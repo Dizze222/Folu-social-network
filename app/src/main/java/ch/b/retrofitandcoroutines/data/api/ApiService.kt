@@ -4,6 +4,9 @@ import ch.b.retrofitandcoroutines.data.model.User
 import retrofit2.http.GET
 
 interface ApiService {
-    @GET("users")
+    @GET("list")
     suspend fun getUsers() : List<User>
 }
+
+
+

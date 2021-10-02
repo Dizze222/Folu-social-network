@@ -3,12 +3,11 @@ package ch.b.retrofitandcoroutines.data.model
 import com.google.gson.annotations.SerializedName
 
 data class User(
-    @SerializedName("avatar")
-    val avatarImage: String,
-    @SerializedName("email")
-    val userEmail: String,
     @SerializedName("id")
-    val userID: String,
-    @SerializedName("name")
-    val userName: String
+    val userEmail: String,
+    @SerializedName("width")
+    val userName: String,
+    @SerializedName("download_url")
+    val avatarImage: String
 )
+
