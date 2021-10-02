@@ -11,6 +11,4 @@ data class User(
     val userID: String,
     @SerializedName("name")
     val userName: String
-
-
 )
