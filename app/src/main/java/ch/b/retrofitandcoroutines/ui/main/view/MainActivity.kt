@@ -2,20 +2,12 @@ package ch.b.retrofitandcoroutines.ui.main.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import ch.b.retrofitandcoroutines.data.api.ApiHelper
-import ch.b.retrofitandcoroutines.data.api.RetrofitBuilder
+import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.model.UserDTO
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
-import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
-import ch.b.retrofitandcoroutines.utils.Status
+import ch.b.retrofitandcoroutines.ui.screens.MainFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,13 +19,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupViewModel()
-        setupObservers()
-        setupUI()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer, MainFragment()).commit()
+        setContentView(binding.root)
+
+
     }
-    private fun setupViewModel(){
+
+   /* private fun setupViewModel() {
         viewModel = ViewModelProviders.of(
-            this,ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))).get(MainViewModel::class.java)
+            this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
+        ).get(MainViewModel::class.java)
     }
 
     private fun setupObservers() {
@@ -43,8 +39,8 @@ class MainActivity : AppCompatActivity() {
                     Status.SUCCESS -> {
                         binding.recyclerView.visibility = View.VISIBLE
                         binding.progressBar.visibility = View.GONE
-                        resource.data?.let {
-                                users -> retrieveList(users)
+                        resource.data?.let { users ->
+                            retrieveList(users)
                         }
                     }
                     Status.ERROR -> {
@@ -67,16 +63,12 @@ class MainActivity : AppCompatActivity() {
             notifyDataSetChanged()
         }
     }
+
     private fun setupUI() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = MainAdapter(arrayListOf())
-        binding.recyclerView.addItemDecoration(
-            DividerItemDecoration(
-                binding.recyclerView.context,
-                (binding.recyclerView.layoutManager as LinearLayoutManager).orientation
-            )
-        )
+        binding.recyclerView.addItemDecoration(DividerItemDecoration(binding.recyclerView.context, (binding.recyclerView.layoutManager as LinearLayoutManager).orientation))
         binding.recyclerView.adapter = adapter
     }
-
+*/
 }
