@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.b.retrofitandcoroutines.data.api.ApiHelper
 import ch.b.retrofitandcoroutines.data.api.RetrofitBuilder
-import ch.b.retrofitandcoroutines.data.model.User
+import ch.b.retrofitandcoroutines.data.model.UserDTO
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
@@ -61,9 +61,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun retrieveList(users: List<User>) {
+    private fun retrieveList(userDTOS: List<UserDTO>) {
         adapter.apply {
-            addUsers(users)
+            addUsers(userDTOS)
             notifyDataSetChanged()
         }
     }

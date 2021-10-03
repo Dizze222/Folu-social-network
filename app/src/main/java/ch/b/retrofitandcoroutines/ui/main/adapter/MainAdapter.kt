@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.data.model.User
+import ch.b.retrofitandcoroutines.data.model.UserDTO
 import ch.b.retrofitandcoroutines.databinding.ItemLayoutBinding
 
 import com.bumptech.glide.Glide
 
-class MainAdapter(private val users: ArrayList<User>) :
+class MainAdapter(private val userDTOS: ArrayList<UserDTO>) :
     RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
     class DataViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(data: User) {
+        fun bind(data: UserDTO) {
             binding.apply {
                 binding.textViewUserName.text = data.userName
                 binding.textViewUserEmail.text = data.userEmail
@@ -32,15 +32,15 @@ class MainAdapter(private val users: ArrayList<User>) :
         return DataViewHolder(binding)
     }
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.bind(users[position])
+        holder.bind(userDTOS[position])
     }
 
-    override fun getItemCount(): Int = users.size
+    override fun getItemCount(): Int = userDTOS.size
 
-    fun addUsers(users: List<User>) {
-        this.users.apply {
+    fun addUsers(userDTOS: List<UserDTO>) {
+        this.userDTOS.apply {
             clear()
-            addAll(users)
+            addAll(userDTOS)
         }
 
     }
