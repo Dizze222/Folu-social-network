@@ -35,7 +35,6 @@ class MainFragment : Fragment(),AdapterOnclick {
         setupUI()
     }
 
-
     private fun setupObservers(){
         viewModel.getUsers().observe(viewLifecycleOwner, Observer {
             it?.let {resources ->
