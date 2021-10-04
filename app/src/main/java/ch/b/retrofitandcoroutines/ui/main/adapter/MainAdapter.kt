@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.ui.main.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
@@ -9,10 +10,12 @@ import ch.b.retrofitandcoroutines.databinding.ItemLayoutBinding
 
 import com.bumptech.glide.Glide
 
-class MainAdapter(private val userDTOS: ArrayList<UserDTO>) :
+class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: AdapterOnclick) :
     RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
-    class DataViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+
+    inner class DataViewHolder(private val binding: ItemLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bind(data: UserDTO) {
             binding.apply {
                 binding.textViewUserName.text = data.userName
@@ -25,20 +28,29 @@ class MainAdapter(private val userDTOS: ArrayList<UserDTO>) :
                     .into(imageViewAvatar)
             }
         }
+
+        fun setItem(item: UserDTO) {
+            binding.imageViewAvatar.setOnClickListener {
+                adapterOnClick.onClick(item)
+            }
+        }
     }
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder{
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemLayoutBinding.inflate(layoutInflater,parent,false)
+        val binding = ItemLayoutBinding.inflate(layoutInflater, parent, false)
         return DataViewHolder(binding)
     }
+
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
-        holder.bind(userDTOS[position])
+        holder.bind(userDTO[position])
+        holder.setItem(userDTO[position])
     }
 
-    override fun getItemCount(): Int = userDTOS.size
+    override fun getItemCount(): Int = userDTO.size
 
     fun addUsers(userDTOS: List<UserDTO>) {
-        this.userDTOS.apply {
+        this.userDTO.apply {
             clear()
             addAll(userDTOS)
         }

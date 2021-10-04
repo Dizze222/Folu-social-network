@@ -7,6 +7,3 @@ interface ApiService {
     @GET("list")
     suspend fun getUsers() : List<UserDTO>
 }
-
-
-

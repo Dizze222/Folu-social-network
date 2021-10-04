@@ -1,10 +1,12 @@
 package ch.b.retrofitandcoroutines.ui.screens
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -15,11 +17,12 @@ import ch.b.retrofitandcoroutines.data.api.RetrofitBuilder
 import ch.b.retrofitandcoroutines.data.model.UserDTO
 import ch.b.retrofitandcoroutines.databinding.FragmentUserBinding
 import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
+import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnclick
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
 import ch.b.retrofitandcoroutines.utils.Status
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(),AdapterOnclick {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MainAdapter
@@ -27,17 +30,12 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
-        setupViewModel()
+        viewModel = ViewModelProviders.of(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))).get(MainViewModel::class.java)
         setupObservers()
         setupUI()
     }
 
-    private fun setupViewModel() {
-        viewModel = ViewModelProviders.of(
-            this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
-        ).get(MainViewModel::class.java)
 
-    }
     private fun setupObservers(){
         viewModel.getUsers().observe(viewLifecycleOwner, Observer {
             it?.let {resources ->
@@ -57,11 +55,8 @@ class MainFragment : Fragment() {
                        binding.recyclerView.visibility = View.VISIBLE
                        binding.progressBar.visibility = View.GONE
                    }
-
                }
             }
-
-
         })
     }
 
@@ -74,18 +69,11 @@ class MainFragment : Fragment() {
 
     private fun setupUI(){
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        adapter = MainAdapter(arrayListOf())
         binding.recyclerView.addItemDecoration(DividerItemDecoration(binding.recyclerView.context,(binding.recyclerView.layoutManager as LinearLayoutManager).orientation))
+        adapter = MainAdapter(arrayListOf(),this)
         binding.recyclerView.adapter = adapter
     }
 
-
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,6 +81,11 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_user, container, false)
+    }
+
+    @SuppressLint("ShowToast")
+    override fun onClick(item: UserDTO) {
+       Toast.makeText(context,item.avatarImage,Toast.LENGTH_SHORT).show()
     }
 
 }
