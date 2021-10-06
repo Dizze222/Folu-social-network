@@ -20,10 +20,10 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
                 binding.textID.text = data.ID
                 Glide.with(imageView)
                     .load(data.downloadedPicture)
-                    .circleCrop()
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imageView)
+
             }
         }
 
