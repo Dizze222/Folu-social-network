@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.ui.main.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
@@ -10,7 +9,7 @@ import ch.b.retrofitandcoroutines.databinding.EachRowBinding
 
 import com.bumptech.glide.Glide
 
-class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: AdapterOnclick) :
+class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: AdapterOnClick) :
     RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
 
@@ -18,9 +17,9 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: UserDTO) {
             binding.apply {
-                binding.textID.text = data.userName
+                binding.textID.text = data.ID
                 Glide.with(imageView)
-                    .load(data.avatarImage)
+                    .load(data.downloadedPicture)
                     .circleCrop()
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)

@@ -11,65 +11,69 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.api.ApiHelper
 import ch.b.retrofitandcoroutines.data.api.RetrofitBuilder
 import ch.b.retrofitandcoroutines.data.model.UserDTO
 import ch.b.retrofitandcoroutines.databinding.FragmentUserBinding
 import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
-import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnclick
+import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnClick
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
 import ch.b.retrofitandcoroutines.utils.Status
 
-class MainFragment : Fragment(),AdapterOnclick {
+class MainFragment : Fragment(), AdapterOnClick {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: MainAdapter
     private lateinit var binding: FragmentUserBinding
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
-        viewModel = ViewModelProviders.of(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))).get(MainViewModel::class.java)
+        viewModel =
+            ViewModelProviders.of(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService)))
+                .get(MainViewModel::class.java)
         setupObservers()
         setupUI()
     }
 
-    private fun setupObservers(){
+    private fun setupObservers() {
         viewModel.getUsers().observe(viewLifecycleOwner, Observer {
-            it?.let {resources ->
-               when(resources.status){
-                   Status.SUCCESS -> {
-                       binding.recyclerView.visibility = View.VISIBLE
-                       binding.progressBar.visibility = View.GONE
-                       resources.data?.let {users ->
-                           retrieveList(users)
-                       }
-                   }
-                   Status.LOADING ->{
-                       binding.recyclerView.visibility = View.GONE
-                       binding.progressBar.visibility = View.VISIBLE
-                   }
-                   Status.ERROR ->{
-                       binding.recyclerView.visibility = View.VISIBLE
-                       binding.progressBar.visibility = View.GONE
-                   }
-               }
+            it?.let { resources ->
+                when (resources.status) {
+                    Status.SUCCESS -> {
+                        binding.recyclerView.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.GONE
+                        resources.data?.let { users ->
+                            retrieveList(users)
+                        }
+                    }
+                    Status.LOADING -> {
+                        binding.recyclerView.visibility = View.GONE
+                        binding.progressBar.visibility = View.VISIBLE
+                    }
+                    Status.ERROR -> {
+                        binding.recyclerView.visibility = View.VISIBLE
+                        binding.progressBar.visibility = View.GONE
+                    }
+                }
             }
         })
     }
 
-    private fun retrieveList(usersDTO: List<UserDTO>){
+    private fun retrieveList(usersDTO: List<UserDTO>) {
         adapter.apply {
             addUsers(usersDTO)
             notifyDataSetChanged()
         }
     }
 
-    private fun setupUI(){
-        binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        binding.recyclerView.addItemDecoration(DividerItemDecoration(binding.recyclerView.context,(binding.recyclerView.layoutManager as LinearLayoutManager).orientation))
-        adapter = MainAdapter(arrayListOf(),this)
+    private fun setupUI() {
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        adapter = MainAdapter(arrayListOf(), this)
         binding.recyclerView.adapter = adapter
     }
 
@@ -84,7 +88,7 @@ class MainFragment : Fragment(),AdapterOnclick {
 
     @SuppressLint("ShowToast")
     override fun onClick(item: UserDTO) {
-       Toast.makeText(context,item.avatarImage,Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, item.downloadedPicture, Toast.LENGTH_SHORT).show()
     }
 
 }
