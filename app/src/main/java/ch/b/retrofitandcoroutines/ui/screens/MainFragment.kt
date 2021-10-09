@@ -9,10 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.recyclerview.widget.*
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.api.ApiHelper
 import ch.b.retrofitandcoroutines.data.api.RetrofitBuilder
@@ -72,6 +69,8 @@ class MainFragment : Fragment(), AdapterOnClick {
     }
 
     private fun setupUI() {
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(binding.recyclerView)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         adapter = MainAdapter(arrayListOf(), this)
         binding.recyclerView.adapter = adapter
@@ -88,7 +87,7 @@ class MainFragment : Fragment(), AdapterOnClick {
 
     @SuppressLint("ShowToast")
     override fun onClick(item: UserDTO) {
-        Toast.makeText(context, item.downloadedPicture, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, item.authorOfPicture, Toast.LENGTH_LONG).show()
     }
 
 }

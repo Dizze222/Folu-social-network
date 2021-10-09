@@ -17,7 +17,7 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: UserDTO) {
             binding.apply {
-                binding.textID.text = data.ID
+                binding.authorName.text = data.authorOfPicture
                 Glide.with(imageView)
                     .load(data.downloadedPicture)
                     .placeholder(R.drawable.ic_launcher_background)
@@ -27,7 +27,7 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
             }
         }
 
-        fun setItem(item: UserDTO) {
+        fun onClickItem(item: UserDTO) {
             binding.imageView.setOnClickListener {
                 adapterOnClick.onClick(item)
             }
@@ -42,7 +42,7 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
 
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         holder.bind(userDTO[position])
-        holder.setItem(userDTO[position])
+        holder.onClickItem(userDTO[position])
     }
 
     override fun getItemCount(): Int = userDTO.size
@@ -52,9 +52,7 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
             clear()
             addAll(userDTOS)
         }
-
     }
-
 
 }
 
