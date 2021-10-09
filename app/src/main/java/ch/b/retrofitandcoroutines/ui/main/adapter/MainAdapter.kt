@@ -1,23 +1,24 @@
 package ch.b.retrofitandcoroutines.ui.main.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.model.UserDTO
-import ch.b.retrofitandcoroutines.databinding.EachRowBinding
-
+import ch.b.retrofitandcoroutines.databinding.GridItemBinding
 import com.bumptech.glide.Glide
 
 class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: AdapterOnClick) :
     RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
 
-    inner class DataViewHolder(private val binding: EachRowBinding) :
+    inner class DataViewHolder(private val binding: GridItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: UserDTO) {
             binding.apply {
                 binding.authorName.text = data.authorOfPicture
+                binding.IdOfPicture.text = data.ID
                 Glide.with(imageView)
                     .load(data.downloadedPicture)
                     .placeholder(R.drawable.ic_launcher_background)
@@ -36,7 +37,7 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = EachRowBinding.inflate(layoutInflater, parent, false)
+        val binding = GridItemBinding.inflate(layoutInflater, parent, false)
         return DataViewHolder(binding)
     }
 

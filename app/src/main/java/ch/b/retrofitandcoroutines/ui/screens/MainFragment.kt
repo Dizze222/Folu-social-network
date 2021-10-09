@@ -39,7 +39,8 @@ class MainFragment : Fragment(), AdapterOnClick {
 
     private fun setupObservers() {
         viewModel.getUsers().observe(viewLifecycleOwner, Observer {
-            it?.let { resources ->
+            it?.let {
+                    resources ->
                 when (resources.status) {
                     Status.SUCCESS -> {
                         binding.recyclerView.visibility = View.VISIBLE
@@ -69,8 +70,6 @@ class MainFragment : Fragment(), AdapterOnClick {
     }
 
     private fun setupUI() {
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(binding.recyclerView)
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         adapter = MainAdapter(arrayListOf(), this)
         binding.recyclerView.adapter = adapter
@@ -85,7 +84,6 @@ class MainFragment : Fragment(), AdapterOnClick {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
-    @SuppressLint("ShowToast")
     override fun onClick(item: UserDTO) {
         Toast.makeText(context, item.authorOfPicture, Toast.LENGTH_LONG).show()
     }
