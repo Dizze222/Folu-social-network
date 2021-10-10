@@ -1,8 +1,8 @@
 package ch.b.retrofitandcoroutines.ui.main.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.model.UserDTO
@@ -11,7 +11,6 @@ import com.bumptech.glide.Glide
 
 class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: AdapterOnClick) :
     RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
-
 
     inner class DataViewHolder(private val binding: GridItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -24,7 +23,6 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
                     .placeholder(R.drawable.ic_launcher_background)
                     .error(R.drawable.ic_launcher_foreground)
                     .into(imageView)
-
             }
         }
 
@@ -34,7 +32,6 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
             }
         }
     }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = GridItemBinding.inflate(layoutInflater, parent, false)
@@ -48,10 +45,11 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
 
     override fun getItemCount(): Int = userDTO.size
 
-    fun addUsers(userDTOS: List<UserDTO>) {
+    fun addUsers(userDTO: List<UserDTO>) {
         this.userDTO.apply {
             clear()
-            addAll(userDTOS)
+            addAll(userDTO)
+            notifyDataSetChanged()
         }
     }
 

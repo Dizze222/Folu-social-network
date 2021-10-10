@@ -2,6 +2,7 @@ package ch.b.retrofitandcoroutines.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,8 +40,7 @@ class MainFragment : Fragment(), AdapterOnClick {
 
     private fun setupObservers() {
         viewModel.getUsers().observe(viewLifecycleOwner, Observer {
-            it?.let {
-                    resources ->
+            it?.let { resources ->
                 when (resources.status) {
                     Status.SUCCESS -> {
                         binding.recyclerView.visibility = View.VISIBLE
@@ -65,12 +65,12 @@ class MainFragment : Fragment(), AdapterOnClick {
     private fun retrieveList(usersDTO: List<UserDTO>) {
         adapter.apply {
             addUsers(usersDTO)
-            notifyDataSetChanged()
         }
     }
 
     private fun setupUI() {
-        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+       // binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        binding.recyclerView.layoutManager = GridLayoutManager(context,2)
         adapter = MainAdapter(arrayListOf(), this)
         binding.recyclerView.adapter = adapter
     }
@@ -84,9 +84,12 @@ class MainFragment : Fragment(), AdapterOnClick {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
+    @SuppressLint("ShowToast")
     override fun onClick(item: UserDTO) {
         Toast.makeText(context, item.authorOfPicture, Toast.LENGTH_LONG).show()
     }
+
+
 
 }
 

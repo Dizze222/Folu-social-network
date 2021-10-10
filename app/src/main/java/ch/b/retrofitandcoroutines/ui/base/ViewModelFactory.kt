@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.ui.base
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ch.b.retrofitandcoroutines.data.api.ApiHelper
