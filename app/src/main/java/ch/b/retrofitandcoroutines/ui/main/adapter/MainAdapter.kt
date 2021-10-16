@@ -1,8 +1,8 @@
 package ch.b.retrofitandcoroutines.ui.main.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.model.UserDTO
@@ -12,12 +12,13 @@ import com.bumptech.glide.Glide
 class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: AdapterOnClick) :
     RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
 
+
     inner class DataViewHolder(private val binding: GridItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(data: UserDTO) {
             binding.apply {
-                binding.authorName.text = data.authorOfPicture
-                binding.IdOfPicture.text = data.ID
+                authorName.text = data.authorOfPicture
+                IdOfPicture.text = data.ID
                 Glide.with(imageView)
                     .load(data.downloadedPicture)
                     .placeholder(R.drawable.ic_launcher_background)
@@ -25,13 +26,13 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
                     .into(imageView)
             }
         }
-
         fun onClickItem(item: UserDTO) {
             binding.imageView.setOnClickListener {
                 adapterOnClick.onClick(item)
             }
         }
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = GridItemBinding.inflate(layoutInflater, parent, false)
@@ -45,10 +46,10 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
 
     override fun getItemCount(): Int = userDTO.size
 
-    fun addUsers(userDTO: List<UserDTO>) {
+    fun addUsers(userDTOS: List<UserDTO>) {
         this.userDTO.apply {
             clear()
-            addAll(userDTO)
+            addAll(userDTOS)
             notifyDataSetChanged()
         }
     }

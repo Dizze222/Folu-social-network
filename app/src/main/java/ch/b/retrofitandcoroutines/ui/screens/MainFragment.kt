@@ -2,7 +2,6 @@ package ch.b.retrofitandcoroutines.ui.screens
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,16 +23,18 @@ import ch.b.retrofitandcoroutines.utils.Status
 
 class MainFragment : Fragment(), AdapterOnClick {
 
-    private lateinit var viewModel: MainViewModel
+
+    private val viewModel by lazy {
+        ViewModelProviders.of(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService)))
+            .get(MainViewModel::class.java)
+    }
     private lateinit var adapter: MainAdapter
     private lateinit var binding: FragmentUserBinding
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
-        viewModel =
-            ViewModelProviders.of(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService)))
-                .get(MainViewModel::class.java)
         setupObservers()
         setupUI()
     }
@@ -43,19 +44,17 @@ class MainFragment : Fragment(), AdapterOnClick {
             it?.let { resources ->
                 when (resources.status) {
                     Status.SUCCESS -> {
+                        binding.shimmerFrameLayout.visibility = View.GONE
                         binding.recyclerView.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.GONE
                         resources.data?.let { users ->
                             retrieveList(users)
                         }
                     }
                     Status.LOADING -> {
                         binding.recyclerView.visibility = View.GONE
-                        binding.progressBar.visibility = View.VISIBLE
                     }
                     Status.ERROR -> {
                         binding.recyclerView.visibility = View.VISIBLE
-                        binding.progressBar.visibility = View.GONE
                     }
                 }
             }
@@ -69,7 +68,6 @@ class MainFragment : Fragment(), AdapterOnClick {
     }
 
     private fun setupUI() {
-       // binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = GridLayoutManager(context,2)
         adapter = MainAdapter(arrayListOf(), this)
         binding.recyclerView.adapter = adapter
@@ -88,8 +86,6 @@ class MainFragment : Fragment(), AdapterOnClick {
     override fun onClick(item: UserDTO) {
         Toast.makeText(context, item.authorOfPicture, Toast.LENGTH_LONG).show()
     }
-
-
 
 }
 
