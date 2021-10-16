@@ -44,17 +44,19 @@ class MainFragment : Fragment(), AdapterOnClick {
             it?.let { resources ->
                 when (resources.status) {
                     Status.SUCCESS -> {
-                        binding.shimmerFrameLayout.visibility = View.GONE
+                        Toast.makeText(context,"успех",Toast.LENGTH_LONG).show()
                         binding.recyclerView.visibility = View.VISIBLE
+                        adapter.isShimmer = false
                         resources.data?.let { users ->
                             retrieveList(users)
                         }
                     }
                     Status.LOADING -> {
-                        binding.recyclerView.visibility = View.GONE
+                        adapter.isShimmer = true
                     }
                     Status.ERROR -> {
-                        binding.recyclerView.visibility = View.VISIBLE
+                        Toast.makeText(context,"ошибка",Toast.LENGTH_LONG).show()
+
                     }
                 }
             }
