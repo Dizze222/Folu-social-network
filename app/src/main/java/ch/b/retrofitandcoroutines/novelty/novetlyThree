@@ -1,11 +1,2 @@
 notifyDataSetChanged() - при вызове этот метод смотрит какие элементы отображаются на экране(в
 момент вызова ) и вызвает getView() c позициями итемов
-
-  //CENTER
-    CENTER_CROP - норм
-    CENTER_INSIDE - хуита ебаная
-    FIT_CENTER - тоже залупа
-    FIT_START - просто пздц
-    FIT_END
-    FIT_XY
-    MATRIX
