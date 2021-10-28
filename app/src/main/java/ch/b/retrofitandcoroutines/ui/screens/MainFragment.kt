@@ -11,9 +11,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.*
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.data.api.ApiHelper
 import ch.b.retrofitandcoroutines.data.api.RetrofitBuilder
 import ch.b.retrofitandcoroutines.data.model.UserDTO
+import ch.b.retrofitandcoroutines.data.repository.MainDataSource
 import ch.b.retrofitandcoroutines.databinding.FragmentUserBinding
 import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
 import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnClick
@@ -25,7 +25,7 @@ class MainFragment : Fragment(), AdapterOnClick {
 
 
     private val viewModel by lazy {
-        ViewModelProviders.of(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService)))
+        ViewModelProviders.of(this, ViewModelFactory(MainDataSource(RetrofitBuilder.apiService)))
             .get(MainViewModel::class.java)
     }
     private lateinit var adapter: MainAdapter
@@ -35,30 +35,17 @@ class MainFragment : Fragment(), AdapterOnClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
+        viewModel.getUsers()
         setupObservers()
         setupUI()
     }
 
     private fun setupObservers() {
-        viewModel.getUsers().observe(viewLifecycleOwner, Observer {
-            it?.let { resources ->
-                when (resources.status) {
-                    Status.SUCCESS -> {
-                        Toast.makeText(context,"успех",Toast.LENGTH_LONG).show()
-                        binding.recyclerView.visibility = View.VISIBLE
-                        adapter.isShimmer = false
-                        resources.data?.let { users ->
-                            retrieveList(users)
-                        }
-                    }
-                    Status.LOADING -> {
-                        adapter.isShimmer = true
-                    }
-                    Status.ERROR -> {
-                        Toast.makeText(context,"ошибка",Toast.LENGTH_LONG).show()
-
-                    }
-                }
+        viewModel.newResponse.observe(viewLifecycleOwner, Observer {
+           binding.recyclerView.visibility = View.VISIBLE
+            adapter.isShimmer = false
+            it.data.let {
+                retrieveList(it)
             }
         })
     }

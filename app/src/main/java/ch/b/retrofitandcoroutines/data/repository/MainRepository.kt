@@ -1,10 +1,9 @@
 package ch.b.retrofitandcoroutines.data.repository
 
-import ch.b.retrofitandcoroutines.data.api.ApiHelper
 
-class MainRepository(private val apiHelper: ApiHelper) {
+class MainRepository(private val dataSource: MainDataSource) {
 
-    suspend fun getUsers()  = apiHelper.getUsers()
+    suspend fun getUsers()  = dataSource.getUsers()
 
 }
 
