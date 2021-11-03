@@ -5,6 +5,4 @@ import ch.b.retrofitandcoroutines.data.model.UserDTO
 
 interface AdapterOnClick {
     fun onClick(item: UserDTO)
-
-
 }

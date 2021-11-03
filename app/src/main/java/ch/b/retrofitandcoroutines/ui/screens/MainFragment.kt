@@ -1,14 +1,14 @@
 package ch.b.retrofitandcoroutines.ui.screens
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.*
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.api.RetrofitBuilder
@@ -19,7 +19,6 @@ import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
 import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnClick
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
-import ch.b.retrofitandcoroutines.utils.Status
 
 class MainFragment : Fragment(), AdapterOnClick {
 
@@ -38,15 +37,14 @@ class MainFragment : Fragment(), AdapterOnClick {
         viewModel.getUsers()
         setupObservers()
         setupUI()
+
     }
 
-    private fun setupObservers() {
-        viewModel.newResponse.observe(viewLifecycleOwner, Observer {
-           binding.recyclerView.visibility = View.VISIBLE
+   private  fun setupObservers() {
+        viewModel.newResponse.observe(viewLifecycleOwner, Observer {resources ->
+            binding.recyclerView.visibility = View.VISIBLE
             adapter.isShimmer = false
-            it.data.let {
-                retrieveList(it)
-            }
+            retrieveList(resources.data!!)
         })
     }
 
@@ -71,11 +69,9 @@ class MainFragment : Fragment(), AdapterOnClick {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
-    @SuppressLint("ShowToast")
     override fun onClick(item: UserDTO) {
-        Toast.makeText(context, item.authorOfPicture, Toast.LENGTH_LONG).show()
+        val argumentOne = bundleOf(DetailInfoFragment.KEY to item.downloadedPicture)
+        findNavController().navigate(R.id.action_mainFragment_to_detailInfo, argumentOne)
     }
 
 }
-
-

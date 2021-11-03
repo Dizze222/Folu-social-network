@@ -2,4 +2,8 @@
     <string name="app_name">Photographer App</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="id">ID:</string>
+    <string name="name">Name:</string>
+    <string name="width">width:</string>
+    <string name="height">height:</string>
 </resources>

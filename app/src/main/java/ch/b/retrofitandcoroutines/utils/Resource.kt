@@ -1,5 +1,5 @@
 package ch.b.retrofitandcoroutines.utils
-
+/*
 class Resource<T>(val status: Status,val data:T,val message: String?) {
 
     companion object {
@@ -11,8 +11,10 @@ class Resource<T>(val status: Status,val data:T,val message: String?) {
     }
 
 
+} */
+
+
+sealed class Resource<T>(val data: T?,val message: String?){
+    class Success<T>(data: T) : Resource<T>(data,null)
+    class Error<T>(message: String?) : Resource<T>(null,message)
 }
-
-
-
-

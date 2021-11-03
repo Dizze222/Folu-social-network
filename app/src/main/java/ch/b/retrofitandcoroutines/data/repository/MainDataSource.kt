@@ -4,7 +4,7 @@ import ch.b.retrofitandcoroutines.data.api.ApiService
 
 class MainDataSource(private val apiService: ApiService) {
 
-    suspend fun getUsers() = apiService.getUsers()
+  suspend fun getUsers() = apiService.getUsers()
 
 }
 
