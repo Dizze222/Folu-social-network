@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,9 +20,10 @@ import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
 import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnClick
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
+import ch.b.retrofitandcoroutines.utils.Resource
+import ch.b.retrofitandcoroutines.utils.Status
 
 class MainFragment : Fragment(), AdapterOnClick {
-
 
     private val viewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory(MainDataSource(RetrofitBuilder.apiService)))
@@ -40,18 +42,30 @@ class MainFragment : Fragment(), AdapterOnClick {
 
     }
 
-   private  fun setupObservers() {
-        viewModel.newResponse.observe(viewLifecycleOwner, Observer {resources ->
-            binding.recyclerView.visibility = View.VISIBLE
-            adapter.isShimmer = false
-            retrieveList(resources.data!!)
+   private fun setupObservers() {
+        viewModel.newResponse.observe(viewLifecycleOwner, Observer {
+            it.let {resources ->
+                when(resources.status){
+                    Status.SUCCESS -> {
+                        binding.recyclerView.visibility = View.VISIBLE
+                        adapter.isShimmer = false
+                        retrieveList(it.data!!)
+                    }
+                    Status.LOADING ->{
+                        Toast.makeText(context,"loading",Toast.LENGTH_LONG).show()
+                    }
+                    Status.ERROR ->{
+                        adapter.isShimmer = true
+                        Toast.makeText(context,"error",Toast.LENGTH_LONG).show()
+                    }
+
+                }
+            }
         })
     }
 
     private fun retrieveList(usersDTO: List<UserDTO>) {
-        adapter.apply {
-            addUsers(usersDTO)
-        }
+        adapter.addUsers(usersDTO)
     }
 
     private fun setupUI() {
