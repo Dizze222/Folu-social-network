@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.ui.main.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.*
 import ch.b.retrofitandcoroutines.data.model.UserDTO
 import ch.b.retrofitandcoroutines.data.repository.MainRepository
@@ -14,10 +15,13 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
     fun getUsers() {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.i("TAG","loading")
             _newResponse.postValue(Resource.Loading(data = null))
             try {
+                 Log.i("TAG","success")
                 _newResponse.postValue(Resource.Success(data = mainRepository.getUsers()))
             }catch (e: Exception){
+                Log.i("TAG","exception")
                 _newResponse.postValue(Resource.Error(data = null, message = e.message ?: "Error Occurred!"))
             }
         }

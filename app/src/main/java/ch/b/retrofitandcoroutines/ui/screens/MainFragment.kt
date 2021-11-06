@@ -1,6 +1,8 @@
 package ch.b.retrofitandcoroutines.ui.screens
 
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +24,10 @@ import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
 import ch.b.retrofitandcoroutines.utils.Resource
 import ch.b.retrofitandcoroutines.utils.Status
+import kotlinx.coroutines.DelicateCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(), AdapterOnClick {
 
@@ -32,7 +38,6 @@ class MainFragment : Fragment(), AdapterOnClick {
     private lateinit var adapter: MainAdapter
     private lateinit var binding: FragmentUserBinding
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
@@ -41,26 +46,23 @@ class MainFragment : Fragment(), AdapterOnClick {
         setupUI()
 
     }
-
    private fun setupObservers() {
         viewModel.newResponse.observe(viewLifecycleOwner, Observer {
-            it.let {resources ->
-                when(resources.status){
+                when(it.status){
                     Status.SUCCESS -> {
-                        binding.recyclerView.visibility = View.VISIBLE
-                        adapter.isShimmer = false
+                        Log.i("TAG","success Fragment")
                         retrieveList(it.data!!)
+                        adapter.isShimmer = true
                     }
                     Status.LOADING ->{
-                        Toast.makeText(context,"loading",Toast.LENGTH_LONG).show()
+                        adapter.isShimmer = true
+                        Log.i("TAG","loading Fragment")
                     }
                     Status.ERROR ->{
-                        adapter.isShimmer = true
-                        Toast.makeText(context,"error",Toast.LENGTH_LONG).show()
+                        Log.i("TAG","error Fragment")
                     }
 
                 }
-            }
         })
     }
 
