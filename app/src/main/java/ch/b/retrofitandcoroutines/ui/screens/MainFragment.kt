@@ -1,13 +1,11 @@
 package ch.b.retrofitandcoroutines.ui.screens
 
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -22,12 +20,7 @@ import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
 import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnClick
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
-import ch.b.retrofitandcoroutines.utils.Resource
 import ch.b.retrofitandcoroutines.utils.Status
-import kotlinx.coroutines.DelicateCoroutinesApi
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class MainFragment : Fragment(), AdapterOnClick {
 
@@ -37,13 +30,24 @@ class MainFragment : Fragment(), AdapterOnClick {
     }
     private lateinit var adapter: MainAdapter
     private lateinit var binding: FragmentUserBinding
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentUserBinding.bind(view)
         viewModel.getUsers()
         setupObservers()
         setupUI()
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+               if (binding.recyclerView.scrollState == RecyclerView.SCROLL_STATE_SETTLING){
+                   if (dy > 0){
+                       binding.appBarLayout.visibility = View.GONE
+                   }else if(dy < 0){
+                       binding.appBarLayout.visibility = View.VISIBLE
+                   }
+               }
+            }
+        })
+
 
     }
    private fun setupObservers() {
@@ -52,16 +56,16 @@ class MainFragment : Fragment(), AdapterOnClick {
                     Status.SUCCESS -> {
                         Log.i("TAG","success Fragment")
                         retrieveList(it.data!!)
-                        adapter.isShimmer = true
+                        adapter.isShimmer = false
                     }
                     Status.LOADING ->{
-                        adapter.isShimmer = true
+
                         Log.i("TAG","loading Fragment")
                     }
                     Status.ERROR ->{
+                        Log.i("TAG",it.message.toString())
                         Log.i("TAG","error Fragment")
                     }
-
                 }
         })
     }

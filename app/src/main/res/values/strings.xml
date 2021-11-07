@@ -6,4 +6,6 @@
     <string name="name">Name:</string>
     <string name="width">width:</string>
     <string name="height">height:</string>
+    <string name="nameFragment">Detail Info</string>
+    <string name="allPhotographer">All photographer</string>
 </resources>

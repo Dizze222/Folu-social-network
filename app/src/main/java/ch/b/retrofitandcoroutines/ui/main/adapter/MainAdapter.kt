@@ -2,7 +2,6 @@ package ch.b.retrofitandcoroutines.ui.main.adapter
 
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,7 +9,7 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.data.model.UserDTO
 import ch.b.retrofitandcoroutines.databinding.GridItemBinding
 import com.bumptech.glide.Glide
-import java.util.*
+import kotlin.collections.ArrayList
 
 class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: AdapterOnClick) :
     RecyclerView.Adapter<MainAdapter.DataViewHolder>() {
@@ -64,7 +63,6 @@ class MainAdapter(private val userDTO: ArrayList<UserDTO>, val adapterOnClick: A
             notifyDataSetChanged()
         }
     }
-
 }
 
 
