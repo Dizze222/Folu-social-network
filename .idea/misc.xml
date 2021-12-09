@@ -4,12 +4,15 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.3509259259259259" />
+        <entry key="app/src/main/res/drawable-anydpi-v24/ic_stat_edit.xml" value="0.24513888888888888" />
         <entry key="app/src/main/res/drawable-anydpi-v24/ic_turned_one.xml" value="0.3351851851851852" />
+        <entry key="app/src/main/res/drawable-v24/ic_dashboard_black_24dp.xml" value="0.24305555555555555" />
         <entry key="app/src/main/res/drawable/custom_color.xml" value="0.2534722222222222" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.35333333333333333" />
+        <entry key="app/src/main/res/drawable/item_selected.xml" value="0.24513888888888888" />
         <entry key="app/src/main/res/drawable/shimmerbackround.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.25833333333333336" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/each_row.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/fragment_detail_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
@@ -18,6 +21,7 @@
         <entry key="app/src/main/res/layout/nav_graph.xml" value="0.3848958333333333" />
         <entry key="app/src/main/res/layout/shimmer_grid.xml" value="0.33" />
         <entry key="app/src/main/res/layout/shimmer_layout.xml" value="0.33" />
+        <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.256640625" />
       </map>
     </option>
   </component>

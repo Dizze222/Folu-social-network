@@ -15,6 +15,7 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
 
     fun getUsers() {
         viewModelScope.launch(Dispatchers.IO) {
+            Log.i("TAGG",Thread.currentThread().name)
             Log.i("TAG","loading")
             _newResponse.postValue(Resource.Loading(data = null))
             try {

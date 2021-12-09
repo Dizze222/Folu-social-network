@@ -6,7 +6,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
@@ -19,15 +21,16 @@ import ch.b.retrofitandcoroutines.databinding.FragmentUserBinding
 import ch.b.retrofitandcoroutines.ui.base.ViewModelFactory
 import ch.b.retrofitandcoroutines.ui.main.adapter.AdapterOnClick
 import ch.b.retrofitandcoroutines.ui.main.adapter.MainAdapter
+import ch.b.retrofitandcoroutines.ui.main.view.MainActivity
 import ch.b.retrofitandcoroutines.ui.main.viewmodel.MainViewModel
 import ch.b.retrofitandcoroutines.utils.Status
 
 class MainFragment : Fragment(), AdapterOnClick {
-
     private val viewModel by lazy {
         ViewModelProviders.of(this, ViewModelFactory(MainDataSource(RetrofitBuilder.apiService)))
             .get(MainViewModel::class.java)
     }
+
     private lateinit var adapter: MainAdapter
     private lateinit var binding: FragmentUserBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,6 +39,7 @@ class MainFragment : Fragment(), AdapterOnClick {
         viewModel.getUsers()
         setupObservers()
         setupUI()
+
         binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                if (binding.recyclerView.scrollState == RecyclerView.SCROLL_STATE_SETTLING){
@@ -47,8 +51,6 @@ class MainFragment : Fragment(), AdapterOnClick {
                }
             }
         })
-
-
     }
    private fun setupObservers() {
         viewModel.newResponse.observe(viewLifecycleOwner, Observer {
@@ -59,7 +61,6 @@ class MainFragment : Fragment(), AdapterOnClick {
                         adapter.isShimmer = false
                     }
                     Status.LOADING ->{
-
                         Log.i("TAG","loading Fragment")
                     }
                     Status.ERROR ->{
@@ -90,8 +91,6 @@ class MainFragment : Fragment(), AdapterOnClick {
     }
 
     override fun onClick(item: UserDTO) {
-        val argumentOne = bundleOf(DetailInfoFragment.KEY to item.downloadedPicture)
-        findNavController().navigate(R.id.action_mainFragment_to_detailInfo, argumentOne)
+        Toast.makeText(context,item.ID,Toast.LENGTH_LONG).show()
     }
-
 }
