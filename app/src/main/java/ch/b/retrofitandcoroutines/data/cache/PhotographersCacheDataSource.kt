@@ -20,6 +20,7 @@ interface PhotographersCacheDataSource {
                 photographers.forEach{ photographer ->
                     val photographerDB = it.createObject(PhotographerDB::class.java, photographer.id)
                     photographerDB.author = photographer.author
+                    photographerDB.URL = photographer.URL
                 }
             }
         }

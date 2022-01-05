@@ -36,7 +36,6 @@ class PhotographerAdapter : RecyclerView.Adapter<PhotographerAdapter.Photographe
             binding.apply {
                 Log.i("TAG",photo.URL)
                 Log.i("TAG",photo.author)
-                Log.i("TAG",photo.id.toString())
                 authorName.text = photo.author
                 Glide.with(imageView)
                     .load(photo.URL)
