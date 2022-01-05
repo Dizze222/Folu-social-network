@@ -8,7 +8,7 @@ interface PhotographerCacheMapper : Abstract.Mapper {
 
     class Base : PhotographerCacheMapper{
         override fun map(photographerDB: PhotographerDB)
-        = PhotographerParameters(photographerDB.id,photographerDB.author)
+        = PhotographerParameters(photographerDB.id,photographerDB.author,photographerDB.URL)
 
     }
 }

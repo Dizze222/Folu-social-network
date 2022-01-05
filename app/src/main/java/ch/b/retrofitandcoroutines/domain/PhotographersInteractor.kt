@@ -9,6 +9,5 @@ interface PhotographersInteractor {
                private val mapper: PhotographersDataToDomainMapper
                ) : PhotographersInteractor{
         override suspend fun getPhotographers() = repository.getPhotographers().map(mapper)
-
     }
 }

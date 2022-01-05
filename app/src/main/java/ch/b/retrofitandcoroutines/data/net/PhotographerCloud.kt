@@ -6,10 +6,13 @@ import com.google.gson.annotations.SerializedName
 
 //https://picsum.photos/v2/list
 data class PhotographerCloud(
-    private var id: Int,
-    private var author: String,
+
+    private val id: Int,
+    private val author: String,
+    @SerializedName("download_url")
+    private val URL: String
 ) : Abstract.Object<PhotographerParameters, PhotographerCloudMapper>() {
     override fun map(mapper: PhotographerCloudMapper): PhotographerParameters {
-       return mapper.map(id, author)
+       return mapper.map(id, author,URL)
     }
 }

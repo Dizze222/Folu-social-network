@@ -12,7 +12,6 @@ interface PhotographersCacheDataSource {
             realmProvider.provide().use { realm ->
                 val photographersDB = realm.where(PhotographerDB::class.java).findAll() ?: emptyList()
                 return realm.copyFromRealm(photographersDB)
-
             }
         }
 

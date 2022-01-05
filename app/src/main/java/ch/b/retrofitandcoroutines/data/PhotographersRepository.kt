@@ -17,11 +17,13 @@ interface PhotographersRepository {
         override suspend fun getPhotographers() = try {
             val photographerCacheList = cacheDataSource.getPhotographers()
             if (photographerCacheList.isEmpty()){
+                Log.i("TAG","Ветка IF сработала")
                 val photographerCloudList = cloudDataSource.getPhotographers()
                 val photographers = photographersCloudMapper.map(photographerCloudList)
                 cacheDataSource.savePhotographers(photographers)
                 PhotographersData.Success(photographers)
             }else{
+                Log.i("TAG","Ветка ELSE сработала")
                 PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
             }
         }catch (e: Exception){

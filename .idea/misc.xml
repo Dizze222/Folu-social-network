@@ -15,6 +15,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="app/src/main/res/layout/each_row.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/fragment_detail_info.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_photographers.xml" value="0.253515625" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_users.xml" value="0.25703125" />
         <entry key="app/src/main/res/layout/grid_item.xml" value="0.25" />

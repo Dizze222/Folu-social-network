@@ -9,5 +9,6 @@ open class PhotographerDB : RealmObject(),Abstract.Mapable<PhotographerParameter
     @PrimaryKey
     var id: Int = -1
     var author: String = ""
-    override fun map(mapper: PhotographerCacheMapper) = PhotographerParameters(id,author)
+    var URL: String = ""
+    override fun map(mapper: PhotographerCacheMapper) = PhotographerParameters(id,author,URL)
 }

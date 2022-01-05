@@ -7,6 +7,7 @@ import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 
 import ch.b.retrofitandcoroutines.presentation.PhotographerAdapter
+import ch.b.retrofitandcoroutines.presentation.screens.PhotographersFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -14,13 +15,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val viewModel = (application as PhotographerApp).mainViewModel
-        val adapter = PhotographerAdapter()
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        viewModel.observe(this, {
-            adapter.update(it)
-        })
-        viewModel.getPhotographers()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragmentContainer,PhotographersFragment()).commit()
+
     }
 }
