@@ -5,7 +5,7 @@ import ch.b.retrofitandcoroutines.core.PhotographerParameters
 import io.realm.RealmObject
 import io.realm.annotations.PrimaryKey
 
-open class PhotographerDataBase : RealmObject(),Abstract.Mapable<PhotographerParameters,PhotographerCacheMapper>{
+class PhotographerDataBase : RealmObject(),Abstract.Mapable<PhotographerParameters,PhotographerCacheMapper>{
     @PrimaryKey
     var id: Int = -1
     var author: String = ""
