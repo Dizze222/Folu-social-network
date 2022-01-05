@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.data
 
+import android.util.Log
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheDataSource
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudMapper
@@ -25,6 +26,7 @@ interface PhotographersRepository {
             }
         }catch (e: Exception){
             PhotographersData.Fail(e)
+
         }
 
 

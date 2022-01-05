@@ -13,13 +13,13 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel(
-    private val interactor: PhotographersInteractor,
+    private val photographerInteractor: PhotographersInteractor,
     private val mapper: PhotographersDomainToUIMapper,
     private val communicate: PhotographerCommunication
 ) : ViewModel(){
 
     fun getPhotographers() = viewModelScope.launch(Dispatchers.IO) {
-        val resultDomain = interactor.getPhotographers()
+        val resultDomain = photographerInteractor.getPhotographers()
         withContext(Dispatchers.Main){
             val resultUI = resultDomain.map(mapper)
             resultUI.map(Abstract.Mapper.Empty())

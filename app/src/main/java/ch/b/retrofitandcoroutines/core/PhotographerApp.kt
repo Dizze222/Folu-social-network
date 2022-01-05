@@ -16,15 +16,18 @@ import ch.b.retrofitandcoroutines.presentation.BasePhotographersDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.MainViewModel
 import ch.b.retrofitandcoroutines.presentation.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.ResourceProvider
+import io.realm.Realm
 import retrofit2.Retrofit
 
 class PhotographerApp : Application(){
     lateinit var mainViewModel: MainViewModel
+
     private companion object{
         const val BASE_URL = "https://picsum.photos/v2/"
     }
     override fun onCreate() {
         super.onCreate()
+        Realm.init(this)
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .build()
@@ -42,12 +45,11 @@ class PhotographerApp : Application(){
             photographersCacheMapper
         )
 
-        val interactor = PhotographersInteractor
-            .Base(photographersRepository,BasePhotographersDataToDomainMapper())
+        val photographerInteractor = PhotographersInteractor.Base(photographersRepository,BasePhotographersDataToDomainMapper())
         val communication = PhotographerCommunication.Base()
-        mainViewModel = MainViewModel(
-            interactor,
-            BasePhotographersDomainToUIMapper(communication,ResourceProvider.Base(this)),
+
+        mainViewModel = MainViewModel(photographerInteractor, BasePhotographersDomainToUIMapper(
+            communication,ResourceProvider.Base(this)),
             communication)
     }
 }

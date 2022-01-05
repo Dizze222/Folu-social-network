@@ -8,8 +8,8 @@ interface PhotographersCloudMapper : Abstract.Mapper{
 
     class Base(private val photographerCloudMapper: PhotographerCloudMapper) : PhotographersCloudMapper{
         override fun map(cloudList: List<PhotographerCloud>): List<PhotographerParameters> {
-            return cloudList.map{
-                it.map(photographerCloudMapper)
+            return cloudList.map{photographerCLoud ->
+                photographerCLoud.map(photographerCloudMapper)
             }
         }
 

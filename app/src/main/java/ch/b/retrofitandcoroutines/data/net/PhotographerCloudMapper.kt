@@ -7,7 +7,8 @@ interface PhotographerCloudMapper : Abstract.Mapper {
     fun map(id: Int,author: String) : PhotographerParameters
 
 class Base : PhotographerCloudMapper {
-    override fun map(id: Int, author: String)
-    = PhotographerParameters(id, author)
+    override fun map(id: Int, author: String) : PhotographerParameters{
+      return  PhotographerParameters(id, author)
     }
+}
 }

@@ -1,9 +1,11 @@
 package ch.b.retrofitandcoroutines
 
-import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
+
 import ch.b.retrofitandcoroutines.presentation.PhotographerAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -15,7 +17,8 @@ class MainActivity : AppCompatActivity() {
         val viewModel = (application as PhotographerApp).mainViewModel
         val adapter = PhotographerAdapter()
         binding.recyclerView.adapter = adapter
-        viewModel.observe(this,{
+        binding.recyclerView.layoutManager = LinearLayoutManager(this)
+        viewModel.observe(this, {
             adapter.update(it)
         })
         viewModel.getPhotographers()

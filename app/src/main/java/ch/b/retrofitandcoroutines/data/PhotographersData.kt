@@ -10,7 +10,7 @@ sealed class PhotographersData : Abstract.Object<PhotographersDomain,Photographe
         override fun map(mapper: PhotographersDataToDomainMapper) = mapper.map(photographers)
     }
     class Fail(private val e: Exception) : PhotographersData() {
-        override fun map(mapper:PhotographersDataToDomainMapper):PhotographersDomain =mapper.map(e)
+        override fun map(mapper:PhotographersDataToDomainMapper) =mapper.map(e)
     }
 
 
