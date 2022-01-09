@@ -23,18 +23,14 @@ interface PhotographersRepository {
             try {
                 val photographerCacheList = cacheDataSource.getPhotographers()
                 if (cloudDataSource.getPhotographers().size > 30){
-                    Log.i("TAG","робит >30")
                     getDataFromServerAndSaveIntoDataBase()
                 }
                 return if (photographerCacheList.isEmpty()){
-                    Log.i("TAG","Ветка IF сработала")
                     getDataFromServerAndSaveIntoDataBase()
                 }else{
-                    Log.i("TAG","Ветка ELSE сработала")
                     PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
                 }
             }catch (e: Exception){
-                Log.i("TAG", "Ветка E сработала$e")
                 val photographerCacheList = cacheDataSource.getPhotographers()
                 if (photographerCacheList.isNotEmpty()){
                     return PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
