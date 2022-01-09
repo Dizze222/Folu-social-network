@@ -12,7 +12,5 @@ interface PhotographersCloudMapper : Abstract.Mapper{
                 photographerCLoud.map(photographerCloudMapper)
             }
         }
-
     }
-
 }

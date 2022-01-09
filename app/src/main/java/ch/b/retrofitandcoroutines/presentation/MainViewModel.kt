@@ -10,6 +10,7 @@ import ch.b.retrofitandcoroutines.domain.PhotographersDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.PhotographersInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
 class MainViewModel(
@@ -18,7 +19,7 @@ class MainViewModel(
     private val communicate: PhotographerCommunication
 ) : ViewModel(){
 
-    fun getPhotographers() = viewModelScope.launch(Dispatchers.IO) {
+   fun getPhotographers() = viewModelScope.launch(Dispatchers.IO) {
         val resultDomain = photographerInteractor.getPhotographers()
         withContext(Dispatchers.Main){
             val resultUI = resultDomain.map(mapper)
@@ -27,6 +28,7 @@ class MainViewModel(
     }
     fun observe(owner: LifecycleOwner,observe: Observer<List<PhotographerParameters>>){
         communicate.observeSuccess(owner,observe)
+
     }
 
 }

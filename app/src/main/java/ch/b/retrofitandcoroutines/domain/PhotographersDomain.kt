@@ -8,8 +8,11 @@ import java.net.UnknownHostException
 
 sealed class PhotographersDomain : Abstract.Object<PhotographersUI,PhotographersDomainToUIMapper>() {
     class Success(private val photographers: List<PhotographerParameters>) : PhotographersDomain(){
-        override fun map(mapper: PhotographersDomainToUIMapper): PhotographersUI = mapper.map(photographers)
+        override fun map(mapper: PhotographersDomainToUIMapper): PhotographersUI {
+           return mapper.map(photographers)
+        }
     }
+
     class Fail(private val e: Exception) : PhotographersDomain(){
         override fun map(mapper: PhotographersDomainToUIMapper): PhotographersUI = mapper.map(
             when(e){
@@ -17,9 +20,6 @@ sealed class PhotographersDomain : Abstract.Object<PhotographersUI,Photographers
                 is HttpException -> ErrorType.SERVICE_UNAVAILABLE
                 else -> ErrorType.GENERIC_ERROR
             }
-
         )
-
     }
-
 }

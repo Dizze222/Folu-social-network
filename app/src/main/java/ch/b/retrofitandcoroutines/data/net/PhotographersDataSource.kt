@@ -5,6 +5,7 @@ import com.google.gson.reflect.TypeToken
 
 interface PhotographersDataSource{
     suspend fun getPhotographers() : List<PhotographerCloud>
+
     class Base(private val service: PhotographerService) : PhotographersDataSource{
         val gson = Gson()
         private val type = object : TypeToken<List<PhotographerCloud>>() {}.type

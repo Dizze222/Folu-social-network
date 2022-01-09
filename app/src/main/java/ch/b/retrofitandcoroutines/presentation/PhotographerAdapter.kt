@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation
 
-import android.util.Log
+
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +8,9 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.PhotographerParameters
 import ch.b.retrofitandcoroutines.databinding.PhotographerItemBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.Priority
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 
 class PhotographerAdapter : RecyclerView.Adapter<PhotographerAdapter.PhotographerViewHolder>(){
 
@@ -34,12 +37,12 @@ class PhotographerAdapter : RecyclerView.Adapter<PhotographerAdapter.Photographe
         : RecyclerView.ViewHolder(binding.root){
         fun bind(photo: PhotographerParameters){
             binding.apply {
-                Log.i("TAG",photo.URL)
-                Log.i("TAG",photo.author)
                 authorName.text = photo.author
                 Glide.with(imageView)
                     .load(photo.URL)
-                    .placeholder(R.drawable.ic_download)
+                    .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
+                    .placeholder(R.color.colorGrey)
+                    .priority(Priority.IMMEDIATE)
                     .error(R.drawable.ic_launcher_background)
                     .into(imageView)
             }

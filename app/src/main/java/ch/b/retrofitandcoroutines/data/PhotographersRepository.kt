@@ -8,29 +8,40 @@ import ch.b.retrofitandcoroutines.data.net.PhotographersDataSource
 
 interface PhotographersRepository {
     suspend fun getPhotographers() : PhotographersData
-
     class Base(
         private val cloudDataSource: PhotographersDataSource,
         private val cacheDataSource: PhotographersCacheDataSource,
         private val photographersCloudMapper: PhotographersCloudMapper,
         private val photographersCacheMapper: PhotographersCacheMapper) : PhotographersRepository{
-        override suspend fun getPhotographers() = try {
-            val photographerCacheList = cacheDataSource.getPhotographers()
-            if (photographerCacheList.isEmpty()){
-                Log.i("TAG","Ветка IF сработала")
-                val photographerCloudList = cloudDataSource.getPhotographers()
-                val photographers = photographersCloudMapper.map(photographerCloudList)
-                cacheDataSource.savePhotographers(photographers)
-                PhotographersData.Success(photographers)
-            }else{
-                Log.i("TAG","Ветка ELSE сработала")
-                PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
-            }
-        }catch (e: Exception){
-            PhotographersData.Fail(e)
-
+        private suspend fun getDataFromServerAndSaveIntoDataBase() : PhotographersData{
+            val photographerCloudList = cloudDataSource.getPhotographers()
+            val photographers = photographersCloudMapper.map(photographerCloudList)
+            cacheDataSource.savePhotographers(photographers)
+            return PhotographersData.Success(photographers)
         }
-
-
+        override suspend fun getPhotographers() : PhotographersData{
+            try {
+                val photographerCacheList = cacheDataSource.getPhotographers()
+                if (cloudDataSource.getPhotographers().size > 30){
+                    Log.i("TAG","робит >30")
+                    getDataFromServerAndSaveIntoDataBase()
+                }
+                return if (photographerCacheList.isEmpty()){
+                    Log.i("TAG","Ветка IF сработала")
+                    getDataFromServerAndSaveIntoDataBase()
+                }else{
+                    Log.i("TAG","Ветка ELSE сработала")
+                    PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
+                }
+            }catch (e: Exception){
+                Log.i("TAG", "Ветка E сработала$e")
+                val photographerCacheList = cacheDataSource.getPhotographers()
+                if (photographerCacheList.isNotEmpty()){
+                    return PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
+                }else{
+                    return PhotographersData.Fail(e)
+                }
+            }
+        }
     }
 }

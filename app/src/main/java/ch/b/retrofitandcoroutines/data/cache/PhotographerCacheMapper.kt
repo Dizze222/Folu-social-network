@@ -4,10 +4,10 @@ import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.core.PhotographerParameters
 
 interface PhotographerCacheMapper : Abstract.Mapper {
-    fun map(photographerDB: PhotographerDB) : PhotographerParameters
+    fun map(photographerDB: PhotographerDataBase) : PhotographerParameters
 
     class Base : PhotographerCacheMapper{
-        override fun map(photographerDB: PhotographerDB)
+        override fun map(photographerDB: PhotographerDataBase)
         = PhotographerParameters(photographerDB.id,photographerDB.author,photographerDB.URL)
 
     }

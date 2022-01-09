@@ -6,7 +6,6 @@ import com.google.gson.annotations.SerializedName
 
 //https://picsum.photos/v2/list
 data class PhotographerCloud(
-
     private val id: Int,
     private val author: String,
     @SerializedName("download_url")
