@@ -9,7 +9,7 @@ import ch.b.retrofitandcoroutines.data.cache.RealmProvider
 import ch.b.retrofitandcoroutines.data.net.PhotographerCloudMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudMapper
-import ch.b.retrofitandcoroutines.data.net.PhotographersDataSource
+import ch.b.retrofitandcoroutines.data.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.domain.BasePhotographersDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.PhotographersInteractor
 import ch.b.retrofitandcoroutines.presentation.BasePhotographersDomainToUIMapper
@@ -33,7 +33,7 @@ class PhotographerApp : Application(){
             .build()
         val service = retrofit.create(PhotographerService::class.java)
 
-        val cloudDataSource = PhotographersDataSource.Base(service)
+        val cloudDataSource = PhotographersCloudDataSource.Base(service)
         val cacheDataSource = PhotographersCacheDataSource.Base(RealmProvider.Base())
         val photographersCloudMapper = PhotographersCloudMapper.Base(PhotographerCloudMapper.Base())
         val photographersCacheMapper = PhotographersCacheMapper.Base(PhotographerCacheMapper.Base())

@@ -3,13 +3,13 @@ package ch.b.retrofitandcoroutines.data
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheDataSource
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudMapper
-import ch.b.retrofitandcoroutines.data.net.PhotographersDataSource
+import ch.b.retrofitandcoroutines.data.net.PhotographersCloudDataSource
 
 interface PhotographersRepository {
     suspend fun getPhotographers() : PhotographersData
     suspend fun getDataFromServerAndSaveIntoDataBase() : PhotographersData
     class Base(
-        private val cloudDataSource: PhotographersDataSource,
+        private val cloudDataSource: PhotographersCloudDataSource,
         private val cacheDataSource: PhotographersCacheDataSource,
         private val photographersCloudMapper: PhotographersCloudMapper,
         private val photographersCacheMapper: PhotographersCacheMapper) : PhotographersRepository{
@@ -19,9 +19,9 @@ interface PhotographersRepository {
             cacheDataSource.savePhotographers(photographers)
             return PhotographersData.Success(photographers)
         }
+        private val photographerCacheList = cacheDataSource.getPhotographers()
         override suspend fun getPhotographers() : PhotographersData{
             try {
-                val photographerCacheList = cacheDataSource.getPhotographers()
                 if (cloudDataSource.getPhotographers().size > 30)
                     getDataFromServerAndSaveIntoDataBase()
                 return if (photographerCacheList.isEmpty())
@@ -29,7 +29,6 @@ interface PhotographersRepository {
                 else
                     PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
             }catch (e: Exception){
-                val photographerCacheList = cacheDataSource.getPhotographers()
                 if (photographerCacheList.isNotEmpty())
                     return PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
                 else
