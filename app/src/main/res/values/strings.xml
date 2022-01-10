@@ -14,4 +14,5 @@
     <string name="no_connection_message">Service unavailble</string>
     <string name="service_unavailable">No connection</string>
     <string name="something_went_wrong">something went wrong</string>
+    <string name="naming_toolbar">All photographer</string>
 </resources>
