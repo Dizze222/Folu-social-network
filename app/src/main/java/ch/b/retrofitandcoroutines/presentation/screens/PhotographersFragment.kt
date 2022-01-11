@@ -1,18 +1,20 @@
 package ch.b.retrofitandcoroutines.presentation.screens
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
-import ch.b.retrofitandcoroutines.MainActivity
-import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import ch.b.retrofitandcoroutines.presentation.PhotographerAdapter
 import ch.b.retrofitandcoroutines.presentation.PhotographerItemClickListener
+import androidx.fragment.app.FragmentManager
+import ch.b.retrofitandcoroutines.core.PhotographerParameters
 
 
 class PhotographersFragment : Fragment(),PhotographerItemClickListener {
@@ -35,11 +37,25 @@ class PhotographersFragment : Fragment(),PhotographerItemClickListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_photographers, container, false)
+        return inflater.inflate(ch.b.retrofitandcoroutines.R.layout.fragment_photographers, container, false)
     }
 
-    override fun onClickPhotographer(photographerId: Int) { //TODO fix this
-        Toast.makeText(activity,photographerId.toString(),Toast.LENGTH_LONG).show() //TODO fix this
+    override fun onClickPhotographer(photographer: PhotographerParameters) { //TODO fix this
+        Toast.makeText(activity,photographer.id.toString(),Toast.LENGTH_LONG).show()
+        val fragment = PhotographerDetailFragment()
+        val fragmentManager: FragmentManager = activity!!.supportFragmentManager
+        val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(ch.b.retrofitandcoroutines.R.id.fragmentContainer, fragment)
+        fragmentTransaction.addToBackStack(null)
+        fragmentTransaction.commit()
+
+        val bundle = Bundle()
+        bundle.putString("id", photographer.id.toString())
+        bundle.putString("author",photographer.author)
+        bundle.putString("URL",photographer.URL)
+        fragment.arguments = bundle
+
+
 
     }
 }

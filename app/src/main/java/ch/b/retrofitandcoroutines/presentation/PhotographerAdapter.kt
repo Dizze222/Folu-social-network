@@ -56,7 +56,7 @@ class PhotographerAdapter(private val listener: PhotographerItemClickListener) :
         }
 
         override fun onClick(v: View?) {
-            listener.onClickPhotographer(photographer.id) //TODO fix this
+            listener.onClickPhotographer(photographer) //TODO fix this
         }
     }
 }
