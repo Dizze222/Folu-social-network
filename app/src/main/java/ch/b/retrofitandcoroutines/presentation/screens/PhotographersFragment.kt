@@ -49,11 +49,11 @@ class PhotographersFragment : Fragment(),PhotographerItemClickListener {
         fragmentTransaction.addToBackStack(null)
         fragmentTransaction.commit()
 
-        val bundle = Bundle()
-        bundle.putString("id", photographer.id.toString())
-        bundle.putString("author",photographer.author)
-        bundle.putString("URL",photographer.URL)
-        fragment.arguments = bundle
+        val bundle = Bundle()//TODO fix this
+        bundle.putString("id", photographer.id.toString())//TODO fix this
+        bundle.putString("author",photographer.author)//TODO fix this
+        bundle.putString("URL",photographer.URL)//TODO fix this
+        fragment.arguments = bundle//TODO fix this
 
 
 

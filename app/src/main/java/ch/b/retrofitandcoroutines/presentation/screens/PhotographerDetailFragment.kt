@@ -18,26 +18,26 @@ class PhotographerDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotographerDetailBinding.bind(view)
-        val bundle = this.arguments
-        val fragment = FullImageView()
-        val photographerId = bundle?.getString("id")
-        val photographerAuthor = bundle?.getString("author")
-        val photographerURL = bundle?.getString("URL")
-        Log.i("TAG",photographerId.toString())
-        binding.idOfAuthor.text = photographerId
-        binding.author.text = photographerAuthor
-        binding.urlOfAuthor.text = photographerURL
-        Glide.with(binding.imageOfAuthor)
-            .load(photographerURL)
-            .into(binding.imageOfAuthor)
-        bundle!!.putString("URL", photographerURL)
-        fragment.arguments = bundle
+        val bundle = this.arguments//TODO fix this
+        val fragment = PhotographerZoomImageFragment()//TODO fix this
+        val photographerId = bundle?.getString("id")//TODO fix this
+        val photographerAuthor = bundle?.getString("author")//TODO fix this
+        val photographerURL = bundle?.getString("URL")//TODO fix this
+        binding.idOfAuthor.text = photographerId//TODO fix this
+        binding.author.text = photographerAuthor//TODO fix this
+        binding.urlOfAuthor.text = photographerURL//TODO fix this
+        Glide.with(binding.imageOfAuthor)//TODO fix this
+            .load(photographerURL)//TODO fix this
+            .into(binding.imageOfAuthor)//TODO fix this
+        bundle!!.putString("URL", photographerURL)//TODO fix this
+        fragment.arguments = bundle//TODO fix this
 
 
 
         binding.imageOfAuthor.setOnClickListener{
             val fragmentManager: FragmentManager = activity!!.supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+            fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,android.R.anim.slide_out_right)
             fragmentTransaction.replace(R.id.fragmentContainer, fragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()

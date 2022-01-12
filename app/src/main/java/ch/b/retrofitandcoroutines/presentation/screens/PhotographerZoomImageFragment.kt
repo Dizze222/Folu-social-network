@@ -5,26 +5,22 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.databinding.FragmentFullImageViewBinding
 import com.bumptech.glide.Glide
 import com.zolad.zoominimageview.ZoomInImageView
 
 
-class FullImageView : Fragment() {
+class PhotographerZoomImageFragment : Fragment() {
 
     lateinit var imageView: ZoomInImageView
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
        imageView = view.findViewById(R.id.imageOfAuthor)
-
 
         val bundle = this.arguments
         val url = bundle!!.getString("URL")
         Glide.with(imageView)
             .load(url)
             .into(imageView)
-
     }
 
     override fun onCreateView(
