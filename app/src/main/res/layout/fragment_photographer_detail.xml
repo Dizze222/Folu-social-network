@@ -11,14 +11,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="@string/naming_toolbar"
+            app:titleTextColor="@color/textColorPrimary" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imageOfAuthor"
             android:layout_width="300dp"
             android:layout_height="300dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@id/toolbar" />
 
         <TextView
             android:id="@+id/author"

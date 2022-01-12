@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.screens
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -31,7 +30,7 @@ class PhotographerDetailFragment : Fragment() {
             .into(binding.imageOfAuthor)//TODO fix this
         bundle!!.putString("URL", photographerURL)//TODO fix this
         fragment.arguments = bundle//TODO fix this
-
+        binding.toolbar.title = photographerAuthor
 
 
         binding.imageOfAuthor.setOnClickListener{
@@ -42,6 +41,7 @@ class PhotographerDetailFragment : Fragment() {
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }
+
 
     }
 
