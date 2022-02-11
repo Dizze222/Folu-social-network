@@ -3,37 +3,26 @@ package ch.b.retrofitandcoroutines.presentation
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import ch.b.retrofitandcoroutines.core.PhotographerParameters
+import ch.b.retrofitandcoroutines.core.Abstract
 
-interface PhotographerCommunication {
+interface PhotographerCommunication : Abstract.Mapper {
 
-    fun show(photographer: List<PhotographerParameters>)
-    fun show(errorMessage: String)
+    fun map(photographer: List<PhotographerUI>)
 
-    fun observeSuccess(owner: LifecycleOwner,observer: Observer<List<PhotographerParameters>>)
-    fun observeFail(owner: LifecycleOwner, observer: Observer<String>)
+    fun observe(owner: LifecycleOwner,observer: Observer<List<PhotographerUI>>)
 
     class Base : PhotographerCommunication{
-        private val successLiveData = MutableLiveData<List<PhotographerParameters>>()
-        private val failLiveData =MutableLiveData<String>()
+        private val successLiveData = MutableLiveData<List<PhotographerUI>>()
 
-        override fun show(photographer: List<PhotographerParameters>) {
+        override fun map(photographer: List<PhotographerUI>) {
             successLiveData.value = photographer
         }
 
-        override fun show(errorMessage: String) {
-            failLiveData.value = errorMessage
-        }
-
-        override fun observeSuccess(
+        override fun observe(
             owner: LifecycleOwner,
-            observer: Observer<List<PhotographerParameters>>
+            observer: Observer<List<PhotographerUI>>
         ) {
             successLiveData.observe(owner,observer)
-        }
-
-        override fun observeFail(owner: LifecycleOwner, observer: Observer<String>) {
-            failLiveData.observe(owner,observer)
         }
 
     }

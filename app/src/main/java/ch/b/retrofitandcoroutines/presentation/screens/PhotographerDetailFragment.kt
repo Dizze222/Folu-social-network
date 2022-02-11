@@ -25,9 +25,6 @@ class PhotographerDetailFragment : Fragment() {
         binding.idOfAuthor.text = photographerId//TODO fix this
         binding.author.text = photographerAuthor//TODO fix this
         binding.urlOfAuthor.text = photographerURL//TODO fix this
-        Glide.with(binding.imageOfAuthor)//TODO fix this
-            .load(photographerURL)//TODO fix this
-            .into(binding.imageOfAuthor)//TODO fix this
         bundle!!.putString("URL", photographerURL)//TODO fix this
         fragment.arguments = bundle//TODO fix this
         binding.toolbar.title = photographerAuthor

@@ -11,9 +11,12 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="author">author</string>
-    <string name="no_connection_message">Service unavailble</string>
+    <string name="no_connection_message">Какой-то сверхразум всё сломал</string>
     <string name="service_unavailable">No connection</string>
     <string name="something_went_wrong">something went wrong</string>
     <string name="naming_toolbar">All photographer</string>
     <string name="photographer_detail">Any</string>
+    <string name="flying_saucer_image">Flying saucer image</string>
+    <string name="errorSubtitle">Постараемся быстро починить</string>
+    <string name="tryAgain"><b>Попробовать снова</b></string>
 </resources>

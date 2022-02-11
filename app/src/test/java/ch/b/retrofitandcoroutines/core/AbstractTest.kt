@@ -6,12 +6,14 @@ import java.io.IOException
 import java.lang.Exception
 
 class AbstractTest {
+    /*
     @Test
     fun test_success(){
         val dataObject = TestDataObject.Success("a","b")
         val domainObject = dataObject.map(DataMapper.Base())
         assertTrue(domainObject is DomainObject.Success)
     }
+
     @Test
     fun test_fail(){
         val dataObject = TestDataObject.Fail(IOException())
@@ -21,8 +23,6 @@ class AbstractTest {
     }
 
     sealed class TestDataObject : Abstract.Object<DomainObject,DataMapper>(){
-        abstract override fun map(mapper: DataMapper) : DomainObject
-
         class Success(private val textOne: String,private val textTwo: String) : TestDataObject(){
             override fun map(mapper: DataMapper): DomainObject = mapper.map(textOne,textTwo)
         }
@@ -31,42 +31,30 @@ class AbstractTest {
         }
     }
     sealed class DomainObject : Abstract.Object<UIObject,DomainToUIMapper>(){
-        class Success(private val textCombined: String) : DomainObject(){
-            override fun map(mapper: DomainToUIMapper): UIObject {
-                TODO("Not yet implemented")
-            }
-
+        class Success(private val textOne: String,private val textTwo: String) : DomainObject(){
+            override fun map(mapper: DomainToUIMapper): UIObject = mapper.map(textOne,textTwo)
         }
-
-        class Fail : DomainObject(){
-            override fun map(mapper: DomainToUIMapper): UIObject {
-                TODO("Not yet implemented")
-            }
-
+        class Fail(private val exception: Exception) : DomainObject(){
+            override fun map(mapper: DomainToUIMapper): UIObject = mapper.map(exception)
         }
     }
 
     sealed class UIObject
 
     interface DomainToUIMapper : Abstract.Mapper{
-        fun map(textOne: String,textTwo: String)
+        fun map(textOne: String,textTwo: String) : UIObject
+        fun map(e:Exception) : UIObject
     }
 
     interface DataMapper : Abstract.Mapper{
         fun map(textOne: String,textTwo: String) : DomainObject
         fun map(e: Exception) : DomainObject
 
-        class Base() : DataMapper{
-            override fun map(textOne: String, textTwo: String): DomainObject {
-                return DomainObject.Success("$textOne $textTwo")
-            }
-
-            override fun map(e: Exception): DomainObject {
-                return DomainObject.Fail()
-            }
-
+        class Base : DataMapper{
+            override fun map(textOne: String, textTwo: String): DomainObject = DomainObject.Success(textOne,textTwo)
+            override fun map(e: Exception): DomainObject = DomainObject.Fail(e)
         }
     }
 
-
+     */
 }

@@ -1,62 +1,108 @@
 package ch.b.retrofitandcoroutines.presentation
 
 
+import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.core.PhotographerParameters
-import ch.b.retrofitandcoroutines.databinding.PhotographerItemBinding
-import com.bumptech.glide.Glide
-import com.bumptech.glide.Priority
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 
-class PhotographerAdapter(private val listener: PhotographerItemClickListener) : RecyclerView.Adapter<PhotographerAdapter.PhotographerViewHolder>(){
 
-    private val photographers = ArrayList<PhotographerParameters>()
+class PhotographerAdapter(private val retry: Retry) :
+    RecyclerView.Adapter<PhotographerAdapter.PhotographerViewHolder>() {
 
-    fun update(new: List<PhotographerParameters>){
+
+    private val photographers = ArrayList<PhotographerUI>()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun update(new: List<PhotographerUI>) {
         photographers.clear()
         photographers.addAll(new)
         notifyDataSetChanged()
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotographerViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val binding =  PhotographerItemBinding.inflate(layoutInflater,parent,false)
-        return PhotographerViewHolder(binding,listener)
+    override fun getItemViewType(position: Int): Int {
+        return when (photographers[position]) {
+            is PhotographerUI.Base -> 0
+            is PhotographerUI.Fail -> 1
+            else -> 2
+        }
     }
 
-    override fun onBindViewHolder(holder: PhotographerViewHolder, position: Int)
-    = holder.bind(photographers[position])
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when(viewType){
+        0 -> PhotographerViewHolder.Base(R.layout.photographer_item.makeView(parent))
+        1 -> PhotographerViewHolder.Fail(R.layout.fail_fullscreen.makeView(parent),retry)
+        else -> PhotographerViewHolder.FullScreenProgress(R.layout.progress_fullscreen.makeView(parent))
+    }
+
+    override fun onBindViewHolder(holder: PhotographerViewHolder, position: Int) =
+        holder.bind(photographers[position])
 
     override fun getItemCount() = photographers.size
 
-    inner class PhotographerViewHolder(private val binding: PhotographerItemBinding,
-    private val listener: PhotographerItemClickListener) : RecyclerView.ViewHolder(binding.root),
-    View.OnClickListener{
-        private lateinit var photographer: PhotographerParameters
-        init {
-            binding.root.setOnClickListener(this) //TODO fix this
+    abstract class PhotographerViewHolder(
+        view: View,
+    ) : RecyclerView.ViewHolder(view) {
+        open fun bind(photographer: PhotographerUI) {}
+
+
+        class FullScreenProgress(view: View) : PhotographerViewHolder(view)
+
+        class Base(view: View) : PhotographerViewHolder(view) {
+            private val authorText = itemView.findViewById<TextView>(R.id.authorName)
+            override fun bind(photographer: PhotographerUI) {
+                photographer.map(object : PhotographerUI.StringMapper {
+                    override fun map(
+                        id: Int,
+                        author: String,
+                        URL: String,
+                        like: Long,
+                        theme: String
+                    ) {
+                        authorText.text = author
+                    }
+
+                    override fun map(message: String) {
+                        Log.i("TAG", message)
+                    }
+
+                })
+            }
+
         }
-        fun bind(photo: PhotographerParameters){
-            binding.apply {
-                photographer = photo //TODO fix this
-                authorName.text = photo.author
-                Glide.with(imageView)
-                    .load(photo.URL)
-                    .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
-                    .placeholder(R.color.colorGrey)
-                    .priority(Priority.IMMEDIATE)
-                    .error(R.drawable.ic_launcher_background)
-                    .into(imageView)
+
+        class Fail(view: View, private val retry: Retry) : PhotographerViewHolder(view) {
+            private val button = itemView.findViewById<TextView>(R.id.update)
+            override fun bind(photographer: PhotographerUI) {
+                photographer.map(object : PhotographerUI.StringMapper {
+                    override fun map(
+                        id: Int,
+                        author: String,
+                        URL: String,
+                        like: Long,
+                        theme: String
+                    ) {
+                        Log.i("TAG", id.toString())
+                    }
+
+                    override fun map(message: String) {
+
+                    }
+                })
+                button.setOnClickListener {
+                    retry.tryAgain()
+                }
             }
         }
 
-        override fun onClick(v: View?) {
-            listener.onClickPhotographer(photographer) //TODO fix this
-        }
+    }
+    interface Retry {
+        fun tryAgain()
     }
 }
+private fun Int.makeView(parent: ViewGroup) =
+    LayoutInflater.from(parent.context).inflate(this, parent, false)

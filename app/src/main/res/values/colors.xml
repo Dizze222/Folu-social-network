@@ -7,4 +7,5 @@
     <color name="colorGrey">#B0A7A7</color>
     <color name="colorShimmer">#dddddd</color>
     <color name="white">#FFFFFF</color>
+    <color name="primary">#6534FF</color>
 </resources>

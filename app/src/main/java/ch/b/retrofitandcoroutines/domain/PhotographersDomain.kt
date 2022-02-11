@@ -1,15 +1,19 @@
 package ch.b.retrofitandcoroutines.domain
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.core.PhotographerParameters
+import ch.b.retrofitandcoroutines.data.PhotographerData
+import ch.b.retrofitandcoroutines.data.mappers.PhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.presentation.PhotographersUI
 import retrofit2.HttpException
 import java.net.UnknownHostException
 
-sealed class PhotographersDomain : Abstract.Object<PhotographersUI,PhotographersDomainToUIMapper>() {
-    class Success(private val photographers: List<PhotographerParameters>) : PhotographersDomain(){
+sealed class PhotographersDomain : Abstract.Object<PhotographersUI,PhotographersDomainToUIMapper> {
+    class Success(private val photographers: List<PhotographerData>,private val photographerMapper: PhotographerDataToDomainMapper) : PhotographersDomain(){
         override fun map(mapper: PhotographersDomainToUIMapper): PhotographersUI {
-           return mapper.map(photographers)
+            val photographersDomain = photographers.map {
+                it.map(photographerMapper)
+            }
+            return mapper.map(photographersDomain)
         }
     }
 
