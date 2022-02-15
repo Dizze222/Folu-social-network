@@ -16,8 +16,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragmentContainer,PhotographersFragment()).commit()
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

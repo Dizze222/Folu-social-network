@@ -9,12 +9,16 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.databinding.FailFullscreenBinding
+import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
+import ch.b.retrofitandcoroutines.databinding.PhotographerItemBinding
+import ch.b.retrofitandcoroutines.databinding.ProgressFullscreenBinding
 
 
 class PhotographerAdapter(private val retry: Retry) :
     RecyclerView.Adapter<PhotographerAdapter.PhotographerViewHolder>() {
-
 
     private val photographers = ArrayList<PhotographerUI>()
 
@@ -25,18 +29,23 @@ class PhotographerAdapter(private val retry: Retry) :
         notifyDataSetChanged()
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return when (photographers[position]) {
-            is PhotographerUI.Base -> 0
-            is PhotographerUI.Fail -> 1
-            else -> 2
-        }
+    override fun getItemViewType(position: Int) = when (photographers[position]) {
+        is PhotographerUI.Base -> 0
+        is PhotographerUI.Fail -> 1
+        else -> 2
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when(viewType){
-        0 -> PhotographerViewHolder.Base(R.layout.photographer_item.makeView(parent))
-        1 -> PhotographerViewHolder.Fail(R.layout.fail_fullscreen.makeView(parent),retry)
-        else -> PhotographerViewHolder.FullScreenProgress(R.layout.progress_fullscreen.makeView(parent))
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotographerViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val bindingBase = PhotographerItemBinding.inflate(layoutInflater, parent, false)
+        val bindingFail = FailFullscreenBinding.inflate(layoutInflater, parent, false)
+        val bindingProgress = ProgressFullscreenBinding.inflate(layoutInflater, parent, false)
+        return when (viewType) {
+            0 -> PhotographerViewHolder.Base(bindingBase)
+            1 -> PhotographerViewHolder.Fail(bindingFail, retry)
+            else -> PhotographerViewHolder.FullScreenProgress(bindingProgress)
+        }
     }
 
     override fun onBindViewHolder(holder: PhotographerViewHolder, position: Int) =
@@ -45,15 +54,14 @@ class PhotographerAdapter(private val retry: Retry) :
     override fun getItemCount() = photographers.size
 
     abstract class PhotographerViewHolder(
-        view: View,
-    ) : RecyclerView.ViewHolder(view) {
+        view: ViewBinding,
+    ) : RecyclerView.ViewHolder(view.root) {
         open fun bind(photographer: PhotographerUI) {}
 
 
-        class FullScreenProgress(view: View) : PhotographerViewHolder(view)
+        class FullScreenProgress(view: ProgressFullscreenBinding) : PhotographerViewHolder(view)
 
-        class Base(view: View) : PhotographerViewHolder(view) {
-            private val authorText = itemView.findViewById<TextView>(R.id.authorName)
+        class Base(private val view: PhotographerItemBinding) : PhotographerViewHolder(view) {
             override fun bind(photographer: PhotographerUI) {
                 photographer.map(object : PhotographerUI.StringMapper {
                     override fun map(
@@ -63,7 +71,8 @@ class PhotographerAdapter(private val retry: Retry) :
                         like: Long,
                         theme: String
                     ) {
-                        authorText.text = author
+                        view.authorName.text = author
+                        view.like.text = like.toString()
                     }
 
                     override fun map(message: String) {
@@ -75,7 +84,8 @@ class PhotographerAdapter(private val retry: Retry) :
 
         }
 
-        class Fail(view: View, private val retry: Retry) : PhotographerViewHolder(view) {
+        class Fail(view: FailFullscreenBinding, private val retry: Retry) :
+            PhotographerViewHolder(view) {
             private val button = itemView.findViewById<TextView>(R.id.update)
             override fun bind(photographer: PhotographerUI) {
                 photographer.map(object : PhotographerUI.StringMapper {
@@ -100,9 +110,8 @@ class PhotographerAdapter(private val retry: Retry) :
         }
 
     }
+
     interface Retry {
         fun tryAgain()
     }
 }
-private fun Int.makeView(parent: ViewGroup) =
-    LayoutInflater.from(parent.context).inflate(this, parent, false)

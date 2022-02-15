@@ -13,7 +13,9 @@ import retrofit2.Response
 interface PhotographersRepository {
 
     suspend fun getPhotographers(): PhotographersData
+
     suspend fun getDataFromServerAndSaveIntoDataBase(): PhotographersData
+
     suspend fun post(
         author: String,
         idPhotographer: Int,
@@ -48,12 +50,23 @@ interface PhotographersRepository {
         }
 
         private val photographerCacheList = cacheDataSource.getPhotographers()
+
         override suspend fun getPhotographers() = try {
+            val photographerCloudList = cloudDataSource.getPhotographers()
+
+            if (photographerCloudList.size != photographerCacheList.size){
+                cacheDataSource.deleteData()
+            }
+            if (photographerCloudList.isEmpty()){
+
+            }
             if (photographerCacheList.isEmpty()){
+                Log.i("TAG","isEmpty")
                 getDataFromServerAndSaveIntoDataBase()
             }else{
                 PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
             }
+
         } catch (e: Exception) {
             if (photographerCacheList.isNotEmpty()) {
                 Log.i("TAG", "ветка catch")

@@ -72,31 +72,31 @@ class PhotographersFragment : Fragment(), PhotographerItemClickListener {
     }
 
     override fun onClickPhotographer(photographer: PhotographerUI) {
-    }
-
-    override fun likeClick(photographer: PhotographerUI) {
-
-    }
-    /*
-    override fun onClickPhotographer(photographer: PhotographerUI) { //TODO fix this
-
-        Toast.makeText(activity, photographer.id.toString(), Toast.LENGTH_LONG).show()
         val fragment = PhotographerDetailFragment()
         val fragmentManager: FragmentManager = activity!!.supportFragmentManager
         val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.fragmentContainer, fragment)
         fragmentTransaction.addToBackStack(null)
-        fragmentTransaction.commit()
+        fragmentTransaction.commit()//TODO fix this
+        photographer.map(object : PhotographerUI.StringMapper{
+            override fun map(id: Int, author: String, URL: String, like: Long, theme: String) {
+                Toast.makeText(activity, id.toString(), Toast.LENGTH_LONG).show()
+                val bundle = Bundle()//TODO fix this
+                bundle.putString("id", id.toString())//TODO fix this
+                bundle.putString("author", author)//TODO fix this
+                bundle.putString("URL", URL)//TODO fix this
+                fragment.arguments = bundle//TODO fix this
+            }
+            override fun map(message: String) {}
+        })
 
-        val bundle = Bundle()//TODO fix this
-        bundle.putString("id", photographer.id.toString())//TODO fix this
-        bundle.putString("author", photographer.author)//TODO fix this
-        bundle.putString("URL", photographer.URL)//TODO fix this
-        fragment.arguments = bundle//TODO fix this
+    }
+    override fun likeClick(photographer: PhotographerUI) {
+
     }
 
-     */
-    /*
+
+/*
     var a = -1
     override fun likeClick(photographer: PhotographerUI) {
         a++
@@ -123,5 +123,7 @@ class PhotographersFragment : Fragment(), PhotographerItemClickListener {
         }
     }
 
-     */
+ */
+
+
 }
