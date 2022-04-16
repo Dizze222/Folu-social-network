@@ -35,4 +35,10 @@ sealed class PhotographersUI : Abstract.Object<Unit, PhotographerCommunication> 
 
     }
 
+    object EmptyData : PhotographersUI() {
+        override fun map(mapper: PhotographerCommunication) =
+            mapper.map(listOf(PhotographerUI.EmptyData))
+
+    }
+
 }

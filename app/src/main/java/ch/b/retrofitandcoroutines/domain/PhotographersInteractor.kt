@@ -12,12 +12,10 @@ interface PhotographersInteractor {
     class Base(private val repository: PhotographersRepository,
                private val mapper: PhotographersDataToDomainMapper
     ) : PhotographersInteractor{
-        override suspend fun getPhotographers() : PhotographersDomain{
-            return repository.getPhotographers().map(mapper)
-        }
+        override suspend fun getPhotographers()= repository.getPhotographers().map(mapper)
 
-        override suspend fun post(author: String,idPhotographer: Int,like: Int,theme: String,url: String): Response<PhotographerCloud> {
-           return repository.post(author, idPhotographer, like, theme, url)
-        }
+
+        override suspend fun post(author: String,idPhotographer: Int,like: Int,theme: String,url: String)
+        = repository.post(author, idPhotographer, like, theme, url)
     }
 }

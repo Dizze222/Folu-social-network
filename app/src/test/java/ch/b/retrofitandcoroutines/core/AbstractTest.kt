@@ -6,7 +6,7 @@ import java.io.IOException
 import java.lang.Exception
 
 class AbstractTest {
-    /*
+
     @Test
     fun test_success(){
         val dataObject = TestDataObject.Success("a","b")
@@ -22,7 +22,7 @@ class AbstractTest {
 
     }
 
-    sealed class TestDataObject : Abstract.Object<DomainObject,DataMapper>(){
+    sealed class TestDataObject : Abstract.Object<DomainObject,DataMapper>{
         class Success(private val textOne: String,private val textTwo: String) : TestDataObject(){
             override fun map(mapper: DataMapper): DomainObject = mapper.map(textOne,textTwo)
         }
@@ -30,7 +30,7 @@ class AbstractTest {
             override fun map(mapper: DataMapper): DomainObject = mapper.map(exception)
         }
     }
-    sealed class DomainObject : Abstract.Object<UIObject,DomainToUIMapper>(){
+    sealed class DomainObject : Abstract.Object<UIObject,DomainToUIMapper>{
         class Success(private val textOne: String,private val textTwo: String) : DomainObject(){
             override fun map(mapper: DomainToUIMapper): UIObject = mapper.map(textOne,textTwo)
         }
@@ -56,5 +56,5 @@ class AbstractTest {
         }
     }
 
-     */
+
 }

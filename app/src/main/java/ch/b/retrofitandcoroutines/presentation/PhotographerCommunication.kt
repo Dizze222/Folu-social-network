@@ -12,17 +12,17 @@ interface PhotographerCommunication : Abstract.Mapper {
     fun observe(owner: LifecycleOwner,observer: Observer<List<PhotographerUI>>)
 
     class Base : PhotographerCommunication{
-        private val successLiveData = MutableLiveData<List<PhotographerUI>>()
+        private val liveData = MutableLiveData<List<PhotographerUI>>()
 
         override fun map(photographer: List<PhotographerUI>) {
-            successLiveData.value = photographer
+            liveData.value = photographer
         }
 
         override fun observe(
             owner: LifecycleOwner,
             observer: Observer<List<PhotographerUI>>
         ) {
-            successLiveData.observe(owner,observer)
+            liveData.observe(owner,observer)
         }
 
     }

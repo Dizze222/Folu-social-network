@@ -26,4 +26,9 @@ sealed class PhotographersDomain : Abstract.Object<PhotographersUI,Photographers
             }
         )
     }
+
+    object EmptyData : PhotographersDomain() {
+        override fun map(mapper: PhotographersDomainToUIMapper): PhotographersUI = mapper.map()
+
+    }
 }

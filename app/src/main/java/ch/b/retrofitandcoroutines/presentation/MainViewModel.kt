@@ -27,7 +27,6 @@ class MainViewModel(
 
     fun observe(owner: LifecycleOwner, observe: Observer<List<PhotographerUI>>) {
         communicate.observe(owner, observe)
-
     }
 
     fun pushPost(author: String, idPhotographer: Int, like: Int, theme: String, url: String) {

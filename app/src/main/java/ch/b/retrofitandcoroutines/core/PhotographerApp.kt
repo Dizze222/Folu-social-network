@@ -7,16 +7,15 @@ import ch.b.retrofitandcoroutines.data.mappers.ToPhotographerMapper
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheDataSource
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheMapper
 import ch.b.retrofitandcoroutines.data.cache.RealmProvider
-import ch.b.retrofitandcoroutines.data.mappers.PhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.domain.BasePhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.BasePhotographersDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.PhotographerDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.PhotographersInteractor
 import ch.b.retrofitandcoroutines.presentation.*
 import io.realm.Realm
+import io.realm.RealmConfiguration
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -27,9 +26,20 @@ class PhotographerApp : Application() {
         const val BASE_URL = "https://photographer-application.herokuapp.com/"
     }
 
+    private val REALM_SCHEMA_VERSION: Long = 1
+    private val REALM_DB_NAME = "rMigrationSample.db"
+
     override fun onCreate() {
         super.onCreate()
         Realm.init(this)
+
+        val config = RealmConfiguration.Builder()
+            .name(REALM_DB_NAME)
+            .schemaVersion(REALM_SCHEMA_VERSION)
+            .build()
+        Realm.setDefaultConfiguration(config)
+
+
         val retrofit = Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .baseUrl(BASE_URL)
@@ -60,7 +70,10 @@ class PhotographerApp : Application() {
         val communication = PhotographerCommunication.Base()
 
         mainViewModel = MainViewModel(
-            photographerInteractor, BasePhotographersDomainToUIMapper(BasePhotographerDomainToUIMapper(),
-                ResourceProvider.Base(this)), communication)
+            photographerInteractor, BasePhotographersDomainToUIMapper(
+                BasePhotographerDomainToUIMapper(),
+                ResourceProvider.Base(this)
+            ), communication
+        )
     }
 }

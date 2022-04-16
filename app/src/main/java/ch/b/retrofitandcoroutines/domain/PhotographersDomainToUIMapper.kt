@@ -8,4 +8,5 @@ interface PhotographersDomainToUIMapper : Abstract.Mapper{
 
     fun map(errorType: ErrorType) : PhotographersUI
 
+    fun map() : PhotographersUI
 }

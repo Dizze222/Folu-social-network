@@ -1,15 +1,14 @@
 package ch.b.retrofitandcoroutines.data
 
-import android.util.Log
+
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheDataSource
 import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudDataSource
-import kotlinx.coroutines.delay
 import retrofit2.Response
 
-//TODO refactor this because this work bed :/
+
 interface PhotographersRepository {
 
     suspend fun getPhotographers(): PhotographersData
@@ -54,24 +53,22 @@ interface PhotographersRepository {
         override suspend fun getPhotographers() = try {
             val photographerCloudList = cloudDataSource.getPhotographers()
 
-            if (photographerCloudList.size != photographerCacheList.size){
+            if (photographerCloudList.size != photographerCacheList.size)
                 cacheDataSource.deleteData()
-            }
-            if (photographerCloudList.isEmpty()){
 
-            }
-            if (photographerCacheList.isEmpty()){
-                Log.i("TAG","isEmpty")
+            if (photographerCacheList.isEmpty())
                 getDataFromServerAndSaveIntoDataBase()
-            }else{
+            else
                 PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
-            }
 
+            if (photographerCloudList.isEmpty())
+                PhotographersData.EmptyData
+            else
+                getDataFromServerAndSaveIntoDataBase()
         } catch (e: Exception) {
-            if (photographerCacheList.isNotEmpty()) {
-                Log.i("TAG", "ветка catch")
+            if (photographerCacheList.isNotEmpty())
                 PhotographersData.Success(photographersCacheMapper.map(photographerCacheList))
-            } else
+            else
                 PhotographersData.Fail(e)
         }
     }
