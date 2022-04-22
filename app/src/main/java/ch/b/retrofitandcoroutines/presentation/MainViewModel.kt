@@ -1,15 +1,14 @@
 package ch.b.retrofitandcoroutines.presentation
 
 import androidx.lifecycle.*
-import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.domain.PhotographersDomainToUIMapper
-import ch.b.retrofitandcoroutines.domain.PhotographersInteractor
+import ch.b.retrofitandcoroutines.domain.PhotographerInteractor
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainViewModel(
-    private val photographerInteractor: PhotographersInteractor,
+    private val photographerInteractor: PhotographerInteractor,
     private val mapper: PhotographersDomainToUIMapper,
     private val communicate: PhotographerCommunication,
 ) : ViewModel() {

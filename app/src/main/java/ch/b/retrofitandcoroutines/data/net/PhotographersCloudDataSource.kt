@@ -19,7 +19,7 @@ interface PhotographersCloudDataSource {
         private val service: PhotographerService,
     ) : PhotographersCloudDataSource {
         val gson = Gson()
-        private val type = object : TypeToken<List<PhotographerCloud>>() {}.type
+        val type = object : TypeToken<List<PhotographerCloud>>(){}.type
         override suspend fun getPhotographers(): List<PhotographerCloud> =
             gson.fromJson(service.getPhotographers().string(), type)
 

@@ -2,9 +2,8 @@ package ch.b.retrofitandcoroutines.data.cache
 
 import ch.b.retrofitandcoroutines.data.PhotographerData
 import ch.b.retrofitandcoroutines.data.mappers.PhotographerDataToDBMapper
-import io.realm.kotlin.delete
 
-interface PhotographersCacheDataSource {
+interface PhotographerListCacheDataSource {
     fun getPhotographers(): List<PhotographerDataBase>
 
     fun savePhotographers(photographers: List<PhotographerData>)
@@ -14,7 +13,7 @@ interface PhotographersCacheDataSource {
     class Base(
         private val realmProvider: RealmProvider,
         private val mapper: PhotographerDataToDBMapper
-    ) : PhotographersCacheDataSource {
+    ) : PhotographerListCacheDataSource {
 
         override fun getPhotographers(): List<PhotographerDataBase> {
             realmProvider.provide().use { realm ->
@@ -38,7 +37,6 @@ interface PhotographersCacheDataSource {
                 realm.executeTransaction {
                     it.deleteAll()
                 }
-
             }
         }
     }

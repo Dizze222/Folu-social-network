@@ -6,11 +6,11 @@ import ch.b.retrofitandcoroutines.domain.ErrorType
 import ch.b.retrofitandcoroutines.domain.PhotographerDomain
 import ch.b.retrofitandcoroutines.domain.PhotographerDomainToUIMapper
 
-sealed class PhotographersUI : Abstract.Object<Unit, PhotographerCommunication> {
+sealed class PhotographerListUI : Abstract.Object<Unit, PhotographerCommunication> {
     class Success(
         private val photographers: List<PhotographerDomain>,
         private val photographerMapper: PhotographerDomainToUIMapper
-    ) : PhotographersUI() {
+    ) : PhotographerListUI() {
         override fun map(mapper: PhotographerCommunication) {
             val photographersUI = photographers.map {
                 it.map(photographerMapper)
@@ -22,7 +22,7 @@ sealed class PhotographersUI : Abstract.Object<Unit, PhotographerCommunication> 
     class Fail(
         private val errorType: ErrorType,
         private val resourceProvider: ResourceProvider
-    ) : PhotographersUI(){
+    ) : PhotographerListUI(){
         override fun map(mapper: PhotographerCommunication) {
             val messageId = when(errorType){
                 ErrorType.NO_CONNECTION -> R.string.no_connection_message
@@ -35,7 +35,7 @@ sealed class PhotographersUI : Abstract.Object<Unit, PhotographerCommunication> 
 
     }
 
-    object EmptyData : PhotographersUI() {
+    object EmptyData : PhotographerListUI() {
         override fun map(mapper: PhotographerCommunication) =
             mapper.map(listOf(PhotographerUI.EmptyData))
 

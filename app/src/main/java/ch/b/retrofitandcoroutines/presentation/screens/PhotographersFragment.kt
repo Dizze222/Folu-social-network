@@ -1,10 +1,11 @@
 package ch.b.retrofitandcoroutines.presentation.screens
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.core.PhotographerApp
@@ -20,6 +21,7 @@ import io.realm.RealmList
 class PhotographersFragment : Fragment() {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: FragmentPhotographersBinding
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotographersBinding.bind(view)
@@ -33,7 +35,8 @@ class PhotographersFragment : Fragment() {
                 override fun onClickPhotographer(photographer: PhotographerUI) {
                     val fragment = PhotographerDetailFragment()
                     val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-                    val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
+                    val fragmentTransaction: FragmentTransaction =
+                        fragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.fragmentContainer, fragment)
                     fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()//TODO fix this
@@ -53,14 +56,14 @@ class PhotographersFragment : Fragment() {
                             bundle.putString("id", id.toString())//TODO fix this
                             bundle.putString("author", author)//TODO fix this
                             bundle.putString("URL", URL)//TODO fix this
-                            for (i in comments){
+                            for (i in comments) {
                                 array.add(i)
                             }
-                            for (i in authorOfComments){
+                            for (i in authorOfComments) {
                                 arrayAuthorOfComments.add(i)
                             }
-                            bundle.putStringArrayList("CUM",array)
-                            bundle.putStringArrayList("CUMauthor",arrayAuthorOfComments)
+                            bundle.putStringArrayList("CUM", array)
+                            bundle.putStringArrayList("CUMauthor", arrayAuthorOfComments)
                             fragment.arguments = bundle//TODO fix this
                         }
 
@@ -106,6 +109,8 @@ class PhotographersFragment : Fragment() {
             }
         }
 
+
+
     }
 
     override fun onCreateView(
@@ -114,6 +119,5 @@ class PhotographersFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_photographers, container, false)
     }
-
 
 }

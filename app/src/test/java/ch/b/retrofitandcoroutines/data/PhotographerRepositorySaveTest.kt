@@ -1,15 +1,5 @@
 package ch.b.retrofitandcoroutines.data
 
-import ch.b.retrofitandcoroutines.data.cache.PhotographerDataBase
-import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheDataSource
-import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheMapper
-import ch.b.retrofitandcoroutines.data.net.PhotographerCloud
-import ch.b.retrofitandcoroutines.data.net.PhotographersCloudDataSource
-import ch.b.retrofitandcoroutines.data.net.PhotographersCloudMapper
-import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.runBlocking
-import org.junit.Test
-
 class PhotographerRepositorySaveTest : BasePhotographerRepositoryTest(){
     /*
 

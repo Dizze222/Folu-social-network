@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.MainViewModel
@@ -44,9 +45,8 @@ class PhotographerDetailFragment : Fragment() {
         bundle!!.putString("URL", photographerURL)//TODO fix this
         fragment.arguments = bundle//TODO fix this
         binding.toolbar.title = photographerAuthor
-        Glide.with(binding.imageOfAuthor)
-            .load(photographerURL)
-            .into(binding.imageOfAuthor)
+        ImageLoad.Base(photographerURL!!).load(binding.imageOfAuthor)
+
 
         binding.imageOfAuthor.setOnClickListener {
             val fragmentManager: FragmentManager = activity!!.supportFragmentManager

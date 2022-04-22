@@ -5,7 +5,6 @@ import ch.b.retrofitandcoroutines.data.cache.PhotographerDataBase
 import ch.b.retrofitandcoroutines.data.mappers.PhotographerDataToDBMapper
 import ch.b.retrofitandcoroutines.data.mappers.PhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.PhotographerDomain
-import ch.b.retrofitandcoroutines.domain.PhotographersDomain
 import io.realm.Realm
 import io.realm.RealmList
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.Priority
@@ -94,13 +95,7 @@ class PhotographerAdapter(
                     ) {
                         binding.authorName.text = author
                         binding.like.text = like.toString()
-                        Glide.with(binding.imageView)
-                            .load(URL)
-                            .apply(RequestOptions().diskCacheStrategy(DiskCacheStrategy.ALL))
-                            .placeholder(R.color.colorGrey)
-                            .priority(Priority.IMMEDIATE)
-                            .error(R.drawable.ic_launcher_background)
-                            .into(binding.imageView)
+                        ImageLoad.Base(URL).load(binding.imageView)
                     }
 
                     override fun map(message: String) = Unit

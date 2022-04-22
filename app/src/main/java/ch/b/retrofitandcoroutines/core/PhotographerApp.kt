@@ -2,17 +2,17 @@ package ch.b.retrofitandcoroutines.core
 
 import android.app.Application
 import ch.b.retrofitandcoroutines.data.mappers.PhotographerDataToDBMapper
-import ch.b.retrofitandcoroutines.data.PhotographersRepository
+import ch.b.retrofitandcoroutines.data.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.mappers.ToPhotographerMapper
-import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheDataSource
-import ch.b.retrofitandcoroutines.data.cache.PhotographersCacheMapper
+import ch.b.retrofitandcoroutines.data.cache.PhotographerListCacheDataSource
+import ch.b.retrofitandcoroutines.data.cache.PhotographerListCacheMapper
 import ch.b.retrofitandcoroutines.data.cache.RealmProvider
 import ch.b.retrofitandcoroutines.data.net.PhotographerService
-import ch.b.retrofitandcoroutines.data.net.PhotographersCloudMapper
+import ch.b.retrofitandcoroutines.data.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.domain.BasePhotographerDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.BasePhotographersDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.PhotographersInteractor
+import ch.b.retrofitandcoroutines.domain.BasePhotographerListDataToDomainMapper
+import ch.b.retrofitandcoroutines.domain.PhotographerInteractor
 import ch.b.retrofitandcoroutines.presentation.*
 import io.realm.Realm
 import io.realm.RealmConfiguration
@@ -47,30 +47,30 @@ class PhotographerApp : Application() {
         val service = retrofit.create(PhotographerService::class.java)
 
         val cloudDataSource = PhotographersCloudDataSource.Base(service)
-        val cacheDataSource = PhotographersCacheDataSource.Base(
+        val cacheDataSource = PhotographerListCacheDataSource.Base(
             RealmProvider.Base(),
             PhotographerDataToDBMapper.Base()
         )
         val toBookMapper = ToPhotographerMapper.Base()
-        val photographersCloudMapper = PhotographersCloudMapper.Base(toBookMapper)
-        val photographersCacheMapper = PhotographersCacheMapper.Base(toBookMapper)
+        val photographersCloudMapper = PhotographerListCloudMapper.Base(toBookMapper)
+        val photographersCacheMapper = PhotographerListCacheMapper.Base(toBookMapper)
 
-        val photographersRepository = PhotographersRepository.Base(
+        val photographersRepository = PhotographerRepository.Base(
             cloudDataSource,
             cacheDataSource,
             photographersCloudMapper,
             photographersCacheMapper
         )
 
-        val photographerInteractor = PhotographersInteractor.Base(
-            photographersRepository, BasePhotographersDataToDomainMapper(
+        val photographerInteractor = PhotographerInteractor.Base(
+            photographersRepository, BasePhotographerListDataToDomainMapper(
                 BasePhotographerDataToDomainMapper()
             )
         )
         val communication = PhotographerCommunication.Base()
 
         mainViewModel = MainViewModel(
-            photographerInteractor, BasePhotographersDomainToUIMapper(
+            photographerInteractor, BasePhotographerListDomainToUIMapper(
                 BasePhotographerDomainToUIMapper(),
                 ResourceProvider.Base(this)
             ), communication
