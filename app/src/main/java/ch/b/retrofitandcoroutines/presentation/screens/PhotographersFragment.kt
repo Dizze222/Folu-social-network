@@ -1,7 +1,5 @@
 package ch.b.retrofitandcoroutines.presentation.screens
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -10,16 +8,17 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
-import ch.b.retrofitandcoroutines.presentation.PhotographerAdapter
+import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerAdapter
 import androidx.fragment.app.FragmentManager
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.presentation.MainViewModel
-import ch.b.retrofitandcoroutines.presentation.PhotographerUI
+import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
+import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
+import ch.b.retrofitandcoroutines.presentation.certain_post.CertainPostViewModel
 import io.realm.RealmList
 
 
 class PhotographersFragment : Fragment() {
-    private lateinit var viewModel: MainViewModel
+    private lateinit var viewModel: AllPostsViewModel
     private lateinit var binding: FragmentPhotographersBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,6 +89,8 @@ class PhotographersFragment : Fragment() {
         }
         viewModel.getPhotographers()
 
+
+
         var count = 2
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
@@ -108,8 +109,6 @@ class PhotographersFragment : Fragment() {
                 else -> false
             }
         }
-
-
 
     }
 

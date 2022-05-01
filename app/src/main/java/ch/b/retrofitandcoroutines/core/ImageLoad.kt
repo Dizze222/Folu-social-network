@@ -21,6 +21,5 @@ interface ImageLoad {
                 .error(R.drawable.ic_launcher_background)
                 .into(imageView)
         }
-
     }
 }
