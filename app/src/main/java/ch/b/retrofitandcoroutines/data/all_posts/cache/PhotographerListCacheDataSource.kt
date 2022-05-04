@@ -1,43 +1,34 @@
 package ch.b.retrofitandcoroutines.data.all_posts.cache
 
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDBMapper
+
+import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 
 interface PhotographerListCacheDataSource {
-    fun getPhotographers(): List<PhotographerDataBase>
 
-    fun savePhotographers(photographers: List<PhotographerData>)
+    suspend fun getPhotographers(): List<CachePhotographer>
 
-    fun deleteData()
+    suspend fun savePhotographers(photographers: List<PhotographerCloud>)
+
+    suspend fun delete()
 
     class Base(
-        private val realmProvider: RealmProvider,
-        private val mapper: PhotographerDataToDBMapper
+        private val dao: PhotographerDao,
+        private val mapper: Abstract.ToCachePhotographerMapper<CachePhotographer>
     ) : PhotographerListCacheDataSource {
 
-        override fun getPhotographers(): List<PhotographerDataBase> {
-            realmProvider.provide().use { realm ->
-                val photographersDB = realm.where(PhotographerDataBase::class.java).findAll() ?: emptyList()
-                return realm.copyFromRealm(photographersDB)
-            }
+        override suspend fun getPhotographers(): List<CachePhotographer> {
+            return dao.readAllData()
         }
 
-        override fun savePhotographers(photographers: List<PhotographerData>) =
-            realmProvider.provide().use { realm ->
-                realm.executeTransaction {
-                    it.deleteAll()
-                    photographers.forEach { photographer ->
-                        photographer.mapTo(mapper, realm)
-                    }
-                }
-            }
+        override suspend fun savePhotographers(photographers: List<PhotographerCloud>) {
+            dao.insert(photographers.map {
+                it.map(mapper)
+            })
+        }
 
-        override fun deleteData() {
-            realmProvider.provide().use { realm->
-                realm.executeTransaction {
-                    it.deleteAll()
-                }
-            }
+        override suspend fun delete(){
+            dao.delete()
         }
     }
 }

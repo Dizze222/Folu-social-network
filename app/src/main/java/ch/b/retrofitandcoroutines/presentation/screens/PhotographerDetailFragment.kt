@@ -16,7 +16,6 @@ import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import ch.b.retrofitandcoroutines.presentation.certain_post.CertainPostViewModel
-import io.realm.RealmList
 import android.net.wifi.WifiManager
 import android.text.format.Formatter
 import android.widget.Toast
@@ -50,8 +49,8 @@ class PhotographerDetailFragment : Fragment() {
                         URL: String,
                         like: Long,
                         theme: String,
-                        comments: RealmList<String>,
-                        authorOfComments: RealmList<String>
+                        comments: List<String>,
+                        authorOfComments: List<String>
                     ) {
                         binding.idOfAuthor.text = id.toString()
                         binding.author.text = author

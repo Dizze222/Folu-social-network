@@ -1,20 +1,33 @@
 package ch.b.retrofitandcoroutines.data.all_posts.cache
 
-import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToPhotographerMapper
-import io.realm.RealmList
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
+import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 
-open class PhotographerDataBase : RealmObject(),Abstract.Object<PhotographerData, ToPhotographerMapper> {
-    @PrimaryKey
-    var id: Int = -1
-    var author: String = ""
-    var URL: String = ""
-    var like: Long = -1
-    var theme: String = ""
-    var comments: RealmList<String> = RealmList()
-    var authorOfComments: RealmList<String> = RealmList()
-    override fun map(mapper: ToPhotographerMapper) = mapper.map(id, author, URL, like, theme, comments,authorOfComments)
+
+@Database(entities = [CachePhotographer::class], version = 1, exportSchema = false)
+@TypeConverters(Convertors::class)
+abstract class PhotographerDataBase : RoomDatabase() {
+
+    abstract fun photographerDao(): PhotographerDao
+
+    companion object {
+        private var instance: PhotographerDataBase? = null
+
+        @Synchronized
+        fun database(context: Context): PhotographerDataBase {
+            if (instance == null) {
+                instance = Room.databaseBuilder(
+                    context.applicationContext,
+                    PhotographerDataBase::class.java,
+                    DATABASE_NAME
+                ).build()
+            }
+            return instance!!
+        }
+
+        private const val DATABASE_NAME = "photographer_db"
+    }
 }

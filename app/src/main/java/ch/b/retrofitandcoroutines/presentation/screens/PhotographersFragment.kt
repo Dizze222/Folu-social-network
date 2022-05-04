@@ -13,8 +13,8 @@ import androidx.fragment.app.FragmentManager
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
-import ch.b.retrofitandcoroutines.presentation.certain_post.CertainPostViewModel
-import io.realm.RealmList
+
+
 
 
 class PhotographersFragment : Fragment() {
@@ -46,8 +46,8 @@ class PhotographersFragment : Fragment() {
                             URL: String,
                             like: Long,
                             theme: String,
-                            comments: RealmList<String>,
-                            authorOfComments: RealmList<String>
+                            comments: List<String>,
+                            authorOfComments: List<String>
                         ) {
                             val array = arrayListOf<String>()
                             val arrayAuthorOfComments = arrayListOf<String>()

@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import io.realm.RealmList
+
 
 sealed class PhotographerUI : Abstract.Object<Unit, PhotographerUI.StringMapper>, Comparing {
     override fun map(mapper: StringMapper) = Unit
@@ -16,8 +16,8 @@ sealed class PhotographerUI : Abstract.Object<Unit, PhotographerUI.StringMapper>
         private val URL: String,
         private val like: Long,
         private val theme: String,
-        private val comments: RealmList<String>,
-        private val authorOfComments: RealmList<String>
+        private val comments: List<String>,
+        private val authorOfComments: List<String>
     ) : PhotographerUI() {
         override fun map(mapper: StringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
@@ -41,8 +41,8 @@ sealed class PhotographerUI : Abstract.Object<Unit, PhotographerUI.StringMapper>
             URL: String,
             like: Long,
             theme: String,
-            comments: RealmList<String>,
-            authorOfComments: RealmList<String>
+            comments: List<String>,
+            authorOfComments: List<String>
         )
 
         fun map(message: String)

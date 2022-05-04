@@ -1,12 +1,9 @@
 package ch.b.retrofitandcoroutines.data.all_posts
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDataBase
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDBMapper
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
-import io.realm.Realm
-import io.realm.RealmList
+
 
 class PhotographerData(
     private val id: Int,
@@ -14,18 +11,12 @@ class PhotographerData(
     private val URL: String,
     private val like: Long,
     private val theme: String,
-    private val comments: RealmList<String>,
-    private val authorOfComments: RealmList<String>
-) : ToPhotographerDB<PhotographerDataBase, PhotographerDataToDBMapper>,
-    Abstract.Object<PhotographerDomain, PhotographerDataToDomainMapper> {
+    private val comments: List<String>,
+    private val authorOfComments: List<String>
+) : Abstract.Object<PhotographerDomain, PhotographerDataToDomainMapper> {
 
-    override fun mapTo(mapper: PhotographerDataToDBMapper, realm: Realm): PhotographerDataBase =
-        mapper.map(id, author, URL, like, theme, realm,comments,authorOfComments)
 
     override fun map(mapper: PhotographerDataToDomainMapper): PhotographerDomain =
-        mapper.map(id, author, URL, like, theme,comments,authorOfComments)
+        mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 }
 
-interface ToPhotographerDB<T, M : Abstract.Mapper> {
-    fun mapTo(mapper: M, realm: Realm): T
-}

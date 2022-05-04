@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomainToUIMapper
-import io.realm.RealmList
+
 
 class BasePhotographerDomainToUIMapper : PhotographerDomainToUIMapper {
     override fun map(
@@ -10,8 +10,8 @@ class BasePhotographerDomainToUIMapper : PhotographerDomainToUIMapper {
         URL: String,
         like: Long,
         theme: String,
-        comments: RealmList<String>,
-        authorOfComments: RealmList<String>
+        comments: List<String>,
+        authorOfComments: List<String>
     ): PhotographerUI =
         PhotographerUI.Base(id, author, URL, like, theme, comments, authorOfComments)
 }

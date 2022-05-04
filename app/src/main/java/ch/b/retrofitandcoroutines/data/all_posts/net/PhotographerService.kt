@@ -1,13 +1,12 @@
 package ch.b.retrofitandcoroutines.data.all_posts.net
 
 
-import okhttp3.ResponseBody
 import retrofit2.Response
 import retrofit2.http.*
 
 interface PhotographerService {
     @GET("posts")
-    suspend fun getPhotographers() : ResponseBody
+    suspend fun getPhotographers() : Response<List<PhotographerCloud.Base>>
 
     @FormUrlEncoded
     @POST("posts")

@@ -4,17 +4,17 @@ package ch.b.retrofitandcoroutines.data.all_posts
 import android.util.Log
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheMapper
+import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToRoomMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import retrofit2.Response
+import java.lang.Exception
 
 
 interface PhotographerRepository {
 
-    suspend fun getPhotographers(): PhotographerListData
-
-    suspend fun getDataFromServerAndSaveIntoDataBase(): PhotographerListData
+    suspend fun getAllPhotographers(): PhotographerListData
 
     suspend fun post(
         author: String,
@@ -27,9 +27,27 @@ interface PhotographerRepository {
     class Base(
         private val cloudDataSource: PhotographersCloudDataSource,
         private val cacheDataSource: PhotographerListCacheDataSource,
-        private val photographersCloudMapper: PhotographerListCloudMapper,
-        private val photographersCacheMapper: PhotographerListCacheMapper
+        private val cloudMapper: PhotographerListCloudMapper,
+        private val toRoomMapper: ToRoomMapper
     ) : PhotographerRepository {
+
+
+        override suspend fun getAllPhotographers() = try {
+            val listOfCache = cacheDataSource.getPhotographers()
+            if (listOfCache.isEmpty()) {
+                val listOfCloud = cloudDataSource.getPhotographers()
+                Log.i("TOR",listOfCloud.toString())
+                val photographerOfList = cloudMapper.map(listOfCloud)
+                cacheDataSource.savePhotographers(listOfCloud)
+                PhotographerListData.Success(photographerOfList)
+            } else {
+                Log.i("CAA",listOfCache.toString())
+                PhotographerListData.Success(listOfCache.map { it.map(toRoomMapper)})
+            }
+
+        } catch (e: Exception) {
+            PhotographerListData.Fail(e)
+        }
 
 
         override suspend fun post(
@@ -40,39 +58,6 @@ interface PhotographerRepository {
             url: String
         ): Response<PhotographerCloud> {
             return cloudDataSource.makePost(author, idPhotographer, like, theme, url)
-        }
-
-        override suspend fun getDataFromServerAndSaveIntoDataBase(): PhotographerListData {
-            val photographerCloudList = cloudDataSource.getPhotographers()
-            val photographersOfList = photographersCloudMapper.map(photographerCloudList)
-            cacheDataSource.savePhotographers(photographersOfList)
-            return PhotographerListData.Success(photographersOfList)
-        }
-
-        private val photographerCacheList = cacheDataSource.getPhotographers()
-
-        override suspend fun getPhotographers() = try {
-            val photographerCloudList = cloudDataSource.getPhotographers()
-
-            if (photographerCloudList.size != photographerCacheList.size)
-                cacheDataSource.deleteData()
-
-            if (photographerCacheList.isEmpty())
-                getDataFromServerAndSaveIntoDataBase()
-            else
-                PhotographerListData.Success(photographersCacheMapper.map(photographerCacheList))
-
-            if (photographerCloudList.isEmpty())
-                PhotographerListData.EmptyData
-            else
-                getDataFromServerAndSaveIntoDataBase()
-        } catch (e: Exception) {
-            if (photographerCacheList.isNotEmpty())
-                PhotographerListData.Success(photographersCacheMapper.map(photographerCacheList))
-            else {
-                Log.i("TOP", e.toString())
-                PhotographerListData.Fail(e)
-            }
         }
     }
 }

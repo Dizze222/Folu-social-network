@@ -12,7 +12,7 @@ import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.*
-import io.realm.RealmList
+
 
 
 class PhotographerAdapter(
@@ -84,8 +84,8 @@ class PhotographerAdapter(
                         URL: String,
                         like: Long,
                         theme: String,
-                        comments: RealmList<String>,
-                        authorOfComments: RealmList<String>
+                        comments: List<String>,
+                        authorOfComments: List<String>
                     ) {
                         binding.authorName.text = author
                         binding.like.text = like.toString()
@@ -114,8 +114,8 @@ class PhotographerAdapter(
                         URL: String,
                         like: Long,
                         theme: String,
-                        comments: RealmList<String>,
-                        authorOfComments: RealmList<String>
+                        comments: List<String>,
+                        authorOfComments: List<String>
 
                     ) {
                         Log.i("TAG", id.toString())
