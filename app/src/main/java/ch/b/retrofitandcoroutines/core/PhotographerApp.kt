@@ -18,13 +18,16 @@ import ch.b.retrofitandcoroutines.domain.all_posts.BasePhotographerDataToDomainM
 import ch.b.retrofitandcoroutines.domain.all_posts.BasePhotographerListDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
 import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
+import ch.b.retrofitandcoroutines.presentation.navigate.MainViewModel
+import ch.b.retrofitandcoroutines.presentation.navigate.Navigator
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.CertainPostViewModel
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 class PhotographerApp : Application() {
-    lateinit var mainViewModel: AllPostsViewModel
+    lateinit var mainViewModel: MainViewModel
+    lateinit var allPostsViewModel: AllPostsViewModel
     lateinit var certainPost: CertainPostViewModel
 
     private companion object {
@@ -73,8 +76,10 @@ class PhotographerApp : Application() {
             certainPostRepository, mapper
         )
         val communication = PhotographerCommunication.Base()
-
-        mainViewModel = AllPostsViewModel(
+        val navigator = Navigator.Base(this)
+        val navigationCommunication = NavigationCommunication.Base()
+        mainViewModel = MainViewModel(navigator, navigationCommunication)
+        allPostsViewModel = AllPostsViewModel(
             photographerInteractor, BasePhotographerListDomainToUIMapper(
                 BasePhotographerDomainToUIMapper(),
                 ResourceProvider.Base(this)

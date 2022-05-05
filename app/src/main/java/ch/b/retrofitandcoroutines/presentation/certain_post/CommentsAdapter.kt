@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.screens
+package ch.b.retrofitandcoroutines.presentation.certain_post
 
 import android.annotation.SuppressLint
 import android.util.Log
@@ -44,32 +44,3 @@ class CommentsAdapter : RecyclerView.Adapter<CommentsAdapter.CommentsViewHolder>
 
     override fun getItemCount(): Int = comments.size
 }
-
-/*
-
- <TextView
-        android:id="@+id/comment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Avengers"
-        android:textSize="20sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/authorOfComments"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="TextView"
-        android:textSize="14sp"
-        android:textStyle="bold|italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/comment" />
-
-
-
- */

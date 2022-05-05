@@ -29,6 +29,5 @@ interface PhotographersCloudDataSource {
             url: String
         ): Response<PhotographerCloud> =
             service.makePost(author, idPhotographer, like, theme, url)
-
     }
 }

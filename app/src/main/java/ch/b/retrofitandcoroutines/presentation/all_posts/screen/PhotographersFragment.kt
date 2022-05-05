@@ -1,7 +1,6 @@
-package ch.b.retrofitandcoroutines.presentation.screens
+package ch.b.retrofitandcoroutines.presentation.all_posts.screen
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -13,8 +12,7 @@ import androidx.fragment.app.FragmentManager
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
-
-
+import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
 
 
 class PhotographersFragment : Fragment() {
@@ -24,7 +22,7 @@ class PhotographersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotographersBinding.bind(view)
-        viewModel = (activity?.application as PhotographerApp).mainViewModel
+        viewModel = (activity?.application as PhotographerApp).allPostsViewModel
         val adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()
@@ -36,7 +34,7 @@ class PhotographersFragment : Fragment() {
                     val fragmentManager: FragmentManager = activity!!.supportFragmentManager
                     val fragmentTransaction: FragmentTransaction =
                         fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+                    fragmentTransaction.replace(R.id.container, fragment)
                     fragmentTransaction.addToBackStack(null)
                     fragmentTransaction.commit()//TODO fix this
                     photographer.map(object : PhotographerUI.StringMapper {
@@ -49,21 +47,9 @@ class PhotographersFragment : Fragment() {
                             comments: List<String>,
                             authorOfComments: List<String>
                         ) {
-                            val array = arrayListOf<String>()
-                            val arrayAuthorOfComments = arrayListOf<String>()
-                            val bundle = Bundle()//TODO fix this
-                            bundle.putString("id", id.toString())//TODO fix this
-                            bundle.putString("author", author)//TODO fix this
-                            bundle.putString("URL", URL)//TODO fix this
-                            for (i in comments) {
-                                array.add(i)
-                            }
-                            for (i in authorOfComments) {
-                                arrayAuthorOfComments.add(i)
-                            }
-                            bundle.putStringArrayList("CUM", array)
-                            bundle.putStringArrayList("CUMauthor", arrayAuthorOfComments)
-                            fragment.arguments = bundle//TODO fix this
+                            val bundle = Bundle()
+                            bundle.putString("id", id.toString())
+                            fragment.arguments = bundle
                         }
 
                         override fun map(message: String) = Unit
@@ -118,5 +104,6 @@ class PhotographersFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_photographers, container, false)
     }
+
 
 }

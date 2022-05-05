@@ -1,8 +1,7 @@
-package ch.b.retrofitandcoroutines.presentation.screens
+package ch.b.retrofitandcoroutines.presentation.certain_post
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,10 +14,10 @@ import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
-import ch.b.retrofitandcoroutines.presentation.certain_post.CertainPostViewModel
 import android.net.wifi.WifiManager
 import android.text.format.Formatter
 import android.widget.Toast
+import ch.b.retrofitandcoroutines.presentation.screens.PhotographerZoomImageFragment
 
 
 class PhotographerDetailFragment : Fragment() {
@@ -38,7 +37,7 @@ class PhotographerDetailFragment : Fragment() {
         val context = requireContext().applicationContext
         val wm = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
         val ip: String = Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
-        Toast.makeText(context,"IP" + ip,Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, "IP$ip",Toast.LENGTH_SHORT).show()
 
         certainViewModel.observe(this){
             it.map {post ->
@@ -74,7 +73,7 @@ class PhotographerDetailFragment : Fragment() {
             val fragmentManager: FragmentManager = activity!!.supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
 
-            fragmentTransaction.replace(R.id.fragmentContainer, fragment)
+            fragmentTransaction.replace(R.id.container, fragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
         }

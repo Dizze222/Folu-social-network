@@ -46,6 +46,7 @@ interface PhotographerRepository {
             }
 
         } catch (e: Exception) {
+            Log.i("TAA",e.toString())
             PhotographerListData.Fail(e)
         }
 
