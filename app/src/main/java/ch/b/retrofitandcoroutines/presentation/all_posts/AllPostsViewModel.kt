@@ -8,6 +8,7 @@ import androidx.lifecycle.*
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -22,15 +23,15 @@ class AllPostsViewModel(
         communicate.map(listOf(PhotographerUI.Progress))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.readDataFromCloud()
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 val resultUi = resultDomain.map(mapper)
                 resultUi.map(communicate)
             }
         }
     }
 
-    fun observe(owner: LifecycleOwner, observe: Observer<List<PhotographerUI>>) {
-        communicate.observe(owner, observe)
+    suspend fun observe(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>) {
+        communicate.observe(owner, observer)
     }
 
     fun pushPost(author: String, idPhotographer: Int, like: Int, theme: String, url: String) {

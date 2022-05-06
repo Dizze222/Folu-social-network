@@ -8,6 +8,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToRoomMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import java.lang.Exception
 
@@ -30,7 +31,6 @@ interface PhotographerRepository {
         private val cloudMapper: PhotographerListCloudMapper,
         private val toRoomMapper: ToRoomMapper
     ) : PhotographerRepository {
-
 
         override suspend fun getAllPhotographers() = try {
             val listOfCache = cacheDataSource.getPhotographers()

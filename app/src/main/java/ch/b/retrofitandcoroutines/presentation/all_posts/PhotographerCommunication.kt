@@ -1,30 +1,29 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import ch.b.retrofitandcoroutines.core.Abstract
+import kotlinx.coroutines.flow.FlowCollector
+import kotlinx.coroutines.flow.MutableStateFlow
 
 interface PhotographerCommunication : Abstract.Mapper {
 
     fun map(photographer: List<PhotographerUI>)
 
-    fun observe(owner: LifecycleOwner,observer: Observer<List<PhotographerUI>>)
+    suspend fun observe(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>)
 
     class Base : PhotographerCommunication {
-        private val liveData = MutableLiveData<List<PhotographerUI>>()
+        private val listOfPhotographers = MutableStateFlow<List<PhotographerUI>>(listOf())
 
         override fun map(photographer: List<PhotographerUI>) {
-            liveData.value = photographer
+            listOfPhotographers.value = photographer
         }
 
-        override fun observe(
+        override suspend fun observe(
             owner: LifecycleOwner,
-            observer: Observer<List<PhotographerUI>>
+            observer: FlowCollector<List<PhotographerUI>>
         ) {
-            liveData.observe(owner,observer)
+            listOfPhotographers.collect(observer)
         }
-
     }
 
 }

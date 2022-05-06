@@ -31,7 +31,7 @@ class PhotographerApp : Application() {
     lateinit var certainPost: CertainPostViewModel
 
     private companion object {
-        const val BASE_URL = "https://91a7-95-105-65-149.ngrok.io/"
+        const val BASE_URL = "https://photographer-application.herokuapp.com/"
     }
     override fun onCreate() {
         super.onCreate()

@@ -5,15 +5,17 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import ch.b.retrofitandcoroutines.core.NavigationCommunication
 import ch.b.retrofitandcoroutines.core.Read
+import kotlinx.coroutines.flow.FlowCollector
 
 class MainViewModel(
     private val navigator: Read<Int>,
     private val communication: NavigationCommunication
-) : ViewModel(){
-    fun init(){
+) : ViewModel() {
+    fun init() {
         communication.map(navigator.read())
     }
-    fun observe(owner: LifecycleOwner, observer: Observer<Int>) {
+
+    suspend fun observe(owner: LifecycleOwner, observer: FlowCollector<Int>) {
         communication.observe(owner, observer)
     }
 

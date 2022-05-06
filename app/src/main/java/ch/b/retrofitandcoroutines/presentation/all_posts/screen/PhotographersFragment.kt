@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts.screen
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -9,10 +10,14 @@ import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerAdapter
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 
 
 class PhotographersFragment : Fragment() {
@@ -69,9 +74,10 @@ class PhotographersFragment : Fragment() {
             binding.refresh.isRefreshing = false
         }
 
-
-        viewModel.observe(this) {
-            adapter.update(it)
+        lifecycleScope.launchWhenStarted {
+            viewModel.observe(this@PhotographersFragment) {
+                adapter.update(it)
+            }
         }
         viewModel.getPhotographers()
 
@@ -106,4 +112,10 @@ class PhotographersFragment : Fragment() {
     }
 
 
+}
+
+fun <T> Flow<T>.launchWhenStarted(lifecycleScope: LifecycleCoroutineScope){
+    lifecycleScope.launchWhenStarted {
+        this@launchWhenStarted.collect()
+    }
 }

@@ -9,6 +9,7 @@ import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -27,8 +28,8 @@ class CertainPostViewModel(
             }
         }
     }
-    fun observe(owner: LifecycleOwner, observe: Observer<List<PhotographerUI>>) {
-        communicate.observe(owner, observe)
+    suspend fun observe(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>) {
+        communicate.observe(owner, observer)
     }
 
 }

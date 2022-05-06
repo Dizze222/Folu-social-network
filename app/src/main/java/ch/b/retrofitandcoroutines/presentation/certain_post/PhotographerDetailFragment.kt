@@ -17,6 +17,7 @@ import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import android.net.wifi.WifiManager
 import android.text.format.Formatter
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.presentation.screens.PhotographerZoomImageFragment
 
 
@@ -38,34 +39,39 @@ class PhotographerDetailFragment : Fragment() {
         val wm = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
         val ip: String = Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
         Toast.makeText(context, "IP$ip",Toast.LENGTH_SHORT).show()
+        lifecycleScope.launchWhenCreated {
+            certainViewModel.observe(this@PhotographerDetailFragment) {
+                it.map { post ->
+                    post.map(object : PhotographerUI.StringMapper {
+                        override fun map(
+                            id: Int,
+                            author: String,
+                            URL: String,
+                            like: Long,
+                            theme: String,
+                            comments: List<String>,
+                            authorOfComments: List<String>
+                        ) {
+                            binding.idOfAuthor.text = id.toString()
+                            binding.author.text = author
+                            binding.toolbar.title = author
+                            adapter.update(
+                                convertToArrayList(comments),
+                                convertToArrayList(authorOfComments)
+                            )
+                            ImageLoad.Base(URL).load(binding.imageOfAuthor)
+                            bundle!!.putString("URL", URL)
 
-        certainViewModel.observe(this){
-            it.map {post ->
-                post.map(object : PhotographerUI.StringMapper{
-                    override fun map(
-                        id: Int,
-                        author: String,
-                        URL: String,
-                        like: Long,
-                        theme: String,
-                        comments: List<String>,
-                        authorOfComments: List<String>
-                    ) {
-                        binding.idOfAuthor.text = id.toString()
-                        binding.author.text = author
-                        binding.toolbar.title = author
-                        adapter.update(convertToArrayList(comments), convertToArrayList(authorOfComments))
-                        ImageLoad.Base(URL).load(binding.imageOfAuthor)
-                        bundle!!.putString("URL", URL)
+                        }
 
-                    }
+                        override fun map(message: String) = Unit
 
-                    override fun map(message: String) = Unit
-
-                })
+                    })
+                }
             }
         }
         certainViewModel.getCertainPost(photographerId!!.toInt())
+
 
         fragment.arguments = bundle
 

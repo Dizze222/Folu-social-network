@@ -3,6 +3,7 @@ package ch.b.retrofitandcoroutines
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
+import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.core.PhotographerApp
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.navigate.MainViewModel
@@ -20,17 +21,18 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel = (application as PhotographerApp).mainViewModel
-
-        viewModel.observe(this, {
-            val fragment = when (it) {
-                ALL_PHOTOGRAPHERS -> PhotographersFragment()
-                CERTAIN_POST -> PhotographerDetailFragment()
-                else -> throw IllegalStateException("screen id undefined $it")
-            }
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.container, fragment)
-                .commit()
-        })
+        lifecycleScope.launchWhenStarted {
+            viewModel.observe(this@MainActivity, {
+                val fragment = when (it) {
+                    ALL_PHOTOGRAPHERS -> PhotographersFragment()
+                    CERTAIN_POST -> PhotographerDetailFragment()
+                    else -> throw IllegalStateException("screen id undefined $it")
+                }
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container, fragment)
+                    .commit()
+            })
+        }
         viewModel.init()
 
     }
