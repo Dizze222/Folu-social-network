@@ -3,12 +3,10 @@ package ch.b.retrofitandcoroutines.data.all_posts
 
 import android.util.Log
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
-import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheMapper
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToRoomMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
-import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 import java.lang.Exception
 
@@ -16,6 +14,8 @@ import java.lang.Exception
 interface PhotographerRepository {
 
     suspend fun getAllPhotographers(): PhotographerListData
+
+    suspend fun searchPhotographers(author: String): PhotographerListData
 
     suspend fun post(
         author: String,
@@ -36,20 +36,27 @@ interface PhotographerRepository {
             val listOfCache = cacheDataSource.getPhotographers()
             if (listOfCache.isEmpty()) {
                 val listOfCloud = cloudDataSource.getPhotographers()
-                Log.i("TOR",listOfCloud.toString())
+                Log.i("TOR", listOfCloud.toString())
                 val photographerOfList = cloudMapper.map(listOfCloud)
                 cacheDataSource.savePhotographers(listOfCloud)
                 PhotographerListData.Success(photographerOfList)
             } else {
-                Log.i("CAA",listOfCache.toString())
-                PhotographerListData.Success(listOfCache.map { it.map(toRoomMapper)})
+                Log.i("CAA", listOfCache.toString())
+                PhotographerListData.Success(listOfCache.map {
+                    it.map(toRoomMapper)
+                })
             }
 
         } catch (e: Exception) {
-            Log.i("TAA",e.toString())
+            Log.i("TAA", e.toString())
             PhotographerListData.Fail(e)
         }
 
+        override suspend fun searchPhotographers(author: String): PhotographerListData {
+            return PhotographerListData.Success(cacheDataSource.searchPhotographers(author).map {
+                it.map(toRoomMapper)
+            })
+        }
 
         override suspend fun post(
             author: String,

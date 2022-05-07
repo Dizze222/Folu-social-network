@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.navigate
 
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import ch.b.retrofitandcoroutines.core.NavigationCommunication
 import ch.b.retrofitandcoroutines.core.Read

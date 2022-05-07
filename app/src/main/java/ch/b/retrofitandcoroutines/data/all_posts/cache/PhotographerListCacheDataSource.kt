@@ -12,6 +12,8 @@ interface PhotographerListCacheDataSource {
 
     suspend fun delete()
 
+    suspend fun searchPhotographers(author: String): List<CachePhotographer>
+
     class Base(
         private val dao: PhotographerDao,
         private val mapper: Abstract.ToCachePhotographerMapper<CachePhotographer>
@@ -27,8 +29,11 @@ interface PhotographerListCacheDataSource {
             })
         }
 
-        override suspend fun delete(){
+        override suspend fun delete() {
             dao.delete()
         }
+
+        override suspend fun searchPhotographers(author: String): List<CachePhotographer> =
+            dao.searchDatabase(author)
     }
 }

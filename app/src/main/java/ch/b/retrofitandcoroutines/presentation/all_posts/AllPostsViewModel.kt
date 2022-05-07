@@ -15,11 +15,13 @@ import kotlinx.coroutines.withContext
 class AllPostsViewModel(
     private val interactor: PhotographerInteractor,
     private val mapper: PhotographerListDomainToUIMapper,
+    private val communicateSearchAuthor: PhotographerCommunication,
     private val communicate: PhotographerCommunication,
     private val resourceProvider: ResourceProvider
 ) : ViewModel() {
 
     fun getPhotographers() {
+
         communicate.map(listOf(PhotographerUI.Progress))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.readDataFromCloud()
@@ -28,10 +30,28 @@ class AllPostsViewModel(
                 resultUi.map(communicate)
             }
         }
+
     }
 
-    suspend fun observe(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>) {
+    suspend fun observeAllPhotographers(
+        owner: LifecycleOwner,
+        observer: FlowCollector<List<PhotographerUI>>
+    ) {
         communicate.observe(owner, observer)
+    }
+
+    suspend fun searchPhotographers(author: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val resultDomain = interactor.searchPhotographers(author)
+            withContext(Dispatchers.Main) {
+                val resultUi = resultDomain.map(mapper)
+                resultUi.map(communicateSearchAuthor)
+            }
+        }
+    }
+
+    suspend fun observeSearchPhotographer(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>) {
+        communicateSearchAuthor.observe(owner, observer)
     }
 
     fun pushPost(author: String, idPhotographer: Int, like: Int, theme: String, url: String) {

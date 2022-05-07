@@ -33,6 +33,7 @@ class PhotographerApp : Application() {
     private companion object {
         const val BASE_URL = "https://photographer-application.herokuapp.com/"
     }
+
     override fun onCreate() {
         super.onCreate()
 
@@ -80,10 +81,14 @@ class PhotographerApp : Application() {
         val navigationCommunication = NavigationCommunication.Base()
         mainViewModel = MainViewModel(navigator, navigationCommunication)
         allPostsViewModel = AllPostsViewModel(
-            photographerInteractor, BasePhotographerListDomainToUIMapper(
+            photographerInteractor,
+            BasePhotographerListDomainToUIMapper(
                 BasePhotographerDomainToUIMapper(),
                 ResourceProvider.Base(this)
-            ), communication, ResourceProvider.Base(this)
+            ),
+            communication,
+            communication,
+            ResourceProvider.Base(this)
         )
         certainPost = CertainPostViewModel(
             certainInteractor, BasePhotographerListDomainToUIMapper(
