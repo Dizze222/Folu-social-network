@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.data.all_posts.cache
 
 
+import android.util.Log
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 

@@ -94,13 +94,13 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
                     binding.recyclerView.layoutManager = GridLayoutManager(activity, count)
                     if (count == 1) {
                         count = 3
+
                     }
                     true
                 }
                 else -> false
             }
         }
-
     }
 
     override fun onCreateView(
@@ -131,12 +131,8 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
                 adapter.update(it)
             }
         }
-        GlobalScope.launch {
+        lifecycleScope.launchWhenCreated {
             viewModel.searchPhotographers(searchQuery)
         }
-
-
     }
-
-
 }
