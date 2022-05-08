@@ -4,9 +4,12 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import ch.b.retrofitandcoroutines.core.NavigationCommunication
 import ch.b.retrofitandcoroutines.core.Read
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.FlowCollector
+import javax.inject.Inject
 
-class MainViewModel(
+@HiltViewModel
+class MainViewModel @Inject constructor(
     private val navigator: Read<Int>,
     private val communication: NavigationCommunication
 ) : ViewModel() {

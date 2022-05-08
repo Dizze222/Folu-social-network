@@ -2,6 +2,8 @@ package ch.b.retrofitandcoroutines.presentation.di
 
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPhotographerService
+import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -43,8 +45,19 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideCertainPostService(retrofit: Retrofit) : CertainPhotographerService{
+        return retrofit.create(CertainPhotographerService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideCloudDataSource(service: PhotographerService): PhotographersCloudDataSource {
         return PhotographersCloudDataSource.Base(service)
     }
 
+    @Provides
+    @Singleton
+    fun provideCertainPostDataSource(service: CertainPhotographerService): CertainPostDataSource {
+        return CertainPostDataSource.Base(service)
+    }
 }

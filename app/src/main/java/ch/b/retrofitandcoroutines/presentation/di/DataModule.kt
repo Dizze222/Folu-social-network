@@ -6,6 +6,8 @@ import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToPhotographerMapper
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToRoomMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
+import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,7 +39,17 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideRoomMapper() : ToRoomMapper{
+    fun provideRoomMapper(): ToRoomMapper {
         return ToRoomMapper.Base()
     }
+
+    @Provides
+    @Singleton
+    fun provideCertainPostRepository(
+        cloudDataSource: CertainPostDataSource,
+        cloudMapper: PhotographerListCloudMapper
+    ): CertainPostRepository {
+        return CertainPostRepository.Base(cloudDataSource, cloudMapper)
+    }
+
 }
