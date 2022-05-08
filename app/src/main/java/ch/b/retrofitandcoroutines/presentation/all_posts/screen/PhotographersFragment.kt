@@ -6,26 +6,27 @@ import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
-import ch.b.retrofitandcoroutines.core.PhotographerApp
+
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerAdapter
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.viewModels
+
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
+import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
-    private lateinit var viewModel: AllPostsViewModel
+    private val viewModel: AllPostsViewModel by viewModels()
     private lateinit var binding: FragmentPhotographersBinding
     private lateinit var adapter: PhotographerAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotographersBinding.bind(view)
-        viewModel = (activity?.application as PhotographerApp).allPostsViewModel
+        //viewModel = (activity?.application as PhotographerApp).allPostsViewModel
+        // viewModel = ViewModelProvider(this, PhotographerViewModelFactory((activity?.application as PhotographerApp).photographerInteractor, ResourceProvider.Base(activity!!.applicationContext))).get(AllPostsViewModel::class.java)
         adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()
@@ -135,4 +136,6 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
             viewModel.searchPhotographers(searchQuery)
         }
     }
+
+
 }

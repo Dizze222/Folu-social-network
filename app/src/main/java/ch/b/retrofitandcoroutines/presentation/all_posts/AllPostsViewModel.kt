@@ -7,12 +7,15 @@ import android.os.Build
 import androidx.lifecycle.*
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class AllPostsViewModel(
+@HiltViewModel
+class AllPostsViewModel @Inject constructor(
     private val interactor: PhotographerInteractor,
     private val mapper: PhotographerListDomainToUIMapper,
     private val communicateSearchAuthor: PhotographerCommunication,
