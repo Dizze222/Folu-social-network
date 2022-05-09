@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.certain_post
 
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -23,6 +24,7 @@ class CertainPostViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getCertainPost(postId: Int){
+        Log.i("TOP","certain post")
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.getCertainPost(postId)
             withContext(Dispatchers.Main){
@@ -31,7 +33,7 @@ class CertainPostViewModel @Inject constructor(
             }
         }
     }
-    suspend fun observe(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>) {
+    suspend fun observeCertainPost(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>) {
         communicate.observe(owner, observer)
     }
 

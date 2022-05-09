@@ -15,6 +15,6 @@ class BasePhotographerListDomainToUIMapper(
     override fun map(errorType: ErrorType): PhotographerListUI =
         PhotographerListUI.Fail(errorType, resourceProvider)
 
-    override fun map(): PhotographerListUI = PhotographerListUI.EmptyData
+   // override fun map(): PhotographerListUI = PhotographerListUI.EmptyData
 
 }

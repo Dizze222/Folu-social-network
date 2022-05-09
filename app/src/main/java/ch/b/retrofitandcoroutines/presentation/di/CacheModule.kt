@@ -7,7 +7,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.cache.CachePhotographer
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDao
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDataBase
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.Cache
+import ch.b.retrofitandcoroutines.data.all_posts.mappers.BaseToCachePhotographerMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -51,7 +51,7 @@ class CacheModule {
     @Provides
     @Singleton
     fun provideToCachePhotographerMapper() : Abstract.ToCachePhotographerMapper<CachePhotographer>{
-        return Cache()
+        return BaseToCachePhotographerMapper()
     }
 
 }

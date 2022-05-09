@@ -35,10 +35,6 @@ sealed class PhotographerListUI : Abstract.Object<Unit, PhotographerCommunicatio
 
     }
 
-    object EmptyData : PhotographerListUI() {
-        override fun map(mapper: PhotographerCommunication) =
-            mapper.map(listOf(PhotographerUI.EmptyData))
-
-    }
+   // object EmptyData : PhotographerListUI() { override fun map(mapper: PhotographerCommunication) = mapper.map(listOf(PhotographerUI.EmptyData)) }
 
 }

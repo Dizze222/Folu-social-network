@@ -10,7 +10,7 @@ interface PhotographerListDomainToUIMapper : Abstract.Mapper {
 
     fun map(errorType: ErrorType): PhotographerListUI
 
-    fun map(): PhotographerListUI
+    //fun map(): PhotographerListUI
 
 
 }

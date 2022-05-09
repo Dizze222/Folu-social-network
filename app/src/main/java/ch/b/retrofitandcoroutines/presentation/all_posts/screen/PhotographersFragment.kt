@@ -25,8 +25,6 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotographersBinding.bind(view)
-        //viewModel = (activity?.application as PhotographerApp).allPostsViewModel
-        // viewModel = ViewModelProvider(this, PhotographerViewModelFactory((activity?.application as PhotographerApp).photographerInteractor, ResourceProvider.Base(activity!!.applicationContext))).get(AllPostsViewModel::class.java)
         adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()

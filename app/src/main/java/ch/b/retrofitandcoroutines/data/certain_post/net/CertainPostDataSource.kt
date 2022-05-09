@@ -11,7 +11,6 @@ interface CertainPostDataSource {
     class Base(private val service: CertainPhotographerService) : CertainPostDataSource{
         val gson = Gson()
         val type = object : TypeToken<List<PhotographerCloud>>(){}.type
-        override suspend fun getCertainPost(postId: Int): List<PhotographerCloud.Base> =
-            gson.fromJson(service.getCertainPost(postId).string(),type)
+        override suspend fun getCertainPost(postId: Int): List<PhotographerCloud.Base> = service.getCertainPost(postId).body()!!
     }
 }

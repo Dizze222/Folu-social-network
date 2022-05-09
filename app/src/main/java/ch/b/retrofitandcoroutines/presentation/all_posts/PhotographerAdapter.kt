@@ -35,7 +35,7 @@ class PhotographerAdapter(
     override fun getItemViewType(position: Int) = when (photographers[position]) {
         is PhotographerUI.Base -> 0
         is PhotographerUI.Fail -> 1
-        is PhotographerUI.EmptyData -> 2
+        //is PhotographerUI.EmptyData -> 2
         else -> 3
     }
 
@@ -49,7 +49,7 @@ class PhotographerAdapter(
         return when (viewType) {
             0 -> PhotographerViewHolder.Base(bindingBase, photographerItemClick)
             1 -> PhotographerViewHolder.Fail(bindingFail, retry)
-            2 -> PhotographerViewHolder.EmptyData(bindingEmpty)
+           // 2 -> PhotographerViewHolder.EmptyData(bindingEmpty)
             else -> PhotographerViewHolder.FullScreenProgress(bindingProgress)
         }
     }

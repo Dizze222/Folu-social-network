@@ -16,11 +16,14 @@ import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import android.net.wifi.WifiManager
 import android.text.format.Formatter
+import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.presentation.screens.PhotographerZoomImageFragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PhotographerDetailFragment : Fragment() {
@@ -28,19 +31,22 @@ class PhotographerDetailFragment : Fragment() {
     private val certainViewModel: CertainPostViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding = FragmentPhotographerDetailBinding.bind(view)
         val bundle = this.arguments
         val fragment = PhotographerZoomImageFragment()
         val photographerId = bundle?.getString("id")
         val adapter = CommentsAdapter()
+        Log.i("TOP", photographerId.toString())
         binding.commetsRecyclerView.adapter = adapter
         binding.commetsRecyclerView.layoutManager = GridLayoutManager(activity, 1)
-        val context = requireContext().applicationContext
-        val wm = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        val ip: String = Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
-        Toast.makeText(context, "IP$ip",Toast.LENGTH_SHORT).show()
-        lifecycleScope.launchWhenCreated {
-            certainViewModel.observe(this@PhotographerDetailFragment) {
+        //val context = requireContext().applicationContext
+        //val wm = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        //val ip: String = Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
+        //Toast.makeText(context, "IP$ip", Toast.LENGTH_SHORT).show()
+        lifecycleScope.launchWhenStarted {
+            certainViewModel.observeCertainPost(this@PhotographerDetailFragment) {
+                Log.i("TOP", "dot 1")
                 it.map { post ->
                     post.map(object : PhotographerUI.StringMapper {
                         override fun map(
@@ -52,6 +58,7 @@ class PhotographerDetailFragment : Fragment() {
                             comments: List<String>,
                             authorOfComments: List<String>
                         ) {
+                            Log.i("TOP", "dot 2")
                             binding.idOfAuthor.text = id.toString()
                             binding.author.text = author
                             binding.toolbar.title = author
@@ -62,6 +69,9 @@ class PhotographerDetailFragment : Fragment() {
                             ImageLoad.Base(URL).load(binding.imageOfAuthor)
                             bundle!!.putString("URL", URL)
 
+                            Log.i("TOP", "dot 3")
+
+
                         }
 
                         override fun map(message: String) = Unit
@@ -69,12 +79,11 @@ class PhotographerDetailFragment : Fragment() {
                     })
                 }
             }
+
         }
         certainViewModel.getCertainPost(photographerId!!.toInt())
 
-
         fragment.arguments = bundle
-
         binding.imageOfAuthor.setOnClickListener {
             val fragmentManager: FragmentManager = activity!!.supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
@@ -89,14 +98,13 @@ class PhotographerDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         return inflater.inflate(R.layout.fragment_photographer_detail, container, false)
     }
 }
 
-fun convertToArrayList(list: List<String>) : ArrayList<String>{
+fun convertToArrayList(list: List<String>): ArrayList<String> {
     val someList = arrayListOf<String>()
-    for (i in list){
+    for (i in list) {
         someList.add(i)
     }
     return someList

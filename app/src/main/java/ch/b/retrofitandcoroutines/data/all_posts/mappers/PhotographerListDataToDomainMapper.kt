@@ -9,5 +9,5 @@ interface PhotographerListDataToDomainMapper : Abstract.Mapper {
 
     fun map(e: Exception) : PhotographerListDomain
 
-    fun map() : PhotographerListDomain
+  //  fun map() : PhotographerListDomain
 }

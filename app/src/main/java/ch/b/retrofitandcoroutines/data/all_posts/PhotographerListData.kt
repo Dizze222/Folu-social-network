@@ -13,8 +13,6 @@ sealed class PhotographerListData : Abstract.Object<PhotographerListDomain, Phot
         override fun map(mapper: PhotographerListDataToDomainMapper) = mapper.map(e)
     }
 
-    object EmptyData : PhotographerListData() {
-        override fun map(mapper: PhotographerListDataToDomainMapper) = mapper.map()
-    }
+   // object EmptyData : PhotographerListData() { override fun map(mapper: PhotographerListDataToDomainMapper) = mapper.map() }
 
 }
