@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts.screen
 
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.SearchView
@@ -12,19 +13,28 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 
 import androidx.lifecycle.lifecycleScope
+import ch.b.retrofitandcoroutines.MainActivity
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
+import ch.b.retrofitandcoroutines.presentation.core.ImageProfile
+import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
+class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageResult {
     private val viewModel: AllPostsViewModel by viewModels()
     private lateinit var binding: FragmentPhotographersBinding
     private lateinit var adapter: PhotographerAdapter
+    private var imageProfile : ImageProfile = ImageProfile.Empty
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotographersBinding.bind(view)
+
+        binding.button.setOnClickListener {
+            (requireActivity() as MainActivity).image()
+        }
+
         adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()
@@ -102,6 +112,8 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
         }
     }
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -133,6 +145,11 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener {
         lifecycleScope.launchWhenCreated {
             viewModel.searchPhotographers(searchQuery)
         }
+    }
+
+    override fun onImageResult(uri: Uri) {
+        binding.button.setImageURI(uri)
+        imageProfile = ImageProfile.Base(uri)
     }
 
 
