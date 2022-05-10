@@ -19,12 +19,13 @@ sealed class PhotographerListUI : Abstract.Object<Unit, PhotographerCommunicatio
         }
 
     }
+
     class Fail(
         private val errorType: ErrorType,
         private val resourceProvider: ResourceProvider
-    ) : PhotographerListUI(){
+    ) : PhotographerListUI() {
         override fun map(mapper: PhotographerCommunication) {
-            val messageId = when(errorType){
+            val messageId = when (errorType) {
                 ErrorType.NO_CONNECTION -> R.string.no_connection_message
                 ErrorType.SERVICE_UNAVAILABLE -> R.string.service_unavailable
                 else -> R.string.something_went_wrong
@@ -35,6 +36,9 @@ sealed class PhotographerListUI : Abstract.Object<Unit, PhotographerCommunicatio
 
     }
 
-   // object EmptyData : PhotographerListUI() { override fun map(mapper: PhotographerCommunication) = mapper.map(listOf(PhotographerUI.EmptyData)) }
+    object EmptyData : PhotographerListUI() {
+        override fun map(mapper: PhotographerCommunication) =
+            mapper.map(listOf(PhotographerUI.EmptyData))
+    }
 
 }
