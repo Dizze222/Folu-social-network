@@ -1,9 +1,9 @@
 package ch.b.retrofitandcoroutines.data.all_posts.mappers
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.data.all_posts.cache.CachePhotographer
+import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 
-class BaseToCachePhotographerMapper : Abstract.ToCachePhotographerMapper<CachePhotographer.Base> {
+class BaseToDataPhotographerMapper : Abstract.ToCachePhotographerMapper<PhotographerData> {
     override fun map(
         id: Int,
         author: String,
@@ -12,8 +12,8 @@ class BaseToCachePhotographerMapper : Abstract.ToCachePhotographerMapper<CachePh
         theme: String,
         comments: List<String>,
         authorOfComments: List<String>
-    ): CachePhotographer.Base {
-        return CachePhotographer.Base(id, author, URL, like, theme, comments, authorOfComments)
+    ): PhotographerData {
+        return PhotographerData(id, author, URL, like, theme, comments, authorOfComments)
     }
 
 }

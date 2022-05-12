@@ -13,6 +13,20 @@ abstract class Abstract {
         fun map(mapper: M): T
     }
 
+    interface ToCloudPhotographerMapper<T> : Mapper {
+        fun map(
+            id: Int,
+            author: String,
+            URL: String,
+            like: Long,
+            theme: String,
+            comments: List<String>,
+            authorOfComments: List<String>
+        ) : T
+    }
+
+
+
     interface ToCachePhotographerMapper<T> : Mapper {
         fun map(
             id: Int,
@@ -34,6 +48,8 @@ abstract class Abstract {
         interface DataToDomain<S, R> : Data<S, R> {
             fun map(e: Exception): R
 
+            fun map() : R
+
             abstract class Base<S, R> : DataToDomain<S, R> {
                 protected fun errorType(e: Exception) = when (e) {
                     is UnknownHostException -> ErrorType.GENERIC_ERROR
@@ -45,6 +61,8 @@ abstract class Abstract {
 
         interface DomainToUi<S, T> : Data<S, T> {
             fun map(errorType: ErrorType): T
+
+            fun map() : T
 
             abstract class Base<S, T>(private val resourceProvider: ResourceProvider) :
                 DomainToUi<S, T> {

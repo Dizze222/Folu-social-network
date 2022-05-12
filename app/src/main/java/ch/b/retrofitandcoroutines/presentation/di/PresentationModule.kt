@@ -11,18 +11,16 @@ import ch.b.retrofitandcoroutines.presentation.all_posts.BasePhotographerDomainT
 import ch.b.retrofitandcoroutines.presentation.all_posts.BasePhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.all_posts.ResourceProvider
-import ch.b.retrofitandcoroutines.presentation.navigate.MainViewModel
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 
 
 @Module
 @InstallIn(ViewModelComponent::class)
-class PresentationModule() {
+class PresentationModule {
 
 
     @Provides

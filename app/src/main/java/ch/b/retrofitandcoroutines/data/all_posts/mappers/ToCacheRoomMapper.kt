@@ -12,7 +12,7 @@ interface ToCacheRoomMapper: Abstract.Mapper {
         theme: String,
         comments: List<String>,
         authorOfComments: List<String>
-    ): CachePhotographer
+    ): CachePhotographer.Base
 
 
     class Base : ToCacheRoomMapper {
@@ -24,6 +24,6 @@ interface ToCacheRoomMapper: Abstract.Mapper {
             theme: String,
             comments: List<String>,
             authorOfComments: List<String>
-        ) = CachePhotographer(id, author, URL, like, theme, comments,authorOfComments)
+        ) = CachePhotographer.Base(id, author, URL, like, theme, comments,authorOfComments)
     }
 }

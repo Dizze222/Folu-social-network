@@ -35,7 +35,7 @@ class CacheModule {
 
     @Provides
     @Singleton
-    fun providePhotographerDao(photographerDatabase: PhotographerDataBase) : PhotographerDao{
+    fun providePhotographerDao(photographerDatabase: PhotographerDataBase): PhotographerDao {
         return photographerDatabase.photographerDao()
     }
 
@@ -43,14 +43,14 @@ class CacheModule {
     @Singleton
     fun provideCacheDataSource(
         dao: PhotographerDao,
-        mapper: Abstract.ToCachePhotographerMapper<CachePhotographer>
-    ) : PhotographerListCacheDataSource{
+        mapper: Abstract.ToCachePhotographerMapper<CachePhotographer.Base>
+    ): PhotographerListCacheDataSource {
         return PhotographerListCacheDataSource.Base(dao, mapper)
     }
 
     @Provides
     @Singleton
-    fun provideToCachePhotographerMapper() : Abstract.ToCachePhotographerMapper<CachePhotographer>{
+    fun provideToCachePhotographerMapper(): Abstract.ToCachePhotographerMapper<CachePhotographer.Base> {
         return BaseToCachePhotographerMapper()
     }
 

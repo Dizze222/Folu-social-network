@@ -1,9 +1,10 @@
 package ch.b.retrofitandcoroutines.presentation.di
 
+import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToPhotographerMapper
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToRoomMapper
+import ch.b.retrofitandcoroutines.data.all_posts.mappers.*
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
@@ -24,7 +25,7 @@ class DataModule {
         cloudDataSource: PhotographersCloudDataSource,
         cacheDataSource: PhotographerListCacheDataSource,
         cloudMapper: PhotographerListCloudMapper,
-        toRoomMapper: ToRoomMapper
+        toRoomMapper: Abstract.ToCachePhotographerMapper<PhotographerData>
     ): PhotographerRepository {
         return PhotographerRepository.Base(
             cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper
@@ -39,8 +40,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideRoomMapper(): ToRoomMapper {
-        return ToRoomMapper.Base()
+    fun provideRoomMapper(): Abstract.ToCachePhotographerMapper<PhotographerData> {
+        return BaseToDataPhotographerMapper()
     }
 
     @Provides

@@ -2,8 +2,8 @@ package ch.b.retrofitandcoroutines.data.all_posts
 
 
 import android.util.Log
+import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.ToRoomMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
@@ -29,7 +29,7 @@ interface PhotographerRepository {
         private val cloudDataSource: PhotographersCloudDataSource,
         private val cacheDataSource: PhotographerListCacheDataSource,
         private val cloudMapper: PhotographerListCloudMapper,
-        private val toRoomMapper: ToRoomMapper
+        private val mapperData: Abstract.ToCachePhotographerMapper<PhotographerData>
     ) : PhotographerRepository {
 
         override suspend fun getAllPhotographers() = try {
@@ -43,7 +43,7 @@ interface PhotographerRepository {
             } else {
                 Log.i("CAA", listOfCache.toString())
                 PhotographerListData.Success(listOfCache.map {
-                    it.map(toRoomMapper)
+                    it.map(mapperData)
                 })
             }
 
@@ -54,7 +54,7 @@ interface PhotographerRepository {
 
         override suspend fun searchPhotographers(author: String): PhotographerListData {
             return PhotographerListData.Success(cacheDataSource.searchPhotographers(author).map {
-                it.map(toRoomMapper)
+                it.map(mapperData)
             })
         }
 

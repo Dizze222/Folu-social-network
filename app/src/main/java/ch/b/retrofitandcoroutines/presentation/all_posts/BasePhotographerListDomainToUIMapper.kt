@@ -8,13 +8,13 @@ import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMap
 class BasePhotographerListDomainToUIMapper(
     private val photographerMapper: PhotographerDomainToUIMapper,
     private val resourceProvider: ResourceProvider
-) : PhotographerListDomainToUIMapper {
-    override fun map(photographers: List<PhotographerDomain>): PhotographerListUI =
-        PhotographerListUI.Success(photographers, photographerMapper)
+) : PhotographerListDomainToUIMapper() {
+    override fun map(data: List<PhotographerDomain>): PhotographerListUI =
+        PhotographerListUI.Success(data, photographerMapper)
 
     override fun map(errorType: ErrorType): PhotographerListUI =
         PhotographerListUI.Fail(errorType, resourceProvider)
 
-   override fun map(): PhotographerListUI = PhotographerListUI.EmptyData
+    override fun map(): PhotographerListUI = PhotographerListUI.EmptyData
 
 }

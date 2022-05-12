@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.data.all_posts.cache
 
 
-import android.util.Log
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 
@@ -17,7 +16,7 @@ interface PhotographerListCacheDataSource {
 
     class Base(
         private val dao: PhotographerDao,
-        private val mapper: Abstract.ToCachePhotographerMapper<CachePhotographer>
+        private val mapper: Abstract.ToCachePhotographerMapper<CachePhotographer.Base>
     ) : PhotographerListCacheDataSource {
 
         override suspend fun getPhotographers(): List<CachePhotographer> {
