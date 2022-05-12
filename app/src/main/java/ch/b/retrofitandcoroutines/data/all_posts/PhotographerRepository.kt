@@ -29,7 +29,7 @@ interface PhotographerRepository {
         private val cloudDataSource: PhotographersCloudDataSource,
         private val cacheDataSource: PhotographerListCacheDataSource,
         private val cloudMapper: PhotographerListCloudMapper,
-        private val mapperData: Abstract.ToCachePhotographerMapper<PhotographerData>
+        private val mapperData: Abstract.ToPhotographerMapper<PhotographerData>
     ) : PhotographerRepository {
 
         override suspend fun getAllPhotographers() = try {

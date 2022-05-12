@@ -16,7 +16,7 @@ interface PhotographerListCacheDataSource {
 
     class Base(
         private val dao: PhotographerDao,
-        private val mapper: Abstract.ToCachePhotographerMapper<CachePhotographer.Base>
+        private val mapper: Abstract.ToPhotographerMapper<CachePhotographer.Base>
     ) : PhotographerListCacheDataSource {
 
         override suspend fun getPhotographers(): List<CachePhotographer> {

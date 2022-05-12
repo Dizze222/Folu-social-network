@@ -13,21 +13,7 @@ abstract class Abstract {
         fun map(mapper: M): T
     }
 
-    interface ToCloudPhotographerMapper<T> : Mapper {
-        fun map(
-            id: Int,
-            author: String,
-            URL: String,
-            like: Long,
-            theme: String,
-            comments: List<String>,
-            authorOfComments: List<String>
-        ) : T
-    }
-
-
-
-    interface ToCachePhotographerMapper<T> : Mapper {
+    interface ToPhotographerMapper<T> : Mapper {
         fun map(
             id: Int,
             author: String,

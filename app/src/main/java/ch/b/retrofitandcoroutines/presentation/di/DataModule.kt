@@ -25,7 +25,7 @@ class DataModule {
         cloudDataSource: PhotographersCloudDataSource,
         cacheDataSource: PhotographerListCacheDataSource,
         cloudMapper: PhotographerListCloudMapper,
-        toRoomMapper: Abstract.ToCachePhotographerMapper<PhotographerData>
+        toRoomMapper: Abstract.ToPhotographerMapper<PhotographerData>
     ): PhotographerRepository {
         return PhotographerRepository.Base(
             cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper
@@ -40,7 +40,7 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideRoomMapper(): Abstract.ToCachePhotographerMapper<PhotographerData> {
+    fun provideRoomMapper(): Abstract.ToPhotographerMapper<PhotographerData> {
         return BaseToDataPhotographerMapper()
     }
 

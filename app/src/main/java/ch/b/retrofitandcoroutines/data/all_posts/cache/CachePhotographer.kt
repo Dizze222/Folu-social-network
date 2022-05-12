@@ -8,7 +8,7 @@ import ch.b.retrofitandcoroutines.core.Abstract
 
 
 interface CachePhotographer {
-    fun <T> map(mapper: Abstract.ToCachePhotographerMapper<T>): T
+    fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T
 
     @Entity(tableName = "photographer_table")
     data class Base(
@@ -30,7 +30,7 @@ interface CachePhotographer {
         //override fun map(mapper: ToRoomMapper): PhotographerData = mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
 
-        override fun <T> map(mapper: Abstract.ToCachePhotographerMapper<T>): T {
+        override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T {
             return mapper.map(id, author, URL, like, theme, comments, authorOfComments)
         }
 
