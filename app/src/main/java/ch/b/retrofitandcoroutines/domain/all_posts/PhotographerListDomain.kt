@@ -11,7 +11,7 @@ sealed class PhotographerListDomain :
     Abstract.Object<PhotographerListUI, PhotographerListDomainToUIMapper> {
     class Success(
         private val photographers: List<PhotographerData>,
-        private val photographerMapper: PhotographerDataToDomainMapper
+        private val photographerMapper: PhotographerDataToDomainMapper<PhotographerDomain>
     ) : PhotographerListDomain() {
         override fun map(mapper: PhotographerListDomainToUIMapper): PhotographerListUI {
             val photographersDomain = photographers.map {

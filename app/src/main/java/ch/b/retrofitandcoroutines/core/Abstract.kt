@@ -12,6 +12,9 @@ abstract class Abstract {
     interface Object<T, M : Mapper> {
         fun map(mapper: M): T
     }
+    interface DataObject
+
+    interface CloudObject
 
     interface ToPhotographerMapper<T> : Mapper {
         fun map(

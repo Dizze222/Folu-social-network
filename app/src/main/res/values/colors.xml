@@ -8,4 +8,6 @@
     <color name="colorShimmer">#dddddd</color>
     <color name="white">#FFFFFF</color>
     <color name="primary">#6534FF</color>
+    <color name="black">#020009</color>
+    <color name="gray_light">#CDCDCD</color>
 </resources>

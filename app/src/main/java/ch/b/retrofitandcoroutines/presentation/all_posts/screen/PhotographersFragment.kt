@@ -2,6 +2,8 @@ package ch.b.retrofitandcoroutines.presentation.all_posts.screen
 
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
@@ -27,13 +29,16 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageRe
     private lateinit var binding: FragmentPhotographersBinding
     private lateinit var adapter: PhotographerAdapter
     private var imageProfile : ImageProfile = ImageProfile.Empty
+    private var searchBy: String = ""
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentPhotographersBinding.bind(view)
 
-        binding.button.setOnClickListener {
-            (requireActivity() as MainActivity).image()
-        }
+        //binding.button.setOnClickListener {
+        //    (requireActivity() as MainActivity).image()
+        //}
 
         adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
@@ -90,6 +95,7 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageRe
 
 
         var count = 2
+        /*
         binding.toolbar.setOnMenuItemClickListener {
             when (it.itemId) {
                 R.id.search -> {
@@ -110,9 +116,15 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageRe
                 else -> false
             }
         }
+
+         */
+        setupListeners()
     }
 
-
+    private fun setupListeners(){
+        binding.search.addTextChangedListener(textChangeListener)
+        binding.cancelSearch.setOnClickListener{binding.search.text.clear()}
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -120,6 +132,28 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageRe
     ): View? {
         return inflater.inflate(R.layout.fragment_photographers, container, false)
     }
+
+
+    private val textChangeListener : TextWatcher = object : TextWatcher{
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
+            if (s.isEmpty()){
+                binding.cancelSearch.visibility = View.GONE
+            }else{
+                binding.cancelSearch.visibility = View.VISIBLE
+            }
+            searchBy = s.toString()
+            if(binding.search.hasFocus()){
+                searchAuthorInDatabase(searchBy)
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) = Unit
+
+    }
+
+
 
     override fun onQueryTextSubmit(query: String?): Boolean {
         if (query != null) {
@@ -148,9 +182,7 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageRe
     }
 
     override fun onImageResult(uri: Uri) {
-        binding.button.setImageURI(uri)
+        //binding.button.setImageURI(uri)
         imageProfile = ImageProfile.Base(uri)
     }
-
-
 }

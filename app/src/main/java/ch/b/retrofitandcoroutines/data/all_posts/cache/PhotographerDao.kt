@@ -15,6 +15,4 @@ interface PhotographerDao {
 
     @Query("SELECT * FROM photographer_table WHERE author LIKE :searchQuery ")
     suspend fun searchDatabase(searchQuery: String): List<CachePhotographer.Base>
-
-
 }

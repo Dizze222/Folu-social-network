@@ -24,7 +24,6 @@ class AllPostsViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getPhotographers() {
-
         communicate.map(listOf(PhotographerUI.Progress))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.readDataFromCloud()
@@ -33,7 +32,6 @@ class AllPostsViewModel @Inject constructor(
                 resultUi.map(communicate)
             }
         }
-
     }
 
     suspend fun observeAllPhotographers(
@@ -53,7 +51,10 @@ class AllPostsViewModel @Inject constructor(
         }
     }
 
-    suspend fun observeSearchPhotographer(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>) {
+    suspend fun observeSearchPhotographer(
+        owner: LifecycleOwner,
+        observer: FlowCollector<List<PhotographerUI>>
+    ) {
         communicateSearchAuthor.observe(owner, observer)
     }
 

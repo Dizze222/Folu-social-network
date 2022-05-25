@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/drawable/ic_megafon.xml" value="0.26180555555555557" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.26216216216216215" />
         <entry key="app/src/main/res/drawable/item_selected.xml" value="0.24513888888888888" />
+        <entry key="app/src/main/res/drawable/shape_circular.xml" value="0.261003861003861" />
         <entry key="app/src/main/res/drawable/shimmerbackround.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.253515625" />
@@ -39,6 +40,7 @@
         <entry key="app/src/main/res/layout/grid_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_layout.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/nav_graph.xml" value="0.3848958333333333" />
+        <entry key="app/src/main/res/layout/part_result.xml" value="0.253515625" />
         <entry key="app/src/main/res/layout/photographer_item.xml" value="0.25234375" />
         <entry key="app/src/main/res/layout/progress_fullscreen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/shimmer_grid.xml" value="0.33" />

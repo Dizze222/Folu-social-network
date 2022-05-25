@@ -3,7 +3,7 @@ package ch.b.retrofitandcoroutines.data.all_posts.mappers
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
 
-interface PhotographerDataToDomainMapper : Abstract.Mapper {
+interface PhotographerDataToDomainMapper<T> : Abstract.Mapper {
     fun map(
         id: Int,
         author: String,
@@ -12,5 +12,5 @@ interface PhotographerDataToDomainMapper : Abstract.Mapper {
         theme: String,
         comments: List<String>,
         authorOfComments: List<String>
-    ): PhotographerDomain
+    ): T
 }

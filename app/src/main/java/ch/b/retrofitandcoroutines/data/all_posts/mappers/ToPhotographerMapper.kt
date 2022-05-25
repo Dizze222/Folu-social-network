@@ -15,7 +15,7 @@ class ToPhotographerMapper :
         comments: List<String>,
         authorOfComments: List<String>
     ): PhotographerData {
-        return PhotographerData(id, author, URL, like, theme, comments, authorOfComments)
+        return PhotographerData.Base(id, author, URL, like, theme, comments, authorOfComments)
     }
 
 }
