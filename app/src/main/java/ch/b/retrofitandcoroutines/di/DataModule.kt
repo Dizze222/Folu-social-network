@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.di
+package ch.b.retrofitandcoroutines.di
 
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData

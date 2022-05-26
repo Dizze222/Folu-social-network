@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.di
+package ch.b.retrofitandcoroutines.di
 
 import android.content.Context
 import androidx.room.Room

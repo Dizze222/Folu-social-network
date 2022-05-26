@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.certain_post
 
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,16 +13,12 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
-import android.net.wifi.WifiManager
-import android.text.format.Formatter
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.presentation.screens.PhotographerZoomImageFragment
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class PhotographerDetailFragment : Fragment() {
@@ -40,13 +35,8 @@ class PhotographerDetailFragment : Fragment() {
         Log.i("TOP", photographerId.toString())
         binding.commetsRecyclerView.adapter = adapter
         binding.commetsRecyclerView.layoutManager = GridLayoutManager(activity, 1)
-        //val context = requireContext().applicationContext
-        //val wm = context.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        //val ip: String = Formatter.formatIpAddress(wm.connectionInfo.ipAddress)
-        //Toast.makeText(context, "IP$ip", Toast.LENGTH_SHORT).show()
         lifecycleScope.launchWhenStarted {
             certainViewModel.observeCertainPost(this@PhotographerDetailFragment) {
-                Log.i("TOP", "dot 1")
                 it.map { post ->
                     post.map(object : PhotographerUI.StringMapper {
                         override fun map(

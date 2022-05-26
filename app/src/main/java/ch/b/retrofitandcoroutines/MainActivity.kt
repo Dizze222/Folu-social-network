@@ -14,7 +14,6 @@ import ch.b.retrofitandcoroutines.presentation.core.ResultApiActivity
 import ch.b.retrofitandcoroutines.presentation.navigate.MainViewModel
 import ch.b.retrofitandcoroutines.presentation.navigate.Screens.Companion.ALL_PHOTOGRAPHERS
 import ch.b.retrofitandcoroutines.presentation.navigate.Screens.Companion.CERTAIN_POST
-import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

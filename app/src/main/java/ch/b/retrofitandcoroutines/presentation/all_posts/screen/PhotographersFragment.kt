@@ -13,9 +13,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
-
 import androidx.lifecycle.lifecycleScope
-import ch.b.retrofitandcoroutines.MainActivity
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
@@ -24,11 +22,11 @@ import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageResult {
+class PhotographersFragment : Fragment(), ImageResult {
     private val viewModel: AllPostsViewModel by viewModels()
     private lateinit var binding: FragmentPhotographersBinding
     private lateinit var adapter: PhotographerAdapter
-    private var imageProfile : ImageProfile = ImageProfile.Empty
+    private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""
 
 
@@ -92,38 +90,12 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageRe
             }
         }
         viewModel.getPhotographers()
-
-
-        var count = 2
-        /*
-        binding.toolbar.setOnMenuItemClickListener {
-            when (it.itemId) {
-                R.id.search -> {
-                    val search = it.actionView as? SearchView
-                    search?.isSubmitButtonEnabled = true
-                    search?.setOnQueryTextListener(this)
-                    true
-                }
-                R.id.changeCountOfGrid -> {
-                    count--
-                    binding.recyclerView.layoutManager = GridLayoutManager(activity, count)
-                    if (count == 1) {
-                        count = 3
-
-                    }
-                    true
-                }
-                else -> false
-            }
-        }
-
-         */
         setupListeners()
     }
 
-    private fun setupListeners(){
+    private fun setupListeners() {
         binding.search.addTextChangedListener(textChangeListener)
-        binding.cancelSearch.setOnClickListener{binding.search.text.clear()}
+        binding.cancelSearch.setOnClickListener { binding.search.text.clear() }
     }
 
     override fun onCreateView(
@@ -134,39 +106,23 @@ class PhotographersFragment : Fragment(), SearchView.OnQueryTextListener,ImageRe
     }
 
 
-    private val textChangeListener : TextWatcher = object : TextWatcher{
+    private val textChangeListener: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
 
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {
-            if (s.isEmpty()){
+            if (s.isEmpty()) {
                 binding.cancelSearch.visibility = View.GONE
-            }else{
+            } else {
                 binding.cancelSearch.visibility = View.VISIBLE
             }
             searchBy = s.toString()
-            if(binding.search.hasFocus()){
+            if (binding.search.hasFocus()) {
                 searchAuthorInDatabase(searchBy)
             }
         }
 
         override fun afterTextChanged(s: Editable?) = Unit
 
-    }
-
-
-
-    override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null) {
-            searchAuthorInDatabase(query)
-        }
-        return true
-    }
-
-    override fun onQueryTextChange(newText: String?): Boolean {
-        if (newText != null) {
-            searchAuthorInDatabase(newText)
-        }
-        return true
     }
 
     private fun searchAuthorInDatabase(author: String) {

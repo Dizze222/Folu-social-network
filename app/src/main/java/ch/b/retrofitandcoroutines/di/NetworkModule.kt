@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.di
+package ch.b.retrofitandcoroutines.di
 
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
@@ -8,8 +8,6 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,7 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     private companion object {
-        private const val BASE_URL = "https://bc79-84-39-247-98.ngrok.io/"
+        private const val BASE_URL = "https://af9d-84-39-247-98.ngrok.io/"
     }
 
 

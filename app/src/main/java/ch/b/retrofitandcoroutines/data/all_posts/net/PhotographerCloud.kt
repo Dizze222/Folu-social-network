@@ -24,8 +24,3 @@ interface PhotographerCloud{
         }
     }
 }
-
-data class HelloModel(
-    @SerializedName("hello")
-    val hello:String
-)
