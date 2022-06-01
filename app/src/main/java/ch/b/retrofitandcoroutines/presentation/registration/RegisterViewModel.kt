@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.registrations
+package ch.b.retrofitandcoroutines.presentation.registration
 
 import androidx.lifecycle.ViewModel
 

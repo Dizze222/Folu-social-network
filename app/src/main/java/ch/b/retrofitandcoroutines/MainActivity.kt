@@ -5,56 +5,88 @@ import android.os.Bundle
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
-import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
+import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
+import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
+import ch.b.retrofitandcoroutines.presentation.containers.LikedTabContainer
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.presentation.core.ResultApiActivity
-import ch.b.retrofitandcoroutines.presentation.navigate.MainViewModel
-import ch.b.retrofitandcoroutines.presentation.navigate.Screens.Companion.ALL_PHOTOGRAPHERS
-import ch.b.retrofitandcoroutines.presentation.navigate.Screens.Companion.CERTAIN_POST
+import ch.b.retrofitandcoroutines.presentation.navigate.*
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
-class MainActivity : AppCompatActivity(),ResultApiActivity {
-    private lateinit var binding: ActivityMainBinding
-    val viewModel: MainViewModel by viewModels()
+import ru.terrakok.cicerone.Cicerone
 
-    private val image = registerForActivityResult(ActivityResultContracts.GetContent()){uri ->
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
+    private lateinit var binding: ActivityMainBinding
+    private val cicerone = Cicerone.create(AppRouter())
+    private lateinit var appNavigator: AppNavigator
+
+    override val router: AppRouter
+        get() = cicerone.router
+
+
+    private val mOnNavigationItemSelectedListener =
+        BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_first -> {
+                    val screen = FragmentScreen(AllPostTabContainer().newInstance())
+                    router.replaceTab(screen)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_second -> {
+                    val screen = FragmentScreen(LikedTabContainer().newInstance())
+                    router.replaceTab(screen)
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }
+
+
+    private val image = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         val fragment = supportFragmentManager.fragments.first() as ImageResult
         uri?.let {
             fragment.onImageResult(it)
         }
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        appNavigator = AppNavigator(this, R.id.container)
+        appNavigator.initContainers()
 
-        lifecycleScope.launchWhenCreated {
-            viewModel.observe(this@MainActivity, {
-                val fragment = when (it) {
-                    ALL_PHOTOGRAPHERS -> PhotographersFragment()
-                    CERTAIN_POST -> PhotographerDetailFragment()
-                    else -> throw IllegalStateException("screen id undefined $it")
-                }
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.container, fragment)
-                    .commit()
-            })
+        binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        if (savedInstanceState == null) {
+            val screen = FragmentScreen(AllPostTabContainer().newInstance())
+            router.replaceTab(screen)
         }
-        viewModel.init()
-
     }
 
     override fun onBackPressed() {
-        if (viewModel.navigateBack())
-            super.onBackPressed()
+        val fragment = supportFragmentManager.findFragmentById(R.id.container)
+        if ((fragment != null && fragment is BackButtonListener && fragment.onBackPressed())) {
+            return
+        } else {
+            router.exit()
+        }
     }
 
+    override fun onPause() {
+        super.onPause()
+        cicerone.navigatorHolder.removeNavigator()
+    }
+
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        cicerone.navigatorHolder.setNavigator(appNavigator)
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater

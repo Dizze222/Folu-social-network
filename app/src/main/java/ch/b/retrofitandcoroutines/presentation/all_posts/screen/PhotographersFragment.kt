@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts.screen
 
+
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -17,18 +18,21 @@ import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
+import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.ImageProfile
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
+import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
+import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import dagger.hilt.android.AndroidEntryPoint
+import ru.terrakok.cicerone.commands.Back
 
 @AndroidEntryPoint
-class PhotographersFragment : Fragment(), ImageResult {
+class PhotographersFragment : Fragment(), ImageResult,BackButtonListener {
     private val viewModel: AllPostsViewModel by viewModels()
     private lateinit var binding: FragmentPhotographersBinding
     private lateinit var adapter: PhotographerAdapter
     private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,12 +51,8 @@ class PhotographersFragment : Fragment(), ImageResult {
             object : PhotographerAdapter.PhotographerItemClickListener {
                 override fun onClickPhotographer(photographer: PhotographerUI) {
                     val fragment = PhotographerDetailFragment()
-                    val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-                    val fragmentTransaction: FragmentTransaction =
-                        fragmentManager.beginTransaction()
-                    fragmentTransaction.replace(R.id.container, fragment)
-                    fragmentTransaction.addToBackStack(null)
-                    fragmentTransaction.commit()//TODO fix this
+                    val nextScreen = FragmentScreen(fragment.newInstance())
+                    val bundle = Bundle()
                     photographer.map(object : PhotographerUI.StringMapper {
                         override fun map(
                             id: Int,
@@ -63,9 +63,10 @@ class PhotographersFragment : Fragment(), ImageResult {
                             comments: List<String>,
                             authorOfComments: List<String>
                         ) {
-                            val bundle = Bundle()
+
                             bundle.putString("id", id.toString())
                             fragment.arguments = bundle
+                            (parentFragment as RouterProvider).router.navigateTo(nextScreen)
                         }
 
                         override fun map(message: String) = Unit
@@ -141,5 +142,13 @@ class PhotographersFragment : Fragment(), ImageResult {
     override fun onImageResult(uri: Uri) {
         //binding.button.setImageURI(uri)
         imageProfile = ImageProfile.Base(uri)
+    }
+    fun newInstance() : PhotographersFragment{
+        return PhotographersFragment()
+    }
+
+    override fun onBackPressed(): Boolean {
+        (parentFragment as RouterProvider).router.exit()
+        return true
     }
 }

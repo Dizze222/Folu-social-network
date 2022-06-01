@@ -6,8 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/photographerLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.certain_post.PhotographerDetailFragment">
+    android:layout_height="match_parent">
 
 
     <androidx.appcompat.widget.Toolbar

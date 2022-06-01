@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.screens
+package ch.b.retrofitandcoroutines.presentation.certain_post
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,7 +1,5 @@
 package ch.b.retrofitandcoroutines.presentation.certain_post
 
-
-import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,16 +13,16 @@ import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import android.util.Log
-import android.view.View.GONE
-import androidx.constraintlayout.widget.ConstraintSet.GONE
 import androidx.lifecycle.lifecycleScope
-import ch.b.retrofitandcoroutines.presentation.screens.PhotographerZoomImageFragment
 import androidx.fragment.app.viewModels
+import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
+import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
+import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class PhotographerDetailFragment : Fragment() {
+class PhotographerDetailFragment : Fragment(),BackButtonListener {
     private lateinit var binding: FragmentPhotographerDetailBinding
     private val certainViewModel: CertainPostViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -91,6 +89,14 @@ class PhotographerDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_photographer_detail, container, false)
+    }
+    fun newInstance() :PhotographerDetailFragment {
+        return PhotographerDetailFragment()
+    }
+
+    override fun onBackPressed(): Boolean {
+        (parentFragment as RouterProvider).router.exit()
+        return true
     }
 }
 

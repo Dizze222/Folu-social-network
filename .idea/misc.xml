@@ -33,10 +33,12 @@
         <entry key="app/src/main/res/layout/each_row.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/emptydata_fullscreen.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fail_fullscreen.xml" value="0.283984375" />
+        <entry key="app/src/main/res/layout/fragment_base_container.xml" value="0.283984375" />
         <entry key="app/src/main/res/layout/fragment_detail_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_full_image_view.xml" value="0.253515625" />
+        <entry key="app/src/main/res/layout/fragment_liked.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fragment_photographer_detail.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_photographers.xml" value="0.253515625" />
+        <entry key="app/src/main/res/layout/fragment_photographers.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_users.xml" value="0.25703125" />
         <entry key="app/src/main/res/layout/grid_item.xml" value="0.25" />
@@ -50,6 +52,7 @@
         <entry key="app/src/main/res/layout/shimmer_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/test.xml" value="0.23680555555555555" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.256640625" />
+        <entry key="app/src/main/res/menu/navigation_icon.xml" value="0.28515625" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.25" />
       </map>
     </option>
