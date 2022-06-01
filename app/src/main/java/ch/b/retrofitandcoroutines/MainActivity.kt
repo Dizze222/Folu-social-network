@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity(),ResultApiActivity {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
-        inflater.inflate(R.menu.top_app_bar, menu)
+        inflater.inflate(R.menu.navigation_icon, menu)
         return true
     }
 

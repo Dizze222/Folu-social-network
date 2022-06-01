@@ -37,7 +37,8 @@ class PhotographersFragment : Fragment(), ImageResult {
         //binding.button.setOnClickListener {
         //    (requireActivity() as MainActivity).image()
         //}
-
+        val navBar = activity!!.findViewById<View>(R.id.navigation)
+        navBar.visibility = View.VISIBLE
         adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()

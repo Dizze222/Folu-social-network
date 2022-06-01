@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.certain_post
 
 
+import android.opengl.Visibility
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +15,8 @@ import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import android.util.Log
+import android.view.View.GONE
+import androidx.constraintlayout.widget.ConstraintSet.GONE
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.presentation.screens.PhotographerZoomImageFragment
 import androidx.fragment.app.viewModels
@@ -32,6 +35,8 @@ class PhotographerDetailFragment : Fragment() {
         val fragment = PhotographerZoomImageFragment()
         val photographerId = bundle?.getString("id")
         val adapter = CommentsAdapter()
+        val navBar = activity!!.findViewById<View>(R.id.navigation)
+        navBar.visibility = View.GONE
         Log.i("TOP", photographerId.toString())
         binding.commetsRecyclerView.adapter = adapter
         binding.commetsRecyclerView.layoutManager = GridLayoutManager(activity, 1)
@@ -48,7 +53,6 @@ class PhotographerDetailFragment : Fragment() {
                             comments: List<String>,
                             authorOfComments: List<String>
                         ) {
-                            Log.i("TOP", "dot 2")
                             binding.idOfAuthor.text = id.toString()
                             binding.author.text = author
                             binding.toolbar.title = author
@@ -58,8 +62,6 @@ class PhotographerDetailFragment : Fragment() {
                             )
                             ImageLoad.Base(URL).load(binding.imageOfAuthor)
                             bundle!!.putString("URL", URL)
-
-                            Log.i("TOP", "dot 3")
 
 
                         }
