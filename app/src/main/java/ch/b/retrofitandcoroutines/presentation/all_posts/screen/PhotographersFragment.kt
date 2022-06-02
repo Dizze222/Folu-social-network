@@ -5,14 +5,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.*
-import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
-
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.R
@@ -24,10 +24,9 @@ import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import dagger.hilt.android.AndroidEntryPoint
-import ru.terrakok.cicerone.commands.Back
 
 @AndroidEntryPoint
-class PhotographersFragment : Fragment(), ImageResult,BackButtonListener {
+class PhotographersFragment : Fragment(), ImageResult, BackButtonListener {
     private val viewModel: AllPostsViewModel by viewModels()
     private lateinit var binding: FragmentPhotographersBinding
     private lateinit var adapter: PhotographerAdapter
@@ -51,8 +50,9 @@ class PhotographersFragment : Fragment(), ImageResult,BackButtonListener {
             object : PhotographerAdapter.PhotographerItemClickListener {
                 override fun onClickPhotographer(photographer: PhotographerUI) {
                     val fragment = PhotographerDetailFragment()
+                    val fragmentManager = activity!!.supportFragmentManager
                     val nextScreen = FragmentScreen(fragment.newInstance())
-                    val bundle = Bundle()
+                    (parentFragment as RouterProvider).router.navigateTo(nextScreen)
                     photographer.map(object : PhotographerUI.StringMapper {
                         override fun map(
                             id: Int,
@@ -63,19 +63,14 @@ class PhotographersFragment : Fragment(), ImageResult,BackButtonListener {
                             comments: List<String>,
                             authorOfComments: List<String>
                         ) {
-
-                            bundle.putString("id", id.toString())
-                            fragment.arguments = bundle
-                            (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+                            fragmentManager.setFragmentResult("requestKey", bundleOf("id" to id.toString()))
                         }
 
                         override fun map(message: String) = Unit
                     })
                 }
 
-                override fun likeClick(photographer: PhotographerUI) {
-
-                }
+                override fun likeClick(photographer: PhotographerUI) = Unit
 
             }
         ) //TODO fix this
@@ -106,7 +101,6 @@ class PhotographersFragment : Fragment(), ImageResult,BackButtonListener {
     ): View? {
         return inflater.inflate(R.layout.fragment_photographers, container, false)
     }
-
 
     private val textChangeListener: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
@@ -143,7 +137,8 @@ class PhotographersFragment : Fragment(), ImageResult,BackButtonListener {
         //binding.button.setImageURI(uri)
         imageProfile = ImageProfile.Base(uri)
     }
-    fun newInstance() : PhotographersFragment{
+
+    fun newInstance(): PhotographersFragment {
         return PhotographersFragment()
     }
 
