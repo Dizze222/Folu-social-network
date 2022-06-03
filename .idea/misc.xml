@@ -23,6 +23,8 @@
         <entry key="app/src/main/res/drawable/ic_megafon.xml" value="0.26180555555555557" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.26216216216216215" />
         <entry key="app/src/main/res/drawable/item_selected.xml" value="0.24513888888888888" />
+        <entry key="app/src/main/res/drawable/main_selector.xml" value="0.2922779922779923" />
+        <entry key="app/src/main/res/drawable/posts_selector.xml" value="0.2922779922779923" />
         <entry key="app/src/main/res/drawable/shape_circular.xml" value="0.261003861003861" />
         <entry key="app/src/main/res/drawable/shimmerbackround.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.25833333333333336" />

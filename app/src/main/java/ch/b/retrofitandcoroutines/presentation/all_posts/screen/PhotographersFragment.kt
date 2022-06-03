@@ -5,12 +5,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
 import androidx.core.os.bundleOf
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import androidx.fragment.app.viewModels
@@ -19,6 +15,7 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
+import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.core.ImageProfile
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
@@ -26,17 +23,14 @@ import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotographersFragment : Fragment(), ImageResult, BackButtonListener {
+class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(FragmentPhotographersBinding::inflate), ImageResult, BackButtonListener {
     private val viewModel: AllPostsViewModel by viewModels()
-    private lateinit var binding: FragmentPhotographersBinding
     private lateinit var adapter: PhotographerAdapter
     private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentPhotographersBinding.bind(view)
-
         //binding.button.setOnClickListener {
         //    (requireActivity() as MainActivity).image()
         //}
@@ -93,13 +87,6 @@ class PhotographersFragment : Fragment(), ImageResult, BackButtonListener {
     private fun setupListeners() {
         binding.search.addTextChangedListener(textChangeListener)
         binding.cancelSearch.setOnClickListener { binding.search.text.clear() }
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_photographers, container, false)
     }
 
     private val textChangeListener: TextWatcher = object : TextWatcher {

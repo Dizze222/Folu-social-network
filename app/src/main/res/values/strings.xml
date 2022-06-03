@@ -21,4 +21,6 @@
     <string name="tryAgain"><b>Попробовать снова</b></string>
     <string name="input_name">Введите имя</string>
     <string name="cancel">Отмена</string>
+    <string name="all_posts">Посты</string>
+    <string name="my_likes">Лайки</string>
 </resources>

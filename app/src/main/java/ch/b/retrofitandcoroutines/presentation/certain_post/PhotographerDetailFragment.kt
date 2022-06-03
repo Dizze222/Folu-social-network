@@ -1,10 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.certain_post
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
@@ -12,27 +9,21 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.fragment.app.viewModels
-import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.annotation.NonNull
-
-import androidx.fragment.app.FragmentResultListener
+import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 
 
 @AndroidEntryPoint
-class PhotographerDetailFragment : Fragment(), BackButtonListener {
-    private lateinit var binding: FragmentPhotographerDetailBinding
+class PhotographerDetailFragment :
+    BaseFragment<FragmentPhotographerDetailBinding>(FragmentPhotographerDetailBinding::inflate),
+    BackButtonListener {
     private val certainViewModel: CertainPostViewModel by viewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        binding = FragmentPhotographerDetailBinding.bind(view)
         val bundle = this.arguments
         val fragment = PhotographerZoomImageFragment()
         val fragmentManager: FragmentManager = activity!!.supportFragmentManager
@@ -65,9 +56,7 @@ class PhotographerDetailFragment : Fragment(), BackButtonListener {
                                     convertToArrayList(authorOfComments)
                                 )
                                 ImageLoad.Base(URL).load(binding.imageOfAuthor)
-                                bundle!!.putString("URL", URL)
-
-
+                                bundle.putString("URL", URL)
                             }
 
                             override fun map(message: String) = Unit
@@ -91,12 +80,6 @@ class PhotographerDetailFragment : Fragment(), BackButtonListener {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_photographer_detail, container, false)
-    }
 
     fun newInstance(): PhotographerDetailFragment {
         return PhotographerDetailFragment()

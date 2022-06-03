@@ -3,12 +3,12 @@
 
     <item
         android:id="@+id/navigation_first"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="first" />
+        android:icon="@drawable/posts_selector"
+        android:title="@string/all_posts" />
 
     <item
         android:id="@+id/navigation_second"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="second" />
+        android:icon="@drawable/likes_selector"
+        android:title="@string/my_likes" />
 
 </menu>
