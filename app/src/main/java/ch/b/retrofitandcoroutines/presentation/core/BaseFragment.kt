@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.presentation.liked_posts.LikedPostsFragment
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
@@ -21,7 +22,7 @@ open class BaseFragment<B : ViewBinding>(private val inflate: Inflate<B>) : Frag
         savedInstanceState: Bundle?
     ): View? {
         _viewBinding = inflate.invoke(inflater, container, false)
-        navBar= activity!!.findViewById(R.id.navigation)
+        navBar = activity!!.findViewById(R.id.navigation)
         return binding.root
     }
 
