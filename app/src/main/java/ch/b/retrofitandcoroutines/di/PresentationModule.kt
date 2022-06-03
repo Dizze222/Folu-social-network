@@ -2,7 +2,6 @@ package ch.b.retrofitandcoroutines.di
 
 import android.content.Context
 import ch.b.retrofitandcoroutines.core.NavigationCommunication
-import ch.b.retrofitandcoroutines.core.Read
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerListDataToDomainMapper
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
@@ -51,11 +50,6 @@ class PresentationModule {
     @Provides
     fun provideNavigationCommunication() : NavigationCommunication{
         return NavigationCommunication.Base()
-    }
-
-    @Provides
-    fun provideRead() : Read<Int>{
-        return Read.Base()
     }
 
 }

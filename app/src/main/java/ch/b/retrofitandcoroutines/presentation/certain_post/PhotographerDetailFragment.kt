@@ -36,9 +36,9 @@ class PhotographerDetailFragment : Fragment(), BackButtonListener {
         val bundle = this.arguments
         val fragment = PhotographerZoomImageFragment()
         val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-        var photographerId: String?
+        var photographerId: Int?
         fragmentManager.setFragmentResultListener("requestKey", this, { key, bundle ->
-            photographerId = bundle.getString("id")
+            photographerId = bundle.getInt("id")
             val adapter = CommentsAdapter()
             val navBar = activity!!.findViewById<View>(R.id.navigation)
             navBar.visibility = View.GONE
@@ -84,9 +84,7 @@ class PhotographerDetailFragment : Fragment(), BackButtonListener {
 
         fragment.arguments = bundle
         binding.imageOfAuthor.setOnClickListener {
-            val fragmentManager: FragmentManager = activity!!.supportFragmentManager
             val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-
             fragmentTransaction.replace(R.id.container, fragment)
             fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()

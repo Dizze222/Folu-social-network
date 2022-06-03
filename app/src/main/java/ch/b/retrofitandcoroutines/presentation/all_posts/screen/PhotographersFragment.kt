@@ -63,7 +63,7 @@ class PhotographersFragment : Fragment(), ImageResult, BackButtonListener {
                             comments: List<String>,
                             authorOfComments: List<String>
                         ) {
-                            fragmentManager.setFragmentResult("requestKey", bundleOf("id" to id.toString()))
+                            fragmentManager.setFragmentResult("requestKey", bundleOf("id" to id))
                         }
 
                         override fun map(message: String) = Unit

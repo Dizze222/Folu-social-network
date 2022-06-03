@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.viewModels
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
@@ -27,30 +26,11 @@ class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
         get() = cicerone.router
 
 
-    private val mOnNavigationItemSelectedListener =
-        BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.navigation_first -> {
-                    val screen = FragmentScreen(AllPostTabContainer().newInstance())
-                    router.replaceTab(screen)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.navigation_second -> {
-                    val screen = FragmentScreen(LikedTabContainer().newInstance())
-                    router.replaceTab(screen)
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }
-
-
     private val image = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         val fragment = supportFragmentManager.fragments.first() as ImageResult
         uri?.let {
             fragment.onImageResult(it)
         }
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +41,21 @@ class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
 
-        binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+        binding.navigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.navigation_first -> {
+                    val screen = FragmentScreen(AllPostTabContainer().newInstance())
+                    router.replaceTab(screen)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_second -> {
+                    val screen = FragmentScreen(LikedTabContainer().newInstance())
+                    router.replaceTab(screen)
+                    return@setOnItemSelectedListener true
+                }
+            }
+            false
+        }
 
         if (savedInstanceState == null) {
             val screen = FragmentScreen(AllPostTabContainer().newInstance())
