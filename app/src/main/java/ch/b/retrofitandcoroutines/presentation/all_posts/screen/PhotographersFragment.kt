@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts.screen
 
-
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
@@ -34,8 +32,7 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
         //binding.button.setOnClickListener {
         //    (requireActivity() as MainActivity).image()
         //}
-        val navBar = activity!!.findViewById<View>(R.id.navigation)
-        navBar.visibility = View.VISIBLE
+        navBar!!.visibility = View.VISIBLE
         adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()

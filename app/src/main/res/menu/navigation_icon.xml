@@ -10,5 +10,9 @@
         android:id="@+id/navigation_second"
         android:icon="@drawable/likes_selector"
         android:title="@string/my_likes" />
+    <item
+        android:id="@+id/navigation_third"
+        android:icon="@drawable/profile_selector"
+        android:title="@string/profile" />
 
 </menu>

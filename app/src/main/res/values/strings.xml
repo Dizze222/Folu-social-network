@@ -23,4 +23,11 @@
     <string name="cancel">Отмена</string>
     <string name="all_posts">Посты</string>
     <string name="my_likes">Лайки</string>
+    <string name="profile">Профиль</string>
+    <string name="numberPhone">Номер телефона</string>
+    <string name="password">Пароль</string>
+    <string name="registration">Регистрация</string>
+    <string name="comments">Комментарии</string>
+    <string name="nameOfUser">Имя</string>
+    <string name="secondNameOfUser">Фамилия</string>
 </resources>

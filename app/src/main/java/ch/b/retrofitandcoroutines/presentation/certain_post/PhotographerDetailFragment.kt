@@ -31,8 +31,7 @@ class PhotographerDetailFragment :
         fragmentManager.setFragmentResultListener("requestKey", this, { key, bundle ->
             photographerId = bundle.getInt("id")
             val adapter = CommentsAdapter()
-            val navBar = activity!!.findViewById<View>(R.id.navigation)
-            navBar.visibility = View.GONE
+            navBar!!.visibility = View.GONE
             binding.commetsRecyclerView.adapter = adapter
             binding.commetsRecyclerView.layoutManager = GridLayoutManager(activity, 1)
             lifecycleScope.launchWhenStarted {

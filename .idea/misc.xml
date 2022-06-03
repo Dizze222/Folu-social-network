@@ -23,9 +23,12 @@
         <entry key="app/src/main/res/drawable/ic_megafon.xml" value="0.26180555555555557" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.26216216216216215" />
         <entry key="app/src/main/res/drawable/item_selected.xml" value="0.24513888888888888" />
+        <entry key="app/src/main/res/drawable/likes_selector.xml" value="0.29343629343629346" />
         <entry key="app/src/main/res/drawable/main_selector.xml" value="0.2922779922779923" />
         <entry key="app/src/main/res/drawable/posts_selector.xml" value="0.2922779922779923" />
+        <entry key="app/src/main/res/drawable/profile_selector.xml" value="0.2922779922779923" />
         <entry key="app/src/main/res/drawable/shape_circular.xml" value="0.261003861003861" />
+        <entry key="app/src/main/res/drawable/shape_register.xml" value="0.23472222222222222" />
         <entry key="app/src/main/res/drawable/shimmerbackround.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.253515625" />
@@ -35,12 +38,14 @@
         <entry key="app/src/main/res/layout/each_row.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/emptydata_fullscreen.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fail_fullscreen.xml" value="0.283984375" />
+        <entry key="app/src/main/res/layout/fragment_authorization.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_base_container.xml" value="0.283984375" />
         <entry key="app/src/main/res/layout/fragment_detail_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_full_image_view.xml" value="0.253515625" />
         <entry key="app/src/main/res/layout/fragment_liked.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fragment_photographer_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photographers.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_users.xml" value="0.25703125" />
         <entry key="app/src/main/res/layout/grid_item.xml" value="0.25" />

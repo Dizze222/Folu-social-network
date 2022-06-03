@@ -63,7 +63,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/commetsRecyclerView"
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="224dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
-        android:text="Комментарии"
+        android:text="@string/comments"
         android:textSize="20sp"
         android:textStyle="normal|bold|italic"
         app:layout_constraintBottom_toTopOf="@+id/commetsRecyclerView"
