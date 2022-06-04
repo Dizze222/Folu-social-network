@@ -4,7 +4,7 @@ import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 
 
-interface PhotographerDomainToUIMapper : Abstract.Mapper {
+interface PhotographerDomainToUIMapper<T> : Abstract.Mapper {
     fun map(
         id: Int,
         author: String,
@@ -13,5 +13,5 @@ interface PhotographerDomainToUIMapper : Abstract.Mapper {
         theme: String,
         comments: List<String>,
         authorOfComments: List<String>
-    ): PhotographerUI
+    ): T
 }

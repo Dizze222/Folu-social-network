@@ -3,7 +3,7 @@ package ch.b.retrofitandcoroutines.presentation.all_posts
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomainToUIMapper
 
 
-class BasePhotographerDomainToUIMapper : PhotographerDomainToUIMapper {
+class BasePhotographerDomainToUIMapper : PhotographerDomainToUIMapper<PhotographerUI> {
     override fun map(
         id: Int,
         author: String,

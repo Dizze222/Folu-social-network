@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.domain.all_posts
+package ch.b.retrofitandcoroutines.domain.core
 
 enum class ErrorType {
     NO_CONNECTION,

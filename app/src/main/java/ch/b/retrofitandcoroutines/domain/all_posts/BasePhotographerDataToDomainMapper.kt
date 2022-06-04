@@ -13,5 +13,5 @@ class BasePhotographerDataToDomainMapper : PhotographerDataToDomainMapper<Photog
         comments: List<String>,
         authorOfComments: List<String>
     ) =
-        PhotographerDomain(id, author, URL, like, theme, comments,authorOfComments)
+        PhotographerDomain.Base(id, author, URL, like, theme, comments,authorOfComments)
 }

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
+import ch.b.retrofitandcoroutines.data.registration.net.RegistrationRepository
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
@@ -11,7 +12,6 @@ import ch.b.retrofitandcoroutines.presentation.containers.LikedTabContainer
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.presentation.core.ResultApiActivity
 import ch.b.retrofitandcoroutines.presentation.navigate.*
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 import ru.terrakok.cicerone.Cicerone
@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
 

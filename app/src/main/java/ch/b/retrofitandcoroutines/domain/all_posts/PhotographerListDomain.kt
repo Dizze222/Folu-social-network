@@ -3,6 +3,7 @@ package ch.b.retrofitandcoroutines.domain.all_posts
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDomainMapper
+import ch.b.retrofitandcoroutines.domain.core.ErrorType
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerListUI
 import retrofit2.HttpException
 import java.net.UnknownHostException

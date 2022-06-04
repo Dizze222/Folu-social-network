@@ -21,7 +21,8 @@ import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(FragmentPhotographersBinding::inflate), ImageResult, BackButtonListener {
+class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(FragmentPhotographersBinding::inflate),
+    ImageResult, BackButtonListener {
     private val viewModel: AllPostsViewModel by viewModels()
     private lateinit var adapter: PhotographerAdapter
     private var imageProfile: ImageProfile = ImageProfile.Empty

@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.core
 
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.domain.all_posts.ErrorType
+import ch.b.retrofitandcoroutines.domain.core.ErrorType
 import ch.b.retrofitandcoroutines.presentation.all_posts.ResourceProvider
 import retrofit2.HttpException
 import java.net.UnknownHostException
@@ -12,6 +12,7 @@ abstract class Abstract {
     interface Object<T, M : Mapper> {
         fun map(mapper: M): T
     }
+
     interface DataObject
 
     interface CloudObject
@@ -25,8 +26,17 @@ abstract class Abstract {
             theme: String,
             comments: List<String>,
             authorOfComments: List<String>
-        ) : T
+        ): T
     }
+
+    interface ToRegisterMapper<T> : Mapper {
+        fun map(
+            accessToken: String,
+            refreshToken: String,
+            successRegister: Boolean
+        ): T
+    }
+
 
     interface Mapper {
 
@@ -37,7 +47,7 @@ abstract class Abstract {
         interface DataToDomain<S, R> : Data<S, R> {
             fun map(e: Exception): R
 
-            fun map() : R
+            fun map(): R
 
             abstract class Base<S, R> : DataToDomain<S, R> {
                 protected fun errorType(e: Exception) = when (e) {
@@ -46,12 +56,13 @@ abstract class Abstract {
                     else -> ErrorType.GENERIC_ERROR
                 }
             }
+
         }
 
         interface DomainToUi<S, T> : Data<S, T> {
             fun map(errorType: ErrorType): T
 
-            fun map() : T
+            fun map(): T
 
             abstract class Base<S, T>(private val resourceProvider: ResourceProvider) :
                 DomainToUi<S, T> {

@@ -2,7 +2,6 @@ package ch.b.retrofitandcoroutines.data.certain_post
 
 import android.util.Log
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerListData
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 

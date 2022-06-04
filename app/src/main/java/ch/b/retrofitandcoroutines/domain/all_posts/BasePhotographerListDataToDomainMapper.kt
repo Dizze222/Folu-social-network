@@ -7,7 +7,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerListDataToD
 class BasePhotographerListDataToDomainMapper(
     private val photographerMapper: PhotographerDataToDomainMapper<PhotographerDomain>
 ) : PhotographerListDataToDomainMapper() {
-    override fun map(photographers: List<PhotographerData>,): PhotographerListDomain =
+    override fun map(photographers: List<PhotographerData>): PhotographerListDomain =
         PhotographerListDomain.Success(photographers, photographerMapper)
 
     override fun map(e: Exception): PhotographerListDomain = PhotographerListDomain.Fail(e)
