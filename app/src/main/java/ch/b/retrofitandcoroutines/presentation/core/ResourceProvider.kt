@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.all_posts
+package ch.b.retrofitandcoroutines.presentation.core
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -14,6 +14,5 @@ interface ResourceProvider {
         override fun getString(id: Int): String = context.getString(id)
         override fun provideContext(): Context = context
         override fun drawable(id: Int): Drawable = ContextCompat.getDrawable(context, id)!!
-
     }
 }

@@ -9,6 +9,7 @@ interface PhotographerCommunication : Abstract.Mapper {
 
     fun map(photographer: List<PhotographerUI>)
 
+
     suspend fun observe(owner: LifecycleOwner, observer: FlowCollector<List<PhotographerUI>>)
 
     class Base : PhotographerCommunication {

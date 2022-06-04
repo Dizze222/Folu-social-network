@@ -8,7 +8,7 @@ import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
 import ch.b.retrofitandcoroutines.presentation.all_posts.BasePhotographerDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.all_posts.BasePhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerCommunication
-import ch.b.retrofitandcoroutines.presentation.all_posts.ResourceProvider
+import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

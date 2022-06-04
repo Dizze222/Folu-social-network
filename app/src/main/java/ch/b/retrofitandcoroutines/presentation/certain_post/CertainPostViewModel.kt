@@ -2,7 +2,6 @@ package ch.b.retrofitandcoroutines.presentation.certain_post
 
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper

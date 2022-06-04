@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.util.Base64
 import androidx.core.graphics.drawable.toBitmap
-import ch.b.retrofitandcoroutines.presentation.all_posts.ResourceProvider
 import java.io.ByteArrayOutputStream
 
 interface BaseImage : Base64Image<Uri> {

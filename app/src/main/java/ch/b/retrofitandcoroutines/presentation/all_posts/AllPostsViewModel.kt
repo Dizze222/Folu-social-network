@@ -7,6 +7,7 @@ import android.os.Build
 import androidx.lifecycle.*
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
+import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
