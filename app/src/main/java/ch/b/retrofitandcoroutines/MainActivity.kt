@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
-import ch.b.retrofitandcoroutines.data.registration.net.RegistrationRepository
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer

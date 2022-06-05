@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.domain.registration
 
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListDataToDomainMapper
-import ch.b.retrofitandcoroutines.data.registration.net.RegistrationRepository
+import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
 
 interface RegistrationInteractor {
     suspend fun register(

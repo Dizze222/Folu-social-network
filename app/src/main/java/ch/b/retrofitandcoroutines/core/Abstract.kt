@@ -69,7 +69,7 @@ abstract class Abstract {
 
                 protected fun errorMessage(errorType: ErrorType) = resourceProvider.getString(
                     when (errorType) {
-                        ErrorType.NO_CONNECTION -> R.string.no_connection_message
+                        ErrorType.NO_CONNECTION -> R.string.service_unavailable
                         ErrorType.SERVICE_UNAVAILABLE -> R.string.service_unavailable
                         else -> R.string.something_went_wrong
                     }

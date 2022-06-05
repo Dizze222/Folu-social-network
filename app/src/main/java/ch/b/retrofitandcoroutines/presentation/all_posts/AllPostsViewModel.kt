@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.*
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor

@@ -1,7 +1,9 @@
-package ch.b.retrofitandcoroutines.data.registration.net
+package ch.b.retrofitandcoroutines.data.registration
 
-import ch.b.retrofitandcoroutines.data.registration.RegistrationListData
+import android.util.Log
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
+import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
+import ch.b.retrofitandcoroutines.presentation.registration.RegistrationUI
 
 interface RegistrationRepository {
     suspend fun register(
@@ -14,8 +16,7 @@ interface RegistrationRepository {
     class Base(
         private val dataSource: RegistrationCloudDataSource,
         private val cloudMapper: RegistrationListCloudMapper
-    ) :
-        RegistrationRepository {
+    ) : RegistrationRepository {
         override suspend fun register(
             phoneNumber: Long,
             name: String,

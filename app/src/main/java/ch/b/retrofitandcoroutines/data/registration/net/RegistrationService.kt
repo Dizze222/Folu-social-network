@@ -2,9 +2,11 @@ package ch.b.retrofitandcoroutines.data.registration.net
 
 import retrofit2.Response
 import retrofit2.http.Field
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 
 interface RegistrationService {
+    @FormUrlEncoded
     @POST("/register")
     suspend fun registration(
         @Field("phoneNumber") phoneNumber: Long,

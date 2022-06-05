@@ -9,6 +9,10 @@ import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
+import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
+import ch.b.retrofitandcoroutines.data.registration.mappers.ToRegistrationMapper
+import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
+import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -46,11 +50,25 @@ class DataModule {
 
     @Provides
     @Singleton
+    fun provideRegistrationCloudMapper() : RegistrationListCloudMapper{
+        return RegistrationListCloudMapper.Base(ToRegistrationMapper())
+    }
+    @Provides
+    @Singleton
     fun provideCertainPostRepository(
         cloudDataSource: CertainPostDataSource,
         cloudMapper: PhotographerListCloudMapper
     ): CertainPostRepository {
         return CertainPostRepository.Base(cloudDataSource, cloudMapper)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRegistrationRepository(
+        cloudDataSource: RegistrationCloudDataSource,
+        cloudMapper: RegistrationListCloudMapper
+    ) : RegistrationRepository {
+        return RegistrationRepository.Base(cloudDataSource,cloudMapper)
     }
 
 }

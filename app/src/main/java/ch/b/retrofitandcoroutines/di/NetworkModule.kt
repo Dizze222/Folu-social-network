@@ -4,6 +4,8 @@ import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPhotographerService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
+import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
+import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +18,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     private companion object {
-        private const val BASE_URL = "https://photographer-application.herokuapp.com/"
+        private const val BASE_URL = "https://806e-84-39-247-98.ngrok.io/"
     }
 
 
@@ -43,6 +45,12 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideRegistrationService(retrofit: Retrofit) : RegistrationService{
+        return retrofit.create(RegistrationService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideCertainPostService(retrofit: Retrofit) : CertainPhotographerService{
         return retrofit.create(CertainPhotographerService::class.java)
     }
@@ -58,4 +66,12 @@ class NetworkModule {
     fun provideCertainPostDataSource(service: CertainPhotographerService): CertainPostDataSource {
         return CertainPostDataSource.Base(service)
     }
+
+    @Provides
+    @Singleton
+    fun provideRegistrationDataSource(service: RegistrationService) : RegistrationCloudDataSource{
+        return RegistrationCloudDataSource.Base(service)
+    }
+
+
 }
