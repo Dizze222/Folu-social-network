@@ -7,6 +7,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheData
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
 import retrofit2.Response
 import java.lang.Exception
 
@@ -29,7 +30,8 @@ interface PhotographerRepository {
         private val cloudDataSource: PhotographersCloudDataSource,
         private val cacheDataSource: PhotographerListCacheDataSource,
         private val cloudMapper: PhotographerListCloudMapper,
-        private val mapperData: Abstract.ToPhotographerMapper<PhotographerData>
+        private val mapperData: Abstract.ToPhotographerMapper<PhotographerData>,
+        private val exceptionMapper: ExceptionMapper
     ) : PhotographerRepository {
 
         override suspend fun getAllPhotographers() = try {
@@ -48,8 +50,8 @@ interface PhotographerRepository {
             }
 
         } catch (e: Exception) {
-            Log.i("TAA", e.toString())
-            PhotographerListData.Fail(e)
+            val messageError = exceptionMapper.mapper(e)
+            PhotographerListData.Fail(messageError)
         }
 
         override suspend fun searchPhotographers(author: String): PhotographerListData {

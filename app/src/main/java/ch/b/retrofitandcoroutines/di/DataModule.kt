@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.di
 
+import android.content.Context
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
@@ -9,13 +10,16 @@ import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
+import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
 import ch.b.retrofitandcoroutines.data.registration.mappers.ToRegistrationMapper
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
+import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -29,11 +33,16 @@ class DataModule {
         cloudDataSource: PhotographersCloudDataSource,
         cacheDataSource: PhotographerListCacheDataSource,
         cloudMapper: PhotographerListCloudMapper,
-        toRoomMapper: Abstract.ToPhotographerMapper<PhotographerData>
+        toRoomMapper: Abstract.ToPhotographerMapper<PhotographerData>,
+        exceptionMapper: ExceptionMapper
     ): PhotographerRepository {
         return PhotographerRepository.Base(
-            cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper
-        )
+            cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper,exceptionMapper)
+    }
+
+    @Provides
+    fun provideResourceProvider(@ApplicationContext context: Context): ResourceProvider {
+        return ResourceProvider.Base(context)
     }
 
     @Provides
@@ -41,6 +50,13 @@ class DataModule {
     fun provideCloudMapper(): PhotographerListCloudMapper {
         return PhotographerListCloudMapper.Base(ToPhotographerMapper())
     }
+
+    @Provides
+    @Singleton
+    fun provideExceptionMapper(resourcesProvider: ResourceProvider) : ExceptionMapper{
+        return ExceptionMapper.Base(resourcesProvider)
+    }
+
 
     @Provides
     @Singleton
@@ -57,18 +73,20 @@ class DataModule {
     @Singleton
     fun provideCertainPostRepository(
         cloudDataSource: CertainPostDataSource,
-        cloudMapper: PhotographerListCloudMapper
+        cloudMapper: PhotographerListCloudMapper,
+        exceptionMapper: ExceptionMapper
     ): CertainPostRepository {
-        return CertainPostRepository.Base(cloudDataSource, cloudMapper)
+        return CertainPostRepository.Base(cloudDataSource, cloudMapper,exceptionMapper)
     }
 
     @Provides
     @Singleton
     fun provideRegistrationRepository(
         cloudDataSource: RegistrationCloudDataSource,
-        cloudMapper: RegistrationListCloudMapper
+        cloudMapper: RegistrationListCloudMapper,
+        exceptionMapper: ExceptionMapper
     ) : RegistrationRepository {
-        return RegistrationRepository.Base(cloudDataSource,cloudMapper)
+        return RegistrationRepository.Base(cloudDataSource,cloudMapper,exceptionMapper)
     }
 
 }

@@ -45,7 +45,7 @@ abstract class Abstract {
         }
 
         interface DataToDomain<S, R> : Data<S, R> {
-            fun map(e: Exception): R
+            fun map(error: String): R
 
             fun map(): R
 
@@ -60,7 +60,7 @@ abstract class Abstract {
         }
 
         interface DomainToUi<S, T> : Data<S, T> {
-            fun map(errorType: ErrorType): T
+            fun map(error: String): T
 
             fun map(): T
 

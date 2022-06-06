@@ -7,12 +7,13 @@ import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListData
 class BaseRegistrationListDataToDomainMapper(
     private val mapper: RegistrationDataToDomainMapper<RegistrationDomain>
 ) : RegistrationListDataToDomainMapper() {
-    override fun map(e: Exception): RegistrationListDomain {
-        return RegistrationListDomain.Fail(e)
+
+    override fun map(error: String): RegistrationListDomain {
+        return RegistrationListDomain.Fail(error)
     }
 
     override fun map(): RegistrationListDomain {
-        return Unit as RegistrationListDomain
+        return Unit as RegistrationListDomain //TODO fix this
     }
 
     override fun map(data: List<RegistrationData>): RegistrationListDomain {

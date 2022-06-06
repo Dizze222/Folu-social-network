@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.data.registration
 
-import android.util.Log
-import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 
@@ -16,7 +15,8 @@ interface RegistrationRepository {
 
     class Base(
         private val dataSource: RegistrationCloudDataSource,
-        private val cloudMapper: RegistrationListCloudMapper
+        private val cloudMapper: RegistrationListCloudMapper,
+        private val exceptionMapper: ExceptionMapper
     ) : RegistrationRepository {
         override suspend fun register(
             phoneNumber: Long,
@@ -25,36 +25,13 @@ interface RegistrationRepository {
             password: String
         ): RegistrationListData = try {
             val listOfCloud = dataSource.register(phoneNumber, name, secondName, password)
-            val registerList: List<RegistrationData> = cloudMapper.map(listOfCloud)
-           for (i in registerList.logTo()){
-               Log.i("TAGG",i)
-           }
+            val registerList = cloudMapper.map(listOfCloud)
             RegistrationListData.Success(registerList)
         } catch (e: Exception) {
-            RegistrationListData.Fail(e)
+            val errorMessage = exceptionMapper.mapper(e)
+            RegistrationListData.Fail(errorMessage)
         }
     }
 
-    fun List<Abstract.Object<Unit, RegistrationData.StringMapper>>.logTo() : ArrayList<String>{
-        val array = ArrayList<String>()
-        this.map {
-            it.map(object : RegistrationData.StringMapper{
-                override fun map(
-                    accessToken: String,
-                    refreshToken: String,
-                    successRegister: Boolean
-                ) {
-                    array.add(accessToken)
-                    array.add(refreshToken)
-                    array.add(successRegister.toString())
-                }
 
-                override fun map(message: String) {
-                    array.add(message)
-                }
-
-            })
-        }
-        return array
-    }
 }

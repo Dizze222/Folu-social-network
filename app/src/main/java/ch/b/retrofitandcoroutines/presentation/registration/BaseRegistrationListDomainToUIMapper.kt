@@ -10,9 +10,10 @@ class BaseRegistrationListDomainToUIMapper(
     private val mapper: RegistrationDomainToUIMapper<RegistrationUI>,
     private val resourceProvider: ResourceProvider
 ) : RegistrationListDomainToUIMapper(){
-    override fun map(errorType: ErrorType): RegistrationListUI {
-        return RegistrationListUI.Fail(errorType, resourceProvider)
+    override fun map(error: String): RegistrationListUI {
+        return RegistrationListUI.Fail(error)
     }
+
 
     override fun map(): RegistrationListUI {
         return Unit as RegistrationListUI //TODO fix this

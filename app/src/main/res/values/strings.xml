@@ -31,4 +31,6 @@
     <string name="nameOfUser">Имя</string>
     <string name="secondNameOfUser">Фамилия</string>
     <string name="authorization">Вход</string>
+    <string name="invalid_register">Ошибка регистрации, скорее всего, такой номер телефона уже зареган в базе</string>
+    <string name="unknown_exception">Неизвестная ошибка</string>
 </resources>

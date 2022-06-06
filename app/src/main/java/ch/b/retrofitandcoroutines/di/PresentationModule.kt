@@ -29,11 +29,6 @@ class PresentationModule {
 
 
     @Provides
-    fun provideResourceProvider(@ApplicationContext context: Context): ResourceProvider {
-        return ResourceProvider.Base(context)
-    }
-
-    @Provides
     fun provideCommunication(): PhotographerCommunication {
         return PhotographerCommunication.Base()
     }
@@ -44,18 +39,18 @@ class PresentationModule {
     }
 
     @Provides
-    fun provideRegistrationMapper(@ApplicationContext context: Context) : RegistrationListDomainToUIMapper{
+    fun provideRegistrationMapper(@ApplicationContext context: Context): RegistrationListDomainToUIMapper {
         return BaseRegistrationListDomainToUIMapper(
-            BaseRegistrationDomainToUIMapper(),ResourceProvider.Base(context)
+            BaseRegistrationDomainToUIMapper(), ResourceProvider.Base(context)
         )
     }
 
     @Provides
     fun provideRegistrationInteractor(
         repository: RegistrationRepository,
-        mapper : RegistrationListDataToDomainMapper
-    ) : RegistrationInteractor{
-        return RegistrationInteractor.Base(repository,mapper)
+        mapper: RegistrationListDataToDomainMapper
+    ): RegistrationInteractor {
+        return RegistrationInteractor.Base(repository, mapper)
     }
 
     @Provides

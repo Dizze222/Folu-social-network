@@ -5,8 +5,6 @@ import ch.b.retrofitandcoroutines.data.registration.RegistrationData
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.core.ErrorType
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationListUI
-import retrofit2.HttpException
-import java.lang.Exception
 import java.net.UnknownHostException
 
 sealed class RegistrationListDomain :
@@ -23,13 +21,7 @@ sealed class RegistrationListDomain :
         }
     }
 
-    class Fail(private val e: Exception) : RegistrationListDomain() {
-        override fun map(mapper: RegistrationListDomainToUIMapper): RegistrationListUI = mapper.map(
-            when (e) {
-                is UnknownHostException -> ErrorType.NO_CONNECTION
-                is HttpException -> ErrorType.SERVICE_UNAVAILABLE
-                else -> ErrorType.GENERIC_ERROR
-            }
-        )
+    class Fail(private val message: String) : RegistrationListDomain() {
+        override fun map(mapper: RegistrationListDomainToUIMapper): RegistrationListUI = mapper.map(message)
     }
 }

@@ -23,17 +23,10 @@ sealed class RegistrationListUI : Abstract.Object<Unit, RegistrationCommunicatio
     }
 
     class Fail(
-        private val errorType: ErrorType,
-        private val resourceProvider: ResourceProvider
+        private val error: String
     ) : RegistrationListUI() {
         override fun map(mapper: RegistrationCommunication) {
-            val messageId = when (errorType) {
-                ErrorType.NO_CONNECTION -> R.string.no_connection_message
-                ErrorType.SERVICE_UNAVAILABLE -> R.string.service_unavailable
-                else -> R.string.something_went_wrong
-            }
-            val message = resourceProvider.getString(messageId)
-            mapper.map(listOf(RegistrationUI.Fail(message)))
+            mapper.map(listOf(RegistrationUI.Fail(error)))
         }
 
     }

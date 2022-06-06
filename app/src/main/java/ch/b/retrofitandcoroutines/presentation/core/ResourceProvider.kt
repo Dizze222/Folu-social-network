@@ -5,6 +5,8 @@ import android.graphics.drawable.Drawable
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import dagger.Provides
+
 
 interface ResourceProvider {
     fun getString(@StringRes id: Int) : String

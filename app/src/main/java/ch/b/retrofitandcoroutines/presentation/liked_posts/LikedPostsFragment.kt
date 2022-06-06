@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import ch.b.retrofitandcoroutines.core.logTo
 import ch.b.retrofitandcoroutines.databinding.FragmentLikedBinding
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.registration.RegisterViewModel
@@ -19,27 +20,7 @@ class LikedPostsFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBindi
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launchWhenCreated {
             viewModel.observeCertainPost(this@LikedPostsFragment, {
-                it.map {registration->
-                    registration.map(object : RegistrationUI.StringMapper {
-                        override fun map(
-                            accessToken: String,
-                            refreshToken: String,
-                            successRegister: Boolean
-                        ) {
-                            Log.i(
-                                "REG",
-                                "access token: ${accessToken}, " +
-                                        "refreshToken: ${refreshToken}, " +
-                                        "successRegister: $successRegister"
-                            )
-                        }
-
-                        override fun map(message: String) {
-                            Log.i("REG",message)
-                        }
-
-                    })
-                }
+                Log.i("TAG",it.logTo().toString())
             })
         }
         viewModel.registration()

@@ -1,9 +1,10 @@
 package ch.b.retrofitandcoroutines.presentation.registration
 
 import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.core.BaseSingleStringMapper
 
-sealed class RegistrationUI : Abstract.Object<Unit, RegistrationUI.StringMapper> {
-    override fun map(mapper: StringMapper) = Unit
+sealed class RegistrationUI : Abstract.Object<Unit, BaseSingleStringMapper.SingleStringMapper> {
+    override fun map(mapper: BaseSingleStringMapper.SingleStringMapper) = Unit
 
     object Progress : RegistrationUI()
 
@@ -13,21 +14,13 @@ sealed class RegistrationUI : Abstract.Object<Unit, RegistrationUI.StringMapper>
         private val refreshToken: String,
         private val successRegister: Boolean
     ) : RegistrationUI() {
-        override fun map(mapper: StringMapper) =
+        override fun map(mapper: BaseSingleStringMapper.SingleStringMapper) =
             mapper.map(accessToken, refreshToken, successRegister)
     }
 
     class Fail(private val message: String) : RegistrationUI() {
-        override fun map(mapper: StringMapper) = mapper.map(message)
+        override fun map(mapper: BaseSingleStringMapper.SingleStringMapper) = mapper.map(message)
     }
 
-    interface StringMapper : Abstract.Mapper {
-        fun map(
-            accessToken: String,
-            refreshToken: String,
-            successRegister: Boolean
-        )
 
-        fun map(message: String)
-    }
 }

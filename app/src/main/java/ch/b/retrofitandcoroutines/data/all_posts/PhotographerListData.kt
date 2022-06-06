@@ -11,7 +11,7 @@ sealed class PhotographerListData :
         override fun map(mapper: PhotographerListDataToDomainMapper) = mapper.map(photographers)
     }
 
-    data class Fail(private val e: Exception) : PhotographerListData() {
+    data class Fail(private val e: String) : PhotographerListData() {
         override fun map(mapper: PhotographerListDataToDomainMapper) = mapper.map(e)
     }
 

@@ -14,9 +14,9 @@ sealed class RegistrationListData :
         }
     }
 
-    class Fail(private val exception: Exception) : RegistrationListData(){
+    class Fail(private val message: String) : RegistrationListData(){
         override fun map(mapper: RegistrationListDataToDomainMapper): RegistrationListDomain {
-            return mapper.map(exception)
+            return mapper.map(message)
         }
     }
 }

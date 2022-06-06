@@ -10,7 +10,7 @@ class BasePhotographerListDataToDomainMapper(
     override fun map(photographers: List<PhotographerData>): PhotographerListDomain =
         PhotographerListDomain.Success(photographers, photographerMapper)
 
-    override fun map(e: Exception): PhotographerListDomain = PhotographerListDomain.Fail(e)
+    override fun map(error: String): PhotographerListDomain = PhotographerListDomain.Fail(error)
 
     override fun map(): PhotographerListDomain = PhotographerListDomain.EmptyData
 
