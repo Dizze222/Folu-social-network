@@ -50,7 +50,7 @@ interface RegistrationRepository {
                 }
 
                 override fun map(message: String) {
-                    TODO("Not yet implemented")
+                    array.add(message)
                 }
 
             })
