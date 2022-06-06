@@ -49,32 +49,12 @@ abstract class Abstract {
 
             fun map(): R
 
-            abstract class Base<S, R> : DataToDomain<S, R> {
-                protected fun errorType(e: Exception) = when (e) {
-                    is UnknownHostException -> ErrorType.GENERIC_ERROR
-                    is HttpException -> ErrorType.SERVICE_UNAVAILABLE
-                    else -> ErrorType.GENERIC_ERROR
-                }
-            }
-
         }
 
         interface DomainToUi<S, T> : Data<S, T> {
             fun map(error: String): T
 
             fun map(): T
-
-            abstract class Base<S, T>(private val resourceProvider: ResourceProvider) :
-                DomainToUi<S, T> {
-
-                protected fun errorMessage(errorType: ErrorType) = resourceProvider.getString(
-                    when (errorType) {
-                        ErrorType.NO_CONNECTION -> R.string.service_unavailable
-                        ErrorType.SERVICE_UNAVAILABLE -> R.string.service_unavailable
-                        else -> R.string.something_went_wrong
-                    }
-                )
-            }
         }
 
         class Empty : Mapper
