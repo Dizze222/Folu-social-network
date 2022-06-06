@@ -5,8 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationInteractor
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUIMapper
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
@@ -24,7 +22,7 @@ class RegisterViewModel @Inject constructor(
     fun registration() {
         communicate.map(listOf(RegistrationUI.Progress))
         viewModelScope.launch {
-            val resultDomain = interactor.register(12345, "Kamil", "Sabirov", "Password123")
+            val resultDomain = interactor.register(987654, "Kamil", "Sabirov", "Password123")
             withContext(Dispatchers.Main) {
                 val resultUi = resultDomain.map(mapper)
                 resultUi.map(communicate)
