@@ -3,13 +3,8 @@ package ch.b.retrofitandcoroutines.core
 
 fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper>>.logTo(): ArrayList<String> {
     val array = ArrayList<String>()
-    this.map {
-        it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
-            override fun map(
-                accessToken: String,
-                refreshToken: String,
-                successRegister: Boolean
-            ) {
+    this.map { it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
+            override fun map(accessToken: String, refreshToken: String, successRegister: Boolean) {
                 array.add(accessToken)
                 array.add(refreshToken)
             }
