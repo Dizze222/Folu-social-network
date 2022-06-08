@@ -3,9 +3,7 @@ package ch.b.retrofitandcoroutines.presentation.navigate
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
-import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
-import ch.b.retrofitandcoroutines.presentation.containers.BaseFragmentContainer
-import ch.b.retrofitandcoroutines.presentation.containers.LikedTabContainer
+import ch.b.retrofitandcoroutines.presentation.containers.*
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import java.util.*
@@ -41,8 +39,33 @@ class AppNavigator(
             .detach(likedTabContainer)
             .commitNow()
 
+        val registrationContainer = fm.findFragmentByTag(RegistrationContainer.TAG) as? RegistrationContainer
+            ?: RegistrationContainer().newInstance()
+        fm.beginTransaction()
+            .replace(containerId,registrationContainer, RegistrationContainer.TAG)
+            .detach(registrationContainer)
+            .commitNow()
+
+        val splashContainer = fm.findFragmentByTag(SplashContainer.TAG) as? SplashContainer
+            ?: SplashContainer().newInstance()
+        fm.beginTransaction()
+            .replace(containerId,splashContainer, SplashContainer.TAG)
+            .detach(splashContainer)
+            .commitNow()
+
+
+        val authorizationContainer = fm.findFragmentByTag(AuthorizationContainer.TAG) as? AuthorizationContainer
+            ?: AuthorizationContainer().newInstance()
+        fm.beginTransaction()
+            .replace(containerId,authorizationContainer,AuthorizationContainer.TAG)
+            .detach(authorizationContainer)
+            .commitNow()
+
         containers.add(allPostTabContainer)
         containers.add(likedTabContainer)
+        containers.add(registrationContainer)
+        containers.add(splashContainer)
+        containers.add(authorizationContainer)
     }
 
     override fun applyCommand(command: Command) {

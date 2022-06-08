@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
@@ -33,7 +34,7 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
         //binding.button.setOnClickListener {
         //    (requireActivity() as MainActivity).image()
         //}
-        navBar!!.visibility = View.VISIBLE
+        hideNavBar(false)
         adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()
@@ -45,16 +46,8 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
                     val fragmentManager = activity!!.supportFragmentManager
                     val nextScreen = FragmentScreen(fragment.newInstance())
                     (parentFragment as RouterProvider).router.navigateTo(nextScreen)
-                    photographer.map(object : PhotographerUI.StringMapper {
-                        override fun map(
-                            id: Int,
-                            author: String,
-                            URL: String,
-                            like: Long,
-                            theme: String,
-                            comments: List<String>,
-                            authorOfComments: List<String>
-                        ) {
+                    photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
+                        override fun map(id: Int, author: String, URL: String, like: Long, theme: String, comments: List<String>, authorOfComments: List<String>) {
                             fragmentManager.setFragmentResult("requestKey", bundleOf("id" to id))
                         }
 
@@ -128,7 +121,6 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
     }
 
     override fun onBackPressed(): Boolean {
-        (parentFragment as RouterProvider).router.exit()
-        return true
+        return false
     }
 }

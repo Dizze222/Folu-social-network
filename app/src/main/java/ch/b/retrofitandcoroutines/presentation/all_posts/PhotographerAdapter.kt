@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.*
 
@@ -76,7 +77,7 @@ class PhotographerAdapter(
             private val photographerItemClick: PhotographerItemClickListener
         ) : PhotographerViewHolder(binding) {
             override fun bind(photographer: PhotographerUI) {
-                photographer.map(object : PhotographerUI.StringMapper {
+                photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
                     override fun map(
                         id: Int,
                         author: String,
@@ -106,7 +107,7 @@ class PhotographerAdapter(
             PhotographerViewHolder(binding) {
             private val button = itemView.findViewById<TextView>(R.id.update)
             override fun bind(photographer: PhotographerUI) {
-                photographer.map(object : PhotographerUI.StringMapper {
+                photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
                     override fun map(
                         id: Int,
                         author: String,

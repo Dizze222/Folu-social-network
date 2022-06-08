@@ -1,10 +1,10 @@
 package ch.b.retrofitandcoroutines.data.registration
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.core.BaseSingleStringMapper
+import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationDataToDomainMapper
 
-interface RegistrationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleStringMapper.SingleStringMapper> {
+interface RegistrationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
     fun <T> map(mapper: RegistrationDataToDomainMapper<T>): T
 
     class Base(
@@ -16,7 +16,7 @@ interface RegistrationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleStr
             return mapper.map(accessToken, refreshToken, successRegister)
         }
 
-        override fun map(mapper: BaseSingleStringMapper.SingleStringMapper) {
+        override fun map(mapper: BaseSingleRegistrationStringMapper.SingleStringMapper) {
             mapper.map(accessToken, refreshToken, successRegister)
         }
 

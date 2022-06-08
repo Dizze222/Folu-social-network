@@ -11,6 +11,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSourc
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
+import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
 import ch.b.retrofitandcoroutines.data.registration.mappers.ToRegistrationMapper
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
@@ -84,9 +85,10 @@ class DataModule {
     fun provideRegistrationRepository(
         cloudDataSource: RegistrationCloudDataSource,
         cloudMapper: RegistrationListCloudMapper,
-        exceptionMapper: ExceptionMapper
+        exceptionMapper: ExceptionMapper,
+        tokenToSharedPreferences: TokenToSharedPreferences
     ) : RegistrationRepository {
-        return RegistrationRepository.Base(cloudDataSource,cloudMapper,exceptionMapper)
+        return RegistrationRepository.Base(cloudDataSource,cloudMapper,exceptionMapper,tokenToSharedPreferences)
     }
 
 }

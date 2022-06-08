@@ -12,4 +12,8 @@
     <color name="gray_light">#CDCDCD</color>
     <color name="gray_super_light">#F8D7D2D2</color>
     <color name="gray">#716C6C</color>
+    <color name="blue">#03A9F4</color>
+    <color name="green">#64DD17</color>
+    <color name="yellow">#FFEA00</color>
+    <color name="purple">#D500F9</color>
 </resources>

@@ -5,6 +5,7 @@ import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import retrofit2.HttpException
 import java.lang.NullPointerException
+import java.net.ConnectException
 import java.net.UnknownHostException
 
 interface ExceptionMapper : Abstract.Mapper {
@@ -17,9 +18,8 @@ interface ExceptionMapper : Abstract.Mapper {
                 is NullPointerException -> resourceProvider.getString(R.string.invalid_register)
                 is UnknownHostException -> resourceProvider.getString(R.string.service_unavailable)
                 is HttpException -> resourceProvider.getString(R.string.something_went_wrong)
-                else -> resourceProvider.getString(R.string.unknown_exception)
+                is ConnectException -> resourceProvider.getString(R.string.filed_to_connection_server)
+                else -> "неизвестная ошибка $exception"
             }
     }
-
-
 }

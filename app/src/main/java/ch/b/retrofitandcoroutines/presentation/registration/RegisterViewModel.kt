@@ -19,10 +19,15 @@ class RegisterViewModel @Inject constructor(
     private val communicate: RegistrationCommunication
 ) : ViewModel() {
 
-    fun registration() {
+    fun registration(
+        name: String,
+        secondName: String,
+        numberOfPhone: Long,
+        password: String
+    ) {
         communicate.map(listOf(RegistrationUI.Progress))
         viewModelScope.launch {
-            val resultDomain = interactor.register(456784344, "Kamil", "Sabirov", "Password123")
+            val resultDomain = interactor.register(numberOfPhone, name, secondName, password)
             withContext(Dispatchers.Main) {
                 val resultUi = resultDomain.map(mapper)
                 resultUi.map(communicate)

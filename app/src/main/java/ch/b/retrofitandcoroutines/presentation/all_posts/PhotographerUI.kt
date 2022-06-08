@@ -1,10 +1,11 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 
 
-sealed class PhotographerUI : Abstract.Object<Unit, PhotographerUI.StringMapper>, Comparing {
-    override fun map(mapper: StringMapper) = Unit
+sealed class PhotographerUI : Abstract.Object<Unit, BasePhotographerStringMapper.SingleStringMapper>, Comparing {
+    override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = Unit
 
     object Progress : PhotographerUI()
 
@@ -19,7 +20,7 @@ sealed class PhotographerUI : Abstract.Object<Unit, PhotographerUI.StringMapper>
         private val comments: List<String>,
         private val authorOfComments: List<String>
     ) : PhotographerUI() {
-        override fun map(mapper: StringMapper) =
+        override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
         override fun same(photographerUI: PhotographerUI) =
@@ -30,23 +31,7 @@ sealed class PhotographerUI : Abstract.Object<Unit, PhotographerUI.StringMapper>
     }
 
     class Fail(private val message: String) : PhotographerUI() {
-        override fun map(mapper: StringMapper) = mapper.map(message)
-    }
-
-
-    interface StringMapper : Abstract.Mapper {
-        fun map(
-            id: Int,
-            author: String,
-            URL: String,
-            like: Long,
-            theme: String,
-            comments: List<String>,
-            authorOfComments: List<String>
-        )
-
-        fun map(message: String)
-
+        override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = mapper.map(message)
     }
 
 }

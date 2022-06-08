@@ -8,6 +8,7 @@ import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
 import ch.b.retrofitandcoroutines.presentation.containers.LikedTabContainer
+import ch.b.retrofitandcoroutines.presentation.containers.SplashContainer
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.presentation.core.ResultApiActivity
 import ch.b.retrofitandcoroutines.presentation.navigate.*
@@ -23,7 +24,6 @@ class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
 
     override val router: AppRouter
         get() = cicerone.router
-
 
     private val image = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
         val fragment = supportFragmentManager.fragments.first() as ImageResult
@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
         }
 
         if (savedInstanceState == null) {
-            val screen = FragmentScreen(AllPostTabContainer().newInstance())
+            val screen = FragmentScreen(SplashContainer().newInstance())
             router.replaceTab(screen)
         }
     }

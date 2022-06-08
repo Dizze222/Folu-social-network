@@ -10,5 +10,4 @@ class AppRouter : Router() {
         val command = ReplaceBottomTab(screen)
         executeCommands(command)
     }
-
 }

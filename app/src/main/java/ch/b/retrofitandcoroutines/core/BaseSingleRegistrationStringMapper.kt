@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.core
 
-interface BaseSingleStringMapper : Abstract.Mapper, Abstract.Object<Unit,BaseSingleStringMapper.SingleStringMapper> {
+interface BaseSingleRegistrationStringMapper : Abstract.Mapper, Abstract.Object<Unit,BaseSingleRegistrationStringMapper.SingleStringMapper> {
 
     interface SingleStringMapper : Abstract.Mapper {
         fun map(

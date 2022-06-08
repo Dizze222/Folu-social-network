@@ -1,21 +1,30 @@
 package ch.b.retrofitandcoroutines.presentation.authorization
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import ch.b.retrofitandcoroutines.R
+import android.widget.Toast
 import ch.b.retrofitandcoroutines.databinding.FragmentAuthorizationBinding
+import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
+import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
+import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AuthorizationFragment : BaseFragment<FragmentAuthorizationBinding>(FragmentAuthorizationBinding::inflate) {
-    private val a: Int = 3
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
 
-        return inflater.inflate(R.layout.fragment_authorization, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.registration.setOnClickListener {
+            val fragment = RegistrationFragment()
+            val nextScreen = FragmentScreen(fragment.newInstance())
+            (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+        }
+
+    }
+
+    fun newInstance() : AuthorizationFragment{
+        return AuthorizationFragment()
     }
 
 
