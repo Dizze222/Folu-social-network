@@ -33,9 +33,9 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
         super.onViewCreated(view, savedInstanceState)
         val sharedPref = TokenToSharedPreferences.Base(activity!!.applicationContext, Reader())
         hideNavBar(true)
-        lifecycleScope.launchWhenStarted {
+        lifecycleScope.launchWhenCreated {
             delay(500)
-            if (sharedPref.read().isEmpty()) {
+            if (sharedPref.readRefreshToken().isEmpty()) {
                 val fragment = AuthorizationFragment()
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)

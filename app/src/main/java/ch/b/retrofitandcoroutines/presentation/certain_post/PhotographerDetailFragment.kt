@@ -60,8 +60,13 @@ class PhotographerDetailFragment :
                                 bundle.putString("URL", URL)
                             }
 
-                            override fun map(message: String) = Unit
+                            override fun map(message: String) {
+                                binding.toolbar.title = message
+                            }
 
+                            override fun map(progress: Boolean) {
+                                binding.toolbar.title = "Загрузка"
+                            }
                         })
                     }
                 }

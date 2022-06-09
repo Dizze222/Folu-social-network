@@ -16,6 +16,8 @@ interface BasePhotographerStringMapper : Abstract.Mapper,
 
         fun map(message: String)
 
+        fun map(progress: Boolean)
+
     }
 
 }

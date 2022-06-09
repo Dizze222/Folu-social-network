@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.data.registration
 
-import android.util.Log
-import ch.b.retrofitandcoroutines.core.logTo
+import ch.b.retrofitandcoroutines.core.dataOfRegister
 import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
 import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
@@ -29,8 +28,8 @@ interface RegistrationRepository {
         ): RegistrationListData = try {
             val listOfCloud = dataSource.register(phoneNumber, name, secondName, password)
             val registerList: List<RegistrationData> = cloudMapper.map(listOfCloud)
-            tokenToSharedPreferences.save(registerList.logTo()[1])
-            //Log.i("REF",tokenToSharedPreferences.read())
+            tokenToSharedPreferences.saveRefreshToken(registerList.dataOfRegister()[1])
+            tokenToSharedPreferences.saveAccessToken(registerList.dataOfRegister()[0])
             RegistrationListData.Success(registerList)
         } catch (e: Exception) {
             val errorMessage = exceptionMapper.mapper(e)

@@ -15,8 +15,7 @@ interface PhotographerService {
         @Field("idPhotographer") idPhotographer: Int,
         @Field("like")like: Int,
         @Field("theme") theme: String,
-        @Field("url") url: String,
-
+        @Field("url") url: String
     ) : Response<PhotographerCloud>
 
 }

@@ -1,9 +1,10 @@
 package ch.b.retrofitandcoroutines.core
 
 
-fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper>>.logTo(): ArrayList<String> {
+fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper>>.dataOfRegister(): ArrayList<String> {
     val array = ArrayList<String>()
-    this.map { it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
+    this.map {
+        it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
             override fun map(accessToken: String, refreshToken: String, successRegister: Boolean) {
                 array.add(accessToken)
                 array.add(refreshToken)
@@ -12,6 +13,8 @@ fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMa
             override fun map(message: String) {
                 array.add(message)
             }
+
+            override fun map(progress: Boolean) = Unit
 
         })
     }
@@ -41,9 +44,9 @@ fun List<Abstract.Object<Unit, BasePhotographerStringMapper.SingleStringMapper>>
                 array.add(authorOfComments.toString())
             }
 
-            override fun map(message: String) {
+            override fun map(message: String) = Unit
 
-            }
+            override fun map(progress: Boolean) = Unit
 
         })
     }

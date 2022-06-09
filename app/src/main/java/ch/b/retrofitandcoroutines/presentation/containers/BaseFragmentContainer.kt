@@ -11,7 +11,7 @@ import ch.b.retrofitandcoroutines.presentation.navigate.*
 import dagger.hilt.android.AndroidEntryPoint
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
-@AndroidEntryPoint
+
 abstract class BaseFragmentContainer : androidx.fragment.app.Fragment(), BackButtonListener,
     RouterProvider {
 

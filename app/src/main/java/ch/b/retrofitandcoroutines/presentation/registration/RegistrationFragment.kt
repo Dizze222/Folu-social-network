@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.databinding.FragmentRegistrationBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
@@ -23,30 +24,21 @@ class RegistrationFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.registration.setOnClickListener {
-            try {
-                lifecycleScope.launchWhenCreated {
+            try { lifecycleScope.launchWhenCreated {
                     viewModel.observeCertainPost(this@RegistrationFragment, { list ->
-                        list.map {
-                            it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
-                                override fun map(
-                                    accessToken: String,
-                                    refreshToken: String,
-                                    successRegister: Boolean
-                                ) {
+                        list.map { it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
+                                override fun map(accessToken: String, refreshToken: String, successRegister: Boolean) {
                                     if (accessToken.isNotEmpty()) {
                                         val fragment = PhotographersFragment()
                                         val nextScreen = FragmentScreen(fragment.newInstance())
-                                        (parentFragment as RouterProvider).router.navigateTo(
-                                            nextScreen)
+                                        (parentFragment as RouterProvider).router.navigateTo(nextScreen)
                                     }
                                 }
-
                                 override fun map(message: String) {
                                     binding.errorText.text = message
                                 }
-
                                 override fun map(progress: Boolean) {
-                                    binding.errorText.text = "Загрузка данных, подождите"
+                                    binding.errorText.text = activity!!.getString(R.string.please_wait)
                                 }
                             })
                         }
@@ -56,12 +48,7 @@ class RegistrationFragment :
                 val secondName = binding.secondName.text.toString()
                 val password = binding.password.text.toString()
                 val phone = binding.numberOfPhone.text.toString().toLong()
-                viewModel.registration(
-                    name,
-                    secondName,
-                    phone,
-                    password
-                )
+                viewModel.registration(name, secondName, phone, password)
             } catch (e: Exception) {
                 binding.errorText.text = "Неизвестная Ошибка"
             }

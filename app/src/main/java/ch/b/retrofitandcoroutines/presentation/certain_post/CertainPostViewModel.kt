@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.certain_post
 
-import android.util.Log
+
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -23,7 +23,7 @@ class CertainPostViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun getCertainPost(postId: Int){
-        Log.i("TOP","certain post")
+        communicate.map(listOf(PhotographerUI.Progress))
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.getCertainPost(postId)
             withContext(Dispatchers.Main){

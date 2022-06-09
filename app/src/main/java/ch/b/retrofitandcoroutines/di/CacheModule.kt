@@ -25,6 +25,8 @@ class CacheModule {
         private const val DATABASE_NAME = "photographer_db"
     }
 
+
+
     @Provides
     @Singleton
     fun providePhotographerDatabase(@ApplicationContext context: Context): PhotographerDataBase {
@@ -55,6 +57,7 @@ class CacheModule {
     fun provideToCachePhotographerMapper(): Abstract.ToPhotographerMapper<CachePhotographer.Base> {
         return BaseToCachePhotographerMapper()
     }
+
 
     @Provides
     @Singleton

@@ -1,15 +1,20 @@
 package ch.b.retrofitandcoroutines.di
 
+
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPhotographerService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
+import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
+import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.runBlocking
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -18,7 +23,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     private companion object {
-        private const val BASE_URL = "https://a34f-84-39-247-98.ngrok.io/"
+        private const val BASE_URL = "https://photographer-application.herokuapp.com/"
     }
 
 
@@ -26,13 +31,24 @@ class NetworkModule {
     @Singleton
     fun provideGson(): GsonConverterFactory = GsonConverterFactory.create()
 
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(accessTokenFromShared: TokenToSharedPreferences): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(TokenInterceptor(accessTokenFromShared))
+            .build()
+    }
+
     @Provides
     @Singleton
     fun provideRetrofit(
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
+        client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(client)
             .addConverterFactory(gsonConverterFactory)
             .build()
     }
@@ -45,13 +61,13 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRegistrationService(retrofit: Retrofit) : RegistrationService{
+    fun provideRegistrationService(retrofit: Retrofit): RegistrationService {
         return retrofit.create(RegistrationService::class.java)
     }
 
     @Provides
     @Singleton
-    fun provideCertainPostService(retrofit: Retrofit) : CertainPhotographerService{
+    fun provideCertainPostService(retrofit: Retrofit): CertainPhotographerService {
         return retrofit.create(CertainPhotographerService::class.java)
     }
 
@@ -69,7 +85,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRegistrationDataSource(service: RegistrationService) : RegistrationCloudDataSource{
+    fun provideRegistrationDataSource(service: RegistrationService): RegistrationCloudDataSource {
         return RegistrationCloudDataSource.Base(service)
     }
 

@@ -7,7 +7,10 @@ import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 sealed class PhotographerUI : Abstract.Object<Unit, BasePhotographerStringMapper.SingleStringMapper>, Comparing {
     override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = Unit
 
-    object Progress : PhotographerUI()
+    object Progress : PhotographerUI(){
+        override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
+            mapper.map(true)
+    }
 
     object EmptyData : PhotographerUI()
 

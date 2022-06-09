@@ -4,8 +4,6 @@ import android.os.Bundle
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 
-
-
 class RegistrationContainer : BaseFragmentContainer() {
     companion object{
         const val TAG = "RegistrationFragment"

@@ -36,4 +36,5 @@
     <string name="filed_to_connection_server">Невозможно подключиться к серверу, попробуйте еще раз</string>
     <string name="to_registration">Зарегестрироваться</string>
     <string name="to_authorization">Вход</string>
+    <string name="please_wait">Загрузка данных, подождите</string>
 </resources>

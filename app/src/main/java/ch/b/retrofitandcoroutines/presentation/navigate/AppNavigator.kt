@@ -24,39 +24,39 @@ class AppNavigator(
     private val containers = LinkedList<BaseFragmentContainer>()
 
     fun initContainers() {
-        val fm = fragmentManager ?: return
-        val allPostTabContainer = fm.findFragmentByTag(AllPostTabContainer.TAG) as? AllPostTabContainer
+        val fragmentManager = fragmentManager ?: return
+        val allPostTabContainer = fragmentManager.findFragmentByTag(AllPostTabContainer.TAG) as? AllPostTabContainer
             ?: AllPostTabContainer().newInstance()
-        fm.beginTransaction()
+        fragmentManager.beginTransaction()
             .replace(containerId, allPostTabContainer, AllPostTabContainer.TAG)
             .detach(allPostTabContainer)
             .commitNow()
 
-        val likedTabContainer = fm.findFragmentByTag(LikedTabContainer.TAG) as? LikedTabContainer
+        val likedTabContainer = fragmentManager.findFragmentByTag(LikedTabContainer.TAG) as? LikedTabContainer
             ?: LikedTabContainer().newInstance()
-        fm.beginTransaction()
+        fragmentManager.beginTransaction()
             .replace(containerId, likedTabContainer, LikedTabContainer.TAG)
             .detach(likedTabContainer)
             .commitNow()
 
-        val registrationContainer = fm.findFragmentByTag(RegistrationContainer.TAG) as? RegistrationContainer
+        val registrationContainer = fragmentManager.findFragmentByTag(RegistrationContainer.TAG) as? RegistrationContainer
             ?: RegistrationContainer().newInstance()
-        fm.beginTransaction()
+        fragmentManager.beginTransaction()
             .replace(containerId,registrationContainer, RegistrationContainer.TAG)
             .detach(registrationContainer)
             .commitNow()
 
-        val splashContainer = fm.findFragmentByTag(SplashContainer.TAG) as? SplashContainer
+        val splashContainer = fragmentManager.findFragmentByTag(SplashContainer.TAG) as? SplashContainer
             ?: SplashContainer().newInstance()
-        fm.beginTransaction()
+        fragmentManager.beginTransaction()
             .replace(containerId,splashContainer, SplashContainer.TAG)
             .detach(splashContainer)
             .commitNow()
 
 
-        val authorizationContainer = fm.findFragmentByTag(AuthorizationContainer.TAG) as? AuthorizationContainer
+        val authorizationContainer = fragmentManager.findFragmentByTag(AuthorizationContainer.TAG) as? AuthorizationContainer
             ?: AuthorizationContainer().newInstance()
-        fm.beginTransaction()
+        fragmentManager.beginTransaction()
             .replace(containerId,authorizationContainer,AuthorizationContainer.TAG)
             .detach(authorizationContainer)
             .commitNow()
