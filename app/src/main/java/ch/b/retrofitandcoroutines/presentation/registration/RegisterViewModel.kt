@@ -42,5 +42,4 @@ class RegisterViewModel @Inject constructor(
         communicate.observe(owner, observer)
     }
 
-
 }

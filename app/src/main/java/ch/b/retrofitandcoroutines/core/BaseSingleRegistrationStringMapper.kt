@@ -10,6 +10,8 @@ interface BaseSingleRegistrationStringMapper : Abstract.Mapper, Abstract.Object<
         )
 
         fun map(message: String)
+
+        fun map(progress: Boolean)
     }
 
 }

@@ -6,7 +6,10 @@ import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 sealed class RegistrationUI : Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
     override fun map(mapper: BaseSingleRegistrationStringMapper.SingleStringMapper) = Unit
 
-    object Progress : RegistrationUI()
+    object Progress : RegistrationUI(){
+        override fun map(mapper: BaseSingleRegistrationStringMapper.SingleStringMapper) =
+            mapper.map(true)
+    }
 
 
     class Base(

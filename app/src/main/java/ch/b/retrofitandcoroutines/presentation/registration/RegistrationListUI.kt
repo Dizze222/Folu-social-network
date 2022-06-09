@@ -1,11 +1,8 @@
 package ch.b.retrofitandcoroutines.presentation.registration
 
-import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.domain.core.ErrorType
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationDomain
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationDomainToUIMapper
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 
 
 sealed class RegistrationListUI : Abstract.Object<Unit, RegistrationCommunication> {
