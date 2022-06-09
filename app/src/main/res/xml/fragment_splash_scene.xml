@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/widget" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/textView6"
+            android:id="@+id/textView5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
+            android:id="@+id/textView4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/textView4"
+            android:id="@+id/textView3"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+        <Constraint
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/textView6"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.499"
+            android:layout_marginLeft="96dp"
+            android:layout_marginStart="96dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@id/widget" />
+    </ConstraintSet>
+
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start" >
+        <KeyFrameSet >
+            <KeyAttribute
+                app:motionTarget="@+id/textView6"
+                app:framePosition="10"
+                android:scaleX="1.2" />
+            <KeyPosition
+                app:motionTarget="@+id/textView6"
+                app:framePosition="10"
+                app:keyPositionType="deltaRelative"
+                app:percentX="30"
+                app:percentY="40" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView5"
+                app:framePosition="50"
+                android:translationY="30dp" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView4"
+                app:framePosition="25"
+                android:rotation="45" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView3"
+                app:framePosition="53"
+                app:transitionPathRotate="90" />
+        </KeyFrameSet>
+        <OnClick />
+    </Transition>
+</MotionScene>

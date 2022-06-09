@@ -52,6 +52,7 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
                         }
 
                         override fun map(message: String) = Unit
+                        override fun map(progress: Boolean) = Unit
                     })
                 }
 

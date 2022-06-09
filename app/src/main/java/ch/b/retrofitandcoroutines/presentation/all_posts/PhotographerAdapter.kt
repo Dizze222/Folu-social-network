@@ -93,6 +93,7 @@ class PhotographerAdapter(
                     }
 
                     override fun map(message: String) = Unit
+                    override fun map(progress: Boolean) = Unit
 
 
                 })
@@ -122,6 +123,7 @@ class PhotographerAdapter(
                     }
 
                     override fun map(message: String) = Unit
+                    override fun map(progress: Boolean) = Unit
                 })
                 button.setOnClickListener {
                     retry.tryAgain()
