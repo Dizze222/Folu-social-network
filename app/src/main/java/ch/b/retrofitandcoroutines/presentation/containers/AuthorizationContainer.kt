@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
-import ch.b.retrofitandcoroutines.presentation.authorization.AuthorizationFragment
+import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 
 class AuthorizationContainer : BaseFragmentContainer() {
@@ -15,7 +15,7 @@ class AuthorizationContainer : BaseFragmentContainer() {
     }
 
     override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
-        return FragmentScreen(AuthorizationFragment().newInstance())
+        return FragmentScreen(AuthenticationFragment().newInstance())
     }
 
 

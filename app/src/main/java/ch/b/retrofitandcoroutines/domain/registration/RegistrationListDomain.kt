@@ -14,14 +14,13 @@ sealed class RegistrationListDomain :
         private val registerMapper: RegistrationDataToDomainMapper<RegistrationDomain>
     ) : RegistrationListDomain() {
         override fun map(mapper: RegistrationListDomainToUIMapper): RegistrationListUI {
-            val registrationDomain = register.map {
-                it.map(registerMapper)
-            }
+            val registrationDomain = register.map { it.map(registerMapper) }
             return mapper.map(registrationDomain)
         }
     }
 
     class Fail(private val message: String) : RegistrationListDomain() {
-        override fun map(mapper: RegistrationListDomainToUIMapper): RegistrationListUI = mapper.map(message)
+        override fun map(mapper: RegistrationListDomainToUIMapper): RegistrationListUI =
+            mapper.map(message)
     }
 }

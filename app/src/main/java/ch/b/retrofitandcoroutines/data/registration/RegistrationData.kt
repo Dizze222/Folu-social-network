@@ -19,8 +19,6 @@ interface RegistrationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleReg
         override fun map(mapper: BaseSingleRegistrationStringMapper.SingleStringMapper) {
             mapper.map(accessToken, refreshToken, successRegister)
         }
-
-
     }
 
 }

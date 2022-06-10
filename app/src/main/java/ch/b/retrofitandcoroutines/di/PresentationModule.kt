@@ -45,13 +45,6 @@ class PresentationModule {
         )
     }
 
-    @Provides
-    fun provideRegistrationInteractor(
-        repository: RegistrationRepository,
-        mapper: RegistrationListDataToDomainMapper
-    ): RegistrationInteractor {
-        return RegistrationInteractor.Base(repository, mapper)
-    }
 
     @Provides
     fun providePhotographerListDomainToUiMapper(@ApplicationContext context: Context): PhotographerListDomainToUIMapper {

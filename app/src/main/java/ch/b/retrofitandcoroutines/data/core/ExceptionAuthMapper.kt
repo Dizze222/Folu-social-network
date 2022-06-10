@@ -8,11 +8,11 @@ import java.lang.NullPointerException
 import java.net.ConnectException
 import java.net.UnknownHostException
 
-interface ExceptionMapper : Abstract.Mapper {
+interface ExceptionAuthMapper : Abstract.Mapper {
 
     fun mapper(exception: Exception): String
 
-    class Base(private val resourceProvider: ResourceProvider) : ExceptionMapper {
+    class Base(private val resourceProvider: ResourceProvider) : ExceptionAuthMapper {
         override fun mapper(exception: Exception): String =
             when (exception) {
                 is NullPointerException -> resourceProvider.getString(R.string.invalid_register)

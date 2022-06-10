@@ -4,10 +4,11 @@ package ch.b.retrofitandcoroutines.data.all_posts
 import android.util.Log
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
+import ch.b.retrofitandcoroutines.data.all_posts.mappers.ExceptionPostsMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
-import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
+import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper
 import retrofit2.Response
 import java.lang.Exception
 
@@ -31,7 +32,7 @@ interface PhotographerRepository {
         private val cacheDataSource: PhotographerListCacheDataSource,
         private val cloudMapper: PhotographerListCloudMapper,
         private val mapperData: Abstract.ToPhotographerMapper<PhotographerData>,
-        private val exceptionMapper: ExceptionMapper
+        private val exceptionMapper: ExceptionPostsMapper
     ) : PhotographerRepository {
 
         override suspend fun getAllPhotographers() = try {

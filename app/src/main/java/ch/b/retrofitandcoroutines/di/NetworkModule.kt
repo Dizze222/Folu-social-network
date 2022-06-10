@@ -3,6 +3,8 @@ package ch.b.retrofitandcoroutines.di
 
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationCloudDataSource
+import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPhotographerService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
@@ -23,7 +25,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
     private companion object {
-        private const val BASE_URL = "https://photographer-application.herokuapp.com/"
+        private const val BASE_URL = "https://8403-84-39-247-98.ngrok.io/"
     }
 
 
@@ -67,6 +69,12 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideAuthenticationService(retrofit: Retrofit) : AuthenticationService{
+        return retrofit.create(AuthenticationService::class.java)
+    }
+
+    @Provides
+    @Singleton
     fun provideCertainPostService(retrofit: Retrofit): CertainPhotographerService {
         return retrofit.create(CertainPhotographerService::class.java)
     }
@@ -76,6 +84,13 @@ class NetworkModule {
     fun provideCloudDataSource(service: PhotographerService): PhotographersCloudDataSource {
         return PhotographersCloudDataSource.Base(service)
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthenticationCloudDataSource(service: AuthenticationService): AuthenticationCloudDataSource {
+        return AuthenticationCloudDataSource.Base(service)
+    }
+
 
     @Provides
     @Singleton

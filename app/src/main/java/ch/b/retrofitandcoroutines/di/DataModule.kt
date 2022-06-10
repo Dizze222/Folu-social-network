@@ -8,9 +8,11 @@ import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheData
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.*
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import ch.b.retrofitandcoroutines.data.authorization.AuthenticationRepository
+import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
-import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
+import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper
 import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
 import ch.b.retrofitandcoroutines.data.registration.mappers.ToRegistrationMapper
@@ -35,15 +37,22 @@ class DataModule {
         cacheDataSource: PhotographerListCacheDataSource,
         cloudMapper: PhotographerListCloudMapper,
         toRoomMapper: Abstract.ToPhotographerMapper<PhotographerData>,
-        exceptionMapper: ExceptionMapper
+        exceptionMapper: ExceptionPostsMapper
     ): PhotographerRepository {
         return PhotographerRepository.Base(
-            cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper,exceptionMapper)
+            cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper, exceptionMapper
+        )
     }
 
     @Provides
     fun provideResourceProvider(@ApplicationContext context: Context): ResourceProvider {
         return ResourceProvider.Base(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideExceptionPostsMapper(resourcesProvider: ResourceProvider): ExceptionPostsMapper {
+        return ExceptionPostsMapper.Base(resourcesProvider)
     }
 
     @Provides
@@ -54,8 +63,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideExceptionMapper(resourcesProvider: ResourceProvider) : ExceptionMapper{
-        return ExceptionMapper.Base(resourcesProvider)
+    fun provideExceptionMapper(resourcesProvider: ResourceProvider): ExceptionAuthMapper {
+        return ExceptionAuthMapper.Base(resourcesProvider)
     }
 
 
@@ -67,17 +76,36 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideRegistrationCloudMapper() : RegistrationListCloudMapper{
+    fun provideRegistrationCloudMapper(): RegistrationListCloudMapper {
         return RegistrationListCloudMapper.Base(ToRegistrationMapper())
     }
+
     @Provides
     @Singleton
     fun provideCertainPostRepository(
         cloudDataSource: CertainPostDataSource,
         cloudMapper: PhotographerListCloudMapper,
-        exceptionMapper: ExceptionMapper
+        exceptionMapper: ExceptionPostsMapper
     ): CertainPostRepository {
-        return CertainPostRepository.Base(cloudDataSource, cloudMapper,exceptionMapper)
+        return CertainPostRepository.Base(cloudDataSource, cloudMapper, exceptionMapper)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideAuthenticationRepository(
+        dataSource: AuthenticationCloudDataSource,
+        cloudMapper: RegistrationListCloudMapper,
+        exceptionMapper: ExceptionAuthMapper,
+        tokenToSharedPreferences: TokenToSharedPreferences
+
+    ): AuthenticationRepository {
+        return AuthenticationRepository.Base(
+            dataSource,
+            cloudMapper,
+            exceptionMapper,
+            tokenToSharedPreferences
+        )
     }
 
     @Provides
@@ -85,10 +113,15 @@ class DataModule {
     fun provideRegistrationRepository(
         cloudDataSource: RegistrationCloudDataSource,
         cloudMapper: RegistrationListCloudMapper,
-        exceptionMapper: ExceptionMapper,
+        exceptionMapper: ExceptionAuthMapper,
         tokenToSharedPreferences: TokenToSharedPreferences
-    ) : RegistrationRepository {
-        return RegistrationRepository.Base(cloudDataSource,cloudMapper,exceptionMapper,tokenToSharedPreferences)
+    ): RegistrationRepository {
+        return RegistrationRepository.Base(
+            cloudDataSource,
+            cloudMapper,
+            exceptionMapper,
+            tokenToSharedPreferences
+        )
     }
 
 }

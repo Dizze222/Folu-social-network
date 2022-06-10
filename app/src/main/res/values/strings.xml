@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Photographer App</string>
+    <string name="app_name">Folu</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="id">ID:</string>
@@ -13,7 +13,7 @@
     <string name="author">author</string>
     <string name="no_connection_message">Какой-то сверхразум всё сломал</string>
     <string name="service_unavailable">No connection</string>
-    <string name="something_went_wrong">something went wrong</string>
+    <string name="something_went_wrong">Что-то пошло не так</string>
     <string name="naming_toolbar">All photographer</string>
     <string name="photographer_detail">Any</string>
     <string name="flying_saucer_image">Flying saucer image</string>
@@ -37,4 +37,5 @@
     <string name="to_registration">Зарегестрироваться</string>
     <string name="to_authorization">Вход</string>
     <string name="please_wait">Загрузка данных, подождите</string>
+    <string name="token_expired">Токен доступа истек срок действия</string>
 </resources>

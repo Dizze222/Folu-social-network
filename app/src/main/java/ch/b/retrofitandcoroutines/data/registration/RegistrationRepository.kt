@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.data.registration
 
 import ch.b.retrofitandcoroutines.core.dataOfRegister
-import ch.b.retrofitandcoroutines.data.core.ExceptionMapper
+import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper
 import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
@@ -17,7 +17,7 @@ interface RegistrationRepository {
     class Base(
         private val dataSource: RegistrationCloudDataSource,
         private val cloudMapper: RegistrationListCloudMapper,
-        private val exceptionMapper: ExceptionMapper,
+        private val exceptionMapper: ExceptionAuthMapper,
         private val tokenToSharedPreferences: TokenToSharedPreferences
     ) : RegistrationRepository {
         override suspend fun register(

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout
-    android:id="@+id/motion"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motion"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
@@ -30,7 +29,7 @@
         android:text="O"
         android:textColor="@color/yellow"
         android:textSize="80dp"
-        tools:layout_editor_absoluteX="178dp"
+        app:layout_constraintStart_toEndOf="@+id/textView6"
         tools:layout_editor_absoluteY="280dp" />
 
     <TextView

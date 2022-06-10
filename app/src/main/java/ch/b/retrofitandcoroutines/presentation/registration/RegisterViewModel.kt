@@ -35,7 +35,7 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    suspend fun observeCertainPost(
+    suspend fun observe(
         owner: LifecycleOwner,
         observer: FlowCollector<List<RegistrationUI>>
     ) {

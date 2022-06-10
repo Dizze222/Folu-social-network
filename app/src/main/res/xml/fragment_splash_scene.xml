@@ -44,7 +44,8 @@
     <Transition
         app:autoTransition="animateToEnd"
         app:constraintSetEnd="@id/end"
-        app:constraintSetStart="@+id/start" >
+        app:constraintSetStart="@+id/start"
+        app:duration="1500">
         <KeyFrameSet >
             <KeyAttribute
                 app:motionTarget="@+id/textView6"
@@ -53,9 +54,7 @@
             <KeyPosition
                 app:motionTarget="@+id/textView6"
                 app:framePosition="10"
-                app:keyPositionType="deltaRelative"
-                app:percentX="30"
-                app:percentY="40" />
+                app:keyPositionType="deltaRelative" />
             <KeyAttribute
                 app:motionTarget="@+id/textView5"
                 app:framePosition="50"
@@ -68,6 +67,52 @@
                 app:motionTarget="@+id/textView3"
                 app:framePosition="53"
                 app:transitionPathRotate="90" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView6"
+                app:framePosition="30"
+                android:translationX="30dp" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView6"
+                app:framePosition="-100"
+                android:translationX="30dp" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView4"
+                app:framePosition="90"
+                android:rotationX="50" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView4"
+                app:framePosition="-80"
+                android:translationX="30dp" />
+            <KeyPosition
+                app:motionTarget="@+id/textView6"
+                app:framePosition="-80"
+                app:keyPositionType="deltaRelative"
+                app:percentX="10"
+                app:percentY="10" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView3"
+                app:framePosition="-40"
+                android:translationX="30dp" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView3"
+                app:framePosition="60"
+                android:scaleX="1.2" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView3"
+                app:framePosition="60"
+                android:scaleX="1.2" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView3"
+                app:framePosition="50"
+                android:scaleX="1.2" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView6"
+                app:framePosition="67"
+                android:translationY="30dp" />
+            <KeyAttribute
+                app:motionTarget="@+id/textView3"
+                app:framePosition="20"
+                android:scaleX="1.2" />
         </KeyFrameSet>
         <OnClick />
     </Transition>

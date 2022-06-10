@@ -9,7 +9,6 @@ interface TokenToSharedPreferences {
     suspend fun saveAccessToken(accessToken: String)
     fun readAccessToken(): String
 
-    fun userIsAuthorized(): Boolean
 
     class Base(
         context: Context,
@@ -32,8 +31,7 @@ interface TokenToSharedPreferences {
         override fun readAccessToken() = reader.read(sharedPreferences, ACCESS_TOKEN_KEY)
 
 
-        override fun userIsAuthorized(): Boolean =
-            readRefreshToken().isNotEmpty()
+
 
     }
 

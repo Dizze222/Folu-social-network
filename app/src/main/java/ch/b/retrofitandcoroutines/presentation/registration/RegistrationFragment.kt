@@ -25,7 +25,7 @@ class RegistrationFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.registration.setOnClickListener {
             try { lifecycleScope.launchWhenCreated {
-                    viewModel.observeCertainPost(this@RegistrationFragment, { list ->
+                    viewModel.observe(this@RegistrationFragment, { list ->
                         list.map { it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
                                 override fun map(accessToken: String, refreshToken: String, successRegister: Boolean) {
                                     if (accessToken.isNotEmpty()) {

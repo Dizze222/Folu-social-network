@@ -62,6 +62,8 @@
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.256640625" />
         <entry key="app/src/main/res/menu/navigation_icon.xml" value="0.28515625" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.25" />
+        <entry key="app/src/main/res/xml/fragment_splash_scene.xml" value="0.283984375" />
+        <entry key="app/src/main/res/xml/fragment_splash_scenee.xml" value="0.283984375" />
       </map>
     </option>
   </component>
