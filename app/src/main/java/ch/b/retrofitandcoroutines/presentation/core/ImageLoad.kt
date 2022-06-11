@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.core
+package ch.b.retrofitandcoroutines.presentation.core
 
 import android.widget.ImageView
 import ch.b.retrofitandcoroutines.R

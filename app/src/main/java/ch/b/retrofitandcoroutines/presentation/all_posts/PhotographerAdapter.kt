@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
-import ch.b.retrofitandcoroutines.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.*
 
 
@@ -77,26 +76,7 @@ class PhotographerAdapter(
             private val photographerItemClick: PhotographerItemClickListener
         ) : PhotographerViewHolder(binding) {
             override fun bind(photographer: PhotographerUI) {
-                photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
-                    override fun map(
-                        id: Int,
-                        author: String,
-                        URL: String,
-                        like: Long,
-                        theme: String,
-                        comments: List<String>,
-                        authorOfComments: List<String>
-                    ) {
-                        binding.authorName.text = author
-                        binding.like.text = like.toString()
-                        ImageLoad.Base(URL).load(binding.imageView)
-                    }
-
-                    override fun map(message: String) = Unit
-                    override fun map(progress: Boolean) = Unit
-
-
-                })
+                photographer.mapSuccess(binding.authorName,binding.like,binding.imageView)
                 binding.imageView.setOnClickListener {
                     photographerItemClick.onClickPhotographer(photographer)
                 }
@@ -109,25 +89,7 @@ class PhotographerAdapter(
             private val button = itemView.findViewById<TextView>(R.id.update)
             private val errorTextView = itemView.findViewById<TextView>(R.id.errorTextView)
             override fun bind(photographer: PhotographerUI) {
-                photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
-                    override fun map(
-                        id: Int,
-                        author: String,
-                        URL: String,
-                        like: Long,
-                        theme: String,
-                        comments: List<String>,
-                        authorOfComments: List<String>
-
-                    ) {
-                        Log.i("TAG", id.toString())
-                    }
-
-                    override fun map(message: String){
-                        errorTextView.text = message
-                    }
-                    override fun map(progress: Boolean) = Unit
-                })
+                photographer.mapError(errorTextView)
                 button.setOnClickListener {
                     retry.tryAgain()
                 }

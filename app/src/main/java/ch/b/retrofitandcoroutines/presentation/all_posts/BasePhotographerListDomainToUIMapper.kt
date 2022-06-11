@@ -6,8 +6,7 @@ import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMap
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 
 class BasePhotographerListDomainToUIMapper(
-    private val photographerMapper: PhotographerDomainToUIMapper<PhotographerUI>,
-    private val resourceProvider: ResourceProvider
+    private val photographerMapper: PhotographerDomainToUIMapper<PhotographerUI>
 ) : PhotographerListDomainToUIMapper() {
     override fun map(data: List<PhotographerDomain>): PhotographerListUI =
         PhotographerListUI.Success(data, photographerMapper)

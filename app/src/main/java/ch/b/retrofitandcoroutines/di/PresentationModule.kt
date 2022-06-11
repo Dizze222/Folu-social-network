@@ -44,10 +44,8 @@ class PresentationModule {
 
 
     @Provides
-    fun providePhotographerListDomainToUiMapper(@ApplicationContext context: Context): PhotographerListDomainToUIMapper {
-        return BasePhotographerListDomainToUIMapper(
-            BasePhotographerDomainToUIMapper(), ResourceProvider.Base(context)
-        )
+    fun providePhotographerListDomainToUiMapper(): PhotographerListDomainToUIMapper {
+        return BasePhotographerListDomainToUIMapper(BasePhotographerDomainToUIMapper())
     }
 
     @Provides

@@ -6,9 +6,8 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.core.ImageLoad
+import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import androidx.lifecycle.lifecycleScope
 import androidx.fragment.app.viewModels
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
