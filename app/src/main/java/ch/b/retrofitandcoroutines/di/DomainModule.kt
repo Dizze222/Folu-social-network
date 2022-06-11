@@ -4,7 +4,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerListDataToDomainMapper
 import ch.b.retrofitandcoroutines.data.authorization.AuthenticationRepository
 import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
-import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListDataToDomainMapper
+import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationListDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.BasePhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.BasePhotographerListDataToDomainMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
@@ -38,7 +38,7 @@ class DomainModule {
     @Singleton
     fun provideAuthenticationInteractor(
         repository: AuthenticationRepository,
-        mapper: RegistrationListDataToDomainMapper
+        mapper: AuthorizationListDataToDomainMapper
     ): AuthenticationInteractor {
         return AuthenticationInteractor.Base(repository,mapper)
     }
@@ -48,7 +48,7 @@ class DomainModule {
     @Singleton
     fun provideRegistrationInteractor(
         repository: RegistrationRepository,
-        mapper: RegistrationListDataToDomainMapper
+        mapper: AuthorizationListDataToDomainMapper
     ): RegistrationInteractor {
         return RegistrationInteractor.Base(repository, mapper)
     }
@@ -61,7 +61,7 @@ class DomainModule {
 
     @Provides
     @Singleton
-    fun provideRegistrationListDataToDomainMapper(): RegistrationListDataToDomainMapper {
+    fun provideRegistrationListDataToDomainMapper(): AuthorizationListDataToDomainMapper {
         return BaseRegistrationListDataToDomainMapper(BaseRegistrationDataToDomainMapper())
     }
 }

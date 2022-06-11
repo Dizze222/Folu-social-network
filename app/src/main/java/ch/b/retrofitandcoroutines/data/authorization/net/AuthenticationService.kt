@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.data.authorization.net
 
-import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloud
+import ch.b.retrofitandcoroutines.data.core.authorization.AuthorizationCloud
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -13,5 +13,5 @@ interface AuthenticationService {
     suspend fun authentication(
         @Field("phoneNumber") phoneNumber: Long,
         @Field("password") password: String
-    ): Response<List<RegistrationCloud.Base>>
+    ): Response<List<AuthorizationCloud.Base>>
 }

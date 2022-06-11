@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.domain.registration
 
-import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListDataToDomainMapper
+import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationListDataToDomainMapper
 import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
 
 interface RegistrationInteractor {
@@ -13,7 +13,7 @@ interface RegistrationInteractor {
 
     class Base(
         private val repository: RegistrationRepository,
-        private val mapper: RegistrationListDataToDomainMapper
+        private val mapper: AuthorizationListDataToDomainMapper
     ) : RegistrationInteractor {
         override suspend fun register(
             phoneNumber: Long,
@@ -21,7 +21,7 @@ interface RegistrationInteractor {
             secondName: String,
             password: String
         ): RegistrationListDomain {
-            return repository.register(phoneNumber, name, secondName, password).map(mapper)
+            return repository.auth(phoneNumber, name, secondName, password,"register").map(mapper)
         }
 
     }

@@ -107,6 +107,7 @@ class PhotographerAdapter(
         class Fail(binding: FailFullscreenBinding, private val retry: Retry) :
             PhotographerViewHolder(binding) {
             private val button = itemView.findViewById<TextView>(R.id.update)
+            private val errorTextView = itemView.findViewById<TextView>(R.id.errorTextView)
             override fun bind(photographer: PhotographerUI) {
                 photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
                     override fun map(
@@ -122,7 +123,9 @@ class PhotographerAdapter(
                         Log.i("TAG", id.toString())
                     }
 
-                    override fun map(message: String) = Unit
+                    override fun map(message: String){
+                        errorTextView.text = message
+                    }
                     override fun map(progress: Boolean) = Unit
                 })
                 button.setOnClickListener {

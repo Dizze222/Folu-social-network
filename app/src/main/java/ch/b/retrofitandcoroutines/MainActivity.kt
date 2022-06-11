@@ -38,7 +38,8 @@ class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
         setContentView(binding.root)
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
-
+        val screen = FragmentScreen(SplashContainer().newInstance())
+        router.replaceTab(screen)
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_first -> {

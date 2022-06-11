@@ -27,8 +27,6 @@ interface CachePhotographer {
         @ColumnInfo(name = "authorOfComments")
         val authorOfComments: List<String>
     ) : CachePhotographer {
-        //override fun map(mapper: ToRoomMapper): PhotographerData = mapper.map(id, author, URL, like, theme, comments, authorOfComments)
-
 
         override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T {
             return mapper.map(id, author, URL, like, theme, comments, authorOfComments)

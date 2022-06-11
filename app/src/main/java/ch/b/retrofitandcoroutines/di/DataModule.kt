@@ -13,9 +13,9 @@ import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationCloudData
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper
-import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
-import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationListCloudMapper
-import ch.b.retrofitandcoroutines.data.registration.mappers.ToRegistrationMapper
+import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
+import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationListCloudMapper
+import ch.b.retrofitandcoroutines.data.core.authorization.mappers.ToAuthorizationMapper
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
@@ -76,8 +76,8 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideRegistrationCloudMapper(): RegistrationListCloudMapper {
-        return RegistrationListCloudMapper.Base(ToRegistrationMapper())
+    fun provideRegistrationCloudMapper(): AuthorizationListCloudMapper {
+        return AuthorizationListCloudMapper.Base(ToAuthorizationMapper())
     }
 
     @Provides
@@ -94,33 +94,37 @@ class DataModule {
     @Provides
     @Singleton
     fun provideAuthenticationRepository(
+        registerDataSource: RegistrationCloudDataSource,
         dataSource: AuthenticationCloudDataSource,
-        cloudMapper: RegistrationListCloudMapper,
+        cloudMapper: AuthorizationListCloudMapper,
         exceptionMapper: ExceptionAuthMapper,
         tokenToSharedPreferences: TokenToSharedPreferences
 
     ): AuthenticationRepository {
-        return AuthenticationRepository.Base(
-            dataSource,
+        return AuthenticationRepository(
+            registerDataSource,
             cloudMapper,
             exceptionMapper,
-            tokenToSharedPreferences
+            tokenToSharedPreferences,
+            dataSource
         )
     }
 
     @Provides
     @Singleton
     fun provideRegistrationRepository(
-        cloudDataSource: RegistrationCloudDataSource,
-        cloudMapper: RegistrationListCloudMapper,
+        registerDataSource: RegistrationCloudDataSource,
+        dataSource: AuthenticationCloudDataSource,
+        cloudMapper: AuthorizationListCloudMapper,
         exceptionMapper: ExceptionAuthMapper,
         tokenToSharedPreferences: TokenToSharedPreferences
     ): RegistrationRepository {
-        return RegistrationRepository.Base(
-            cloudDataSource,
+        return RegistrationRepository(
+            registerDataSource,
             cloudMapper,
             exceptionMapper,
-            tokenToSharedPreferences
+            tokenToSharedPreferences,
+            dataSource
         )
     }
 

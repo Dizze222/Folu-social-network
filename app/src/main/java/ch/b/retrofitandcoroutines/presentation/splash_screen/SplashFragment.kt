@@ -3,8 +3,8 @@ package ch.b.retrofitandcoroutines.presentation.splash_screen
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.lifecycleScope
-import ch.b.retrofitandcoroutines.data.core.Reader
-import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
+import ch.b.retrofitandcoroutines.data.core.authorization.Reader
+import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.databinding.FragmentSplashBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
@@ -26,7 +26,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
         hideNavBar(true)
         lifecycleScope.launchWhenCreated {
             delay(2000)
-            if (sharedPref.readRefreshToken().isEmpty()) {
+            if (sharedPref.readAccessToken().isEmpty()) {
                 val fragment = AuthenticationFragment()
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)

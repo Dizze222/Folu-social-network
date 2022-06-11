@@ -8,8 +8,8 @@ import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDao
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDataBase
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.BaseToCachePhotographerMapper
-import ch.b.retrofitandcoroutines.data.core.Reader
-import ch.b.retrofitandcoroutines.data.core.TokenToSharedPreferences
+import ch.b.retrofitandcoroutines.data.core.authorization.Reader
+import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -62,7 +62,7 @@ class CacheModule {
     @Provides
     @Singleton
     fun provideTokenToSharedPreferences(@ApplicationContext context: Context): TokenToSharedPreferences {
-        return TokenToSharedPreferences.Base(context,Reader())
+        return TokenToSharedPreferences.Base(context, Reader())
     }
 
 }

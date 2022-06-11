@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.data.registration.net
 
+import ch.b.retrofitandcoroutines.data.core.authorization.AuthorizationCloud
 import retrofit2.Response
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -13,5 +14,5 @@ interface RegistrationService {
         @Field("name") name: String,
         @Field("secondName") secondName: String,
         @Field("password") password: String
-    ): Response<List<RegistrationCloud.Base>>
+    ): Response<List<AuthorizationCloud.Base>>
 }

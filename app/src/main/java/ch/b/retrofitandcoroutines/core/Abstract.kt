@@ -1,10 +1,6 @@
 package ch.b.retrofitandcoroutines.core
 
-import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.domain.core.ErrorType
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
-import retrofit2.HttpException
-import java.net.UnknownHostException
+
 
 
 abstract class Abstract {

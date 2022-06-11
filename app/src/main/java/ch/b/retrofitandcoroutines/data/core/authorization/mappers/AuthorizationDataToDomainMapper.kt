@@ -1,8 +1,8 @@
-package ch.b.retrofitandcoroutines.data.registration.mappers
+package ch.b.retrofitandcoroutines.data.core.authorization.mappers
 
 import ch.b.retrofitandcoroutines.core.Abstract
 
-interface RegistrationDataToDomainMapper<T> : Abstract.Mapper {
+interface AuthorizationDataToDomainMapper<T> : Abstract.Mapper {
     fun map(
         accessToken: String,
         refreshToken: String,

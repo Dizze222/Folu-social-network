@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.presentation.registration
 
-import ch.b.retrofitandcoroutines.domain.core.ErrorType
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationDomain
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUIMapper

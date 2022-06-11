@@ -1,18 +1,18 @@
-package ch.b.retrofitandcoroutines.data.registration
+package ch.b.retrofitandcoroutines.data.core.authorization
 
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
-import ch.b.retrofitandcoroutines.data.registration.mappers.RegistrationDataToDomainMapper
+import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationDataToDomainMapper
 
-interface RegistrationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
-    fun <T> map(mapper: RegistrationDataToDomainMapper<T>): T
+interface AuthorizationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
+    fun <T> map(mapper: AuthorizationDataToDomainMapper<T>): T
 
     class Base(
         private val accessToken: String,
         private val refreshToken: String,
         private val successRegister: Boolean
-    ) : RegistrationData {
-        override fun <T> map(mapper: RegistrationDataToDomainMapper<T>): T {
+    ) : AuthorizationData {
+        override fun <T> map(mapper: AuthorizationDataToDomainMapper<T>): T {
             return mapper.map(accessToken, refreshToken, successRegister)
         }
 

@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.core
 
 
-fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper>>.dataOfRegister(): ArrayList<String> {
+fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper>>.dataOfAuth(): ArrayList<String> {
     val array = ArrayList<String>()
     this.map {
         it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
