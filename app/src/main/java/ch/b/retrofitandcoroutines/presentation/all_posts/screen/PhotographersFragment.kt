@@ -11,6 +11,7 @@ import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
@@ -19,15 +20,26 @@ import ch.b.retrofitandcoroutines.presentation.core.ImageProfile
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
-import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-@AndroidEntryPoint
+
 class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(FragmentPhotographersBinding::inflate),
     ImageResult, BackButtonListener {
-    private val viewModel: AllPostsViewModel by viewModels()
+    @Inject
+    lateinit var allPostsViewModelFactory: AllPostsViewModelFactory
+
+
+    private val viewModel: AllPostsViewModel by viewModels(){
+        allPostsViewModelFactory
+    }
     private lateinit var adapter: PhotographerAdapter
     private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inject()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -124,4 +136,10 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
     override fun onBackPressed(): Boolean {
         return false
     }
+    fun inject(){
+        val application = requireActivity().application as PhotoApp
+        val appComponent = application.appComponent
+        appComponent.inject(this)
+    }
+
 }

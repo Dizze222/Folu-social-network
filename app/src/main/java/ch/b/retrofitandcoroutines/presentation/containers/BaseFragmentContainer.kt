@@ -4,11 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.navigate.*
-import dagger.hilt.android.AndroidEntryPoint
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 

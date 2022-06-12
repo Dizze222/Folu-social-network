@@ -4,9 +4,8 @@ import android.os.Bundle
 import android.view.View
 import ch.b.retrofitandcoroutines.databinding.FragmentLikedBinding
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
 class LikedPostsFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::inflate) {
 
 

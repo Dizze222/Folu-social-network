@@ -1,7 +1,5 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
-
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
@@ -9,10 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.databinding.*
-
-
 
 class PhotographerAdapter(
     private val retry: Retry,

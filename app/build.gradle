@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-    id 'dagger.hilt.android.plugin'
     id 'kotlin-android-extensions'
 }
 
@@ -77,10 +76,19 @@ dependencies {
 
 
     //di
-    implementation "com.google.dagger:hilt-android:2.38.1"
-    kapt "com.google.dagger:hilt-compiler:2.38.1"
+    //implementation "com.google.dagger:hilt-android:2.38.1"
+   // kapt "com.google.dagger:hilt-compiler:2.38.1"
 
     //navigation
     implementation "ru.terrakok.cicerone:cicerone:5.1.1"
+
+    //dagger
+    api 'com.google.dagger:dagger:2.40'
+    testImplementation 'org.testng:testng:6.9.6'
+    kapt 'com.google.dagger:dagger-compiler:2.40'
+    api 'com.google.dagger:dagger-android:2.37'
+    api 'com.google.dagger:dagger-android-support:2.37'
 }
+
+
 

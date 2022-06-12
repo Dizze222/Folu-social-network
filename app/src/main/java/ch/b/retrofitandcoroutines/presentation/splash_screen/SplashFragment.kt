@@ -12,11 +12,9 @@ import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 
 
-@AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate),
     BackButtonListener {
 

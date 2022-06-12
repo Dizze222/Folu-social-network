@@ -12,11 +12,10 @@ import ch.b.retrofitandcoroutines.presentation.containers.SplashContainer
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.presentation.core.ResultApiActivity
 import ch.b.retrofitandcoroutines.presentation.navigate.*
-import dagger.hilt.android.AndroidEntryPoint
 
 import ru.terrakok.cicerone.Cicerone
 
-@AndroidEntryPoint
+
 class MainActivity : AppCompatActivity(), ResultApiActivity, RouterProvider {
     private lateinit var binding: ActivityMainBinding
     private val cicerone = Cicerone.create(AppRouter())

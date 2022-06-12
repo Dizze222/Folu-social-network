@@ -14,11 +14,10 @@ import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.convertToArrayList
 import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
-import dagger.hilt.android.AndroidEntryPoint
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 
 
-@AndroidEntryPoint
+
 class PhotographerDetailFragment :
     BaseFragment<FragmentPhotographerDetailBinding>(FragmentPhotographerDetailBinding::inflate),
     BackButtonListener {

@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.di
+package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerListDataToDomainMapper
@@ -14,13 +14,10 @@ import ch.b.retrofitandcoroutines.domain.registration.BaseRegistrationListDataTo
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationInteractor
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 
 @Module
-@InstallIn(SingletonComponent::class)
 class DomainModule {
 
     @Provides

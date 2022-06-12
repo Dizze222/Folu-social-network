@@ -12,9 +12,9 @@ import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
+
+
 class AuthenticationFragment :
     BaseFragment<FragmentAuthorizationBinding>(FragmentAuthorizationBinding::inflate) {
     private val viewModel: AuthenticationViewModel by viewModels()

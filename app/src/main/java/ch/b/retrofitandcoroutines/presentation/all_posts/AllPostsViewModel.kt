@@ -4,20 +4,18 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.util.Log
 import androidx.lifecycle.*
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-@HiltViewModel
-class AllPostsViewModel @Inject constructor(
+
+class AllPostsViewModel(
     private val interactor: PhotographerInteractor,
     private val mapper: PhotographerListDomainToUIMapper,
     private val communicateSearchAuthor: PhotographerCommunication,

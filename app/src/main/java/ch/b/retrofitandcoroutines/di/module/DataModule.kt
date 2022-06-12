@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.di
+package ch.b.retrofitandcoroutines.di.module
 
 import android.content.Context
 import ch.b.retrofitandcoroutines.core.Abstract
@@ -21,13 +21,9 @@ import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module(includes = [NetworkModule::class])
-@InstallIn(SingletonComponent::class)
 class DataModule {
 
     @Provides
@@ -42,11 +38,6 @@ class DataModule {
         return PhotographerRepository.Base(
             cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper, exceptionMapper
         )
-    }
-
-    @Provides
-    fun provideResourceProvider(@ApplicationContext context: Context): ResourceProvider {
-        return ResourceProvider.Base(context)
     }
 
     @Provides

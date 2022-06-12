@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.di
+package ch.b.retrofitandcoroutines.di.module
 
 import android.content.Context
 import androidx.room.Room
@@ -12,13 +12,9 @@ import ch.b.retrofitandcoroutines.data.core.authorization.Reader
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module
-@InstallIn(SingletonComponent::class)
 class CacheModule {
 
     private companion object {
@@ -29,7 +25,7 @@ class CacheModule {
 
     @Provides
     @Singleton
-    fun providePhotographerDatabase(@ApplicationContext context: Context): PhotographerDataBase {
+    fun providePhotographerDatabase(context: Context): PhotographerDataBase {
         return Room.databaseBuilder(
             context,
             PhotographerDataBase::class.java,
@@ -61,7 +57,7 @@ class CacheModule {
 
     @Provides
     @Singleton
-    fun provideTokenToSharedPreferences(@ApplicationContext context: Context): TokenToSharedPreferences {
+    fun provideTokenToSharedPreferences(context: Context): TokenToSharedPreferences {
         return TokenToSharedPreferences.Base(context, Reader())
     }
 

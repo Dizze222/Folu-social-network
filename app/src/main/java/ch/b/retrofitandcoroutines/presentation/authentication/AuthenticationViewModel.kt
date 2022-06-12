@@ -8,15 +8,13 @@ import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomain
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationCommunication
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationUI
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.concurrent.Flow
 import javax.inject.Inject
 
-@HiltViewModel
+
 class AuthenticationViewModel @Inject constructor(
     private val interactor: AuthenticationInteractor,
     private val communication: RegistrationCommunication,

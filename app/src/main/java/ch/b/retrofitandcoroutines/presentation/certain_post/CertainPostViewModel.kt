@@ -8,14 +8,13 @@ import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMap
 import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-@HiltViewModel
+
 class CertainPostViewModel @Inject constructor(
     private val interactor: CertainPostInteractor,
     private val mapper: PhotographerListDomainToUIMapper,

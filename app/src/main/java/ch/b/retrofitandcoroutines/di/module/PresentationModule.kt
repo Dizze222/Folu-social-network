@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.di
+package ch.b.retrofitandcoroutines.di.module
 
 import android.content.Context
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerListDataToDomainMapper
@@ -15,13 +15,10 @@ import ch.b.retrofitandcoroutines.presentation.registration.BaseRegistrationList
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationCommunication
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.qualifiers.ApplicationContext
+
 
 
 @Module
-@InstallIn(ViewModelComponent::class)
 class PresentationModule {
 
 
@@ -36,7 +33,7 @@ class PresentationModule {
     }
 
     @Provides
-    fun provideRegistrationMapper(@ApplicationContext context: Context): RegistrationListDomainToUIMapper {
+    fun provideRegistrationMapper(context: Context): RegistrationListDomainToUIMapper {
         return BaseRegistrationListDomainToUIMapper(
             BaseRegistrationDomainToUIMapper(), ResourceProvider.Base(context)
         )
