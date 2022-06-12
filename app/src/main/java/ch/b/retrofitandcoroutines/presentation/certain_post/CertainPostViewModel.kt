@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class CertainPostViewModel @Inject constructor(
+class CertainPostViewModel(
     private val interactor: CertainPostInteractor,
     private val mapper: PhotographerListDomainToUIMapper,
     private val communicate: PhotographerCommunication

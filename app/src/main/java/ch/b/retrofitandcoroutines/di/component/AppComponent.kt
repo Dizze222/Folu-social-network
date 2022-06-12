@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Context
 import ch.b.retrofitandcoroutines.di.module.*
 import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
+import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 import dagger.BindsInstance
 import dagger.Component
@@ -26,5 +27,6 @@ interface AppComponent {
 
     fun inject(fragment: RegistrationFragment)
     fun inject(fragment: PhotographersFragment)
+    fun inject(fragment: PhotographerDetailFragment)
 
 }

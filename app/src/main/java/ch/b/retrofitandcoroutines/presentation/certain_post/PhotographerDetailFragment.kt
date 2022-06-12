@@ -11,17 +11,28 @@ import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.fragment.app.viewModels
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.core.convertToArrayList
 import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-
+import javax.inject.Inject
 
 
 class PhotographerDetailFragment :
     BaseFragment<FragmentPhotographerDetailBinding>(FragmentPhotographerDetailBinding::inflate),
     BackButtonListener {
-    private val certainViewModel: CertainPostViewModel by viewModels()
+    @Inject
+    lateinit var certainViewModelFactory: CertainViewModelFactory
+    private val certainViewModel: CertainPostViewModel by viewModels() {
+        certainViewModelFactory
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inject()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = this.arguments
@@ -94,4 +105,11 @@ class PhotographerDetailFragment :
         (parentFragment as RouterProvider).router.exit()
         return true
     }
+
+    fun inject(){
+        val application = requireActivity().application as PhotoApp
+        val appComponent = application.appComponent
+        appComponent.inject(this)
+    }
+
 }

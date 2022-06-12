@@ -28,7 +28,6 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
     @Inject
     lateinit var allPostsViewModelFactory: AllPostsViewModelFactory
 
-
     private val viewModel: AllPostsViewModel by viewModels(){
         allPostsViewModelFactory
     }
