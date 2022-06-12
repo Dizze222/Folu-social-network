@@ -36,7 +36,6 @@ class PhotographerDetailFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val bundle = this.arguments
-        val fragment = PhotographerZoomImageFragment()
         val fragmentManager: FragmentManager = activity!!.supportFragmentManager
         var photographerId: Int?
         fragmentManager.setFragmentResultListener("requestKey", this, { key, bundle ->
@@ -85,14 +84,6 @@ class PhotographerDetailFragment :
             certainViewModel.getCertainPost(photographerId!!.toInt())
         }
         )
-
-        fragment.arguments = bundle
-        binding.imageOfAuthor.setOnClickListener {
-            val fragmentTransaction: FragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.container, fragment)
-            fragmentTransaction.addToBackStack(null)
-            fragmentTransaction.commit()
-        }
     }
 
 

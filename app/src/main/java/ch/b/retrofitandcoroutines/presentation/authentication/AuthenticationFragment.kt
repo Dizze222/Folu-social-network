@@ -6,18 +6,30 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
+import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentAuthorizationBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
-
+import javax.inject.Inject
 
 
 class AuthenticationFragment :
+
     BaseFragment<FragmentAuthorizationBinding>(FragmentAuthorizationBinding::inflate) {
-    private val viewModel: AuthenticationViewModel by viewModels()
+    @Inject
+    lateinit var authenticationViewModelFactory: AuthenticationViewModelFactory
+    private val viewModel: AuthenticationViewModel by viewModels(){
+        authenticationViewModelFactory
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        inject()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.registration.setOnClickListener {
@@ -70,6 +82,12 @@ class AuthenticationFragment :
 
     fun newInstance(): AuthenticationFragment {
         return AuthenticationFragment()
+    }
+
+    fun inject(){
+        val app = requireActivity().application as PhotoApp
+        val component = app.appComponent
+        component.inject(this)
     }
 
 }

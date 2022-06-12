@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 
-class AuthenticationViewModel @Inject constructor(
+class AuthenticationViewModel(
     private val interactor: AuthenticationInteractor,
     private val communication: RegistrationCommunication,
     private val mapper: RegistrationListDomainToUIMapper
