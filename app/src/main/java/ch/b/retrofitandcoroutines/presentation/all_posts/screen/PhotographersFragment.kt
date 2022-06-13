@@ -14,12 +14,10 @@ import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.core.ImageProfile
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
-import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
-import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
+import ch.b.retrofitandcoroutines.BackButtonListener
 import javax.inject.Inject
 
 
@@ -55,8 +53,9 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
                 override fun onClickPhotographer(photographer: PhotographerUI) {
                     val fragment = PhotographerDetailFragment()
                     val fragmentManager = activity!!.supportFragmentManager
-                    val nextScreen = FragmentScreen(fragment.newInstance())
-                    (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+                    val nextScreen =
+                        ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
+                    (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
                     photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
                         override fun map(id: Int, author: String, URL: String, like: Long, theme: String, comments: List<String>, authorOfComments: List<String>) {
                             fragmentManager.setFragmentResult("requestKey", bundleOf("id" to id))

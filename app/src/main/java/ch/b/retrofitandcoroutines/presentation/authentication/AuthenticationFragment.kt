@@ -9,9 +9,9 @@ import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentAuthorizationBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
+import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
+import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 import javax.inject.Inject
 
@@ -34,8 +34,8 @@ class AuthenticationFragment :
         super.onViewCreated(view, savedInstanceState)
         binding.registration.setOnClickListener {
             val fragment = RegistrationFragment()
-            val nextScreen = FragmentScreen(fragment.newInstance())
-            (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+            val nextScreen = ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
+            (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
         }
         binding.authentication.setOnClickListener {
             try {
@@ -50,8 +50,9 @@ class AuthenticationFragment :
                                 ) {
                                     if (accessToken.isNotEmpty()) {
                                         val fragment = PhotographersFragment()
-                                        val nextScreen = FragmentScreen(fragment.newInstance())
-                                        (parentFragment as RouterProvider).router.navigateTo(
+                                        val nextScreen =
+                                            ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
+                                        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
                                             nextScreen
                                         )
                                     }

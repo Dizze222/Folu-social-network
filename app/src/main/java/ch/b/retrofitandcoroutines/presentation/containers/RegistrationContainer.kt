@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
+import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 
 class RegistrationContainer : BaseFragmentContainer() {
@@ -11,8 +11,8 @@ class RegistrationContainer : BaseFragmentContainer() {
     fun newInstance() : RegistrationContainer{
         return RegistrationContainer()
     }
-    override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
-        return FragmentScreen(RegistrationFragment().newInstance())
+    override fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen {
+        return ch.b.retrofitandcoroutines.FragmentScreen(RegistrationFragment().newInstance())
     }
 
 

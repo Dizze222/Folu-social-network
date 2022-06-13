@@ -69,7 +69,7 @@ class AppNavigator(
     }
 
     override fun applyCommand(command: Command) {
-        if (command is ReplaceBottomTab) {
+        if (command is ch.b.retrofitandcoroutines.ReplaceBottomTab) {
             val transaction = fragmentManager?.beginTransaction() ?: return
             var wasContainerAttached = false
             containers.forEach { container ->

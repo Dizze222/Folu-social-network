@@ -4,21 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ch.b.retrofitandcoroutines.BackButtonListener
+import ch.b.retrofitandcoroutines.LocalCiceroneHolder
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.Navigator
 
 abstract class BaseFragmentContainer : androidx.fragment.app.Fragment(), BackButtonListener,
-    RouterProvider {
+    ch.b.retrofitandcoroutines.RouterProvider {
 
-    protected abstract fun getInitialFragmentScreen(params: Bundle?): FragmentScreen
+    protected abstract fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen
 
     private lateinit var navigator: Navigator
     private val containerId = R.id.base_container
 
-    override val router: AppRouter
+    override val router: ch.b.retrofitandcoroutines.AppRouter
         get() = getCicerone().router
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,7 +59,7 @@ abstract class BaseFragmentContainer : androidx.fragment.app.Fragment(), BackBut
         return if (fragment != null && fragment is BackButtonListener && fragment.onBackPressed()) {
             true
         } else {
-            (activity as RouterProvider).router.exit()
+            (activity as ch.b.retrofitandcoroutines.RouterProvider).router.exit()
             true
         }
     }
@@ -71,7 +72,7 @@ abstract class BaseFragmentContainer : androidx.fragment.app.Fragment(), BackBut
         return javaClass.canonicalName ?: "Unknown container name"
     }
 
-    private fun getCicerone(): Cicerone<AppRouter> {
+    private fun getCicerone(): Cicerone<ch.b.retrofitandcoroutines.AppRouter> {
         val containerName = getContainerName()
         return LocalCiceroneHolder.getCicerone(containerName)
     }

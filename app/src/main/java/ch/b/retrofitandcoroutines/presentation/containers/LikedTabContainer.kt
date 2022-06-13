@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
+import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.liked_posts.LikedPostsFragment
 
 class LikedTabContainer : BaseFragmentContainer() {
@@ -13,7 +13,7 @@ class LikedTabContainer : BaseFragmentContainer() {
         return LikedTabContainer()
     }
 
-    override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
-        return FragmentScreen(LikedPostsFragment().newInstance())
+    override fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen {
+        return ch.b.retrofitandcoroutines.FragmentScreen(LikedPostsFragment().newInstance())
     }
 }

@@ -3,9 +3,7 @@ package ch.b.retrofitandcoroutines.presentation.certain_post
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.GridLayoutManager
-import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import androidx.lifecycle.lifecycleScope
@@ -13,8 +11,7 @@ import androidx.fragment.app.viewModels
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.core.convertToArrayList
-import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
-import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
+import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import javax.inject.Inject
 
@@ -93,7 +90,7 @@ class PhotographerDetailFragment :
 
 
     override fun onBackPressed(): Boolean {
-        (parentFragment as RouterProvider).router.exit()
+        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.exit()
         return true
     }
 

@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.navigate
+package ch.b.retrofitandcoroutines
 
 import ru.terrakok.cicerone.Router
 

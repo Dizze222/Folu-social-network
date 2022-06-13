@@ -9,10 +9,8 @@ import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentRegistrationBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
-import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
+import ch.b.retrofitandcoroutines.BackButtonListener
 import javax.inject.Inject
 
 
@@ -47,8 +45,9 @@ class RegistrationFragment :
                                 ) {
                                     if (accessToken.isNotEmpty()) {
                                         val fragment = PhotographersFragment()
-                                        val nextScreen = FragmentScreen(fragment.newInstance())
-                                        (parentFragment as RouterProvider).router.navigateTo(
+                                        val nextScreen =
+                                            ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
+                                        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
                                             nextScreen
                                         )
                                     }
@@ -82,7 +81,7 @@ class RegistrationFragment :
     }
 
     override fun onBackPressed(): Boolean {
-        (parentFragment as RouterProvider).router.exit()
+        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.exit()
         return true
     }
 

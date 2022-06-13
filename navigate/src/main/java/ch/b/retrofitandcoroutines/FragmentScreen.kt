@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.container_screens
+package ch.b.retrofitandcoroutines
 
 import androidx.fragment.app.Fragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen

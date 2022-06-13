@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.navigate
+package ch.b.retrofitandcoroutines
 
 import androidx.collection.ArrayMap
 import ru.terrakok.cicerone.Cicerone

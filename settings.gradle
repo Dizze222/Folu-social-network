@@ -9,3 +9,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "RetrofitAndCoroutines"
 include ':app'
+include ':testScreen'
+include ':navigate'

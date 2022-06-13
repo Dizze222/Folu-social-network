@@ -1,6 +1,6 @@
-package ch.b.retrofitandcoroutines.presentation.navigate
+package ch.b.retrofitandcoroutines
 
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
+
 import ru.terrakok.cicerone.Router
 
 

@@ -8,10 +8,8 @@ import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPre
 import ch.b.retrofitandcoroutines.databinding.FragmentSplashBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
-import ch.b.retrofitandcoroutines.presentation.container_screens.FragmentScreen
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-import ch.b.retrofitandcoroutines.presentation.navigate.BackButtonListener
-import ch.b.retrofitandcoroutines.presentation.navigate.RouterProvider
+import ch.b.retrofitandcoroutines.BackButtonListener
 import kotlinx.coroutines.delay
 
 
@@ -26,12 +24,12 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
             delay(2000)
             if (sharedPref.readAccessToken().isEmpty()) {
                 val fragment = AuthenticationFragment()
-                val nextScreen = FragmentScreen(fragment.newInstance())
-                (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+                val nextScreen = ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
+                (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
             } else {
                 val fragment = PhotographersFragment()
-                val nextScreen = FragmentScreen(fragment.newInstance())
-                (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+                val nextScreen = ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
+                (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
             }
         }
     }
