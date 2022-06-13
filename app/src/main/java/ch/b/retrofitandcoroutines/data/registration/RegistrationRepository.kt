@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.data.registration
 
-import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationCloudDataSource
+import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper
 import ch.b.retrofitandcoroutines.data.core.authorization.BaseRepositoryAuth
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences

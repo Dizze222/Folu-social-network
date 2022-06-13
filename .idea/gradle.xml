@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/navigate" />
-            <option value="$PROJECT_DIR$/testScreen" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

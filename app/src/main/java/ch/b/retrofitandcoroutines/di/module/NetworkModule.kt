@@ -2,8 +2,8 @@ package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
-import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationCloudDataSource
-import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationService
+import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
+import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPhotographerService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
@@ -64,7 +64,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthenticationService(retrofit: Retrofit) : AuthenticationService{
+    fun provideAuthenticationService(retrofit: Retrofit) : AuthenticationService {
         return retrofit.create(AuthenticationService::class.java)
     }
 

@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.data.authorization.net
+package ch.b.retrofitandcoroutines.data.authorization.net.authorization
 
 import ch.b.retrofitandcoroutines.data.core.authorization.AuthorizationCloud
 

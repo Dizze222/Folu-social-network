@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.di.module
 
-import android.content.Context
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
@@ -9,7 +8,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.mappers.*
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.AuthenticationRepository
-import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationCloudDataSource
+import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper

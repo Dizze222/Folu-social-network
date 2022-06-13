@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.data.core.authorization
 
 import ch.b.retrofitandcoroutines.core.dataOfAuth
-import ch.b.retrofitandcoroutines.data.authorization.net.AuthenticationCloudDataSource
+import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationListCloudMapper

@@ -65,6 +65,7 @@
         <entry key="app/src/main/res/xml/fragment_splash_scene.xml" value="0.283984375" />
         <entry key="app/src/main/res/xml/fragment_splash_scenee.xml" value="0.283984375" />
         <entry key="testScreen/src/main/res/layout/fragment_test.xml" value="0.240234375" />
+        <entry key="testTwo/src/main/res/layout/fragment_two.xml" value="0.28515625" />
       </map>
     </option>
   </component>
