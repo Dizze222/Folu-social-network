@@ -34,6 +34,7 @@ abstract class Abstract {
     }
 
 
+
     interface Mapper {
 
         interface Data<S, R> : Mapper {

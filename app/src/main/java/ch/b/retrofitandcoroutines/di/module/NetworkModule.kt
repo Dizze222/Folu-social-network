@@ -4,11 +4,14 @@ import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationService
+import ch.b.retrofitandcoroutines.data.authorization.net.authorization.Authenticator
+import ch.b.retrofitandcoroutines.data.authorization.net.update_token.UpdateTokenService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPhotographerService
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
+import ch.b.retrofitandcoroutines.data.core.TokenInterceptorRefresh
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import dagger.Module
 import dagger.Provides
@@ -20,7 +23,7 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
     private companion object {
-        private const val BASE_URL = "https://photographer-application.herokuapp.com/"
+        private const val BASE_URL = "https://97d9-84-39-247-98.ngrok.io/"
     }
 
 
@@ -31,8 +34,12 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(accessTokenFromShared: TokenToSharedPreferences): OkHttpClient {
+    fun provideOkHttpClient(
+        accessTokenFromShared: TokenToSharedPreferences,
+        authenticator: Authenticator
+    ): OkHttpClient {
         return OkHttpClient.Builder()
+            .authenticator(authenticator)
             .addInterceptor(TokenInterceptor(accessTokenFromShared))
             .build()
     }
@@ -52,6 +59,19 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideUpdateTokenService(retrofit: Retrofit): UpdateTokenService {
+        return retrofit.create(UpdateTokenService::class.java)
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideAuthenticator(accessTokenFromShared: TokenToSharedPreferences) : Authenticator {
+        return Authenticator(accessTokenFromShared)
+    }
+
+    @Provides
+    @Singleton
     fun providePhotographerService(retrofit: Retrofit): PhotographerService {
         return retrofit.create(PhotographerService::class.java)
     }
@@ -62,9 +82,10 @@ class NetworkModule {
         return retrofit.create(RegistrationService::class.java)
     }
 
+
     @Provides
     @Singleton
-    fun provideAuthenticationService(retrofit: Retrofit) : AuthenticationService {
+    fun provideAuthenticationService(retrofit: Retrofit): AuthenticationService {
         return retrofit.create(AuthenticationService::class.java)
     }
 

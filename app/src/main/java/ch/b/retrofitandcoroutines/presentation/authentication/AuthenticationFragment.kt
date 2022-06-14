@@ -17,11 +17,11 @@ import javax.inject.Inject
 
 
 class AuthenticationFragment :
-
     BaseFragment<FragmentAuthorizationBinding>(FragmentAuthorizationBinding::inflate) {
+
     @Inject
     lateinit var authenticationViewModelFactory: AuthenticationViewModelFactory
-    private val viewModel: AuthenticationViewModel by viewModels(){
+    private val viewModel: AuthenticationViewModel by viewModels() {
         authenticationViewModelFactory
     }
 
@@ -35,7 +35,9 @@ class AuthenticationFragment :
         binding.registration.setOnClickListener {
             val fragment = RegistrationFragment()
             val nextScreen = ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
-            (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
+            (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
+                nextScreen
+            )
         }
         binding.authentication.setOnClickListener {
             try {
@@ -85,7 +87,7 @@ class AuthenticationFragment :
         return AuthenticationFragment()
     }
 
-    fun inject(){
+    fun inject() {
         val app = requireActivity().application as PhotoApp
         val component = app.appComponent
         component.inject(this)

@@ -17,8 +17,6 @@ interface AuthenticationCloudDataSource {
         ): List<AuthorizationCloud.Base> {
             return authenticationService.authentication(phoneNumber, password).body()!!
         }
-
-
     }
 
 

@@ -12,6 +12,4 @@ class AppModule {
     fun provideResourceProvider(context: Context): ResourceProvider {
         return ResourceProvider.Base(context)
     }
-
-
 }

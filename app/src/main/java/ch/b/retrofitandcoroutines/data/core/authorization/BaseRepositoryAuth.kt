@@ -24,11 +24,10 @@ open class BaseRepositoryAuth @Inject constructor(
         password: String,
         state: String
     ): AuthorizationListData = try {
-        val listOfCloud: List<AuthorizationCloud>?
-        if (state == "register"){
-            listOfCloud = registrationCloudDataSource.register(phoneNumber, name, secondName, password)
+        val listOfCloud: List<AuthorizationCloud> = if (state == "register"){
+            registrationCloudDataSource.register(phoneNumber, name, secondName, password)
         }else{
-            listOfCloud = authenticationCloudDataSource.authentication(phoneNumber, password)
+            authenticationCloudDataSource.authentication(phoneNumber, password)
         }
         val registerList = cloudMapper.map(listOfCloud)
         tokenToSharedPreferences.saveAccessToken(registerList.dataOfAuth()[0])

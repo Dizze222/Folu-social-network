@@ -11,3 +11,11 @@ class TokenInterceptor(private val tokenToSharedPreferences: TokenToSharedPrefer
         return chain.proceed(request)
     }
 }
+
+class TokenInterceptorRefresh(private val tokenToSharedPreferences: TokenToSharedPreferences) : Interceptor {
+    override fun intercept(chain: Interceptor.Chain): Response {
+        val request = chain.request().newBuilder()
+            .addHeader("Authorization", "Bearer ${tokenToSharedPreferences.readRefreshToken()}").build()
+        return chain.proceed(request)
+    }
+}
