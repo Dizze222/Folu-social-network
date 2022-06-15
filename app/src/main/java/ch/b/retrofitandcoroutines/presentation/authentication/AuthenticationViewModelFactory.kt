@@ -2,6 +2,7 @@ package ch.b.retrofitandcoroutines.presentation.authentication
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.domain.authorization.AuthenticationInteractor
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationCommunication

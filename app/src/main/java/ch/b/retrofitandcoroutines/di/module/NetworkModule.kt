@@ -11,22 +11,21 @@ import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
-import ch.b.retrofitandcoroutines.data.core.TokenInterceptorRefresh
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
+import ch.b.retrofitandcoroutines.di.module.CoroutinesScopeModule.providesCoroutineScope
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [CoroutinesScopeModule::class])
 class NetworkModule {
     private companion object {
-        private const val BASE_URL = "https://97d9-84-39-247-98.ngrok.io/"
+        private const val BASE_URL = "https://photographer-application.herokuapp.com/"
     }
-
-
     @Provides
     @Singleton
     fun provideGson(): GsonConverterFactory = GsonConverterFactory.create()
@@ -40,7 +39,7 @@ class NetworkModule {
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .authenticator(authenticator)
-            .addInterceptor(TokenInterceptor(accessTokenFromShared))
+            .addInterceptor(TokenInterceptor.AccessToken(accessTokenFromShared))
             .build()
     }
 
@@ -67,7 +66,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideAuthenticator(accessTokenFromShared: TokenToSharedPreferences) : Authenticator {
-        return Authenticator(accessTokenFromShared)
+        return Authenticator(accessTokenFromShared,providesCoroutineScope())
     }
 
     @Provides

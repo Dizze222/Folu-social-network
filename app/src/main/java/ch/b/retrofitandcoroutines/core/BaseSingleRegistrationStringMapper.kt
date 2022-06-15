@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.core
 
-interface BaseSingleRegistrationStringMapper : Abstract.Mapper, Abstract.Object<Unit,BaseSingleRegistrationStringMapper.SingleStringMapper> {
+interface BaseSingleRegistrationStringMapper : Abstract.Mapper,
+    Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
 
     interface SingleStringMapper : Abstract.Mapper {
         fun map(
@@ -13,5 +14,13 @@ interface BaseSingleRegistrationStringMapper : Abstract.Mapper, Abstract.Object<
 
         fun map(progress: Boolean)
     }
+
+    interface AuthenticatorStringMapper : Abstract.Mapper {
+        suspend fun map(
+            accessToken: String,
+            refreshToken: String
+        )
+    }
+
 
 }
