@@ -24,5 +24,4 @@ interface AuthorizationCloud {
             mapperr.map(accessToken, refreshToken)
         }
     }
-
 }

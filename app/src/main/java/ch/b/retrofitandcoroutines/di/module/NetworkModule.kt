@@ -66,7 +66,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideAuthenticator(accessTokenFromShared: TokenToSharedPreferences) : Authenticator {
-        return Authenticator(accessTokenFromShared,providesCoroutineScope())
+        return Authenticator(accessTokenFromShared)
     }
 
     @Provides
