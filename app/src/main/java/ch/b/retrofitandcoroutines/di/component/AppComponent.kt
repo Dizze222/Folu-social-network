@@ -7,6 +7,7 @@ import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFra
 import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
+import ch.b.retrofitandcoroutines.presentation.splash_screen.SplashFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -30,5 +31,6 @@ interface AppComponent {
     fun inject(fragment: PhotographersFragment)
     fun inject(fragment: PhotographerDetailFragment)
     fun inject(fragment: AuthenticationFragment)
+    fun inject(fragment: SplashFragment)
 
 }

@@ -12,6 +12,7 @@ import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSou
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
+import ch.b.retrofitandcoroutines.data.splash.SplashService
 import ch.b.retrofitandcoroutines.di.module.CoroutinesScopeModule.providesCoroutineScope
 import dagger.Module
 import dagger.Provides
@@ -73,6 +74,12 @@ class NetworkModule {
     @Singleton
     fun providePhotographerService(retrofit: Retrofit): PhotographerService {
         return retrofit.create(PhotographerService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSplashService(retrofit: Retrofit) : SplashService{
+        return retrofit.create(SplashService::class.java)
     }
 
     @Provides

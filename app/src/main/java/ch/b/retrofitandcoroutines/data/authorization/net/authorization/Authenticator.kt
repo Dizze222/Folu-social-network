@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.data.authorization.net.authorization
 
+import android.util.Log
 import ch.b.retrofitandcoroutines.data.authorization.net.update_token.UpdateTokenService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
@@ -15,7 +16,7 @@ class Authenticator(
 ) :
     Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? = runBlocking {
-
+        Log.i("AUTHO","resp")
         val okHttp = OkHttpClient.Builder()
             .addInterceptor(TokenInterceptor.RefreshToken(tokenFromShared))
             .build()
