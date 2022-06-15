@@ -6,7 +6,7 @@ import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationD
 
 interface AuthorizationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
     fun <T> map(mapper: AuthorizationDataToDomainMapper<T>): T
-
+    fun accessToken() : String
     class Base(
         private val accessToken: String,
         private val refreshToken: String,
@@ -18,6 +18,10 @@ interface AuthorizationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleRe
 
         override fun map(mapper: BaseSingleRegistrationStringMapper.SingleStringMapper) {
             mapper.map(accessToken, refreshToken, successRegister)
+        }
+
+        override fun accessToken(): String {
+            return accessToken
         }
     }
 

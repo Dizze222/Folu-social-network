@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.data.authorization.net.authorization
 
-import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.data.authorization.net.update_token.UpdateTokenService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
@@ -30,19 +29,14 @@ class Authenticator(
         if (!isRequestWithAccessToken(response)) {
             return@runBlocking null
         }
-        var newResult: String? = null
+        val newResult: String = api.updateToken().accessToken()
 
-        api.updateToken().map(object : BaseSingleRegistrationStringMapper.AuthenticatorStringMapper{
-            override suspend fun map(accessToken: String, refreshToken: String) {
-                 newResult = accessToken
-            }
-        })
         synchronized(this) {
             if (tokenFromShared.readAccessToken() != newResult) {
                 return@runBlocking newRequestWithAccessToken(response.request, newResult)
             }
             val updatedAccessToken = tokenFromShared.readAccessToken()
-            return@synchronized newRequestWithAccessToken(response.request,updatedAccessToken)
+            return@synchronized newRequestWithAccessToken(response.request, updatedAccessToken)
         }
     }
 
