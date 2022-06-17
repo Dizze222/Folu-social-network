@@ -15,7 +15,6 @@ class AbstractTest {
         assertEquals(expected,domainObject)
     }
 
-
     @Test
     fun test_fail() {
         val dataObject = TestDataObject.Fail(IOException())

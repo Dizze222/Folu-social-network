@@ -28,7 +28,7 @@ interface BaseImage : Base64Image<Uri> {
 
         override fun base64Image(drawableId: Int): String {
             val drawable  = resourceProvider.drawable(drawableId)
-            val bitmap = drawable.toBitmap()
+            val bitmap = drawable!!.toBitmap()
             bitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY, byteArrayOutputStream)
             val imageBytes = byteArrayOutputStream.toByteArray()
 

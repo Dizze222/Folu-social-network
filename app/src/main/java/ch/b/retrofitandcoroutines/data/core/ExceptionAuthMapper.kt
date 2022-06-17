@@ -10,10 +10,10 @@ import java.net.UnknownHostException
 
 interface ExceptionAuthMapper : Abstract.Mapper {
 
-    fun mapper(exception: Exception): String
+    fun map(exception: Exception): String
 
     class Base(private val resourceProvider: ResourceProvider) : ExceptionAuthMapper {
-        override fun mapper(exception: Exception): String =
+        override fun map(exception: Exception): String =
             when (exception) {
                 is NullPointerException -> resourceProvider.getString(R.string.invalid_register)
                 is UnknownHostException -> resourceProvider.getString(R.string.service_unavailable)
@@ -21,5 +21,17 @@ interface ExceptionAuthMapper : Abstract.Mapper {
                 is ConnectException -> resourceProvider.getString(R.string.filed_to_connection_server)
                 else -> "неизвестная ошибка $exception"
             }
+    }
+
+    class Test : ExceptionAuthMapper {
+        override fun map(exception: Exception): String =
+            when (exception) {
+                is NullPointerException -> "Ошибка регистрации, скорее всего, такой номер телефона уже зареган в базе"
+                is UnknownHostException -> "No connection"
+                is HttpException -> "Что-то пошло не так"
+                is ConnectException -> "Невозможно подключиться к серверу, попробуйте еще раз"
+                else -> "неизвестная ошибка $exception"
+            }
+
     }
 }

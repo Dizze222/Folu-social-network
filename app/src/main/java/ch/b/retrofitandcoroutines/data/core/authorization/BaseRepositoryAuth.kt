@@ -34,7 +34,7 @@ open class BaseRepositoryAuth @Inject constructor(
         tokenToSharedPreferences.saveRefreshToken(registerList.dataOfAuth()[1])
         AuthorizationListData.Success(registerList)
     } catch (e: Exception) {
-        val errorMessage = exceptionMapper.mapper(e)
+        val errorMessage = exceptionMapper.map(e)
         AuthorizationListData.Fail(errorMessage)
     }
 }

@@ -11,10 +11,10 @@ import dagger.Provides
 interface ResourceProvider {
     fun getString(@StringRes id: Int) : String
     fun provideContext(): Context
-    fun drawable(@DrawableRes id: Int) : Drawable
+    fun drawable(@DrawableRes id: Int) : Drawable?
     class Base(private val context: Context) : ResourceProvider {
         override fun getString(id: Int): String = context.getString(id)
         override fun provideContext(): Context = context
-        override fun drawable(id: Int): Drawable = ContextCompat.getDrawable(context, id)!!
+        override fun drawable(id: Int): Drawable? = ContextCompat.getDrawable(context, id)
     }
 }

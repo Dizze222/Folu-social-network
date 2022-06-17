@@ -1,27 +1,26 @@
-package ch.b.retrofitandcoroutines
+package ch.b.retrofitandcoroutines.presentation.core
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
+import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
 import ch.b.retrofitandcoroutines.presentation.containers.LikedTabContainer
 import ch.b.retrofitandcoroutines.presentation.containers.SplashContainer
-import ch.b.retrofitandcoroutines.presentation.core.ImageResult
-import ch.b.retrofitandcoroutines.presentation.core.ResultApiActivity
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
 import ru.terrakok.cicerone.Cicerone
 
 
 class MainActivity : AppCompatActivity(), ResultApiActivity,
-    ch.b.retrofitandcoroutines.RouterProvider {
+    RouterProvider {
     private lateinit var binding: ActivityMainBinding
-    private val cicerone = Cicerone.create(ch.b.retrofitandcoroutines.AppRouter())
+    private val cicerone = Cicerone.create(AppRouter())
     private lateinit var appNavigator: AppNavigator
 
-    override val router: ch.b.retrofitandcoroutines.AppRouter
+    override val router: AppRouter
         get() = cicerone.router
 
     private val image = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
@@ -37,19 +36,19 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         setContentView(binding.root)
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
-        val screen = ch.b.retrofitandcoroutines.FragmentScreen(SplashContainer().newInstance())
+        val screen = FragmentScreen(SplashContainer().newInstance())
         router.replaceTab(screen)
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_first -> {
                     val screen =
-                        ch.b.retrofitandcoroutines.FragmentScreen(AllPostTabContainer().newInstance())
+                        FragmentScreen(AllPostTabContainer().newInstance())
                     router.replaceTab(screen)
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_second -> {
                     val screen =
-                        ch.b.retrofitandcoroutines.FragmentScreen(LikedTabContainer().newInstance())
+                        FragmentScreen(LikedTabContainer().newInstance())
                     router.replaceTab(screen)
                     return@setOnItemSelectedListener true
                 }
@@ -58,7 +57,7 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         }
 
         if (savedInstanceState == null) {
-            val screen = ch.b.retrofitandcoroutines.FragmentScreen(SplashContainer().newInstance())
+            val screen = FragmentScreen(SplashContainer().newInstance())
             router.replaceTab(screen)
         }
     }
