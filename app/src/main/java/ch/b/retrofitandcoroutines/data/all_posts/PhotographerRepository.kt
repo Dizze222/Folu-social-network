@@ -38,12 +38,10 @@ interface PhotographerRepository {
             val listOfCloud = cloudDataSource.getPhotographers()
             val listOfCache = cacheDataSource.getPhotographers()
             if (listOfCache.isEmpty()) {
-                Log.i("TOR", listOfCloud.toString())
                 val photographerOfList = cloudMapper.map(listOfCloud)
                 cacheDataSource.savePhotographers(listOfCloud)
                 PhotographerListData.Success(photographerOfList)
             } else {
-                Log.i("CAA", listOfCache.toString())
                 PhotographerListData.Success(listOfCache.map {
                     it.map(mapperData)
                 }

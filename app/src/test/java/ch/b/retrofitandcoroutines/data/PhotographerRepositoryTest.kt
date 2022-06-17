@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.data
 
-import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerListData
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
@@ -22,7 +21,7 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
     private val unknownHostException = Exception()
 
     @Test
-    fun test_no_connection_no_test() = runBlocking{
+    fun test_no_connection_no_cache() = runBlocking {
         val testCloudDataSource = TestPhotographerListCloudDataSource(false)
         val testCacheDataSource = TestPhotographerListCacheDataSource(false)
         val repository = PhotographerRepository.Base(
@@ -35,6 +34,72 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
         val actual = repository.getAllPhotographers()
         val expected = PhotographerListData.Fail("Что-то пошло не так")
         assertEquals(expected, actual)
+    }
+
+    @Test
+    fun test_cloud_success_no_cache() = runBlocking {
+        val testCloudDataSource = TestPhotographerListCloudDataSource(true)
+        val testCacheDataSource = TestPhotographerListCacheDataSource(false)
+        val repository = PhotographerRepository.Base(
+            testCloudDataSource,
+            testCacheDataSource,
+            PhotographerListCloudMapper.Base(TestToBookMapper()),
+            BaseToDataPhotographerMapper(),
+            ExceptionPostsMapper.Test()
+        )
+        val actual = repository.getAllPhotographers()
+        val expected = PhotographerListData.Success(
+            listOf(
+                PhotographerData.Base(1, "name1", "url", 1, "theme1", listOf("one"), listOf("one")),
+                PhotographerData.Base(2, "name2", "url", 2, "theme2", listOf("two"), listOf("two")),
+                PhotographerData.Base(3, "name3", "url", 3, "theme3", listOf("third"), listOf("third"))
+            )
+        )
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun test_no_connection_with_cache() = runBlocking{
+        val testCloudDataSource = TestPhotographerListCloudDataSource(true)
+        val testCacheDataSource = TestPhotographerListCacheDataSource(true)
+        val repository = PhotographerRepository.Base(
+            testCloudDataSource,
+            testCacheDataSource,
+            PhotographerListCloudMapper.Base(TestToBookMapper()),
+            BaseToDataPhotographerMapper(),
+            ExceptionPostsMapper.Test()
+        )
+        val actual = repository.getAllPhotographers()
+        val expected = PhotographerListData.Success(listOf(
+                PhotographerData.Base(
+                    10,
+                    "name10",
+                    "url",
+                    10,
+                    "theme10",
+                    listOf("ten"),
+                    listOf("ten")
+                ),
+            PhotographerData.Base(
+                20,
+                "name20",
+                "url",
+                20,
+                "theme20",
+                listOf("twelve"),
+                listOf("twelve")
+            ),
+            PhotographerData.Base(
+                30,
+                "name30",
+                "url",
+                30,
+                "theme30",
+                listOf("third"),
+                listOf("third")
+            )
+        ))
+        assertEquals(expected,actual)
     }
 
 

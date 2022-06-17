@@ -47,7 +47,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)
             } else {
-                viewModel.checkAccessToken()
+               // viewModel.checkAccessToken()
                 val fragment = PhotographersFragment()
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)
