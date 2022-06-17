@@ -19,4 +19,12 @@ interface ExceptionPostsMapper : Abstract.Mapper {
                 else -> resourceProvider.getString(R.string.something_went_wrong)
             }
     }
+    class Test : ExceptionPostsMapper {
+        override fun mapper(exception: Exception): String =
+            when (exception) {
+                is NullPointerException -> "Токен доступа истек срок действия"
+                is ConnectException -> "Невозможно подключиться к серверу, попробуйте еще раз"
+                else -> "Что-то пошло не так"
+            }
+    }
 }

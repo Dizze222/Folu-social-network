@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationService
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.Authenticator
@@ -13,10 +13,8 @@ import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.splash.SplashService
-import ch.b.retrofitandcoroutines.di.module.CoroutinesScopeModule.providesCoroutineScope
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.CoroutineScope
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -103,8 +101,8 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideCloudDataSource(service: PhotographerService): PhotographersCloudDataSource {
-        return PhotographersCloudDataSource.Base(service)
+    fun provideCloudDataSource(service: PhotographerService): PhotographerListCloudDataSource {
+        return PhotographerListCloudDataSource.Base(service)
     }
 
     @Provides

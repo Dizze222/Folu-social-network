@@ -7,8 +7,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheData
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.ExceptionPostsMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
-import ch.b.retrofitandcoroutines.data.core.ExceptionAuthMapper
+import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
 import retrofit2.Response
 import java.lang.Exception
 
@@ -28,7 +27,7 @@ interface PhotographerRepository {
     ): Response<PhotographerCloud>
 
     class Base(
-        private val cloudDataSource: PhotographersCloudDataSource,
+        private val cloudDataSource: PhotographerListCloudDataSource,
         private val cacheDataSource: PhotographerListCacheDataSource,
         private val cloudMapper: PhotographerListCloudMapper,
         private val mapperData: Abstract.ToPhotographerMapper<PhotographerData>,
@@ -45,7 +44,7 @@ interface PhotographerRepository {
                 PhotographerListData.Success(photographerOfList)
             } else {
                 Log.i("CAA", listOfCache.toString())
-                PhotographerListData.Success(listOfCloud.map {
+                PhotographerListData.Success(listOfCache.map {
                     it.map(mapperData)
                 }
                 )

@@ -6,7 +6,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.*
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographersCloudDataSource
+import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.AuthenticationRepository
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
@@ -28,7 +28,7 @@ class DataModule {
     @Provides
     @Singleton
     fun providePhotographerRepository(
-        cloudDataSource: PhotographersCloudDataSource,
+        cloudDataSource: PhotographerListCloudDataSource,
         cacheDataSource: PhotographerListCacheDataSource,
         cloudMapper: PhotographerListCloudMapper,
         toRoomMapper: Abstract.ToPhotographerMapper<PhotographerData>,

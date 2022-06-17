@@ -1,9 +1,5 @@
 package ch.b.retrofitandcoroutines.data.core
 
-import android.content.Context
-import android.graphics.drawable.Drawable
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
-import com.bumptech.glide.load.HttpException
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import java.lang.Exception

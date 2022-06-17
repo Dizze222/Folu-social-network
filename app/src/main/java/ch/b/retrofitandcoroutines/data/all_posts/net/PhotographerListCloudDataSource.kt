@@ -3,7 +3,7 @@ package ch.b.retrofitandcoroutines.data.all_posts.net
 import com.google.gson.reflect.TypeToken
 import retrofit2.Response
 
-interface PhotographersCloudDataSource {
+interface PhotographerListCloudDataSource {
     suspend fun getPhotographers(): List<PhotographerCloud.Base>
 
     suspend fun makePost(
@@ -16,7 +16,7 @@ interface PhotographersCloudDataSource {
 
     class Base(
         private val service: PhotographerService,
-    ) : PhotographersCloudDataSource {
+    ) : PhotographerListCloudDataSource {
         val type = object : TypeToken<List<PhotographerCloud>>(){}.type
         override suspend fun getPhotographers(): List<PhotographerCloud.Base> =
             service.getPhotographers().body()!!
