@@ -11,8 +11,14 @@ import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFra
 import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.BackButtonListener
+import ch.b.retrofitandcoroutines.FragmentScreen
+import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import kotlinx.coroutines.delay
+import okhttp3.Authenticator
+import okhttp3.Request
+import okhttp3.Response
+import okhttp3.Route
 import javax.inject.Inject
 
 
@@ -35,16 +41,16 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
         val sharedPref = TokenToSharedPreferences.Base(activity!!.applicationContext, Reader())
         hideNavBar(true)
         lifecycleScope.launchWhenCreated {
-            delay(2000)
-            viewModel.splash()
+            delay(1000)
             if (sharedPref.readAccessToken().isEmpty()) {
                 val fragment = AuthenticationFragment()
-                val nextScreen = ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
-                (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
+                val nextScreen = FragmentScreen(fragment.newInstance())
+                (parentFragment as RouterProvider).router.navigateTo(nextScreen)
             } else {
+                viewModel.checkAccessToken()
                 val fragment = PhotographersFragment()
-                val nextScreen = ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
-                (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
+                val nextScreen = FragmentScreen(fragment.newInstance())
+                (parentFragment as RouterProvider).router.navigateTo(nextScreen)
             }
         }
     }
@@ -56,6 +62,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     override fun onBackPressed(): Boolean {
         return false
     }
+
     private fun inject() {
         val application = requireActivity().application as PhotoApp
         val appComponent = application.appComponent

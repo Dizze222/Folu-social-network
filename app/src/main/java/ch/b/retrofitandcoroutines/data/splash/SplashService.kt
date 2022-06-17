@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface SplashService {
 
     @GET("/splash")
-    suspend fun splash() : Boolean
+    suspend fun checkAccessToken()
 }

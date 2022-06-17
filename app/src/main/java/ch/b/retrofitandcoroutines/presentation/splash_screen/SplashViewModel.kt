@@ -6,7 +6,7 @@ import ch.b.retrofitandcoroutines.domain.splash.SplashInteractor
 class SplashViewModel(
     private val interceptor: SplashInteractor
 ) : ViewModel() {
-    suspend fun splash(): Boolean {
-        return interceptor.splash()
+    suspend fun checkAccessToken() {
+        return interceptor.checkAccessToken()
     }
 }
