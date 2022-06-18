@@ -18,7 +18,7 @@ interface PhotographerRepository {
 
     suspend fun searchPhotographers(author: String): PhotographerListData
 
-    suspend fun post(
+    suspend fun like(
         author: String,
         idPhotographer: Int,
         like: Int,
@@ -59,7 +59,7 @@ interface PhotographerRepository {
             })
         }
 
-        override suspend fun post(
+        override suspend fun like(
             author: String,
             idPhotographer: Int,
             like: Int,

@@ -6,7 +6,7 @@ import retrofit2.Response
 interface PhotographerListCloudDataSource {
     suspend fun getPhotographers(): List<PhotographerCloud.Base>
 
-    suspend fun makePost(
+    suspend fun like(
         author: String,
         idPhotographer: Int,
         like: Int,
@@ -21,13 +21,13 @@ interface PhotographerListCloudDataSource {
         override suspend fun getPhotographers(): List<PhotographerCloud.Base> =
             service.getPhotographers().body()!!
 
-        override suspend fun makePost(
+        override suspend fun like(
             author: String,
             idPhotographer: Int,
             like: Int,
             theme: String,
             url: String
         ): Response<PhotographerCloud> =
-            service.makePost(author, idPhotographer, like, theme, url)
+            service.like(author, idPhotographer, like, theme, url)
     }
 }

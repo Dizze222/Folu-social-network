@@ -10,7 +10,7 @@ interface PhotographerService {
 
     @FormUrlEncoded
     @POST("posts")
-    suspend fun makePost(
+    suspend fun like(
         @Field("author") author: String,
         @Field("idPhotographer") idPhotographer: Int,
         @Field("like")like: Int,

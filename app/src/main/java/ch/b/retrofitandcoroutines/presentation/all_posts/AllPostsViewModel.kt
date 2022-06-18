@@ -58,9 +58,9 @@ class AllPostsViewModel(
         communicateSearchAuthor.observe(owner, observer)
     }
 
-    fun pushPost(author: String, idPhotographer: Int, like: Int, theme: String, url: String) {
+    fun like(author: String, idPhotographer: Int, like: Int, theme: String, url: String) {
         viewModelScope.launch {
-            interactor.post(author, idPhotographer, like, theme, url)
+            interactor.like(author, idPhotographer, like, theme, url)
         }
     }
 

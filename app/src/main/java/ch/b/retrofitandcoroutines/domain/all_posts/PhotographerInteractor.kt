@@ -12,7 +12,7 @@ interface PhotographerInteractor {
 
     suspend fun searchPhotographers(author: String) : PhotographerListDomain
 
-    suspend fun post(
+    suspend fun like(
         author: String,
         idPhotographer: Int,
         like: Int,
@@ -32,7 +32,7 @@ interface PhotographerInteractor {
             return repository.searchPhotographers(author).map(mapper)
         }
 
-        override suspend fun post(
+        override suspend fun like(
             author: String,
             idPhotographer: Int,
             like: Int,
