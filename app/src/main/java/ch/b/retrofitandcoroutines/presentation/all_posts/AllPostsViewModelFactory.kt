@@ -1,11 +1,9 @@
-package ch.b.retrofitandcoroutines.presentation.all_posts.screen
+package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
-import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import javax.inject.Inject
 

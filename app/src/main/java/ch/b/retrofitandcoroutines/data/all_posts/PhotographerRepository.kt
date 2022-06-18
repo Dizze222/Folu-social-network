@@ -42,7 +42,7 @@ interface PhotographerRepository {
                 cacheDataSource.savePhotographers(listOfCloud)
                 PhotographerListData.Success(photographerOfList)
             } else {
-                PhotographerListData.Success(listOfCache.map {
+                PhotographerListData.Success(listOfCloud.map {
                     it.map(mapperData)
                 }
                 )

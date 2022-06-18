@@ -24,3 +24,17 @@ interface PhotographerCloud{
         }
     }
 }
+data class Story (
+    val id: Int? = null,
+    val profileName: String? = null,
+    val profileImageUrl: String? = null,
+    val hasUncheckedStory: Boolean = false,
+    val storyType: Int = Stories.DEFAULT
+)
+
+class Stories {
+    companion object{
+        const val MY_STORY = 0
+        const val DEFAULT = 1
+    }
+}

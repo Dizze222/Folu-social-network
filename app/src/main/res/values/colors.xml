@@ -16,4 +16,5 @@
     <color name="green">#64DD17</color>
     <color name="yellow">#FFEA00</color>
     <color name="purple">#D500F9</color>
+    <color name="story_border_color">#FF0000</color>
 </resources>

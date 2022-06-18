@@ -8,10 +8,8 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentAuthorizationBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
-import ch.b.retrofitandcoroutines.FragmentScreen
+import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 import javax.inject.Inject
 

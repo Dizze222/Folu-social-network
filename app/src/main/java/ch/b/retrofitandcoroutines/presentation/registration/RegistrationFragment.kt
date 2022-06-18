@@ -8,7 +8,7 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentRegistrationBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
+import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.BackButtonListener
 import javax.inject.Inject

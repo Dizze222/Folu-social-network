@@ -1,15 +1,18 @@
-package ch.b.retrofitandcoroutines.presentation.all_posts.screen
+package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.*
+
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ConcatAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
@@ -18,18 +21,22 @@ import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.core.ImageProfile
 import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.BackButtonListener
+import ch.b.retrofitandcoroutines.data.all_posts.net.Stories
+import ch.b.retrofitandcoroutines.data.all_posts.net.Story
+import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
 import javax.inject.Inject
 
 
-class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(FragmentPhotographersBinding::inflate),
+class PhotographersFragment :
+    BaseFragment<FragmentPhotographersBinding>(FragmentPhotographersBinding::inflate),
     ImageResult, BackButtonListener {
     @Inject
     lateinit var allPostsViewModelFactory: AllPostsViewModelFactory
-
-    private val viewModel: AllPostsViewModel by viewModels(){
+    private lateinit var storiesContainerAdapter: StoriesContainerAdapter
+    private val viewModel: AllPostsViewModel by viewModels() {
         allPostsViewModelFactory
     }
-    private lateinit var adapter: PhotographerAdapter
+    private lateinit var photographersAdapter: PhotographerAdapter
     private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""
 
@@ -44,7 +51,8 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
         //    (requireActivity() as MainActivity).image()
         //}
         hideNavBar(false)
-        adapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
+        storiesContainerAdapter = StoriesContainerAdapter()
+        photographersAdapter = PhotographerAdapter(object : PhotographerAdapter.Retry {
             override fun tryAgain() {
                 viewModel.getPhotographers()
             }
@@ -55,9 +63,19 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
                     val fragmentManager = activity!!.supportFragmentManager
                     val nextScreen =
                         ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
-                    (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(nextScreen)
+                    (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
+                        nextScreen
+                    )
                     photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
-                        override fun map(id: Int, author: String, URL: String, like: Long, theme: String, comments: List<String>, authorOfComments: List<String>) {
+                        override fun map(
+                            id: Int,
+                            author: String,
+                            URL: String,
+                            like: Long,
+                            theme: String,
+                            comments: List<String>,
+                            authorOfComments: List<String>
+                        ) {
                             fragmentManager.setFragmentResult("requestKey", bundleOf("id" to id))
                         }
 
@@ -70,8 +88,10 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
 
             }
         ) //TODO fix this
-        binding.recyclerView.adapter = adapter
-        binding.recyclerView.layoutManager = GridLayoutManager(activity, 2)
+
+        val mergeAdapter = ConcatAdapter(storiesContainerAdapter,photographersAdapter)
+        binding.recyclerView.adapter = mergeAdapter
+        binding.recyclerView. layoutManager = LinearLayoutManager(activity!!.applicationContext)
         binding.refresh.setOnRefreshListener {
             viewModel.getPhotographers()
             binding.refresh.isRefreshing = false
@@ -79,9 +99,19 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
 
         lifecycleScope.launchWhenStarted {
             viewModel.observeAllPhotographers(this@PhotographersFragment) {
-                adapter.update(it)
+                photographersAdapter.update(it)
             }
         }
+        val list = mutableListOf<Story>()
+        list.add(Story(1,"Ivan","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,0))
+        list.add(Story(2,"Кирил","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,1))
+        list.add(Story(3,"Иван","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,1))
+        list.add(Story(4,"Саша","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,1))
+        list.add(Story(5,"Маша","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,1))
+        list.add(Story(6,"Дима","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,1))
+        list.add(Story(7,"Азат","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,1))
+        list.add(Story(8,"Григорий","https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",true,1))
+        storiesContainerAdapter.stories(list)
         viewModel.getPhotographers()
         setupListeners()
     }
@@ -114,13 +144,14 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
         val searchQuery = "%$author%"
         lifecycleScope.launchWhenStarted {
             viewModel.observeSearchPhotographer(this@PhotographersFragment) {
-                adapter.update(it)
+                photographersAdapter.update(it)
             }
         }
         lifecycleScope.launchWhenCreated {
             viewModel.searchPhotographers(searchQuery)
         }
     }
+
 
     override fun onImageResult(uri: Uri) {
         //binding.button.setImageURI(uri)
@@ -134,7 +165,8 @@ class PhotographersFragment : BaseFragment<FragmentPhotographersBinding>(Fragmen
     override fun onBackPressed(): Boolean {
         return false
     }
-    fun inject(){
+
+    fun inject() {
         val application = requireActivity().application as PhotoApp
         val appComponent = application.appComponent
         appComponent.inject(this)

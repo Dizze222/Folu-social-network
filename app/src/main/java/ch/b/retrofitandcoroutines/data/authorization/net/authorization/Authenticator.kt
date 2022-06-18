@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.data.authorization.net.authorization
 
-import android.util.Log
 import ch.b.retrofitandcoroutines.data.authorization.net.update_token.UpdateTokenService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
@@ -16,13 +15,12 @@ class Authenticator(
 ) :
     Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? = runBlocking {
-        Log.i("AUTHO","resp")
         val okHttp = OkHttpClient.Builder()
             .addInterceptor(TokenInterceptor.RefreshToken(tokenFromShared))
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://ec9d-84-39-247-98.ngrok.io/")
+            .baseUrl("https://photographer-application.herokuapp.com/")
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

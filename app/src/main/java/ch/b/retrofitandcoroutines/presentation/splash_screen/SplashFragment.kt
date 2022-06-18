@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.data.core.authorization.Reader
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.databinding.FragmentSplashBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.screen.PhotographersFragment
+import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.BackButtonListener
@@ -15,10 +15,6 @@ import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import kotlinx.coroutines.delay
-import okhttp3.Authenticator
-import okhttp3.Request
-import okhttp3.Response
-import okhttp3.Route
 import javax.inject.Inject
 
 
