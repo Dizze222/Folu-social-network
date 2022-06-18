@@ -91,7 +91,7 @@ class PhotographersFragment :
 
         val mergeAdapter = ConcatAdapter(storiesContainerAdapter,photographersAdapter)
         binding.recyclerView.adapter = mergeAdapter
-        binding.recyclerView. layoutManager = LinearLayoutManager(activity!!.applicationContext)
+        binding.recyclerView.layoutManager = LinearLayoutManager(activity!!.applicationContext)
         binding.refresh.setOnRefreshListener {
             viewModel.getPhotographers()
             binding.refresh.isRefreshing = false

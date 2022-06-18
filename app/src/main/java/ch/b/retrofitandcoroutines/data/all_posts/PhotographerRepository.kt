@@ -66,7 +66,7 @@ interface PhotographerRepository {
             theme: String,
             url: String
         ): Response<PhotographerCloud> {
-            return cloudDataSource.makePost(author, idPhotographer, like, theme, url)
+            return cloudDataSource.like(author, idPhotographer, like, theme, url)
         }
     }
 }

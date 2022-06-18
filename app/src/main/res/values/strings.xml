@@ -39,4 +39,5 @@
     <string name="please_wait">Загрузка данных, подождите</string>
     <string name="token_expired">Токен доступа истек срок действия</string>
     <string name="your_story">Ваша история</string>
+    <string name="comment_hint">Коментировать..</string>
 </resources>

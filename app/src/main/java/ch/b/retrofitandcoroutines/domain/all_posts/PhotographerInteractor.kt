@@ -38,6 +38,6 @@ interface PhotographerInteractor {
             like: Int,
             theme: String,
             url: String
-        ) = repository.post(author, idPhotographer, like, theme, url)
+        ) = repository.like(author, idPhotographer, like, theme, url)
     }
 }

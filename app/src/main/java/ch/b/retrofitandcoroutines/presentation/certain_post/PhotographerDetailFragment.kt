@@ -32,7 +32,6 @@ class PhotographerDetailFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bundle = this.arguments
         val fragmentManager: FragmentManager = activity!!.supportFragmentManager
         var photographerId: Int?
         fragmentManager.setFragmentResultListener("requestKey", this, { key, bundle ->
@@ -56,7 +55,7 @@ class PhotographerDetailFragment :
                             ) {
                                 binding.idOfAuthor.text = id.toString()
                                 binding.author.text = author
-                                //binding.toolbar.title = author
+                                binding.toolbar.title = author
                                 adapter.update(
                                     comments.convertToArrayList(),
                                     authorOfComments.convertToArrayList()
@@ -66,11 +65,11 @@ class PhotographerDetailFragment :
                             }
 
                             override fun map(message: String) {
-                                //binding.toolbar.title = message
+                                binding.toolbar.title = message
                             }
 
                             override fun map(progress: Boolean) {
-                                //binding.toolbar.title = "Загрузка"
+                                binding.toolbar.title = "Загрузка"
                             }
                         })
                     }
