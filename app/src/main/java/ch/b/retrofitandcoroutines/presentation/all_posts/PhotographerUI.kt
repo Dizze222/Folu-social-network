@@ -10,6 +10,7 @@ import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
 sealed class PhotographerUI :
     Abstract.Object<Unit, BasePhotographerStringMapper.SingleStringMapper>, Comparing {
     override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = Unit
+    open fun map(mapper: BasePhotographerStringMapper.IdMapper) = Unit
 
     open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView) = Unit
 
@@ -34,6 +35,9 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
+        override fun map(mapper: BasePhotographerStringMapper.IdMapper){
+            mapper.map(id)
+        }
         override fun mapSuccess(authorView: TextView, likeView: TextView,imageView: ImageView) {
             authorView.text = author
             likeView.text = like.toString()

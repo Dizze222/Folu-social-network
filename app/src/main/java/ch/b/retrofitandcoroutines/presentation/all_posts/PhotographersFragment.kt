@@ -66,28 +66,17 @@ class PhotographersFragment :
                     (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
                         nextScreen
                     )
-                    photographer.map(object : BasePhotographerStringMapper.SingleStringMapper {
-                        override fun map(
-                            id: Int,
-                            author: String,
-                            URL: String,
-                            like: Long,
-                            theme: String,
-                            comments: List<String>,
-                            authorOfComments: List<String>
-                        ) {
+                    photographer.map(object : BasePhotographerStringMapper.IdMapper {
+                        override fun map(id: Int) {
                             fragmentManager.setFragmentResult("requestKey", bundleOf("id" to id))
                         }
-
-                        override fun map(message: String) = Unit
-                        override fun map(progress: Boolean) = Unit
                     })
                 }
 
                 override fun likeClick(photographer: PhotographerUI) = Unit
 
             }
-        ) //TODO fix this
+        )
 
         val mergeAdapter = ConcatAdapter(storiesContainerAdapter,photographersAdapter)
         binding.recyclerView.adapter = mergeAdapter
