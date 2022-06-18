@@ -69,6 +69,7 @@ class StoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         context.resources.getColor(R.color.story_border_color)
                 }
                 textViewProfileName.text = story.profileName
+                ImageLoad.Base(story.profileImageUrl!!).load(imageViewProfile)
             }
         }
 

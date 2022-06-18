@@ -6,8 +6,7 @@ import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUI
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 
 class BaseRegistrationListDomainToUIMapper(
-    private val mapper: RegistrationDomainToUIMapper<RegistrationUI>,
-    private val resourceProvider: ResourceProvider
+    private val mapper: RegistrationDomainToUIMapper<RegistrationUI>
 ) : RegistrationListDomainToUIMapper(){
     override fun map(error: String): RegistrationListUI {
         return RegistrationListUI.Fail(error)
