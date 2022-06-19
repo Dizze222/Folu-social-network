@@ -40,4 +40,23 @@
     <string name="token_expired">Токен доступа истек срок действия</string>
     <string name="your_story">Ваша история</string>
     <string name="comment_hint">Коментировать..</string>
+    <string name="camera">Camera</string>
+    <string name="logo">Logo</string>
+    <string name="direct">Direct</string>
+    <string name="like">Like</string>
+    <string name="more">More</string>
+    <string name="comment">Comment</string>
+    <string name="collect">Collect</string>
+    <string name="close">Close</string>
+    <string name="home">Home</string>
+    <string name="search">Search</string>
+
+    <string name="post_image">post image</string>
+    <string name="view_all">View all %d comments</string>
+    <string name="date">2 days ago</string>
+    <string name="likes">%d likes</string>
+    <string name="saved">Saved</string>
+    <string name="save_to_collection">Save to Collection</string>
+    <string name="learn_more">Читать больше</string>
+    <string name="ic_tag_border">border</string>
 </resources>

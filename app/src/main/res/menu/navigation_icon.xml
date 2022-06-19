@@ -14,5 +14,9 @@
         android:id="@+id/navigation_third"
         android:icon="@drawable/profile_selector"
         android:title="@string/profile" />
+    <item
+        android:id="@+id/navigation_four"
+        android:icon="@drawable/bookmark_selector"
+        android:title="@string/profile" />
 
 </menu>

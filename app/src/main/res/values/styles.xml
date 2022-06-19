@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
@@ -19,4 +19,159 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
+
+
+    <style name="post_user_image">
+        <item name="android:layout_width">@dimen/post_user_image_size</item>
+        <item name="android:layout_height">@dimen/post_user_image_size</item>
+        <item name="android:padding">8dp</item>
+    </style>
+
+
+
+
+
+
+
+
+
+    //Text Appearance
+
+    <style name="smallest_text">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="small_text">
+        <item name="android:textSize">11.5sp</item>
+    </style>
+
+    <style name="medium_text">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="large_text">
+        <item name="android:textSize">13.5sp</item>
+    </style>
+
+    <style name="largest_text">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    //Toolbar
+
+    <style name="toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:minHeight">?attr/actionBarSize</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Light</item>
+    </style>
+
+    <style name="icon">
+        <item name="android:layout_width">@dimen/icon_width</item>
+        <item name="android:layout_height">@dimen/icon_height</item>
+        <item name="android:paddingStart">@dimen/padding_icon_horizontal</item>
+        <item name="android:paddingEnd">@dimen/padding_icon_horizontal</item>
+        <item name="android:paddingTop">@dimen/padding_icon_vertical</item>
+        <item name="android:paddingBottom">@dimen/padding_icon_vertical</item>
+    </style>
+
+    <style name="logo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:adjustViewBounds">true</item>
+    </style>
+
+    // Stories
+
+    <style name="story_image">
+        <item name="android:layout_width">65dp</item>
+        <item name="android:layout_height">65dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="story_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:paddingStart">2dp</item>
+        <item name="android:paddingEnd">2dp</item>
+        <item name="android:textAppearance">@style/medium_text</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+
+
+
+
+    <style name="post_user_name">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAppearance">@style/large_text</item>
+    </style>
+
+    <style name="post_user_location">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textAppearance">@style/small_text</item>
+    </style>
+
+    <style name="post_comment">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_marginTop">1dp</item>
+        <item name="android:paddingStart">@dimen/padding_text_horizontal</item>
+        <item name="android:paddingEnd">@dimen/padding_text_horizontal</item>
+        <item name="android:textAppearance">@style/large_text</item>
+    </style>
+
+    <style name="item_recommendation_text">
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingStart">@dimen/item_recommendation_padding</item>
+        <item name="android:paddingEnd">@dimen/item_recommendation_padding</item>
+        <item name="android:textColor">@color/colorBlack</item>
+    </style>
+
+    <style name="ad_text">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@color/colorBackground</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_right</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingStart">@dimen/padding_text_horizontal</item>
+        <item name="android:paddingEnd">@dimen/padding_text_horizontal</item>
+        <item name="android:textAppearance">@style/largest_text</item>
+        <item name="android:textColor">@color/colorBlue</item>
+    </style>
+
+    // Divider
+
+    <style name="divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:background">@color/colorDivider</item>
+    </style>
+
+
+
+
+
+
 </resources>

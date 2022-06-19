@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
+import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import ch.b.retrofitandcoroutines.core.Abstract
@@ -12,7 +13,7 @@ sealed class PhotographerUI :
     override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = Unit
     open fun map(mapper: BasePhotographerStringMapper.IdMapper) = Unit
 
-    open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView) = Unit
+    open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView) = Unit
 
     open fun mapError(errorTextView: TextView) = Unit
 
@@ -38,9 +39,16 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.IdMapper){
             mapper.map(id)
         }
-        override fun mapSuccess(authorView: TextView, likeView: TextView,imageView: ImageView) {
+        @SuppressLint("SetTextI18n")
+        override fun mapSuccess(
+            authorView: TextView,
+            like: TextView,
+            imageView: ImageView,
+            comment: TextView
+        ) {
             authorView.text = author
-            likeView.text = like.toString()
+            like.text = this.like.toString()
+            comment.text = "Показать более ${authorOfComments.size - 1} комментария"
             ImageLoad.Base(URL).load(imageView)
         }
 

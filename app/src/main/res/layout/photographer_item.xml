@@ -1,72 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    app:cardCornerRadius="17dp"
-    app:cardElevation="15dp">
+    android:background="@color/colorBackground"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/padding_container_horizontal"
+        android:paddingEnd="@dimen/padding_container_horizontal">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/item_post_user_image"
+            style="@style/post_user_image" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:orientation="vertical">
-
-            <ImageView
-                android:id="@+id/imageView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@color/colorShimmer"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/authorName"
-                android:layout_width="378dp"
-                android:layout_height="25dp"
-                android:gravity="clip_horizontal"
-                android:paddingStart="15dp"
-                android:textSize="15sp"
-                android:textStyle="bold|italic"
-                tools:ignore="RtlSymmetry" />
+                style="@style/post_user_name"
+                tools:text="Author" />
 
             <TextView
-                android:id="@+id/IdOfPicture"
-                android:layout_width="134dp"
-                android:layout_height="50dp"
-                android:gravity="clip_horizontal"
-                android:paddingStart="15dp"
-                android:textSize="15sp"
-                android:textStyle="bold|italic"
-                tools:ignore="RtlSymmetry" />
+                android:id="@+id/idOfPicture"
+                style="@style/post_user_location"
+                tools:text="Local" />
 
-
-            <ImageButton
-                android:id="@+id/likeButton"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="right"
-                android:layout_marginTop="-40dp"
-                android:background="@android:color/transparent"
-                android:src="@drawable/ic_like_empty"
-                tools:ignore="SpeakableTextPresentCheck" />
-
-            <TextView
-                android:id="@+id/like"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="right"
-                android:paddingStart="17dp"
-                android:text="12"
-                android:textStyle="normal|bold"
-                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
 
-</androidx.cardview.widget.CardView>
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/post_image"
+            android:minHeight="200dp"
+            tools:src="@drawable/ic_launcher_background" />
+
+        <ImageView
+            android:id="@+id/item_post_big_like"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:alpha="0"
+            android:src="@drawable/big_like_animation"
+            tools:ignore="ContentDescription" />
+
+        <LinearLayout
+            android:id="@+id/item_post_collection"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_gravity="bottom"
+            android:background="@color/colorPrimaryDark23"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/padding_text_horizontal"
+            android:paddingEnd="@dimen/padding_text_horizontal"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/item_post_collect_image"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:scaleType="centerCrop"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/ic_launcher_background" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:text="@string/saved"
+                android:textAppearance="@style/large_text"
+                android:textColor="@color/colorBlack" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/save_to_collection"
+                android:textAppearance="@style/largest_text"
+                android:textColor="@color/colorBlue" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/item_post_ad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <TextView
+            style="@style/ad_text"
+            android:text="@string/learn_more"
+            android:textColor="#0277BD" />
+
+        <View style="@style/divider" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/icon_height"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="@dimen/padding_container_horizontal"
+        android:paddingEnd="@dimen/padding_container_horizontal">
+
+        <ImageView
+            android:id="@+id/item_post_like"
+            style="@style/icon"
+            android:contentDescription="@string/like"
+            android:src="@drawable/ic_like"
+            android:tag="@string/ic_tag_border" />
+
+        <ImageView
+            android:id="@+id/item_post_comment"
+            style="@style/icon"
+            android:contentDescription="@string/comment"
+            android:src="@drawable/ic_comment" />
+
+        <ImageView
+            android:id="@+id/item_post_direct"
+            style="@style/icon"
+            android:contentDescription="@string/direct"
+            android:src="@drawable/ic_direct" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/item_post_collect"
+            style="@style/icon"
+            android:contentDescription="@string/collect"
+            android:src="@drawable/bookmark_empty"
+            android:tag="@string/ic_tag_border" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/like"
+        style="@style/post_comment"
+        android:textColor="@color/colorBlack" />
+
+    <TextView
+        android:id="@+id/item_post_caption"
+        style="@style/post_comment"
+        android:textColor="@color/colorBlack" />
+
+    <TextView
+        android:id="@+id/item_post_show_all_comments"
+        style="@style/post_comment"
+        android:textColor="@color/colorGray" />
+
+
+
+
+</LinearLayout>
