@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.*
+import ch.b.retrofitandcoroutines.presentation.core.iconAnimation
 
 class PhotographerAdapter(
     private val retry: Retry,
@@ -75,8 +76,15 @@ class PhotographerAdapter(
                 binding.imageView.setOnClickListener {
                     photographerItemClick.onClickPhotographer(photographer)
                 }
+                binding.itemPostCollect.setOnClickListener {
+                    collectAnimation()
+                }
             }
-
+            private fun collectAnimation() {
+                binding.itemPostCollect.iconAnimation(
+                    R.drawable.bookmark_empty, R.drawable.bookmark
+                )
+            }
         }
 
         class Fail(binding: FailFullscreenBinding, private val retry: Retry) :
@@ -103,4 +111,7 @@ class PhotographerAdapter(
         fun onClickPhotographer(photographer: PhotographerUI)
         fun likeClick(photographer: PhotographerUI)
     }
+
+
+
 }

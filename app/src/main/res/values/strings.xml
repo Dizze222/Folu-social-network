@@ -46,7 +46,7 @@
     <string name="like">Лайк</string>
     <string name="more">Больше</string>
     <string name="comment">Комментарий</string>
-    <string name="collect">Коллект</string>
+    <string name="collect">Collect</string>
     <string name="close">Закрыть</string>
     <string name="home">Дом</string>
     <string name="search">Поиск</string>
@@ -59,4 +59,5 @@
     <string name="learn_more">Читать больше</string>
     <string name="ic_tag_border">border</string>
     <string name="loading">Загрузка</string>
+    <string name="ic_tag_fill">fill</string>
 </resources>
