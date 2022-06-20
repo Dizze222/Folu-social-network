@@ -14,7 +14,6 @@ sealed class PhotographerUI :
     open fun map(mapper: BasePhotographerStringMapper.IdMapper) = Unit
     open fun map(imageView: ImageView) = Unit
     open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView,someComment: TextView) = Unit
-
     open fun mapError(errorTextView: TextView) = Unit
 
     object Progress : PhotographerUI() {

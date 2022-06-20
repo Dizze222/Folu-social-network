@@ -1,5 +1,8 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
+import android.os.Handler
+import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +14,8 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.*
 import ch.b.retrofitandcoroutines.presentation.core.iconAnimation
 import ch.b.retrofitandcoroutines.presentation.core.translateY
+import kotlinx.coroutines.*
+import java.util.concurrent.TimeUnit
 
 class PhotographerAdapter(
     private val retry: Retry,
@@ -74,7 +79,13 @@ class PhotographerAdapter(
             private val photographerItemClick: PhotographerItemClickListener
         ) : PhotographerViewHolder(binding) {
             override fun bind(photographer: PhotographerUI) {
-                photographer.mapSuccess(binding.authorName,binding.like,binding.imageView,binding.itemPostShowAllComments,binding.someComment)
+                photographer.mapSuccess(
+                    binding.authorName,
+                    binding.like,
+                    binding.imageView,
+                    binding.itemPostShowAllComments,
+                    binding.someComment
+                )
                 binding.imageView.setOnClickListener {
                     photographerItemClick.onClickPhotographer(photographer)
                 }
@@ -82,13 +93,21 @@ class PhotographerAdapter(
                     it.collectAnimation(photographer)
                 }
             }
+
             private fun View.collectAnimation(photographer: PhotographerUI) {
                 photographer.map(binding.itemPostCollectImage)
                 binding.itemPostCollect.iconAnimation(
                     R.drawable.bookmark_empty, R.drawable.bookmark
                 )
-                val dp = if (binding.itemPostCollect.tag == context.getString(R.string.ic_tag_border)) 0 else 38
+                val dp =
+                    if (binding.itemPostCollect.tag == context.getString(R.string.ic_tag_border)) 0 else 38
                 binding.itemPostCollection.translateY(dp)
+
+
+                Handler(Looper.getMainLooper()).postDelayed({
+                    binding.itemPostCollection.translateY(38)
+                }, 3000)
+
             }
         }
 
@@ -116,7 +135,6 @@ class PhotographerAdapter(
         fun onClickPhotographer(photographer: PhotographerUI)
         fun likeClick(photographer: PhotographerUI)
     }
-
 
 
 }

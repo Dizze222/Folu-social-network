@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.ImageView
 import ch.b.retrofitandcoroutines.R
 import com.bumptech.glide.Glide
+import kotlinx.coroutines.delay
 
 fun ImageView.iconAnimation(borderDrawable: Int, fillDrawable: Int) {
     isClickable = false
@@ -61,8 +62,10 @@ fun ImageView.insertDrawable(ref: Int) {
 
 fun View.translateY(dp: Int) {
     val distance = context.dpToPx(dp).toFloat()
+
     visibility = View.VISIBLE
     ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, distance).start()
+
 }
 
 fun Context.dpToPx(dp: Int): Int {
