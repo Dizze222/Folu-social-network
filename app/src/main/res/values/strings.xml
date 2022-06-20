@@ -59,4 +59,5 @@
     <string name="save_to_collection">Save to Collection</string>
     <string name="learn_more">Читать больше</string>
     <string name="ic_tag_border">border</string>
+    <string name="loading">Загрузка</string>
 </resources>

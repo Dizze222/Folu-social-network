@@ -71,7 +71,7 @@ class PhotographerAdapter(
             private val photographerItemClick: PhotographerItemClickListener
         ) : PhotographerViewHolder(binding) {
             override fun bind(photographer: PhotographerUI) {
-                photographer.mapSuccess(binding.authorName,binding.like,binding.imageView,binding.itemPostShowAllComments)
+                photographer.mapSuccess(binding.authorName,binding.like,binding.imageView,binding.itemPostShowAllComments,binding.someComment)
                 binding.imageView.setOnClickListener {
                     photographerItemClick.onClickPhotographer(photographer)
                 }

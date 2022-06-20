@@ -11,7 +11,7 @@ interface ImageLoad {
 
     fun load(imageView: ImageView)
 
-    class Base(private val url: String) : ImageLoad {
+    class Base(private val url: String?) : ImageLoad {
         override fun load(imageView: ImageView) {
             Glide.with(imageView.context)
                 .load(url)

@@ -41,15 +41,15 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_first -> {
-                    val screen =
+                    val allPostsScreen =
                         FragmentScreen(AllPostTabContainer().newInstance())
-                    router.replaceTab(screen)
+                    router.replaceTab(allPostsScreen)
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_second -> {
-                    val screen =
+                    val likesScreen =
                         FragmentScreen(LikedTabContainer().newInstance())
-                    router.replaceTab(screen)
+                    router.replaceTab(likesScreen)
                     return@setOnItemSelectedListener true
                 }
             }
@@ -57,8 +57,8 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         }
 
         if (savedInstanceState == null) {
-            val screen = FragmentScreen(SplashContainer().newInstance())
-            router.replaceTab(screen)
+            val splashScreen = FragmentScreen(SplashContainer().newInstance())
+            router.replaceTab(splashScreen)
         }
     }
 

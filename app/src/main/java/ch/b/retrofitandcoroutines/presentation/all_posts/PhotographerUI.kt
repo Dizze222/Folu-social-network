@@ -13,7 +13,7 @@ sealed class PhotographerUI :
     override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = Unit
     open fun map(mapper: BasePhotographerStringMapper.IdMapper) = Unit
 
-    open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView) = Unit
+    open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView,someComment: TextView) = Unit
 
     open fun mapError(errorTextView: TextView) = Unit
 
@@ -44,11 +44,13 @@ sealed class PhotographerUI :
             authorView: TextView,
             like: TextView,
             imageView: ImageView,
-            comment: TextView
+            comment: TextView,
+            someComment: TextView
         ) {
             authorView.text = author
-            like.text = this.like.toString()
+            like.text = "Нравится: ${this.like}"
             comment.text = "Показать более ${authorOfComments.size - 1} комментария"
+            someComment.text = "${authorOfComments[0]}: ${this.comments[0]}"
             ImageLoad.Base(URL).load(imageView)
         }
 

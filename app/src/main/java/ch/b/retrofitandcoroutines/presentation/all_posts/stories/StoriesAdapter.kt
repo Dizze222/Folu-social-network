@@ -87,7 +87,7 @@ class StoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                         context.resources.getColor(R.color.story_border_color)
                     imageViewAddStory.visibility = View.INVISIBLE
                 }
-                ImageLoad.Base(story.profileImageUrl!!).load(imageViewProfile)
+                ImageLoad.Base(story.profileImageUrl).load(imageViewProfile)
                 textViewProfileName.text = context.getString(R.string.your_story)
             }
         }
