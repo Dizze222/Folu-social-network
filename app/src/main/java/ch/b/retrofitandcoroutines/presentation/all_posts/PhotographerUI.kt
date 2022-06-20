@@ -12,7 +12,7 @@ sealed class PhotographerUI :
     Abstract.Object<Unit, BasePhotographerStringMapper.SingleStringMapper>, Comparing {
     override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = Unit
     open fun map(mapper: BasePhotographerStringMapper.IdMapper) = Unit
-
+    open fun map(imageView: ImageView) = Unit
     open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView,someComment: TextView) = Unit
 
     open fun mapError(errorTextView: TextView) = Unit
@@ -37,7 +37,9 @@ sealed class PhotographerUI :
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
         override fun map(mapper: BasePhotographerStringMapper.IdMapper) = mapper.map(id)
-
+        override fun map(imageView: ImageView) {
+            ImageLoad.Base(URL).load(imageView)
+        }
         @SuppressLint("SetTextI18n")
         override fun mapSuccess(
             authorView: TextView,

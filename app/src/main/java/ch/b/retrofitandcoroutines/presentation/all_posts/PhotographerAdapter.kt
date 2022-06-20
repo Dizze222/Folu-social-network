@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -9,6 +10,7 @@ import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.*
 import ch.b.retrofitandcoroutines.presentation.core.iconAnimation
+import ch.b.retrofitandcoroutines.presentation.core.translateY
 
 class PhotographerAdapter(
     private val retry: Retry,
@@ -77,13 +79,16 @@ class PhotographerAdapter(
                     photographerItemClick.onClickPhotographer(photographer)
                 }
                 binding.itemPostCollect.setOnClickListener {
-                    collectAnimation()
+                    it.collectAnimation(photographer)
                 }
             }
-            private fun collectAnimation() {
+            private fun View.collectAnimation(photographer: PhotographerUI) {
+                photographer.map(binding.itemPostCollectImage)
                 binding.itemPostCollect.iconAnimation(
                     R.drawable.bookmark_empty, R.drawable.bookmark
                 )
+                val dp = if (binding.itemPostCollect.tag == context.getString(R.string.ic_tag_border)) 0 else 38
+                binding.itemPostCollection.translateY(dp)
             }
         }
 

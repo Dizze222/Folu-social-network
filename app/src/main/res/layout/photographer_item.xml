@@ -54,7 +54,7 @@
             android:contentDescription="@string/post_image"
             android:minHeight="200dp"
             tools:ignore="ImageContrastCheck"
-            tools:src="@drawable/ic_launcher_background" />
+            tools:src="@drawable/example_img" />
 
         <ImageView
             android:id="@+id/itemPostBigLike"
