@@ -8,15 +8,16 @@
 
     <item
         android:id="@+id/navigation_second"
-        android:icon="@drawable/likes_selector"
-        android:title="@string/my_likes" />
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
+
     <item
         android:id="@+id/navigation_third"
-        android:icon="@drawable/profile_selector"
-        android:title="@string/profile" />
+        android:icon="@drawable/likes_and_favorite_selector"
+        android:title="@string/my_likes" />
     <item
-        android:id="@+id/navigation_four"
-        android:icon="@drawable/bookmark_selector"
+        android:id="@+id/navigation_fourth"
+        android:icon="@drawable/profile_selector"
         android:title="@string/profile" />
 
 </menu>

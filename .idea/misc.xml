@@ -26,6 +26,7 @@
         <entry key="app/src/main/res/drawable/ic_megafon.xml" value="0.26180555555555557" />
         <entry key="app/src/main/res/drawable/ic_sort.xml" value="0.26216216216216215" />
         <entry key="app/src/main/res/drawable/item_selected.xml" value="0.24513888888888888" />
+        <entry key="app/src/main/res/drawable/likes_and_favorite_selector.xml" value="0.2604166666666667" />
         <entry key="app/src/main/res/drawable/likes_selector.xml" value="0.29343629343629346" />
         <entry key="app/src/main/res/drawable/main_selector.xml" value="0.2922779922779923" />
         <entry key="app/src/main/res/drawable/posts_selector.xml" value="0.2922779922779923" />

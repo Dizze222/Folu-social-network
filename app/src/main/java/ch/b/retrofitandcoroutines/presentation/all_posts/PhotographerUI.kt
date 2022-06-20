@@ -36,9 +36,8 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
-        override fun map(mapper: BasePhotographerStringMapper.IdMapper){
-            mapper.map(id)
-        }
+        override fun map(mapper: BasePhotographerStringMapper.IdMapper) = mapper.map(id)
+
         @SuppressLint("SetTextI18n")
         override fun mapSuccess(
             authorView: TextView,
