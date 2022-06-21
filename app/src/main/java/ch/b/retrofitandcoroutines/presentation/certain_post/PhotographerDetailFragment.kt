@@ -8,6 +8,7 @@ import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.core.convertToArrayList
@@ -33,13 +34,13 @@ class PhotographerDetailFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragmentManager: FragmentManager = activity!!.supportFragmentManager
-        var photographerId: Int?
+
         fragmentManager.setFragmentResultListener("requestKey", this, { key, bundle ->
-            photographerId = bundle.getInt("id")
+            val photographerId = bundle.getInt("id")
             val adapter = CommentsAdapter()
             hideNavBar(true)
             binding.commetsRecyclerView.adapter = adapter
-            binding.commetsRecyclerView.layoutManager = GridLayoutManager(activity, 1)
+            binding.commetsRecyclerView.layoutManager = LinearLayoutManager(requireActivity())
             lifecycleScope.launchWhenStarted {
                 certainViewModel.observeCertainPost(this@PhotographerDetailFragment) {
                     it.map { post ->
@@ -77,9 +78,17 @@ class PhotographerDetailFragment :
 
             }
 
-            certainViewModel.getCertainPost(photographerId!!.toInt())
+            certainViewModel.getCertainPost(photographerId)
+            binding.refresh.setOnRefreshListener {
+                certainViewModel.getCertainPost(photographerId)
+                binding.refresh.isRefreshing = false
+            }
+
         }
+
         )
+
+
     }
 
 
@@ -93,7 +102,7 @@ class PhotographerDetailFragment :
         return true
     }
 
-    fun inject(){
+    fun inject() {
         val application = requireActivity().application as PhotoApp
         val appComponent = application.appComponent
         appComponent.inject(this)

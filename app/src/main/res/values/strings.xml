@@ -55,7 +55,7 @@
     <string name="view_all">View all %d comments</string>
     <string name="likes">%d likes</string>
     <string name="saved">Сохранено</string>
-    <string name="save_to_collection">Сохранить в коллекцию</string>
+    <string name="save_to_collection">Посмотреть все мои избранные</string>
     <string name="learn_more">Читать больше</string>
     <string name="ic_tag_border">border</string>
     <string name="loading">Загрузка</string>
