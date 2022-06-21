@@ -2,21 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_first"
+        android:id="@+id/navigation_posts"
         android:icon="@drawable/posts_selector"
         android:title="@string/all_posts" />
 
     <item
-        android:id="@+id/navigation_second"
+        android:id="@+id/navigation_search"
         android:icon="@drawable/ic_search"
         android:title="@string/search" />
 
     <item
-        android:id="@+id/navigation_third"
+        android:id="@+id/navigation_likes"
         android:icon="@drawable/likes_and_favorite_selector"
         android:title="@string/my_likes" />
     <item
-        android:id="@+id/navigation_fourth"
+        android:id="@+id/navigation_profile"
         android:icon="@drawable/profile_selector"
         android:title="@string/profile" />
 

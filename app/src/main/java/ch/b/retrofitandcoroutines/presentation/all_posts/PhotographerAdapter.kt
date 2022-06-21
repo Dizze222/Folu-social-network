@@ -14,8 +14,6 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.*
 import ch.b.retrofitandcoroutines.presentation.core.iconAnimation
 import ch.b.retrofitandcoroutines.presentation.core.translateY
-import kotlinx.coroutines.*
-import java.util.concurrent.TimeUnit
 
 class PhotographerAdapter(
     private val retry: Retry,
@@ -90,6 +88,7 @@ class PhotographerAdapter(
                     photographerItemClick.onClickPhotographer(photographer)
                 }
                 binding.itemPostCollect.setOnClickListener {
+                    photographerItemClick.favouriteClick(photographer)
                     it.collectAnimation(photographer)
                 }
             }
@@ -134,7 +133,9 @@ class PhotographerAdapter(
     interface PhotographerItemClickListener {
         fun onClickPhotographer(photographer: PhotographerUI)
         fun likeClick(photographer: PhotographerUI)
+        fun favouriteClick(photographer: PhotographerUI)
     }
+
 
 
 }

@@ -13,7 +13,7 @@ class LikedTabContainer : BaseFragmentContainer() {
         return LikedTabContainer()
     }
 
-    override fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen {
-        return ch.b.retrofitandcoroutines.FragmentScreen(LikedPostsFragment().newInstance())
+    override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
+        return FragmentScreen(LikedPostsFragment().newInstance())
     }
 }

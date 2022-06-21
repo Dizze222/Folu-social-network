@@ -14,8 +14,8 @@ class AuthorizationContainer : BaseFragmentContainer() {
         return AuthorizationContainer()
     }
 
-    override fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen {
-        return ch.b.retrofitandcoroutines.FragmentScreen(AuthenticationFragment().newInstance())
+    override fun getInitialFragmentScreen(params: Bundle?):FragmentScreen {
+        return FragmentScreen(AuthenticationFragment().newInstance())
     }
 
 

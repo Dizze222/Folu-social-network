@@ -8,6 +8,7 @@ import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
 import ch.b.retrofitandcoroutines.presentation.containers.LikedTabContainer
+import ch.b.retrofitandcoroutines.presentation.containers.SearchTabContainer
 import ch.b.retrofitandcoroutines.presentation.containers.SplashContainer
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
@@ -40,16 +41,21 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         router.replaceTab(screen)
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.navigation_first -> {
+                R.id.navigation_posts -> {
                     val allPostsScreen =
                         FragmentScreen(AllPostTabContainer().newInstance())
                     router.replaceTab(allPostsScreen)
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_second -> {
+                R.id.navigation_likes -> {
                     val likesScreen =
                         FragmentScreen(LikedTabContainer().newInstance())
                     router.replaceTab(likesScreen)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_search ->{
+                    val searchScreen = FragmentScreen(SearchTabContainer().newInstance())
+                    router.replaceTab(searchScreen)
                     return@setOnItemSelectedListener true
                 }
             }

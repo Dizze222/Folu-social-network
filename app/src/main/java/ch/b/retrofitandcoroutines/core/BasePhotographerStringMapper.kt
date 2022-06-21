@@ -25,4 +25,5 @@ interface BasePhotographerStringMapper : Abstract.Mapper,
         fun map(id:Int)
     }
 
+
 }

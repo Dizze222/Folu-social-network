@@ -3,6 +3,7 @@ package ch.b.retrofitandcoroutines.presentation.navigate
 import androidx.annotation.IdRes
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import ch.b.retrofitandcoroutines.ReplaceBottomTab
 import ch.b.retrofitandcoroutines.presentation.containers.*
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
@@ -61,15 +62,25 @@ class AppNavigator(
             .detach(authorizationContainer)
             .commitNow()
 
+
+        val searchContainer = fragmentManager.findFragmentByTag(SearchTabContainer.TAG) as? SearchTabContainer
+            ?: SearchTabContainer().newInstance()
+        fragmentManager.beginTransaction()
+            .replace(containerId,searchContainer,SearchTabContainer.TAG)
+            .detach(searchContainer)
+            .commitNow()
+
+
         containers.add(allPostTabContainer)
         containers.add(likedTabContainer)
         containers.add(registrationContainer)
         containers.add(splashContainer)
         containers.add(authorizationContainer)
+        containers.add(searchContainer)
     }
 
     override fun applyCommand(command: Command) {
-        if (command is ch.b.retrofitandcoroutines.ReplaceBottomTab) {
+        if (command is ReplaceBottomTab) {
             val transaction = fragmentManager?.beginTransaction() ?: return
             var wasContainerAttached = false
             containers.forEach { container ->

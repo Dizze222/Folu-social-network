@@ -15,6 +15,7 @@ sealed class PhotographerUI :
     open fun map(imageView: ImageView) = Unit
     open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView,someComment: TextView) = Unit
     open fun mapError(errorTextView: TextView) = Unit
+    open fun list() : List<PhotographerUI> = listOf()
 
     object Progress : PhotographerUI() {
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
@@ -35,10 +36,14 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
+        override fun list(): List<PhotographerUI> {
+            return arrayListOf(Base(id, author, URL, like, theme, comments, authorOfComments))
+        }
         override fun map(mapper: BasePhotographerStringMapper.IdMapper) = mapper.map(id)
         override fun map(imageView: ImageView) {
             ImageLoad.Base(URL).load(imageView)
         }
+
         @SuppressLint("SetTextI18n")
         override fun mapSuccess(
             authorView: TextView,
@@ -49,7 +54,7 @@ sealed class PhotographerUI :
         ) {
             authorView.text = author
             like.text = "Нравится: ${this.like}"
-            comment.text = "Показать более ${authorOfComments.size - 1} комментария"
+            comment.text = "Показать все комментарии (${this.comments.size})"
             someComment.text = "${authorOfComments[0]}: ${this.comments[0]}"
             ImageLoad.Base(URL).load(imageView)
         }

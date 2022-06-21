@@ -53,6 +53,7 @@
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user_profile.xml" value="0.28515625" />
+        <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fragment_users.xml" value="0.25703125" />
         <entry key="app/src/main/res/layout/grid_item.xml" value="0.25" />
         <entry key="app/src/main/res/layout/item_layout.xml" value="0.34270833333333334" />
