@@ -46,7 +46,7 @@
         <entry key="app/src/main/res/layout/fragment_base_container.xml" value="0.283984375" />
         <entry key="app/src/main/res/layout/fragment_detail_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_full_image_view.xml" value="0.253515625" />
-        <entry key="app/src/main/res/layout/fragment_liked.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/fragment_liked.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photographer_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photographers.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.25" />

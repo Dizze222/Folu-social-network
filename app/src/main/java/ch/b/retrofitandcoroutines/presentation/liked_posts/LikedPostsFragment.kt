@@ -13,8 +13,15 @@ class LikedPostsFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBindi
         super.onViewCreated(view, savedInstanceState)
 
     }
-
-    fun newInstance(): LikedPostsFragment {
-        return LikedPostsFragment()
+    companion object {
+        private const val ARGS_KEY_TAB_NAME = "ARGS_KEY_TAB_NAME"
+        fun newInstance(tabName: String): LikedPostsFragment {
+            val args = Bundle()
+            args.putString(ARGS_KEY_TAB_NAME, tabName)
+            val fragment = LikedPostsFragment()
+            fragment.arguments = args
+            return fragment
+        }
     }
+
 }

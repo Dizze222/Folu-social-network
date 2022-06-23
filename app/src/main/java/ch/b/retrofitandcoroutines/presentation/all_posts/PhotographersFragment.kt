@@ -116,78 +116,14 @@ class PhotographersFragment :
             }
         }
         val list = mutableListOf<Story>()
-        list.add(
-            Story(
-                1,
-                "Ivan",
-                "https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",
-                false,
-                0
-            )
-        )
-        list.add(
-            Story(
-                2,
-                "Кирил",
-                "https://icdn.lenta.ru/images/2019/10/22/09/20191022091418639/pwa_vertical_1280_735a83106d6f25775db643a0e1ac8dfb.jpg",
-                true,
-                1
-            )
-        )
-        list.add(
-            Story(
-                3,
-                "Иван",
-                "https://myaw.by/upload/iblock/0d5/0d586c8df2382335a475205e7bbe694a.png",
-                true,
-                1
-            )
-        )
-        list.add(
-            Story(
-                4,
-                "Саша",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLB1ddsrLGCCnFTRcWKiSZuO_1VwGKu9wgxOQenLki5dapre23YTpSPYP2G7rMDV6lZWk&usqp=CAU",
-                true,
-                1
-            )
-        )
-        list.add(
-            Story(
-                5,
-                "Маша",
-                "https://cdn.botanichka.ru/wp-content/uploads/2020/05/kroliki-na-leto-moy-opyit-razvedeniya-01.jpg",
-                true,
-                1
-            )
-        )
-        list.add(
-            Story(
-                6,
-                "Дима",
-                "https://avatars.mds.yandex.net/get-zen_doc/4569048/pub_61bd850c4b46c01ca7146949_61bd86baacfe143bb4cdc6f2/scale_1200",
-                false,
-                1
-            )
-        )
-        list.add(
-            Story(
-                7,
-                "Азат",
-                "https://omskzdes.ru/storage/c/2019/11/11/1573447270_423998_15.jpg",
-                false,
-                1
-            )
-        )
-        list.add(
-            Story(
-                8,
-                "Григорий",
-                "https://storage-api.petstory.ru/resize/800x800x80/fa/17/4b/fa174b369e114c428c0601cb64369c85.jpeg",
-                false,
-                1
-            )
-        )
+        list.add(Story(1, "Ivan", "https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg", false, 0))
+        list.add(Story(2, "Кирил", "https://icdn.lenta.ru/images/2019/10/22/09/20191022091418639/pwa_vertical_1280_735a83106d6f25775db643a0e1ac8dfb.jpg", true, 1))
+        list.add(Story(3, "Иван", "https://myaw.by/upload/iblock/0d5/0d586c8df2382335a475205e7bbe694a.png", true, 1))
+        list.add(Story(4, "Саша", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLB1ddsrLGCCnFTRcWKiSZuO_1VwGKu9wgxOQenLki5dapre23YTpSPYP2G7rMDV6lZWk&usqp=CAU", true, 1))
+        list.add(Story(5, "Маша", "https://cdn.botanichka.ru/wp-content/uploads/2020/05/kroliki-na-leto-moy-opyit-razvedeniya-01.jpg", true, 1))
+        list.add(Story(6, "Дима", "https://avatars.mds.yandex.net/get-zen_doc/4569048/pub_61bd850c4b46c01ca7146949_61bd86baacfe143bb4cdc6f2/scale_1200", false, 1))
+        list.add(Story(7, "Азат", "https://omskzdes.ru/storage/c/2019/11/11/1573447270_423998_15.jpg", false, 1))
+        list.add(Story(8, "Григорий", "https://storage-api.petstory.ru/resize/800x800x80/fa/17/4b/fa174b369e114c428c0601cb64369c85.jpeg", false, 1))
         storiesContainerAdapter.stories(list)
         viewModel.getPhotographers()
         setupListeners()
