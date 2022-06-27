@@ -25,6 +25,7 @@ class NetworkModule {
     private companion object {
         private const val BASE_URL = "https://photographer-application.herokuapp.com/"
     }
+
     @Provides
     @Singleton
     fun provideGson(): GsonConverterFactory = GsonConverterFactory.create()
@@ -64,7 +65,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideAuthenticator(accessTokenFromShared: TokenToSharedPreferences) : Authenticator {
+    fun provideAuthenticator(accessTokenFromShared: TokenToSharedPreferences): Authenticator {
         return Authenticator(accessTokenFromShared)
     }
 
@@ -76,7 +77,7 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideSplashService(retrofit: Retrofit) : SplashService{
+    fun provideSplashService(retrofit: Retrofit): SplashService {
         return retrofit.create(SplashService::class.java)
     }
 

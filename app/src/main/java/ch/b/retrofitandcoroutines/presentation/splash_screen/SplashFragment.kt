@@ -24,7 +24,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
     @Inject
     lateinit var splashViewModelFactory: SplashViewModelFactory
 
-    private val viewModel: SplashViewModel by viewModels{
+    private val viewModel: SplashViewModel by viewModels {
         splashViewModelFactory
     }
 
@@ -32,6 +32,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
         super.onCreate(savedInstanceState)
         inject()
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val sharedPref = TokenToSharedPreferences.Base(activity!!.applicationContext, Reader())
@@ -43,7 +44,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)
             } else {
-               // viewModel.checkAccessToken()
+                viewModel.checkAccessToken()
                 val fragment = PhotographersFragment()
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)

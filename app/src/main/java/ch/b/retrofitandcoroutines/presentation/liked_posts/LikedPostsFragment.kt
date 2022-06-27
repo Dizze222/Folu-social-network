@@ -12,21 +12,16 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class LikedPostsFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBinding::inflate) {
 
-    private var tabLayout: TabLayout? = null
 
-    private var pager: ViewPager2? = null
     private var adapter: ViewPagerAdapter? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pager = binding.viewPager
-        tabLayout = binding.tab
         setUpViewPager()
-
     }
 
     companion object {
-        private const val ARGS_KEY_TAB_NAME = "ARGS_KEY_TAB_NAME"
+        private val ARGS_KEY_TAB_NAME = "ARGS_KEY_TAB_NAME"
         fun newInstance(tabName: String): LikedPostsFragment {
             val args = Bundle()
             args.putString(ARGS_KEY_TAB_NAME, tabName)
@@ -34,20 +29,17 @@ class LikedPostsFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBindi
             fragment.arguments = args
             return fragment
         }
-    }
 
-    fun newInstance() : LikedPostsFragment{
-        return LikedPostsFragment()
+        fun newInstance(): LikedPostsFragment {
+            return LikedPostsFragment()
+        }
     }
-
     private fun setUpViewPager() {
-        pager = binding.viewPager
-        tabLayout = binding.tab
         adapter = ViewPagerAdapter(this)
         adapter!!.tabNames = arrayOf("one", "two")
-        pager!!.adapter = adapter
-        TabLayoutMediator(tabLayout!!, pager!!) { tab, index ->
-            tab.text = namesOfFragment(index)
+        binding.viewPager.adapter = adapter
+        TabLayoutMediator(binding.tab, binding.viewPager) { tab, position ->
+            tab.contentDescription = "$position"
         }.attach()
     }
 
@@ -55,6 +47,4 @@ class LikedPostsFragment : BaseFragment<FragmentLikedBinding>(FragmentLikedBindi
         val arrayOfNamesFragment = arrayOf("one", "two")
         return arrayOfNamesFragment[index]
     }
-
 }
-
