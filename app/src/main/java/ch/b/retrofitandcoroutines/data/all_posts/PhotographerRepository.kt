@@ -49,6 +49,7 @@ interface PhotographerRepository {
             }
 
         } catch (e: Exception) {
+            Log.i("REPOS",e.toString())
             val messageError = exceptionMapper.mapper(e)
             PhotographerListData.Fail(messageError)
         }

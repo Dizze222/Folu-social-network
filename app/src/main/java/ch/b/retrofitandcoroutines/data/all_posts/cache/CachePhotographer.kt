@@ -31,6 +31,18 @@ interface CachePhotographer {
         override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T {
             return mapper.map(id, author, URL, like, theme, comments, authorOfComments)
         }
+    }
+
+    @Entity(tableName = "photographer_table_favourite")
+    data class Favourite(
+        @PrimaryKey
+        val id: List<Int>,
+    ) {
+        open fun <T> map(mapper: Abstract.ToFavouriteMapper<T>): T {
+            return mapper.map(id)
+        }
+
 
     }
+
 }

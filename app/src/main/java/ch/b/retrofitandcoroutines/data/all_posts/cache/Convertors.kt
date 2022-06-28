@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.data.all_posts.cache
 
-import androidx.lifecycle.LiveData
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -18,4 +17,17 @@ class Convertors{
         val type = object : TypeToken<List<String>>() {}.type
         return Gson().fromJson(json, type)
     }
+
+    @TypeConverter
+    fun fromIntList(list: List<Int>) : String{
+        return Gson().toJson(list)
+    }
+
+    @TypeConverter
+    fun toIntList(list: String) : List<Int>{
+        return Gson().fromJson(list,object : TypeToken<List<Int>>(){}.type)
+    }
+
+
+
 }

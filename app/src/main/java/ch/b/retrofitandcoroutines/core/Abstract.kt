@@ -1,8 +1,6 @@
 package ch.b.retrofitandcoroutines.core
 
 
-
-
 abstract class Abstract {
 
     interface Object<T, M : Mapper> {
@@ -23,6 +21,14 @@ abstract class Abstract {
             comments: List<String>,
             authorOfComments: List<String>
         ): T
+
+
+    }
+
+    interface ToFavouriteMapper<T> : Mapper {
+        fun map(
+            id: List<Int>
+        ): T
     }
 
     interface ToRegisterMapper<T> : Mapper {
@@ -32,7 +38,6 @@ abstract class Abstract {
             successRegister: Boolean
         ): T
     }
-
 
 
     interface Mapper {
