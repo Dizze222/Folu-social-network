@@ -141,15 +141,17 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
             }
         }
 
-        override suspend fun makePost(
+        override suspend fun like(
             author: String,
             idPhotographer: Int,
             like: Int,
             theme: String,
             url: String
         ): Response<PhotographerCloud> {
-            TODO("Not used here")
+            TODO("Not yet implemented")
         }
+
+
 
     }
 

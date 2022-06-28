@@ -1,8 +1,8 @@
 <resources>
 
-    <string-array name="names_of_fragments">
-        <item>one</item>
-        <item>two</item>
+    <string-array name="names_of_tabs">
+        <item>Избранное</item>
+        <item>Понравившиеся</item>
     </string-array>
 
 
