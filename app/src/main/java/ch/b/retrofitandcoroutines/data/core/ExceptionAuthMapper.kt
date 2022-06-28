@@ -12,7 +12,7 @@ interface ExceptionAuthMapper : Abstract.Mapper {
 
     fun map(exception: Exception): String
 
-    class Base(private val resourceProvider: ResourceProvider) : ExceptionAuthMapper {
+    class Registration(private val resourceProvider: ResourceProvider) : ExceptionAuthMapper {
         override fun map(exception: Exception): String =
             when (exception) {
                 is NullPointerException -> resourceProvider.getString(R.string.invalid_register)
@@ -22,6 +22,20 @@ interface ExceptionAuthMapper : Abstract.Mapper {
                 else -> "неизвестная ошибка $exception"
             }
     }
+
+    class Authorization(private val resourceProvider: ResourceProvider) : ExceptionAuthMapper {
+        override fun map(exception: Exception): String =
+            when (exception) {
+                is NullPointerException -> resourceProvider.getString(R.string.invalid_authorization)
+                is UnknownHostException -> resourceProvider.getString(R.string.service_unavailable)
+                is HttpException -> resourceProvider.getString(R.string.something_went_wrong)
+                is ConnectException -> resourceProvider.getString(R.string.filed_to_connection_server)
+                else -> "неизвестная ошибка $exception"
+            }
+
+
+    }
+
 
     class Test : ExceptionAuthMapper {
         override fun map(exception: Exception): String =

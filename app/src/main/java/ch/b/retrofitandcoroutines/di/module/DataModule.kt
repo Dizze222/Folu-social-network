@@ -53,8 +53,14 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideExceptionMapper(resourcesProvider: ResourceProvider): ExceptionAuthMapper {
-        return ExceptionAuthMapper.Base(resourcesProvider)
+    fun provideExceptionMapper(resourcesProvider: ResourceProvider): ExceptionAuthMapper.Registration {
+        return ExceptionAuthMapper.Registration(resourcesProvider)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthExceptionMapper(resourcesProvider: ResourceProvider): ExceptionAuthMapper.Authorization {
+        return ExceptionAuthMapper.Authorization(resourcesProvider)
     }
 
 
@@ -87,14 +93,16 @@ class DataModule {
         registerDataSource: RegistrationCloudDataSource,
         dataSource: AuthenticationCloudDataSource,
         cloudMapper: AuthorizationListCloudMapper,
-        exceptionMapper: ExceptionAuthMapper,
+        exceptionAuthMapper: ExceptionAuthMapper.Authorization,
+        exceptionRegisterMapper: ExceptionAuthMapper.Registration,
         tokenToSharedPreferences: TokenToSharedPreferences
 
     ): AuthenticationRepository {
         return AuthenticationRepository(
             registerDataSource,
             cloudMapper,
-            exceptionMapper,
+            exceptionRegisterMapper,
+            exceptionAuthMapper,
             tokenToSharedPreferences,
             dataSource
         )
@@ -106,13 +114,15 @@ class DataModule {
         registerDataSource: RegistrationCloudDataSource,
         dataSource: AuthenticationCloudDataSource,
         cloudMapper: AuthorizationListCloudMapper,
-        exceptionMapper: ExceptionAuthMapper,
+        exceptionAuthMapper: ExceptionAuthMapper.Authorization,
+        exceptionRegisterMapper: ExceptionAuthMapper.Registration,
         tokenToSharedPreferences: TokenToSharedPreferences
     ): RegistrationRepository {
         return RegistrationRepository(
             registerDataSource,
             cloudMapper,
-            exceptionMapper,
+            exceptionRegisterMapper,
+            exceptionAuthMapper,
             tokenToSharedPreferences,
             dataSource
         )

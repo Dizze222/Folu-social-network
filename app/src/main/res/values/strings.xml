@@ -1,6 +1,6 @@
 <resources>
 
-    <string-array name ="names_of_fragments">
+    <string-array name="names_of_fragments">
         <item>one</item>
         <item>two</item>
     </string-array>
@@ -29,7 +29,7 @@
     <string name="input_name">Введите имя</string>
     <string name="cancel">Отмена</string>
     <string name="all_posts">Посты</string>
-    <string name="my_likes">Лайки</string>
+    <string name="my_likes">Мое любимое</string>
     <string name="profile">Профиль</string>
     <string name="numberPhone">Номер телефона</string>
     <string name="password">Пароль</string>
@@ -39,6 +39,7 @@
     <string name="secondNameOfUser">Фамилия</string>
     <string name="authorization">Войти</string>
     <string name="invalid_register">Ошибка регистрации, скорее всего, такой номер телефона уже зареган в базе</string>
+    <string name="invalid_authorization">Ошибка авторизации, логин или пароль не верный</string>
     <string name="unknown_exception">Неизвестная ошибка</string>
     <string name="filed_to_connection_server">Невозможно подключиться к серверу, попробуйте еще раз</string>
     <string name="to_registration">Зарегестрироваться</string>
@@ -68,4 +69,6 @@
     <string name="loading">Загрузка</string>
     <string name="ic_tag_fill">fill</string>
     <string name="profile_text">Шла саша по саше и сосала сушку</string>
+    <string name="favourite">Избранное</string>
+    <string name="my_like">Мне понравилось</string>
 </resources>

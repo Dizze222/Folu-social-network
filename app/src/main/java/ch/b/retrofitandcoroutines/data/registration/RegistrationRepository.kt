@@ -12,13 +12,15 @@ import javax.inject.Inject
 class RegistrationRepository @Inject constructor(
     registrationCloudDataSource: RegistrationCloudDataSource,
     cloudMapper: AuthorizationListCloudMapper,
-    exceptionMapper: ExceptionAuthMapper,
+    exceptionRegisterMapper: ExceptionAuthMapper.Registration,
+    exceptionAuthMapper: ExceptionAuthMapper.Authorization,
     tokenToSharedPreferences: TokenToSharedPreferences,
     authenticationCloudDataSource: AuthenticationCloudDataSource
 ) :
     BaseRepositoryAuth(
         cloudMapper,
-        exceptionMapper,
+        exceptionAuthMapper,
+        exceptionRegisterMapper,
         tokenToSharedPreferences,
         registrationCloudDataSource,
         authenticationCloudDataSource

@@ -10,7 +10,8 @@ import javax.inject.Inject
 
 open class BaseRepositoryAuth @Inject constructor(
     private val cloudMapper: AuthorizationListCloudMapper,
-    private val exceptionMapper: ExceptionAuthMapper,
+    private val exceptionAuthMapper: ExceptionAuthMapper.Authorization,
+    private val exceptionRegisterMapper: ExceptionAuthMapper.Registration,
     private val tokenToSharedPreferences: TokenToSharedPreferences,
     private val registrationCloudDataSource: RegistrationCloudDataSource,
     private val authenticationCloudDataSource: AuthenticationCloudDataSource
@@ -34,7 +35,11 @@ open class BaseRepositoryAuth @Inject constructor(
         tokenToSharedPreferences.saveRefreshToken(registerList.dataOfAuth()[1])
         AuthorizationListData.Success(registerList)
     } catch (e: Exception) {
-        val errorMessage = exceptionMapper.map(e)
+        if (state == "register"){
+            val errorMessage = exceptionRegisterMapper.map(e)
+            AuthorizationListData.Fail(errorMessage)
+        }
+        val errorMessage = exceptionAuthMapper.map(e)
         AuthorizationListData.Fail(errorMessage)
     }
 }
