@@ -10,13 +10,15 @@ import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 
 interface CacheFavouriteDataSource {
 
-
+    fun insert()
 
     class Base(
         private val dao: PhotographerDao,
         private val mapper: Abstract.ToPhotographerMapper<PhotographerData>
     ) : CacheFavouriteDataSource {
-
+        override fun insert() {
+            TODO("Not yet implemented")
+        }
 
 
     }
