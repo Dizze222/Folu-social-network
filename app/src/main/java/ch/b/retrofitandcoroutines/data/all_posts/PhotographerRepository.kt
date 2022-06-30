@@ -38,7 +38,7 @@ interface PhotographerRepository {
             val listOfCache = cacheDataSource.getPhotographers()
             if (listOfCache.isEmpty()) {
                 val photographerOfList = cloudMapper.map(listOfCloud)
-                cacheDataSource.savePhotographers(listOfCloud)
+                //cacheDataSource.savePhotographers(listOfCloud)
                 PhotographerListData.Success(photographerOfList)
             } else {
                 PhotographerListData.Success(listOfCloud.map {
