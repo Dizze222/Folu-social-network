@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
 import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
 
 
@@ -15,8 +16,7 @@ sealed class PhotographerUI :
     open fun map(imageView: ImageView) = Unit
     open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView,someComment: TextView) = Unit
     open fun mapError(errorTextView: TextView) = Unit
-    open fun list() : List<PhotographerUI> = listOf()
-
+    open fun list() : List<PhotographerDomain> = listOf()
     object Progress : PhotographerUI() {
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(true)
@@ -36,8 +36,8 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
-        override fun list(): List<PhotographerUI> {
-            return arrayListOf(Base(id, author, URL, like, theme, comments, authorOfComments))
+        override fun list(): List<PhotographerDomain> {
+            return arrayListOf(PhotographerDomain.Base(id, author, URL, like, theme, comments, authorOfComments))
         }
         override fun map(mapper: BasePhotographerStringMapper.IdMapper) = mapper.map(id)
         override fun map(imageView: ImageView) {

@@ -33,16 +33,5 @@ interface CachePhotographer {
         }
     }
 
-    @Entity(tableName = "photographer_table_favourite")
-    data class Favourite(
-        @PrimaryKey
-        val id: List<Int>,
-    ) {
-        open fun <T> map(mapper: Abstract.ToFavouriteMapper<T>): T {
-            return mapper.map(id)
-        }
-
-
-    }
 
 }

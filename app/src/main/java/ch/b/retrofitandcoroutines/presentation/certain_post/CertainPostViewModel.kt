@@ -26,8 +26,8 @@ class CertainPostViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val resultDomain = interactor.getCertainPost(postId)
             withContext(Dispatchers.Main){
-                val resultUI = resultDomain.map(mapper)
-                resultUI.map(communicate)
+                val resultUi = resultDomain.map(mapper)
+                resultUi.map(communicate)
             }
         }
     }

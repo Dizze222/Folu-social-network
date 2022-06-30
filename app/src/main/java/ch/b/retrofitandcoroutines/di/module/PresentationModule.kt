@@ -43,17 +43,4 @@ class PresentationModule {
         return BasePhotographerListDomainToUIMapper(BasePhotographerDomainToUIMapper())
     }
 
-    @Provides
-    fun provideCertainPostInteractor(
-        repository: CertainPostRepository,
-        mapper: PhotographerListDataToDomainMapper
-    ): CertainPostInteractor {
-        return CertainPostInteractor.Base(repository, mapper)
-    }
-
-    @Provides
-    fun provideSplashInteractor(service: SplashService) : SplashInteractor{
-        return SplashInteractor.Base(service)
-    }
-
 }

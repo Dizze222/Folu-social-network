@@ -1,7 +1,6 @@
 package ch.b.retrofitandcoroutines.data.all_posts
 
 
-import android.util.Log
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.ExceptionPostsMapper
@@ -49,7 +48,6 @@ interface PhotographerRepository {
             }
 
         } catch (e: Exception) {
-            Log.i("REPOS",e.toString())
             val messageError = exceptionMapper.mapper(e)
             PhotographerListData.Fail(messageError)
         }

@@ -4,11 +4,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.*
-
 import androidx.core.os.bundleOf
-import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographersBinding
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -24,9 +21,11 @@ import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
-import ch.b.retrofitandcoroutines.data.all_posts.net.Stories
 import ch.b.retrofitandcoroutines.data.all_posts.net.Story
+import ch.b.retrofitandcoroutines.domain.favourite_post.FavouritePostInteractor
 import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
+import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.favourites.FavouriteViewModel
+import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.favourites.FavouriteViewModelFactory
 import javax.inject.Inject
 
 
@@ -35,8 +34,14 @@ class PhotographersFragment :
     ImageResult, BackButtonListener {
     @Inject
     lateinit var allPostsViewModelFactory: AllPostsViewModelFactory
+    @Inject
+    lateinit var favouriteViewModelFactory: FavouriteViewModelFactory
     private lateinit var storiesContainerAdapter: StoriesContainerAdapter
-    private val viewModel: AllPostsViewModel by viewModels() {
+    private val favouriteViewModel: FavouriteViewModel by viewModels {
+        favouriteViewModelFactory
+    }
+
+    private val viewModel: AllPostsViewModel by viewModels {
         allPostsViewModelFactory
     }
     private lateinit var photographersAdapter: PhotographerAdapter
@@ -75,30 +80,8 @@ class PhotographersFragment :
 
             override fun likeClick(photographer: PhotographerUI) = Unit
             override fun favouriteClick(photographer: PhotographerUI) {
-                photographer.map(object : BasePhotographerStringMapper.SingleStringMapper{
-                    override fun map(
-                        id: Int,
-                        author: String,
-                        URL: String,
-                        like: Long,
-                        theme: String,
-                        comments: List<String>,
-                        authorOfComments: List<String>
-                    ) {
-                        Log.i("TAG",id.toString())
-                    }
-
-                    override fun map(message: String) {
-                        TODO("Not yet implemented")
-                    }
-
-                    override fun map(progress: Boolean) {
-                        TODO("Not yet implemented")
-                    }
-
-                })
+                favouriteViewModel.saveFavouritePost(photographer.list())
             }
-
         }
         photographersAdapter = PhotographerAdapter(retry, itemClickListener)
 
@@ -116,14 +99,78 @@ class PhotographersFragment :
             }
         }
         val list = mutableListOf<Story>()
-        list.add(Story(1, "Ivan", "https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg", false, 0))
-        list.add(Story(2, "Кирил", "https://icdn.lenta.ru/images/2019/10/22/09/20191022091418639/pwa_vertical_1280_735a83106d6f25775db643a0e1ac8dfb.jpg", true, 1))
-        list.add(Story(3, "Иван", "https://myaw.by/upload/iblock/0d5/0d586c8df2382335a475205e7bbe694a.png", true, 1))
-        list.add(Story(4, "Саша", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLB1ddsrLGCCnFTRcWKiSZuO_1VwGKu9wgxOQenLki5dapre23YTpSPYP2G7rMDV6lZWk&usqp=CAU", true, 1))
-        list.add(Story(5, "Маша", "https://cdn.botanichka.ru/wp-content/uploads/2020/05/kroliki-na-leto-moy-opyit-razvedeniya-01.jpg", true, 1))
-        list.add(Story(6, "Дима", "https://avatars.mds.yandex.net/get-zen_doc/4569048/pub_61bd850c4b46c01ca7146949_61bd86baacfe143bb4cdc6f2/scale_1200", false, 1))
-        list.add(Story(7, "Азат", "https://omskzdes.ru/storage/c/2019/11/11/1573447270_423998_15.jpg", false, 1))
-        list.add(Story(8, "Григорий", "https://storage-api.petstory.ru/resize/800x800x80/fa/17/4b/fa174b369e114c428c0601cb64369c85.jpeg", false, 1))
+        list.add(
+            Story(
+                1,
+                "Ivan",
+                "https://rkorova.ru/assets/images/portfolio/myagkaya-igrushka-talisman-08.jpg",
+                false,
+                0
+            )
+        )
+        list.add(
+            Story(
+                2,
+                "Кирил",
+                "https://icdn.lenta.ru/images/2019/10/22/09/20191022091418639/pwa_vertical_1280_735a83106d6f25775db643a0e1ac8dfb.jpg",
+                true,
+                1
+            )
+        )
+        list.add(
+            Story(
+                3,
+                "Иван",
+                "https://myaw.by/upload/iblock/0d5/0d586c8df2382335a475205e7bbe694a.png",
+                true,
+                1
+            )
+        )
+        list.add(
+            Story(
+                4,
+                "Саша",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLB1ddsrLGCCnFTRcWKiSZuO_1VwGKu9wgxOQenLki5dapre23YTpSPYP2G7rMDV6lZWk&usqp=CAU",
+                true,
+                1
+            )
+        )
+        list.add(
+            Story(
+                5,
+                "Маша",
+                "https://cdn.botanichka.ru/wp-content/uploads/2020/05/kroliki-na-leto-moy-opyit-razvedeniya-01.jpg",
+                true,
+                1
+            )
+        )
+        list.add(
+            Story(
+                6,
+                "Дима",
+                "https://avatars.mds.yandex.net/get-zen_doc/4569048/pub_61bd850c4b46c01ca7146949_61bd86baacfe143bb4cdc6f2/scale_1200",
+                false,
+                1
+            )
+        )
+        list.add(
+            Story(
+                7,
+                "Азат",
+                "https://omskzdes.ru/storage/c/2019/11/11/1573447270_423998_15.jpg",
+                false,
+                1
+            )
+        )
+        list.add(
+            Story(
+                8,
+                "Григорий",
+                "https://storage-api.petstory.ru/resize/800x800x80/fa/17/4b/fa174b369e114c428c0601cb64369c85.jpeg",
+                false,
+                1
+            )
+        )
         storiesContainerAdapter.stories(list)
         viewModel.getPhotographers()
         setupListeners()
