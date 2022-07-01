@@ -17,7 +17,6 @@ class FavouritesFragment :
     BaseFragment<FragmentFavouritesBinding>(FragmentFavouritesBinding::inflate) {
     @Inject
     lateinit var favouriteViewModelFactory: FavouriteViewModelFactory
-    private lateinit var storiesContainerAdapter: StoriesContainerAdapter
     private val favouriteViewModel: FavouriteViewModel by viewModels {
         favouriteViewModelFactory
     }
