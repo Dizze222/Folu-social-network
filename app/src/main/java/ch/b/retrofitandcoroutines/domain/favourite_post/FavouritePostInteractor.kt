@@ -12,7 +12,7 @@ interface FavouritePostInteractor {
 
     suspend fun saveFavouritePost(post: List<PhotographerDomain>)
 
-   suspend fun readFavouritePost(): PhotographerListDomain
+    suspend fun readFavouritePost(): PhotographerListDomain
 
 
     class Base(
@@ -21,9 +21,9 @@ interface FavouritePostInteractor {
         private val mapperData: PhotographerDomainToUIMapper<PhotographerData>
     ) : FavouritePostInteractor {
         override suspend fun saveFavouritePost(post: List<PhotographerDomain>) {
-           dataSource.saveFavouritePost(post.map{
-               it.map(mapperData)
-           })
+            dataSource.saveFavouritePost(post.map {
+                it.map(mapperData)
+            })
         }
 
         override suspend fun readFavouritePost(): PhotographerListDomain =

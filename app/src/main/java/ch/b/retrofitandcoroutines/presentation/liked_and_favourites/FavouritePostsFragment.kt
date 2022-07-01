@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import ch.b.retrofitandcoroutines.databinding.FragmentFavouriteBinding
+import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
+import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModelFactory
 import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.core.FavouriteNames
@@ -16,7 +18,6 @@ import javax.inject.Inject
 
 class FavouritePostsFragment :
     BaseFragment<FragmentFavouriteBinding>(FragmentFavouriteBinding::inflate) {
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -37,6 +37,7 @@ class PhotographersFragment :
     @Inject
     lateinit var favouriteViewModelFactory: FavouriteViewModelFactory
     private lateinit var storiesContainerAdapter: StoriesContainerAdapter
+
     private val favouriteViewModel: FavouriteViewModel by viewModels {
         favouriteViewModelFactory
     }
@@ -54,7 +55,7 @@ class PhotographersFragment :
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
         //binding.button.setOnClickListener {
         //    (requireActivity() as MainActivity).image()
         //}

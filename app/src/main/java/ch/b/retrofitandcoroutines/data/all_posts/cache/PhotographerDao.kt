@@ -20,5 +20,5 @@ interface PhotographerDao {
     suspend fun insertFavouritesPost(post: List<CachePhotographer.Base>)
 
     @Query("SELECT * FROM photographer_table ORDER BY id ASC")
-    fun readFavouritePost(): List<CachePhotographer.Base>
+    suspend fun readFavouritePost(): List<CachePhotographer.Base>
 }
