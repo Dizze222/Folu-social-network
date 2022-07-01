@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ListAdapter
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -20,21 +19,9 @@ class PhotographerAdapter(
     private val retry: Retry,
     private val photographerItemClick: PhotographerItemClickListener
 ) :
-    androidx.recyclerview.widget.ListAdapter<PhotographerUI, PhotographerAdapter.PhotographerViewHolder>(FavoriteDiffItemCallback) {
+    androidx.recyclerview.widget.ListAdapter<PhotographerUI, PhotographerAdapter.PhotographerViewHolder>(PhotographerDiffItemCallback) {
 
-    private val photographerListCloud = ArrayList<PhotographerUI>()
-
-    fun update(new: List<PhotographerUI>) {
-        val diffCallback = DiffUtilCallback(photographerListCloud, new)
-        val result = DiffUtil.calculateDiff(diffCallback)
-        photographerListCloud.clear()
-        photographerListCloud.addAll(new)
-        result.dispatchUpdatesTo(this)
-    }
-
-
-
-    override fun getItemViewType(position: Int) = when (photographerListCloud[position]) {
+    override fun getItemViewType(position: Int) = when (currentList[position]) {
         is PhotographerUI.Base -> 0
         is PhotographerUI.Fail -> 1
         is PhotographerUI.EmptyData -> 2
@@ -57,9 +44,9 @@ class PhotographerAdapter(
     }
 
     override fun onBindViewHolder(holder: PhotographerViewHolder, position: Int) =
-        holder.bind(photographerListCloud[position])
+        holder.bind(currentList[position])
 
-    override fun getItemCount() = photographerListCloud.size
+    override fun getItemCount() = currentList.size
 
     abstract class PhotographerViewHolder(view: ViewBinding) : RecyclerView.ViewHolder(view.root) {
         open fun bind(photographer: PhotographerUI) = Unit
@@ -137,7 +124,7 @@ class PhotographerAdapter(
 }
 
 
-private object FavoriteDiffItemCallback : DiffUtil.ItemCallback<PhotographerUI>() {
+private object PhotographerDiffItemCallback : DiffUtil.ItemCallback<PhotographerUI>() {
     override fun areItemsTheSame(oldItem: PhotographerUI, newItem: PhotographerUI): Boolean =
         oldItem.map() == oldItem.map()
 

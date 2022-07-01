@@ -89,7 +89,7 @@ class PhotographersFragment :
 
         lifecycleScope.launchWhenStarted {
             viewModel.observeAllPhotographers(this@PhotographersFragment) {
-                photographersAdapter.update(it)
+                photographersAdapter.submitList(it)
             }
         }
         val list = mutableListOf<Story>()
@@ -198,7 +198,7 @@ class PhotographersFragment :
         val searchQuery = "%$author%"
         lifecycleScope.launchWhenStarted {
             viewModel.observeSearchPhotographer(this@PhotographersFragment) {
-                photographersAdapter.update(it)
+                photographersAdapter.submitList(it)
             }
         }
         lifecycleScope.launchWhenCreated {
