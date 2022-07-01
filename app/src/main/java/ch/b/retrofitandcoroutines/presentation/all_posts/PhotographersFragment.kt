@@ -22,10 +22,7 @@ import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.data.all_posts.net.Story
-import ch.b.retrofitandcoroutines.domain.favourite_post.FavouritePostInteractor
 import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
-import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.favourites.FavouriteViewModel
-import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.favourites.FavouriteViewModelFactory
 import javax.inject.Inject
 
 
@@ -40,6 +37,7 @@ class PhotographersFragment :
     private val viewModel: AllPostsViewModel by viewModels {
         allPostsViewModelFactory
     }
+
     private lateinit var photographersAdapter: PhotographerAdapter
     private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""

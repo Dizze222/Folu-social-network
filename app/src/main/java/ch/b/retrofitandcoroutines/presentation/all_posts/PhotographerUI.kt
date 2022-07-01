@@ -21,10 +21,12 @@ sealed class PhotographerUI :
         comment: TextView,
         someComment: TextView
     ) = Unit
-    open fun map(favourite: Boolean) = Unit
-    open fun checkFavourite() : Boolean = true
+    open fun mapFavourite(flag: Boolean) = Unit
+    open fun mapFlag(): Boolean = false
+    open fun checkFavourite(): Boolean = true
     open fun mapError(errorTextView: TextView) = Unit
     open fun list(): List<PhotographerDomain> = listOf()
+    open fun map(): Int = -1
 
     object Progress : PhotographerUI() {
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
@@ -33,7 +35,7 @@ sealed class PhotographerUI :
 
     object EmptyData : PhotographerUI()
 
-    class Base(
+    data class Base(
         private val id: Int,
         private val author: String,
         private val URL: String,
@@ -46,16 +48,33 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
+        override fun mapFavourite(flag: Boolean) {
+            this.favourite = flag
+        }
+        override fun map(): Int {
+            return id
+        }
+
+        override fun mapFlag(): Boolean {
+            return favourite
+        }
         override fun list(): List<PhotographerDomain> =
-            arrayListOf(PhotographerDomain.Base(id, author, URL, like, theme, comments, authorOfComments,favourite = true))
+            arrayListOf(
+                PhotographerDomain.Base(
+                    id,
+                    author,
+                    URL,
+                    like,
+                    theme,
+                    comments,
+                    authorOfComments,
+                    favourite = true
+                )
+            )
 
         override fun map(mapper: BasePhotographerStringMapper.IdMapper) = mapper.map(id)
         override fun map(imageView: ImageView) {
             ImageLoad.Base(URL).load(imageView)
-        }
-
-        override fun map(favourite: Boolean) {
-            this.favourite = favourite
         }
 
         override fun checkFavourite(): Boolean {
