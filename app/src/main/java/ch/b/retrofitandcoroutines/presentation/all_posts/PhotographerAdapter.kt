@@ -2,6 +2,7 @@ package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +22,6 @@ class PhotographerAdapter(
     RecyclerView.Adapter<PhotographerAdapter.PhotographerViewHolder>() {
 
     private val photographers = ArrayList<PhotographerUI>()
-
 
     fun update(new: List<PhotographerUI>) {
         val diffCallback = DiffUtilCallback(photographers, new)
@@ -58,24 +58,15 @@ class PhotographerAdapter(
 
     override fun getItemCount() = photographers.size
 
-    abstract class PhotographerViewHolder(
-        view: ViewBinding,
-    ) : RecyclerView.ViewHolder(view.root) {
+    abstract class PhotographerViewHolder(view: ViewBinding) : RecyclerView.ViewHolder(view.root) {
         open fun bind(photographer: PhotographerUI) = Unit
-
-
-        class FullScreenProgress(private val binding: ProgressFullscreenBinding) :
-            PhotographerViewHolder(binding) {
-            override fun bind(photographer: PhotographerUI) {
-                binding.shimmerLayout.startShimmerAnimation()
-            }
-        }
 
         class Base(
             private val binding: PhotographerItemBinding,
             private val photographerItemClick: PhotographerItemClickListener
         ) : PhotographerViewHolder(binding) {
             override fun bind(photographer: PhotographerUI) {
+                Log.i("ROOM", photographer.checkFavourite().toString())
                 photographer.mapSuccess(
                     binding.authorName,
                     binding.like,
@@ -89,9 +80,9 @@ class PhotographerAdapter(
                 binding.itemPostCollect.setOnClickListener {
                     photographerItemClick.favouriteClick(photographer)
                     it.collectAnimation(photographer)
+                    photographer.map(true)
                 }
             }
-
             private fun View.collectAnimation(photographer: PhotographerUI) {
                 photographer.map(binding.itemPostCollectImage)
                 binding.itemPostCollect.iconAnimation(
@@ -100,12 +91,16 @@ class PhotographerAdapter(
                 val dp =
                     if (binding.itemPostCollect.tag == context.getString(R.string.ic_tag_border)) 0 else 38
                 binding.itemPostCollection.translateY(dp)
-
-
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.itemPostCollection.translateY(38)
                 }, 3000)
+            }
+        }
 
+        class FullScreenProgress(private val binding: ProgressFullscreenBinding) :
+            PhotographerViewHolder(binding) {
+            override fun bind(photographer: PhotographerUI) {
+                binding.shimmerLayout.startShimmerAnimation()
             }
         }
 
@@ -134,7 +129,4 @@ class PhotographerAdapter(
         fun likeClick(photographer: PhotographerUI)
         fun favouriteClick(photographer: PhotographerUI)
     }
-
-
-
 }

@@ -5,7 +5,7 @@ import ch.b.retrofitandcoroutines.core.Abstract
 import com.google.gson.annotations.SerializedName
 
 
-interface PhotographerCloud{
+interface PhotographerCloud {
     fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T
 
     data class Base(
@@ -17,14 +17,16 @@ interface PhotographerCloud{
         private val like: Long,
         private val theme: String,
         private val comments: List<String>,
-        private val authorOfComments: List<String>
-    ) : PhotographerCloud{
+        private val authorOfComments: List<String>,
+        private val favourite: Boolean
+    ) : PhotographerCloud {
         override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T {
-            return mapper.map(id, author, URL, like, theme, comments, authorOfComments)
+            return mapper.map(id, author, URL, like, theme, comments, authorOfComments,favourite)
         }
     }
 }
-data class Story (
+
+data class Story(
     val id: Int? = null,
     val profileName: String? = null,
     val profileImageUrl: String? = null,
@@ -33,7 +35,7 @@ data class Story (
 )
 
 class Stories {
-    companion object{
+    companion object {
         const val MY_STORY = 0
         const val DEFAULT = 1
     }

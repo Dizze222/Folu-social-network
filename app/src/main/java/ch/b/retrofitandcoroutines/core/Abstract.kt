@@ -9,7 +9,6 @@ abstract class Abstract {
 
     interface DataObject
 
-    interface CloudObject
 
     interface ToPhotographerMapper<T> : Mapper {
         fun map(
@@ -19,17 +18,14 @@ abstract class Abstract {
             like: Long,
             theme: String,
             comments: List<String>,
-            authorOfComments: List<String>
+            authorOfComments: List<String>,
+            favourite: Boolean
         ): T
 
 
     }
 
-    interface ToFavouriteMapper<T> : Mapper {
-        fun map(
-            id: List<Int>
-        ): T
-    }
+
 
     interface ToRegisterMapper<T> : Mapper {
         fun map(

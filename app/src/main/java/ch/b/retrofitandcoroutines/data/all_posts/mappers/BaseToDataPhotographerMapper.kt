@@ -13,9 +13,19 @@ class BaseToDataPhotographerMapper :
         like: Long,
         theme: String,
         comments: List<String>,
-        authorOfComments: List<String>
+        authorOfComments: List<String>,
+        favourite: Boolean
     ): PhotographerData {
-        return PhotographerData.Base(id, author, URL, like, theme, comments, authorOfComments)
+        return PhotographerData.Base(
+            id,
+            author,
+            URL,
+            like,
+            theme,
+            comments,
+            authorOfComments,
+            favourite
+        )
     }
 
 }
@@ -29,9 +39,19 @@ class BaseToPhotographerDomainMapper :
         like: Long,
         theme: String,
         comments: List<String>,
-        authorOfComments: List<String>
+        authorOfComments: List<String>,
+        favourite: Boolean
     ): PhotographerData {
-        return PhotographerData.Base(id, author, URL, like, theme, comments, authorOfComments)
+        return PhotographerData.Base(
+            id,
+            author,
+            URL,
+            like,
+            theme,
+            comments,
+            authorOfComments,
+            favourite
+        )
     }
 
 }

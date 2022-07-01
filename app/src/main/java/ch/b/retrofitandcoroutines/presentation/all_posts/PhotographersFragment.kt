@@ -34,13 +34,8 @@ class PhotographersFragment :
     ImageResult, BackButtonListener {
     @Inject
     lateinit var allPostsViewModelFactory: AllPostsViewModelFactory
-    @Inject
-    lateinit var favouriteViewModelFactory: FavouriteViewModelFactory
-    private lateinit var storiesContainerAdapter: StoriesContainerAdapter
 
-    private val favouriteViewModel: FavouriteViewModel by viewModels {
-        favouriteViewModelFactory
-    }
+    private lateinit var storiesContainerAdapter: StoriesContainerAdapter
 
     private val viewModel: AllPostsViewModel by viewModels {
         allPostsViewModelFactory
@@ -55,7 +50,7 @@ class PhotographersFragment :
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
+        super.onViewCreated(view, savedInstanceState)
         //binding.button.setOnClickListener {
         //    (requireActivity() as MainActivity).image()
         //}
@@ -81,7 +76,7 @@ class PhotographersFragment :
 
             override fun likeClick(photographer: PhotographerUI) = Unit
             override fun favouriteClick(photographer: PhotographerUI) {
-                favouriteViewModel.saveFavouritePost(photographer.list())
+                viewModel.saveFavouritePost(photographer.list())
             }
         }
         photographersAdapter = PhotographerAdapter(retry, itemClickListener)

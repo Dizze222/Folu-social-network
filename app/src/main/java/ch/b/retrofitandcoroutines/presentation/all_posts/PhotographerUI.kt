@@ -14,9 +14,18 @@ sealed class PhotographerUI :
     override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) = Unit
     open fun map(mapper: BasePhotographerStringMapper.IdMapper) = Unit
     open fun map(imageView: ImageView) = Unit
-    open fun mapSuccess(authorView: TextView, like: TextView,imageView: ImageView,comment: TextView,someComment: TextView) = Unit
+    open fun mapSuccess(
+        authorView: TextView,
+        like: TextView,
+        imageView: ImageView,
+        comment: TextView,
+        someComment: TextView
+    ) = Unit
+    open fun map(favourite: Boolean) = Unit
+    open fun checkFavourite() : Boolean = true
     open fun mapError(errorTextView: TextView) = Unit
-    open fun list() : List<PhotographerDomain> = listOf()
+    open fun list(): List<PhotographerDomain> = listOf()
+
     object Progress : PhotographerUI() {
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(true)
@@ -31,17 +40,26 @@ sealed class PhotographerUI :
         private val like: Long,
         private val theme: String,
         private val comments: List<String>,
-        private val authorOfComments: List<String>
+        private val authorOfComments: List<String>,
+        private var favourite: Boolean
     ) : PhotographerUI() {
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
-        override fun list(): List<PhotographerDomain> {
-            return arrayListOf(PhotographerDomain.Base(id, author, URL, like, theme, comments, authorOfComments))
-        }
+        override fun list(): List<PhotographerDomain> =
+            arrayListOf(PhotographerDomain.Base(id, author, URL, like, theme, comments, authorOfComments,favourite = true))
+
         override fun map(mapper: BasePhotographerStringMapper.IdMapper) = mapper.map(id)
         override fun map(imageView: ImageView) {
             ImageLoad.Base(URL).load(imageView)
+        }
+
+        override fun map(favourite: Boolean) {
+            this.favourite = favourite
+        }
+
+        override fun checkFavourite(): Boolean {
+            return favourite
         }
 
         @SuppressLint("SetTextI18n")

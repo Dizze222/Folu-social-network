@@ -11,7 +11,8 @@ class BasePhotographerDomainToUIMapper : PhotographerDomainToUIMapper<Photograph
         like: Long,
         theme: String,
         comments: List<String>,
-        authorOfComments: List<String>
+        authorOfComments: List<String>,
+        favourite: Boolean
     ): PhotographerUI =
-        PhotographerUI.Base(id, author, URL, like, theme, comments, authorOfComments)
+        PhotographerUI.Base(id, author, URL, like, theme, comments, authorOfComments,favourite)
 }

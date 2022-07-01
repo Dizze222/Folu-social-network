@@ -25,11 +25,13 @@ interface CachePhotographer {
         @ColumnInfo(name = "comments")
         val comments: List<String>,
         @ColumnInfo(name = "authorOfComments")
-        val authorOfComments: List<String>
+        val authorOfComments: List<String>,
+        @ColumnInfo(name="favourite")
+        val favourite: Boolean
     ) : CachePhotographer {
 
         override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T {
-            return mapper.map(id, author, URL, like, theme, comments, authorOfComments)
+            return mapper.map(id, author, URL, like, theme, comments, authorOfComments,favourite)
         }
     }
 

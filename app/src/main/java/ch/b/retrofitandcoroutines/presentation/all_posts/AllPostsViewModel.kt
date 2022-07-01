@@ -5,19 +5,21 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
 import androidx.lifecycle.*
+import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
+import ch.b.retrofitandcoroutines.domain.favourite_post.FavouritePostInteractor
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 
 class AllPostsViewModel(
     private val interactor: PhotographerInteractor,
     private val mapper: PhotographerListDomainToUIMapper,
+    private val favouriteInteractor: FavouritePostInteractor,
     private val communicateSearchAuthor: PhotographerCommunication,
     private val communicate: PhotographerCommunication,
     private val resourceProvider: ResourceProvider
@@ -48,6 +50,11 @@ class AllPostsViewModel(
                 val resultUi = resultDomain.map(mapper)
                 resultUi.map(communicateSearchAuthor)
             }
+        }
+    }
+    fun saveFavouritePost(post: List<PhotographerDomain>) {
+        viewModelScope.launch {
+            favouriteInteractor.saveFavouritePost(post)
         }
     }
 

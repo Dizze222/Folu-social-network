@@ -12,9 +12,19 @@ class BaseToCachePhotographerMapper :
         like: Long,
         theme: String,
         comments: List<String>,
-        authorOfComments: List<String>
+        authorOfComments: List<String>,
+        favourite: Boolean
     ): CachePhotographer.Base {
-        return CachePhotographer.Base(id, author, URL, like, theme, comments, authorOfComments)
+        return CachePhotographer.Base(
+            id,
+            author,
+            URL,
+            like,
+            theme,
+            comments,
+            authorOfComments,
+            favourite
+        )
     }
 
 }

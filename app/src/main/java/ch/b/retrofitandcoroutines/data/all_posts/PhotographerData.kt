@@ -17,9 +17,10 @@ interface PhotographerData {
         private val like: Long,
         private val theme: String,
         private val comments: List<String>,
-        private val authorOfComments: List<String>
+        private val authorOfComments: List<String>,
+        private val favourite: Boolean
     ) : Abstract.DataObject, PhotographerData {
         override fun <T> map(mapper: PhotographerDataToDomainMapper<T>): T =
-            mapper.map(id, author, URL, like, theme, comments, authorOfComments)
+            mapper.map(id, author, URL, like, theme, comments, authorOfComments,favourite)
     }
 }

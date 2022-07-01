@@ -12,6 +12,7 @@ interface PhotographerDomainToUIMapper<T> : Abstract.Mapper {
         like: Long,
         theme: String,
         comments: List<String>,
-        authorOfComments: List<String>
+        authorOfComments: List<String>,
+        favourite: Boolean
     ): T
 }

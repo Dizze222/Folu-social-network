@@ -30,7 +30,6 @@ class FavouritesFragment :
         inject()
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val adapter = FavouriteAdapter()
