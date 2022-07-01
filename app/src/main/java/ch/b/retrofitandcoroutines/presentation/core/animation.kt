@@ -23,7 +23,6 @@ fun ImageView.iconAnimation(borderDrawable: Int, fillDrawable: Int) {
     }
 }
 
-
 private fun ImageView.scaleTo(scale: Float, listenerEnd: () -> Unit) {
     getScaleObjectAnimator(scale, scale).apply {
         animatorEndListener { listenerEnd() }
@@ -62,14 +61,11 @@ fun ImageView.insertDrawable(ref: Int) {
 
 fun View.translateY(dp: Int) {
     val distance = context.dpToPx(dp).toFloat()
-
     visibility = View.VISIBLE
     ObjectAnimator.ofFloat(this, View.TRANSLATION_Y, distance).start()
-
 }
 
 fun Context.dpToPx(dp: Int): Int {
     val d: Float = this.resources.displayMetrics.density
     return (dp * d).toInt()
 }
-

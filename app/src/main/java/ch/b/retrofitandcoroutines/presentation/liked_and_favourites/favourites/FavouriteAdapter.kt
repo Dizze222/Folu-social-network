@@ -40,7 +40,7 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHold
         viewType: Int
     ): FavouriteAdapter.FavouriteViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = PhotographerItemBinding.inflate(layoutInflater)
+        val binding =  PhotographerItemBinding.inflate(layoutInflater, parent, false)
         return FavouriteViewHolder(binding)
     }
 
