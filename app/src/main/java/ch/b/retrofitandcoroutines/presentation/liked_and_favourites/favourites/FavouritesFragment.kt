@@ -35,8 +35,8 @@ class FavouritesFragment :
         val itemCollectClickListener =object :FavouriteAdapter.FavouriteItemClickListener{
             override fun deleteClick(id: Int) {
                 favouriteViewModel.deleteFavouritePost(id)
+                favouriteViewModel.getFavouritePost()
             }
-
         }
         val adapter = FavouriteAdapter(itemCollectClickListener)
         binding.listOfFavourites.adapter = adapter
