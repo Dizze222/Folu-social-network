@@ -16,7 +16,7 @@ interface PhotographerDao {
     @Query("SELECT * FROM photographer_table WHERE author LIKE :searchQuery ")
     suspend fun searchDatabase(searchQuery: String): List<CachePhotographer.Base>
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavouritesPost(post: List<CachePhotographer.Base>)
 
     @Query("SELECT * FROM photographer_table ORDER BY id ASC")

@@ -76,7 +76,6 @@ class PhotographerAdapter(
                 }
 
                 if (photographer.map() in favourite){
-                    photographer.map()
                     binding.itemPostCollect.setColorFilter(Color.BLUE)
                 }
             }

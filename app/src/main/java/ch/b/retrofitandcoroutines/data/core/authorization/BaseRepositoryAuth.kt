@@ -17,7 +17,6 @@ open class BaseRepositoryAuth @Inject constructor(
     private val authenticationCloudDataSource: AuthenticationCloudDataSource
 ) {
 
-
     suspend fun auth(
         phoneNumber: Long,
         name: String,
@@ -38,8 +37,9 @@ open class BaseRepositoryAuth @Inject constructor(
         if (state == "register"){
             val errorMessage = exceptionRegisterMapper.map(e)
             AuthorizationListData.Fail(errorMessage)
+        }else {
+            val errorMessage = exceptionAuthMapper.map(e)
+            AuthorizationListData.Fail(errorMessage)
         }
-        val errorMessage = exceptionAuthMapper.map(e)
-        AuthorizationListData.Fail(errorMessage)
     }
 }
