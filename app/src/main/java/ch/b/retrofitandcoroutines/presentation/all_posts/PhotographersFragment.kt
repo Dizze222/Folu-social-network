@@ -21,8 +21,10 @@ import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
+import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.all_posts.net.Story
 import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
+import ch.b.retrofitandcoroutines.presentation.core.SharedPreferencesFavourite
 import javax.inject.Inject
 
 
@@ -37,10 +39,10 @@ class PhotographersFragment :
     private val viewModel: AllPostsViewModel by viewModels {
         allPostsViewModelFactory
     }
-
     private lateinit var photographersAdapter: PhotographerAdapter
     private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""
+    private var favourite: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +55,7 @@ class PhotographersFragment :
         //    (requireActivity() as MainActivity).image()
         //}
         hideNavBar(false)
+        val preferences = SharedPreferencesFavourite.Base(requireContext(),Reader())
         storiesContainerAdapter = StoriesContainerAdapter()
         val retry = object : PhotographerAdapter.Retry {
             override fun tryAgain() {
@@ -75,9 +78,11 @@ class PhotographersFragment :
             override fun likeClick(photographer: PhotographerUI) = Unit
             override fun favouriteClick(photographer: PhotographerUI) {
                 viewModel.saveFavouritePost(photographer.list())
+                favourite = photographer.map() + " " + preferences.readIdOfFavouritePost()
+                preferences.saveFavouritePost(favourite)
             }
         }
-        photographersAdapter = PhotographerAdapter(retry, itemClickListener)
+        photographersAdapter = PhotographerAdapter(retry, itemClickListener,preferences.readIdOfFavouritePost())
 
         val mergeAdapter = ConcatAdapter(storiesContainerAdapter, photographersAdapter)
         binding.recyclerView.adapter = mergeAdapter

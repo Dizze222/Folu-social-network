@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import ch.b.retrofitandcoroutines.data.core.authorization.Reader
+import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.databinding.FragmentSplashBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographersFragment

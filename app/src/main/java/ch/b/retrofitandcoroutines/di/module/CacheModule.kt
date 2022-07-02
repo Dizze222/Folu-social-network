@@ -10,7 +10,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDataBase
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.BaseToCachePhotographerMapper
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDomainMapper
-import ch.b.retrofitandcoroutines.data.core.authorization.Reader
+import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.favourite_post.cache.CacheFavouriteDataSource
 import ch.b.retrofitandcoroutines.data.favourite_post.mappers.BasePhotographerDataToCacheMapper

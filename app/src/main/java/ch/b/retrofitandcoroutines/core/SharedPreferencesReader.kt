@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.data.core.authorization.cache
+package ch.b.retrofitandcoroutines.core
 
 import android.content.SharedPreferences
 

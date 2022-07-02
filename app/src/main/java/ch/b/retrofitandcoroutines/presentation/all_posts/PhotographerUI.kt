@@ -21,13 +21,11 @@ sealed class PhotographerUI :
         comment: TextView,
         someComment: TextView
     ) = Unit
-    open fun mapFavourite(flag: Boolean) = Unit
     open fun mapFlag(): Boolean = false
     open fun checkFavourite(): Boolean = true
     open fun mapError(errorTextView: TextView) = Unit
     open fun list(): List<PhotographerDomain> = listOf()
-    open fun map(): Int = -1
-
+    open fun map(): String = ""
     object Progress : PhotographerUI() {
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(true)
@@ -48,11 +46,9 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
-        override fun mapFavourite(flag: Boolean) {
-            this.favourite = flag
-        }
-        override fun map(): Int {
-            return id
+
+        override fun map(): String {
+            return id.toString()
         }
 
         override fun mapFlag(): Boolean {
@@ -111,7 +107,6 @@ sealed class PhotographerUI :
             errorTextView.text = message
         }
     }
-
 }
 
 interface Comparing {

@@ -1,7 +1,6 @@
-package ch.b.retrofitandcoroutines.data.core.authorization
+package ch.b.retrofitandcoroutines.core
 
 import android.content.SharedPreferences
-import ch.b.retrofitandcoroutines.data.core.authorization.cache.SharedPreferencesReader
 
 class Reader : SharedPreferencesReader<String> {
     override fun read(sharedPreferencesReader: SharedPreferences, key: String): String =

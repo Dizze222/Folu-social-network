@@ -2,11 +2,11 @@ package ch.b.retrofitandcoroutines.data.core.authorization.cache
 
 import android.content.Context
 import android.util.Log
-import ch.b.retrofitandcoroutines.data.core.authorization.Reader
+import ch.b.retrofitandcoroutines.core.Reader
 
 interface TokenToSharedPreferences {
     suspend fun saveRefreshToken(refreshToken: String)
-     fun readRefreshToken(): String
+    fun readRefreshToken(): String
 
     suspend fun saveAccessToken(accessToken: String)
     fun readAccessToken(): String
@@ -30,10 +30,8 @@ interface TokenToSharedPreferences {
             sharedPreferences.edit().putString(ACCESS_TOKEN_KEY, accessToken).apply()
         }
 
-        override  fun readAccessToken(): String {
-            Log.i("TOKE", reader.read(sharedPreferences, ACCESS_TOKEN_KEY))
-            return reader.read(sharedPreferences, ACCESS_TOKEN_KEY)
-        }
+        override fun readAccessToken(): String = reader.read(sharedPreferences, ACCESS_TOKEN_KEY)
+
     }
 
     private companion object {

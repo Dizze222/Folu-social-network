@@ -1,13 +1,14 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
+import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
@@ -17,9 +18,11 @@ import ch.b.retrofitandcoroutines.presentation.core.translateY
 
 class PhotographerAdapter(
     private val retry: Retry,
-    private val photographerItemClick: PhotographerItemClickListener
-) :
-    androidx.recyclerview.widget.ListAdapter<PhotographerUI, PhotographerAdapter.PhotographerViewHolder>(PhotographerDiffItemCallback) {
+    private val photographerItemClick: PhotographerItemClickListener,
+    private val favourite: String
+) : ListAdapter<PhotographerUI, PhotographerAdapter.PhotographerViewHolder>(
+    PhotographerDiffItemCallback
+) {
 
     override fun getItemViewType(position: Int) = when (currentList[position]) {
         is PhotographerUI.Base -> 0
@@ -36,7 +39,7 @@ class PhotographerAdapter(
         val bindingProgress = ProgressFullscreenBinding.inflate(layoutInflater, parent, false)
         val bindingEmpty = EmptydataFullscreenBinding.inflate(layoutInflater, parent, false)
         return when (viewType) {
-            0 -> PhotographerViewHolder.Base(bindingBase, photographerItemClick)
+            0 -> PhotographerViewHolder.Base(bindingBase, photographerItemClick,favourite)
             1 -> PhotographerViewHolder.Fail(bindingFail, retry)
             2 -> PhotographerViewHolder.EmptyData(bindingEmpty)
             else -> PhotographerViewHolder.FullScreenProgress(bindingProgress)
@@ -50,13 +53,13 @@ class PhotographerAdapter(
 
     abstract class PhotographerViewHolder(view: ViewBinding) : RecyclerView.ViewHolder(view.root) {
         open fun bind(photographer: PhotographerUI) = Unit
-
+        open fun bindFavoriteState(isFavorite: Boolean) = Unit
         class Base(
             private val binding: PhotographerItemBinding,
-            private val photographerItemClick: PhotographerItemClickListener
+            private val photographerItemClick: PhotographerItemClickListener,
+            private val favourite: String
         ) : PhotographerViewHolder(binding) {
             override fun bind(photographer: PhotographerUI) {
-                Log.i("ROOM", photographer.checkFavourite().toString())
                 photographer.mapSuccess(
                     binding.authorName,
                     binding.like,
@@ -70,8 +73,16 @@ class PhotographerAdapter(
                 binding.itemPostCollect.setOnClickListener {
                     photographerItemClick.favouriteClick(photographer)
                     it.collectAnimation(photographer)
-                    photographer.mapFavourite(true)
                 }
+
+                if (photographer.map() in favourite){
+                    photographer.map()
+                    binding.itemPostCollect.setColorFilter(Color.BLUE)
+                }
+            }
+
+            override fun bindFavoriteState(isFavorite: Boolean) {
+
             }
 
             private fun View.collectAnimation(photographer: PhotographerUI) {
