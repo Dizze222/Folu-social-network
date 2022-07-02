@@ -14,6 +14,8 @@ interface CacheFavouriteDataSource {
 
     suspend fun readFavouritePost(): PhotographerListData
 
+    suspend fun delete(id: Int)
+
     class Base(
         private val dao: PhotographerDao,
         private val mapperCache: PhotographerDataToDomainMapper<CachePhotographer.Base>,
@@ -29,5 +31,9 @@ interface CacheFavouriteDataSource {
             PhotographerListData.Success(dao.readFavouritePost().map {
                 it.map(mapperData)
             })
+
+        override suspend fun delete(id: Int) {
+            dao.delete(id)
+        }
     }
 }

@@ -9,7 +9,6 @@ interface PhotographerListCacheDataSource {
 
     suspend fun savePhotographers(photographers: List<PhotographerCloud>)
 
-    suspend fun delete()
 
     suspend fun searchPhotographers(author: String): List<CachePhotographer>
 
@@ -28,9 +27,6 @@ interface PhotographerListCacheDataSource {
             })
         }
 
-        override suspend fun delete() {
-            dao.delete()
-        }
 
         override suspend fun searchPhotographers(author: String): List<CachePhotographer> =
             dao.searchDatabase(author)

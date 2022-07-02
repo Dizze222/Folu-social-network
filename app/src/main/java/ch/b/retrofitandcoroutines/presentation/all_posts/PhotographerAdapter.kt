@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
-import android.graphics.Color
+
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -60,6 +60,9 @@ class PhotographerAdapter(
             private val favourite: String
         ) : PhotographerViewHolder(binding) {
             override fun bind(photographer: PhotographerUI) {
+                if (photographer.map() in favourite){
+                    binding.itemPostCollect.setImageResource(R.drawable.bookmark)
+                }
                 photographer.mapSuccess(
                     binding.authorName,
                     binding.like,
@@ -75,9 +78,7 @@ class PhotographerAdapter(
                     it.collectAnimation(photographer)
                 }
 
-                if (photographer.map() in favourite){
-                    binding.itemPostCollect.setColorFilter(Color.BLUE)
-                }
+
             }
 
             override fun bindFavoriteState(isFavorite: Boolean) {

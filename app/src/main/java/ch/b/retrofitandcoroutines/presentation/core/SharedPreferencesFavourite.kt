@@ -19,7 +19,8 @@ interface SharedPreferencesFavourite {
             sharedPreferences.edit().putString(FAVOURITE_KEY, id).apply()
         }
 
-        override fun readIdOfFavouritePost(): String = reader.read(sharedPreferences, FAVOURITE_KEY)
+        override fun readIdOfFavouritePost(): String =
+            reader.read(sharedPreferences, FAVOURITE_KEY)
 
     }
 
