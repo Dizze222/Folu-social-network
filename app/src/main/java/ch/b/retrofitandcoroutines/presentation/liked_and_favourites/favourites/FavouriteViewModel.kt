@@ -29,12 +29,6 @@ class FavouriteViewModel(
         }
     }
 
-    fun saveFavouritePost(post: List<PhotographerDomain>) {
-        viewModelScope.launch {
-            interactor.saveFavouritePost(post)
-        }
-    }
-
 
     suspend fun observe(
         owner: LifecycleOwner,
