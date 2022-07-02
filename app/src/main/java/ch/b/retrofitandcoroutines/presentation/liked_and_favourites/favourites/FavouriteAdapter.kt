@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.PhotographerItemBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.DiffUtilCallback
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 
 
-class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder>() {
+class FavouriteAdapter(private val favouriteClick: FavouriteItemClickListener) : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHolder>() {
 
     private val favouritePost = ArrayList<PhotographerUI>()
 
@@ -24,6 +25,7 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHold
     inner class FavouriteViewHolder(private val binding: PhotographerItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(photographer: PhotographerUI) {
+            binding.itemPostCollect.setImageResource(R.drawable.bookmark)
             photographer.mapSuccess(
                 binding.authorName,
                 binding.like,
@@ -31,7 +33,11 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHold
                 binding.itemPostShowAllComments,
                 binding.someComment
             )
+            binding.itemPostCollect.setOnClickListener {
+                favouriteClick.deleteClick(photographer.mapId())
+            }
         }
+
     }
 
 
@@ -49,5 +55,10 @@ class FavouriteAdapter : RecyclerView.Adapter<FavouriteAdapter.FavouriteViewHold
     }
 
     override fun getItemCount(): Int = favouritePost.size
+
+
+    interface FavouriteItemClickListener {
+        fun deleteClick(id: Int)
+    }
 
 }

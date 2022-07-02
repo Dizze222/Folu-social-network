@@ -32,7 +32,13 @@ class FavouritesFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val adapter = FavouriteAdapter()
+        val itemCollectClickListener =object :FavouriteAdapter.FavouriteItemClickListener{
+            override fun deleteClick(id: Int) {
+                favouriteViewModel.deleteFavouritePost(id)
+            }
+
+        }
+        val adapter = FavouriteAdapter(itemCollectClickListener)
         binding.listOfFavourites.adapter = adapter
         binding.listOfFavourites.layoutManager = LinearLayoutManager(activity!!.applicationContext)
         lifecycleScope.launchWhenStarted {

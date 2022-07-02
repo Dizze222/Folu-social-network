@@ -26,6 +26,7 @@ sealed class PhotographerUI :
     open fun mapError(errorTextView: TextView) = Unit
     open fun list(): List<PhotographerDomain> = listOf()
     open fun map(): String = ""
+    open fun mapId(): Int = -1
     object Progress : PhotographerUI() {
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(true)
@@ -46,6 +47,9 @@ sealed class PhotographerUI :
         override fun map(mapper: BasePhotographerStringMapper.SingleStringMapper) =
             mapper.map(id, author, URL, like, theme, comments, authorOfComments)
 
+        override fun mapId(): Int {
+            return id
+        }
 
         override fun map(): String {
             return id.toString()
