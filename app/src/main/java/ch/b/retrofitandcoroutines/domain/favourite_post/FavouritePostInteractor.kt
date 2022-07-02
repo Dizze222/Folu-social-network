@@ -14,7 +14,7 @@ interface FavouritePostInteractor {
 
     suspend fun readFavouritePost(): PhotographerListDomain
 
-
+    suspend fun delete(id: Int)
     class Base(
         private val dataSource: CacheFavouriteDataSource,
         private val mapper: PhotographerListDataToDomainMapper,
@@ -28,6 +28,10 @@ interface FavouritePostInteractor {
 
         override suspend fun readFavouritePost(): PhotographerListDomain =
             dataSource.readFavouritePost().map(mapper)
+
+        override suspend fun delete(id: Int) {
+            dataSource.delete(id)
+        }
 
 
     }
