@@ -10,7 +10,6 @@ import ch.b.retrofitandcoroutines.databinding.FragmentFavouritesBinding
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import javax.inject.Inject
 
-
 class FavouritesFragment :
     BaseFragment<FragmentFavouritesBinding>(FragmentFavouritesBinding::inflate) {
 

@@ -70,7 +70,11 @@ class AllPostsViewModel(
             interactor.like(author, idPhotographer, like, theme, url)
         }
     }
-
+    fun deleteFavouritePost(id: Int){
+        viewModelScope.launch {
+            favouriteInteractor.delete(id)
+        }
+    }
 
     private fun checkInternetConnection(): Boolean {
         val connectivityManager = resourceProvider.provideContext()

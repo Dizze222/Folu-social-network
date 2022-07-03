@@ -25,6 +25,7 @@ import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.all_posts.net.Story
 import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
 import ch.b.retrofitandcoroutines.presentation.core.SharedPreferencesFavourite
+import java.util.*
 import javax.inject.Inject
 
 
@@ -55,7 +56,7 @@ class PhotographersFragment :
         //    (requireActivity() as MainActivity).image()
         //}
         hideNavBar(false)
-        val preferences = SharedPreferencesFavourite.Base(requireContext(),Reader())
+        val preferences = SharedPreferencesFavourite.Base(requireContext(), Reader())
         storiesContainerAdapter = StoriesContainerAdapter()
         val retry = object : PhotographerAdapter.Retry {
             override fun tryAgain() {
@@ -77,12 +78,20 @@ class PhotographersFragment :
 
             override fun likeClick(photographer: PhotographerUI) = Unit
             override fun favouriteClick(photographer: PhotographerUI) {
-                viewModel.saveFavouritePost(photographer.list())
-                favourite = photographer.map() + " " + preferences.readIdOfFavouritePost()
-                preferences.saveFavouritePost(favourite)
+                val localId = preferences.readIdOfFavouritePost()
+                if (photographer.map() in localId) {
+                    val new = localId.replace(photographer.map(), " ")
+                    preferences.saveFavouritePost(new)
+                    viewModel.deleteFavouritePost(photographer.mapId())
+                }else {
+                    viewModel.saveFavouritePost(photographer.list())
+                    favourite = photographer.map() + " " + preferences.readIdOfFavouritePost()
+                    preferences.saveFavouritePost(favourite)
+                }
             }
         }
-        photographersAdapter = PhotographerAdapter(retry, itemClickListener,preferences.readIdOfFavouritePost())
+        photographersAdapter =
+            PhotographerAdapter(retry, itemClickListener, preferences.readIdOfFavouritePost())
 
         val mergeAdapter = ConcatAdapter(storiesContainerAdapter, photographersAdapter)
         binding.recyclerView.adapter = mergeAdapter
@@ -97,6 +106,8 @@ class PhotographersFragment :
                 photographersAdapter.submitList(it)
             }
         }
+
+
         val list = mutableListOf<Story>()
         list.add(
             Story(
