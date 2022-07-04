@@ -1,20 +1,18 @@
-
 package ch.b.retrofitandcoroutines.presentation.core
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
-
 import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.containers.*
 import ch.b.retrofitandcoroutines.presentation.navigate.*
+import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
 
 import ru.terrakok.cicerone.Cicerone
 
-
-class MainActivity : AppCompatActivity(), ResultApiActivity,
+class MainActivity : AppCompatActivity(), ActivityLauncher,
     RouterProvider {
     private lateinit var binding: ActivityMainBinding
     private val cicerone = Cicerone.create(AppRouter())
@@ -23,13 +21,14 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
     override val router: AppRouter
         get() = cicerone.router
 
-    private val image = registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-        val fragment = supportFragmentManager.fragments.first() as ImageResult
-        uri?.let {
-            fragment.onImageResult(it)
+    private val imageLauncher = ActivityResultLauncher.Image(
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
+            val fragment = UserProfileFragment.newInstance() as ImageResult
+            uri?.let {
+                fragment.onImageResult(it)
+            }
         }
-    }
-
+    )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -97,5 +96,5 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         return true
     }
 
-    override fun image() = image.launch("image/*")
+    override fun launch(arg: LauncherType) = arg.launch(imageLauncher)
 }

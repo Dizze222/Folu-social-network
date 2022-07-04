@@ -1,6 +1,5 @@
 package ch.b.retrofitandcoroutines.presentation.all_posts
 
-import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -15,23 +14,19 @@ import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.presentation.all_posts.*
 import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
-import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-import ch.b.retrofitandcoroutines.presentation.core.ImageProfile
-import ch.b.retrofitandcoroutines.presentation.core.ImageResult
 import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.all_posts.net.Story
 import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
-import ch.b.retrofitandcoroutines.presentation.core.SharedPreferencesFavourite
+import ch.b.retrofitandcoroutines.presentation.core.*
 import java.util.*
 import javax.inject.Inject
 
-
 class PhotographersFragment :
     BaseFragment<FragmentPhotographersBinding>(FragmentPhotographersBinding::inflate),
-    ImageResult, BackButtonListener {
+    BackButtonListener {
     @Inject
     lateinit var allPostsViewModelFactory: AllPostsViewModelFactory
 
@@ -41,7 +36,6 @@ class PhotographersFragment :
         allPostsViewModelFactory
     }
     private lateinit var photographersAdapter: PhotographerAdapter
-    private var imageProfile: ImageProfile = ImageProfile.Empty
     private var searchBy: String = ""
     private var favourite: String = ""
 
@@ -52,9 +46,6 @@ class PhotographersFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //binding.button.setOnClickListener {
-        //    (requireActivity() as MainActivity).image()
-        //}
         hideNavBar(false)
         val preferences = SharedPreferencesFavourite.Base(requireContext(), Reader())
         storiesContainerAdapter = StoriesContainerAdapter()
@@ -83,7 +74,7 @@ class PhotographersFragment :
                     val new = localId.replace(photographer.map(), " ")
                     preferences.saveFavouritePost(new)
                     viewModel.deleteFavouritePost(photographer.mapId())
-                }else {
+                } else {
                     viewModel.saveFavouritePost(photographer.list())
                     favourite = photographer.map() + " " + preferences.readIdOfFavouritePost()
                     preferences.saveFavouritePost(favourite)
@@ -220,12 +211,6 @@ class PhotographersFragment :
         lifecycleScope.launchWhenCreated {
             viewModel.searchPhotographers(searchQuery)
         }
-    }
-
-
-    override fun onImageResult(uri: Uri) {
-        //binding.button.setImageURI(uri)
-        imageProfile = ImageProfile.Base(uri)
     }
 
     fun newInstance(): PhotographersFragment {
