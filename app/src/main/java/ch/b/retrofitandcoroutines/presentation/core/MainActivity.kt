@@ -1,15 +1,14 @@
+
 package ch.b.retrofitandcoroutines.presentation.core
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
+
 import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
-import ch.b.retrofitandcoroutines.presentation.containers.AllPostTabContainer
-import ch.b.retrofitandcoroutines.presentation.containers.LikedTabContainer
-import ch.b.retrofitandcoroutines.presentation.containers.SearchTabContainer
-import ch.b.retrofitandcoroutines.presentation.containers.SplashContainer
+import ch.b.retrofitandcoroutines.presentation.containers.*
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
 import ru.terrakok.cicerone.Cicerone
@@ -37,25 +36,30 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         setContentView(binding.root)
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
-        val screen = FragmentScreen(SplashContainer().newInstance())
+        val screen = FragmentScreen(SplashContainer.newInstance())
         router.replaceTab(screen)
         binding.navigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.navigation_posts -> {
                     val allPostsScreen =
-                        FragmentScreen(AllPostTabContainer().newInstance())
+                        FragmentScreen(AllPostTabContainer.newInstance())
                     router.replaceTab(allPostsScreen)
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_likes -> {
                     val likesScreen =
-                        FragmentScreen(LikedTabContainer().newInstance())
+                        FragmentScreen(LikedTabContainer.newInstance())
                     router.replaceTab(likesScreen)
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_search ->{
-                    val searchScreen = FragmentScreen(SearchTabContainer().newInstance())
+                    val searchScreen = FragmentScreen(SearchTabContainer.newInstance())
                     router.replaceTab(searchScreen)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.navigation_profile ->{
+                    val profileScreen = FragmentScreen(UserProfileContainer.newInstance())
+                    router.replaceTab(profileScreen)
                     return@setOnItemSelectedListener true
                 }
             }
@@ -63,7 +67,7 @@ class MainActivity : AppCompatActivity(), ResultApiActivity,
         }
 
         if (savedInstanceState == null) {
-            val splashScreen = FragmentScreen(SplashContainer().newInstance())
+            val splashScreen = FragmentScreen(SplashContainer.newInstance())
             router.replaceTab(splashScreen)
         }
     }

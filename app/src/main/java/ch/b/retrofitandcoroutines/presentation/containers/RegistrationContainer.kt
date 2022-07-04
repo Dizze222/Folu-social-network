@@ -7,10 +7,11 @@ import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 class RegistrationContainer : BaseFragmentContainer() {
     companion object{
         const val TAG = "RegistrationFragment"
+        fun newInstance() : RegistrationContainer{
+            return RegistrationContainer()
+        }
     }
-    fun newInstance() : RegistrationContainer{
-        return RegistrationContainer()
-    }
+
     override fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen {
         return ch.b.retrofitandcoroutines.FragmentScreen(RegistrationFragment().newInstance())
     }

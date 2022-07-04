@@ -10,12 +10,6 @@ import ch.b.retrofitandcoroutines.R
 
 class UserProfileFragment : Fragment() {
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -23,6 +17,10 @@ class UserProfileFragment : Fragment() {
 
         return inflater.inflate(R.layout.fragment_user_profile, container, false)
     }
-
+    companion object{
+        fun newInstance() : UserProfileFragment{
+            return UserProfileFragment()
+        }
+    }
 
 }

@@ -8,10 +8,11 @@ class AllPostTabContainer : BaseFragmentContainer() {
 
     companion object {
         const val TAG = "AllPostTabContainerTag"
+        fun newInstance() : AllPostTabContainer{
+            return AllPostTabContainer()
+        }
     }
-    fun newInstance() : AllPostTabContainer{
-        return AllPostTabContainer()
-    }
+
 
     override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
         return FragmentScreen(PhotographersFragment().newInstance())

@@ -8,10 +8,9 @@ class LikedTabContainer : BaseFragmentContainer() {
 
     companion object {
         const val TAG = "LikedTabContainerTag"
-
-    }
-    fun newInstance() : LikedTabContainer{
-        return LikedTabContainer()
+        fun newInstance() : LikedTabContainer{
+            return LikedTabContainer()
+        }
     }
 
     override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {

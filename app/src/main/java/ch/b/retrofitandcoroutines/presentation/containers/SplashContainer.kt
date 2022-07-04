@@ -8,14 +8,14 @@ class SplashContainer : BaseFragmentContainer() {
 
     companion object{
         const val TAG = "SplashScreenContainerTag"
+
+        fun newInstance() : SplashContainer{
+            return SplashContainer()
+        }
     }
 
-    fun newInstance() : SplashContainer{
-        return SplashContainer()
-    }
-
-    override fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen {
-        return ch.b.retrofitandcoroutines.FragmentScreen(SplashFragment().newInstance())
+    override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
+        return FragmentScreen(SplashFragment().newInstance())
     }
 
 

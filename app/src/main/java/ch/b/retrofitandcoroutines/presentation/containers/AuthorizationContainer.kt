@@ -6,15 +6,15 @@ import ch.b.retrofitandcoroutines.FragmentScreen
 
 class AuthorizationContainer : BaseFragmentContainer() {
 
-    companion object{
+    companion object {
         const val TAG = "AuthorizationFragmentTAG"
+        fun newInstance(): AuthorizationContainer {
+            return AuthorizationContainer()
+        }
     }
 
-    fun newInstance() : AuthorizationContainer{
-        return AuthorizationContainer()
-    }
 
-    override fun getInitialFragmentScreen(params: Bundle?):FragmentScreen {
+    override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
         return FragmentScreen(AuthenticationFragment().newInstance())
     }
 
