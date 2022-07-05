@@ -12,18 +12,15 @@ class UserProfileFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.imageProfile.setOnClickListener {
-            openForGetImageLauncher()
+            resultLauncher.launch()
         }
+        binding.smileOfProfile.text = "\uD83D\uDC7A"
     }
 
 
-    private fun openForGetImageLauncher() {
-        resultLauncher.launch("image/*")
-    }
-
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) {
+    private var resultLauncher = ActivityResultLauncher.Image(registerForActivityResult(ActivityResultContracts.GetContent()) {
         binding.imageProfile.setImageURI(it)
-    }
+    })
 
 
     companion object {
@@ -31,6 +28,4 @@ class UserProfileFragment :
             return UserProfileFragment()
         }
     }
-
-
 }
