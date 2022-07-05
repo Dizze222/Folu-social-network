@@ -8,6 +8,7 @@ import okhttp3.*
 import okhttp3.Authenticator
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 
 class Authenticator(
@@ -16,6 +17,9 @@ class Authenticator(
     Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? = runBlocking {
         val okHttp = OkHttpClient.Builder()
+            .connectTimeout(5,TimeUnit.MINUTES)
+            .writeTimeout(5,TimeUnit.MINUTES)
+            .readTimeout(5,TimeUnit.MINUTES)
             .addInterceptor(TokenInterceptor.RefreshToken(tokenFromShared))
             .build()
 

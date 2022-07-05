@@ -25,6 +25,16 @@ abstract class Abstract {
 
     }
 
+    interface ToProfileMapper<T> : Mapper {
+        fun map(
+            name: String,
+            secondName: String,
+            dio: String,
+            image: String
+        ): T
+
+
+    }
 
 
     interface ToRegisterMapper<T> : Mapper {

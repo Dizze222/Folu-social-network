@@ -22,14 +22,6 @@ class MainActivity : AppCompatActivity(),
     override val router: AppRouter
         get() = cicerone.router
 
-    private val image =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            val fragment = supportFragmentManager.fragments[1] as ImageResult
-            uri?.let {
-                Log.i("URII", it.toString())
-                fragment.onImageResult(it)
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -99,7 +91,4 @@ class MainActivity : AppCompatActivity(),
     }
 
 
-//    override fun image() {
-//        image.launch("image/*")
-//    }
 }

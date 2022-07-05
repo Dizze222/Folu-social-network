@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 interface PhotographerCloud {
     fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T
 
-    data class Base(
+    /*data*/class Base(
         @SerializedName("idPhotographer")
         private val id: Int,
         private val author: String,
@@ -21,12 +21,12 @@ interface PhotographerCloud {
         private val favourite: Boolean
     ) : PhotographerCloud {
         override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T {
-            return mapper.map(id, author, URL, like, theme, comments, authorOfComments,favourite)
+            return mapper.map(id, author, URL, like, theme, comments, authorOfComments, favourite)
         }
     }
 }
 
-data class Story(
+class Story(
     val id: Int? = null,
     val profileName: String? = null,
     val profileImageUrl: String? = null,

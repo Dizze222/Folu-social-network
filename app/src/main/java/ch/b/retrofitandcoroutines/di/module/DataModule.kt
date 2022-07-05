@@ -17,6 +17,8 @@ import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationL
 import ch.b.retrofitandcoroutines.data.core.authorization.mappers.ToAuthorizationMapper
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
+import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileCloudDataSource
+import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileService
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
@@ -56,6 +58,13 @@ class DataModule {
     fun provideExceptionMapper(resourcesProvider: ResourceProvider): ExceptionAuthMapper.Registration {
         return ExceptionAuthMapper.Registration(resourcesProvider)
     }
+
+    @Provides
+    @Singleton
+    fun provideUserProfileDataSource(service: UserProfileService) : UserProfileCloudDataSource{
+        return UserProfileCloudDataSource.Base(service)
+    }
+
 
     @Provides
     @Singleton

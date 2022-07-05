@@ -13,11 +13,13 @@ import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
 import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.splash.SplashService
+import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileService
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module(includes = [CoroutinesScopeModule::class])
@@ -38,6 +40,9 @@ class NetworkModule {
         authenticator: Authenticator
     ): OkHttpClient {
         return OkHttpClient.Builder()
+            .connectTimeout(5, TimeUnit.MINUTES)
+            .writeTimeout(5, TimeUnit.MINUTES)
+            .readTimeout(5, TimeUnit.MINUTES)
             .authenticator(authenticator)
             .addInterceptor(TokenInterceptor.AccessToken(accessTokenFromShared))
             .build()
@@ -62,6 +67,11 @@ class NetworkModule {
         return retrofit.create(UpdateTokenService::class.java)
     }
 
+    @Provides
+    @Singleton
+    fun provideUserProfileService(retrofit: Retrofit) : UserProfileService{
+        return retrofit.create(UserProfileService::class.java)
+    }
 
     @Provides
     @Singleton

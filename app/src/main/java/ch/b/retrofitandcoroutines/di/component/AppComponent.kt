@@ -9,6 +9,7 @@ import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFr
 import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.favourites.FavouritesFragment
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 import ch.b.retrofitandcoroutines.presentation.splash_screen.SplashFragment
+import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -34,5 +35,6 @@ interface AppComponent {
     fun inject(fragment: AuthenticationFragment)
     fun inject(fragment: SplashFragment)
     fun inject(fragment: FavouritesFragment)
+    fun inject(fragment: UserProfileFragment)
 
 }
