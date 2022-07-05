@@ -2,6 +2,7 @@ package ch.b.retrofitandcoroutines.presentation.core
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import androidx.activity.result.contract.ActivityResultContracts
 import ch.b.retrofitandcoroutines.*
@@ -12,7 +13,7 @@ import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
 
 import ru.terrakok.cicerone.Cicerone
 
-class MainActivity : AppCompatActivity(), ActivityLauncher,
+class MainActivity : AppCompatActivity(),
     RouterProvider {
     private lateinit var binding: ActivityMainBinding
     private val cicerone = Cicerone.create(AppRouter())
@@ -21,14 +22,15 @@ class MainActivity : AppCompatActivity(), ActivityLauncher,
     override val router: AppRouter
         get() = cicerone.router
 
-    private val imageLauncher = ActivityResultLauncher.Image(
+    private val image =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri ->
-            val fragment = UserProfileFragment.newInstance() as ImageResult
+            val fragment = supportFragmentManager.fragments[1] as ImageResult
             uri?.let {
+                Log.i("URII", it.toString())
                 fragment.onImageResult(it)
             }
         }
-    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -51,12 +53,12 @@ class MainActivity : AppCompatActivity(), ActivityLauncher,
                     router.replaceTab(likesScreen)
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_search ->{
+                R.id.navigation_search -> {
                     val searchScreen = FragmentScreen(SearchTabContainer.newInstance())
                     router.replaceTab(searchScreen)
                     return@setOnItemSelectedListener true
                 }
-                R.id.navigation_profile ->{
+                R.id.navigation_profile -> {
                     val profileScreen = FragmentScreen(UserProfileContainer.newInstance())
                     router.replaceTab(profileScreen)
                     return@setOnItemSelectedListener true
@@ -96,5 +98,8 @@ class MainActivity : AppCompatActivity(), ActivityLauncher,
         return true
     }
 
-    override fun launch(arg: LauncherType) = arg.launch(imageLauncher)
+
+//    override fun image() {
+//        image.launch("image/*")
+//    }
 }
