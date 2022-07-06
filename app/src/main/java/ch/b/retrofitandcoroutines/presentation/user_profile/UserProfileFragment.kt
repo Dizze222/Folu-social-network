@@ -30,7 +30,7 @@ class UserProfileFragment :
         lifecycleScope.launchWhenCreated {
             viewModel.observer(this@UserProfileFragment){
                 it.map { userProfileUi ->
-                    userProfileUi.map(binding.name,binding.imageProfile)
+                    userProfileUi.map(binding.name,binding.imageProfile,binding.bio)
                 }
             }
         }
