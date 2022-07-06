@@ -38,7 +38,7 @@ class UserProfileFragment :
         val stream = ByteArrayOutputStream()
         selectedImage.compress(Bitmap.CompressFormat.PNG,80,stream)
         val byteArray= stream.toByteArray()
-        val base64String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+        val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
         val decodedString = Base64.decode(base64String, Base64.DEFAULT)
         val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
         binding.imageProfile.setImageBitmap(decodedByte)

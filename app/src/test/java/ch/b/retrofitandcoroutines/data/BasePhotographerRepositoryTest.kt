@@ -13,9 +13,10 @@ abstract class BasePhotographerRepositoryTest {
             like: Long,
             theme: String,
             comments: List<String>,
-            authorOfComments: List<String>
+            authorOfComments: List<String>,
+            favourite: Boolean
         ): PhotographerData =
-            PhotographerData.Base(id, author, URL, like, theme, comments, authorOfComments)
+            PhotographerData.Base(id, author, URL, like, theme, comments, authorOfComments,favourite)
 
     }
 
