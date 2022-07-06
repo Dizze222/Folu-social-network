@@ -3,13 +3,12 @@ package ch.b.retrofitandcoroutines.presentation.certain_post
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.FragmentManager
-import androidx.recyclerview.widget.GridLayoutManager
 import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
 import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.core.convertToArrayList
 import ch.b.retrofitandcoroutines.BackButtonListener

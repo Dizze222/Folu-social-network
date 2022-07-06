@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.data.core.authorization
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
+import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
 
 
 interface AuthorizationCloud {
@@ -9,7 +9,7 @@ interface AuthorizationCloud {
     fun map(mapperr: BaseSingleRegistrationStringMapper.SingleStringMapper)
     suspend fun map(mapperr: BaseSingleRegistrationStringMapper.AuthenticatorStringMapper)
 
-    data class Base(
+    /*data*/class Base(
         private val accessToken: String,
         private val refreshToken: String,
         private val successRegister: Boolean

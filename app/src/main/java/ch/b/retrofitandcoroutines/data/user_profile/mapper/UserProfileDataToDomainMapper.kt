@@ -6,7 +6,7 @@ interface UserProfileDataToDomainMapper<T> : Abstract.Mapper {
     fun map(
         name: String,
         secondName: String,
-        dio: String,
+        bio: String,
         image: String
     ): T
 

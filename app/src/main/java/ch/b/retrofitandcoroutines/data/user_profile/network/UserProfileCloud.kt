@@ -9,13 +9,14 @@ interface UserProfileCloud {
     /*data*/class Base(
         private val name: String,
         private val secondName: String,
-        private val dio: String,
+        private val bio: String,
         private val image: String
-    ) : UserProfileCloud{
+    ) : UserProfileCloud {
         override fun <T> map(mapper: Abstract.ToProfileMapper<T>): T =
-            mapper.map(name, secondName, dio, image)
+            if (bio.isEmpty()) {
+                mapper.map(name, secondName, "О себе", image)
+            } else {
+                mapper.map(name, secondName, bio, image)
+            }
     }
-
-
-
 }

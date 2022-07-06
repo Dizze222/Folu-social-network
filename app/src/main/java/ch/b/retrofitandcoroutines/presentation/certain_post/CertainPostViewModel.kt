@@ -6,13 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerCommunication
+import ch.b.retrofitandcoroutines.presentation.all_posts.core.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 
 class CertainPostViewModel(

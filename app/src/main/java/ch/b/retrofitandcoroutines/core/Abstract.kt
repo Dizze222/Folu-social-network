@@ -29,7 +29,7 @@ abstract class Abstract {
         fun map(
             name: String,
             secondName: String,
-            dio: String,
+            bio: String,
             image: String
         ): T
 

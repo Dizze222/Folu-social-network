@@ -14,6 +14,8 @@ import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.splash.SplashService
 import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileService
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -30,7 +32,9 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideGson(): GsonConverterFactory = GsonConverterFactory.create()
+    fun provideGson(): Gson {
+        return GsonBuilder().setLenient().create()
+    }
 
 
     @Provides
@@ -51,13 +55,13 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideRetrofit(
-        gsonConverterFactory: GsonConverterFactory,
+        gson: Gson,
         client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
-            .addConverterFactory(gsonConverterFactory)
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

@@ -1,4 +1,6 @@
-package ch.b.retrofitandcoroutines.core
+package ch.b.retrofitandcoroutines.presentation.all_posts.core
+
+import ch.b.retrofitandcoroutines.core.Abstract
 
 interface BaseSingleRegistrationStringMapper : Abstract.Mapper,
     Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {

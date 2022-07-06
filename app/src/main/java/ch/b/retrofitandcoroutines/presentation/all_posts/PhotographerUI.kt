@@ -4,10 +4,9 @@ import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
 import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
-
 
 sealed class PhotographerUI :
     Abstract.Object<Unit, BasePhotographerStringMapper.SingleStringMapper>, Comparing {

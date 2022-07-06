@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.data.core.authorization
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.core.BaseSingleRegistrationStringMapper
+import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationDataToDomainMapper
 
 interface AuthorizationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {

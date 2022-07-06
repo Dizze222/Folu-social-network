@@ -1,6 +1,7 @@
-package ch.b.retrofitandcoroutines.presentation.all_posts
+package ch.b.retrofitandcoroutines.presentation.all_posts.core
 
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomainToUIMapper
+import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 
 
 class BasePhotographerDomainToUIMapper : PhotographerDomainToUIMapper<PhotographerUI> {
@@ -14,5 +15,5 @@ class BasePhotographerDomainToUIMapper : PhotographerDomainToUIMapper<Photograph
         authorOfComments: List<String>,
         favourite: Boolean
     ): PhotographerUI =
-        PhotographerUI.Base(id, author, URL, like, theme, comments, authorOfComments,favourite)
+        PhotographerUI.Base(id, author, URL, like, theme, comments, authorOfComments, favourite)
 }

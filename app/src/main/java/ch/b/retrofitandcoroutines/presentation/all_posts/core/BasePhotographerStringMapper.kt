@@ -1,4 +1,6 @@
-package ch.b.retrofitandcoroutines.core
+package ch.b.retrofitandcoroutines.presentation.all_posts.core
+
+import ch.b.retrofitandcoroutines.core.Abstract
 
 interface BasePhotographerStringMapper : Abstract.Mapper,
     Abstract.Object<Unit, BasePhotographerStringMapper.SingleStringMapper> {
@@ -21,7 +23,7 @@ interface BasePhotographerStringMapper : Abstract.Mapper,
 
     }
 
-    interface IdMapper : Abstract.Mapper{
+    interface IdMapper : Abstract.Mapper {
         fun map(id:Int)
     }
 

@@ -20,10 +20,11 @@ interface PhotographerCloud {
         private val authorOfComments: List<String>,
         private val favourite: Boolean
     ) : PhotographerCloud {
-        override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T {
-            return mapper.map(id, author, URL, like, theme, comments, authorOfComments, favourite)
-        }
+        override fun <T> map(mapper: Abstract.ToPhotographerMapper<T>): T =
+             mapper.map(id, author, URL, like, theme, comments, authorOfComments, favourite)
     }
+
+
 }
 
 class Story(

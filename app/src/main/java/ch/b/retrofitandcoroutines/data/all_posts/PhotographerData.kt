@@ -5,12 +5,10 @@ import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDomai
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
 
 
-
-
 interface PhotographerData {
     fun <T> map(mapper: PhotographerDataToDomainMapper<T>): T
 
-   data class Base(
+    /*data*/class Base(
         private val id: Int,
         private val author: String,
         private val URL: String,
@@ -21,6 +19,6 @@ interface PhotographerData {
         private val favourite: Boolean
     ) : Abstract.DataObject, PhotographerData {
         override fun <T> map(mapper: PhotographerDataToDomainMapper<T>): T =
-            mapper.map(id, author, URL, like, theme, comments, authorOfComments,favourite)
+            mapper.map(id, author, URL, like, theme, comments, authorOfComments, favourite)
     }
 }

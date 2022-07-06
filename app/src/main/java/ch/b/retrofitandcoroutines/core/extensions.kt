@@ -1,5 +1,8 @@
 package ch.b.retrofitandcoroutines.core
 
+import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
+
 
 fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper>>.dataOfAuth(): ArrayList<String> {
     val array = ArrayList<String>()
