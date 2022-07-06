@@ -17,6 +17,10 @@ import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationL
 import ch.b.retrofitandcoroutines.data.core.authorization.mappers.ToAuthorizationMapper
 import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
 import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
+import ch.b.retrofitandcoroutines.data.user_profile.UserProfileData
+import ch.b.retrofitandcoroutines.data.user_profile.UserProfileRepository
+import ch.b.retrofitandcoroutines.data.user_profile.mapper.BaseToProfileMapper
+import ch.b.retrofitandcoroutines.data.user_profile.mapper.ExceptionProfileMapper
 import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileCloudDataSource
 import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileService
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
@@ -61,7 +65,13 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideUserProfileDataSource(service: UserProfileService) : UserProfileCloudDataSource{
+    fun provideExceptionProfileMapper(resourcesProvider: ResourceProvider) : ExceptionProfileMapper.Base{
+        return ExceptionProfileMapper.Base(resourcesProvider)
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserProfileDataSource(service: UserProfileService): UserProfileCloudDataSource {
         return UserProfileCloudDataSource.Base(service)
     }
 
@@ -135,6 +145,23 @@ class DataModule {
             tokenToSharedPreferences,
             dataSource
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideBaseToProfileMapper() : Abstract.ToProfileMapper<UserProfileData> {
+        return BaseToProfileMapper()
+    }
+
+
+    @Provides
+    @Singleton
+    fun provideUserProfileRepository(
+        dataSource: UserProfileCloudDataSource,
+        mapper: Abstract.ToProfileMapper<UserProfileData>,
+        exceptionMapper: ExceptionProfileMapper.Base
+    ): UserProfileRepository {
+        return UserProfileRepository.Base(dataSource,mapper, exceptionMapper)
     }
 
 }

@@ -12,7 +12,7 @@ interface UserProfileRepository {
     class Base(
         private val dataSource: UserProfileCloudDataSource,
         private val mapper: Abstract.ToProfileMapper<UserProfileData>,
-        private val exceptionMapper: ExceptionProfileMapper
+        private val exceptionMapper: ExceptionProfileMapper.Base
     ) : UserProfileRepository {
         override suspend fun sendPhoto(photo: String) {
             dataSource.sendPhoto(photo)

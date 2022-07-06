@@ -7,6 +7,7 @@ import android.util.Base64
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentUserProfileBinding
 import ch.b.retrofitandcoroutines.presentation.core.*
@@ -20,11 +21,21 @@ class UserProfileFragment :
     private val viewModel: UserProfileViewModel by viewModels {
         authenticationViewModelFactory
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.imageProfile.setOnClickListener {
             resultLauncher.launch()
         }
         binding.smileOfProfile.text = "\uD83D\uDC7A"
+        lifecycleScope.launchWhenCreated {
+            viewModel.observer(this@UserProfileFragment){
+                it.map { userProfileUi ->
+                    userProfileUi.map(binding.name,binding.imageProfile)
+                }
+            }
+        }
+
+        viewModel.getUserProfile()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,17 +43,19 @@ class UserProfileFragment :
         inject()
     }
 
-    private var resultLauncher = ActivityResultLauncher.Image(registerForActivityResult(ActivityResultContracts.GetContent()) {
-        val imageStream = requireActivity().contentResolver.openInputStream(it)
-        val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
-        val stream = ByteArrayOutputStream()
-        selectedImage.compress(Bitmap.CompressFormat.PNG,80,stream)
-        val byteArray= stream.toByteArray()
-        val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
-        val decodedString = Base64.decode(base64String, Base64.DEFAULT)
-        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-        binding.imageProfile.setImageBitmap(decodedByte)
-    })
+    private var resultLauncher =
+        ActivityResultLauncher.Image(registerForActivityResult(ActivityResultContracts.GetContent()) {
+            val imageStream = requireActivity().contentResolver.openInputStream(it)
+            val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
+            val stream = ByteArrayOutputStream()
+            selectedImage.compress(Bitmap.CompressFormat.PNG, 80, stream)
+            val byteArray = stream.toByteArray()
+            val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            viewModel.sendImage(base64String)
+            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
+            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            binding.imageProfile.setImageBitmap(decodedByte)
+        })
 
 
     companion object {

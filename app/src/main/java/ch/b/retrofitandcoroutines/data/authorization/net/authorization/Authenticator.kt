@@ -24,7 +24,7 @@ class Authenticator(
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://photographer-application.herokuapp.com/")
+            .baseUrl("https://cdef-84-39-247-127.ngrok.io/")
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

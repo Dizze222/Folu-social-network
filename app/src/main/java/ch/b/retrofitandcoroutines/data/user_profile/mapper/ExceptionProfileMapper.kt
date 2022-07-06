@@ -13,7 +13,7 @@ interface ExceptionProfileMapper : Abstract.Mapper{
 
     fun map(exception: Exception): String
 
-    class Registration(private val resourceProvider: ResourceProvider) : ExceptionAuthMapper {
+    class Base(private val resourceProvider: ResourceProvider) : ExceptionAuthMapper {
         override fun map(exception: Exception): String =
             when (exception) {
                 is UnknownHostException -> resourceProvider.getString(R.string.service_unavailable)
