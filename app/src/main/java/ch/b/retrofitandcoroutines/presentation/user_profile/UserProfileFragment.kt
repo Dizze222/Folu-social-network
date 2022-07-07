@@ -26,7 +26,6 @@ class UserProfileFragment :
         binding.imageProfile.setOnClickListener {
             resultLauncher.launch()
         }
-        binding.smileOfProfile.text = "\uD83D\uDC7A"
         lifecycleScope.launchWhenCreated {
             viewModel.observer(this@UserProfileFragment){
                 it.map { userProfileUi ->
@@ -34,7 +33,6 @@ class UserProfileFragment :
                 }
             }
         }
-
         viewModel.getUserProfile()
     }
 
