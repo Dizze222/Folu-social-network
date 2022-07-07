@@ -5,7 +5,9 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.core.PhotoApp
@@ -16,6 +18,7 @@ import javax.inject.Inject
 
 class UserProfileFragment :
     BaseFragment<FragmentUserProfileBinding>(FragmentUserProfileBinding::inflate) {
+
     @Inject
     lateinit var authenticationViewModelFactory: UserProfileViewModelFactory
     private val viewModel: UserProfileViewModel by viewModels {
@@ -24,12 +27,13 @@ class UserProfileFragment :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.imageProfile.setOnClickListener {
-            resultLauncher.launch()
+            alertDialog()
         }
         lifecycleScope.launchWhenCreated {
             viewModel.observer(this@UserProfileFragment){
                 it.map { userProfileUi ->
-                    userProfileUi.map(binding.name,binding.imageProfile,binding.bio)
+                    userProfileUi.map(binding.name,binding.imageProfile,binding.bio,binding.progress,binding.mainLayout)
+                    userProfileUi.map(binding.errorLayout,binding.progress,binding.errorTextView)
                 }
             }
         }
@@ -67,4 +71,22 @@ class UserProfileFragment :
         val appComponent = application.appComponent
         appComponent.inject(this)
     }
+
+    private fun alertDialog() {
+        val dialog: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        dialog.setMessage("Откуда брать фото?")
+        dialog.setTitle("Фото профиля")
+        dialog.setPositiveButton("Камера"
+        ) { _, _ ->
+            Toast.makeText(requireContext(), "Камера", Toast.LENGTH_LONG)
+                .show()
+        }
+        dialog.setNegativeButton("Галерея"
+        ) { _, _ ->
+            resultLauncher.launch()
+        }
+        val alertDialog: AlertDialog = dialog.create()
+        alertDialog.show()
+    }
+
 }

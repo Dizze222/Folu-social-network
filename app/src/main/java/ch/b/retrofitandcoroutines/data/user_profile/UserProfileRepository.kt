@@ -20,7 +20,7 @@ interface UserProfileRepository {
 
         override suspend fun getProfileInfo(): UserProfileListData = try {
             val listOfCloud = dataSource.getProfileInfo()
-            UserProfileListData.Base(listOfCloud.map {
+            UserProfileListData.Success(listOfCloud.map {
                 it.map(mapper)
             })
         } catch (e: Exception) {

@@ -16,7 +16,6 @@ import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-
 class AllPostsViewModel(
     private val interactor: PhotographerInteractor,
     private val mapper: PhotographerListDomainToUIMapper,

@@ -19,21 +19,23 @@ class UserProfileViewModel(
 
     fun sendImage(base64: String) {
         viewModelScope.launch {
-           interactor.sendPhoto(base64)
+            interactor.sendPhoto(base64)
         }
     }
-    fun getUserProfile(){
-       viewModelScope.launch {
-           val resultDomain = interactor.getProfileInfo()
-           withContext(Dispatchers.Main){
-               val resultUi = resultDomain.map(mapper)
-               resultUi.map(communication)
-           }
-       }
+
+    fun getUserProfile() {
+        communication.map(listOf(UserProfileUi.Progress))
+        viewModelScope.launch {
+            val resultDomain = interactor.getProfileInfo()
+            withContext(Dispatchers.Main) {
+                val resultUi = resultDomain.map(mapper)
+                resultUi.map(communication)
+            }
+        }
     }
 
-    suspend fun observer(owner: LifecycleOwner, observer: FlowCollector<List<UserProfileUi>>){
-        communication.observe(owner,observer)
+    suspend fun observer(owner: LifecycleOwner, observer: FlowCollector<List<UserProfileUi>>) {
+        communication.observe(owner, observer)
     }
 
 

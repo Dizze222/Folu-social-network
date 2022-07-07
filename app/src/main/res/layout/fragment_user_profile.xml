@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,12 +9,14 @@
 
 
     <LinearLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
         android:paddingStart="10dp"
         android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:visibility="gone"
         tools:ignore="RtlSymmetry">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -33,11 +36,11 @@
 
         <TextView
             android:id="@+id/smileOfProfile"
-            android:layout_marginStart="5dp"
-            android:text="👺"
-            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="8dp"
+            android:text="👺" />
 
 
         <TextView
@@ -51,10 +54,30 @@
     </LinearLayout>
 
 
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="170dp" />
+
+
     <LinearLayout
+        android:id="@+id/errorLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="300dp"
+        android:layout_marginTop="80dp"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/errorTextView"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="130dp"
+            android:text="ERROR"
+            android:textSize="40dp" />
+
     </LinearLayout>
 
 </LinearLayout>
