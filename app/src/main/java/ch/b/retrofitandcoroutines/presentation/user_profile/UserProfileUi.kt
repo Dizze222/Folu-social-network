@@ -13,7 +13,6 @@ sealed class UserProfileUi : Abstract.Object<Unit, BaseUserProfileStringMapper.S
 
     open fun map(textView: TextView, imageView: ImageView, bioTextView: TextView) = Unit
 
-
     class Base(
         private val name: String,
         private val secondName: String,
@@ -29,7 +28,7 @@ sealed class UserProfileUi : Abstract.Object<Unit, BaseUserProfileStringMapper.S
             textView.text = name + secondName
             bioTextView.text = bio
             if (image == "empty") {
-                imageView.setImageResource(R.drawable.ic_collect)
+                imageView.setImageResource(R.drawable.ic_user_profile)
             } else {
                 val decodedString = Base64.decode(image, Base64.DEFAULT)
                 val decodedByte =
