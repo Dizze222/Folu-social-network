@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 
-@Database(entities = [CachePhotographer.Base::class], version = 1, exportSchema = false)
+@Database(entities = [CachePhotographer.Base::class], version = 2, exportSchema = true)
 @TypeConverters(Convertors::class)
 abstract class PhotographerDataBase : RoomDatabase() {
 
@@ -23,7 +23,7 @@ abstract class PhotographerDataBase : RoomDatabase() {
                     context.applicationContext,
                     PhotographerDataBase::class.java,
                     DATABASE_NAME
-                ).build()
+                ).fallbackToDestructiveMigration().build()
             }
             return instance!!
         }

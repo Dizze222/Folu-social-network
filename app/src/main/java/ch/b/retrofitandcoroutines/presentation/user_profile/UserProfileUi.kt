@@ -65,7 +65,7 @@ sealed class UserProfileUi : Abstract.Object<Unit, BaseUserProfileStringMapper.S
         override fun map(errorLayout: LinearLayout, progress: ProgressBar, textView: TextView) {
             errorLayout.visibility = View.VISIBLE
             progress.visibility = View.GONE
-            textView.text = "ERROR"
+            textView.text = message
         }
     }
 

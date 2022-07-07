@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,14 +8,51 @@
 
 
     <LinearLayout
+        android:id="@+id/camera"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black"
+        android:visibility="gone"
+        android:orientation="horizontal">
+
+
+        <Button
+            android:id="@+id/getPhoto"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="150dp"
+            android:background="@drawable/capture_button" />
+
+
+
+        <ImageView
+            android:id="@+id/finalPhoto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="10dp" />
+
+
+        <androidx.camera.view.PreviewView
+            android:id="@+id/preview"
+            android:layout_width="match_parent"
+            android:layout_marginStart="-390dp"
+            android:layout_height="680dp" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingStart="10dp"
         android:paddingTop="10dp"
-        android:paddingBottom="10dp"
         android:visibility="gone"
+        android:paddingBottom="10dp"
         tools:ignore="RtlSymmetry">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -59,7 +95,8 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
-        android:layout_marginTop="170dp" />
+        android:layout_marginTop="170dp"
+        android:visibility="visible" />
 
 
     <LinearLayout
