@@ -63,14 +63,12 @@ class UserProfileFragment :
         ActivityResultLauncher.Image(registerForActivityResult(ActivityResultContracts.GetContent()) {
             val imageStream = requireActivity().contentResolver.openInputStream(it)
             val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
+            binding.imageProfile.setImageBitmap(selectedImage)
             val stream = ByteArrayOutputStream()
             selectedImage.compress(Bitmap.CompressFormat.PNG, 80, stream)
             val byteArray = stream.toByteArray()
             val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
             viewModel.sendImage(base64String)
-            val decodedString = Base64.decode(base64String, Base64.DEFAULT)
-            val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-            binding.imageProfile.setImageBitmap(decodedByte)
         })
 
 
@@ -93,11 +91,12 @@ class UserProfileFragment :
         dialog.setPositiveButton("Камера") { _, _ ->
             val nextScreen = FragmentScreen(CameraFragment.newInstance())
             (parentFragment as RouterProvider).router.navigateTo(nextScreen)
-            setFragmentResultListener("request_key") { requestKey, bundle ->
+            setFragmentResultListener("request_key") { _, bundle ->
                 val result = bundle.getString("bundleKey")
                 Toast.makeText(requireContext(), result, Toast.LENGTH_LONG).show()
                 val decodedString = Base64.decode(result, Base64.DEFAULT)
-                val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                val decodedByte =
+                    BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
                 binding.imageProfile.setImageBitmap(decodedByte)
                 viewModel.sendImage(result!!)
             }

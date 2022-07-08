@@ -25,13 +25,13 @@ sealed class UserProfileUi : Abstract.Object<Unit, BaseUserProfileStringMapper.S
     open fun map(mainView: LinearLayout, progress: View) = Unit
     open fun map(errorLayout: LinearLayout,progress: ProgressBar,textView: TextView) = Unit
     class Base(
-        private val name: String,
+        private val fullName: String,
         private val secondName: String,
         private val bio: String,
         private val image: String
     ) : UserProfileUi() {
         override fun map(mapper: BaseUserProfileStringMapper.SingleStringMapper) {
-            mapper.map(name, secondName, bio, image)
+            mapper.map(fullName, secondName, bio, image)
         }
 
         @SuppressLint("SetTextI18n")
@@ -44,7 +44,7 @@ sealed class UserProfileUi : Abstract.Object<Unit, BaseUserProfileStringMapper.S
         ) {
             mainLayout.visibility = View.VISIBLE
             progress.visibility = View.GONE
-            textView.text = name + secondName
+            textView.text = fullName + secondName
             bioTextView.text = bio
             if (image == "empty") {
                 imageView.setImageResource(R.drawable.ic_user_profile)
