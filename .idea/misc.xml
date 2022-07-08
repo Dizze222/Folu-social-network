@@ -45,6 +45,7 @@
         <entry key="app/src/main/res/layout/fail_fullscreen.xml" value="0.283984375" />
         <entry key="app/src/main/res/layout/fragment_authorization.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_base_container.xml" value="0.283984375" />
+        <entry key="app/src/main/res/layout/fragment_camera.xml" value="0.25277777777777777" />
         <entry key="app/src/main/res/layout/fragment_detail_info.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_favourite.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fragment_favourites.xml" value="0.28515625" />
@@ -54,6 +55,7 @@
         <entry key="app/src/main/res/layout/fragment_photographer_detail.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_photographers.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_registration.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_result.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_user_profile.xml" value="0.28515625" />
