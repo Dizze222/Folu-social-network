@@ -8,11 +8,8 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageCapture
 import androidx.camera.core.ImageCaptureException
@@ -21,13 +18,10 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResult
-import androidx.fragment.app.setFragmentResultListener
 import ch.b.retrofitandcoroutines.BackButtonListener
-import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.databinding.FragmentCameraBinding
-import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
@@ -38,15 +32,21 @@ import java.util.concurrent.Executors
 
 class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding::inflate),
     BackButtonListener {
+
     private var imageCapture: ImageCapture? = null
     private lateinit var outputDirectory: File
     private lateinit var cameraExecutor: ExecutorService
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (allPermissionsGranted()) {
             startCamera()
         } else {
-            ActivityCompat.requestPermissions(requireActivity(), REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                REQUIRED_PERMISSIONS,
+                REQUEST_CODE_PERMISSIONS
+            )
         }
         binding.getPhoto.setOnClickListener {
             takePhoto()
@@ -69,10 +69,9 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
     }
 
 
-
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
-
+        Log.i("CAMERA","takePhoto()")
         val photoFile = File(
             outputDirectory,
             SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis()) + ".jpg"
@@ -82,10 +81,10 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
 
         imageCapture.takePicture(
             outputOptions,
-            ContextCompat.getMainExecutor(requireContext()),
+            ContextCompat.getMainExecutor(activity!!.applicationContext),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onError(exc: ImageCaptureException) {
-                    Log.e(TAG, "Photo capture failed: ${exc.message}", exc)
+                    Log.i(TAG, "Photo capture failed: ${exc.message}", exc)
                 }
 
                 override fun onImageSaved(output: ImageCapture.OutputFileResults) {
@@ -98,15 +97,18 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                     val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
                     setFragmentResult("request_key", Bundle().apply {
                         putString("bundleKey", base64String)
+                        Log.i("CAMERA","fragment result")
+                        (parentFragment as RouterProvider).router.exit()
                     })
-                    cameraExecutor.shutdown()
-                    (parentFragment as RouterProvider).router.exit()
                 }
             })
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
-        ContextCompat.checkSelfPermission(requireContext(), it) == PackageManager.PERMISSION_GRANTED
+        ContextCompat.checkSelfPermission(
+            activity!!.applicationContext,
+            it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun getOutputDirectory(): File {
@@ -114,7 +116,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
             File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
         }
         return if (mediaDir != null && mediaDir.exists())
-            mediaDir else requireActivity().filesDir
+            mediaDir else activity!!.filesDir
     }
 
     override fun onRequestPermissionsResult(
@@ -131,7 +133,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                     "Permissions not granted by the user.",
                     Toast.LENGTH_SHORT
                 ).show()
-                requireActivity().finish()
+                activity!!.finish()
             }
         }
     }
@@ -143,7 +145,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
 
 
     private fun startCamera() {
-        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(activity!!.applicationContext)
 
         cameraProviderFuture.addListener({
 
@@ -167,11 +169,12 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                 )
 
             } catch (exc: Exception) {
-
+                Log.i("RTRR",exc.toString())
             }
 
-        }, ContextCompat.getMainExecutor(requireContext()))
+        }, ContextCompat.getMainExecutor(activity!!.applicationContext))
     }
+
     override fun onBackPressed(): Boolean {
         (parentFragment as RouterProvider).router.exit()
         return true

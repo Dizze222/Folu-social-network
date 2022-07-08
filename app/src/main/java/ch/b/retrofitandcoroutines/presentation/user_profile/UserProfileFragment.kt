@@ -1,40 +1,24 @@
 package ch.b.retrofitandcoroutines.presentation.user_profile
 
-import android.Manifest
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.camera.core.CameraSelector
-import androidx.camera.core.ImageCapture
-import androidx.camera.core.ImageCaptureException
-import androidx.camera.core.Preview
-import androidx.camera.lifecycle.ProcessCameraProvider
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.FragmentScreen
-import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentUserProfileBinding
 import ch.b.retrofitandcoroutines.presentation.core.CameraFragment
 import ch.b.retrofitandcoroutines.presentation.core.*
 import java.io.ByteArrayOutputStream
-import java.io.File
-import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.ExecutorService
-import java.util.concurrent.Executors
 import javax.inject.Inject
 
 class UserProfileFragment :
@@ -112,6 +96,10 @@ class UserProfileFragment :
             setFragmentResultListener("request_key") { requestKey, bundle ->
                 val result = bundle.getString("bundleKey")
                 Toast.makeText(requireContext(), result, Toast.LENGTH_LONG).show()
+                val decodedString = Base64.decode(result, Base64.DEFAULT)
+                val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                binding.imageProfile.setImageBitmap(decodedByte)
+                viewModel.sendImage(result!!)
             }
         }
         dialog.setNegativeButton("Галерея") { _, _ ->
