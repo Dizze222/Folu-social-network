@@ -8,7 +8,6 @@ interface BaseUserProfileStringMapper : Abstract.Mapper,
     interface SingleStringMapper : Abstract.Mapper {
         fun map(
             name: String,
-            secondName: String,
             bio: String,
             image: String
         )

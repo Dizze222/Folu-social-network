@@ -4,8 +4,7 @@ import ch.b.retrofitandcoroutines.core.Abstract
 
 interface UserProfileDomainToUiMapper<T> : Abstract.Mapper {
     fun map(
-        name: String,
-        secondName: String,
+        fullName: String,
         bio: String,
         image: String
     ): T
