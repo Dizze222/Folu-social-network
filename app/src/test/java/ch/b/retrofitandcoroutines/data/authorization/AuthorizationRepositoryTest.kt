@@ -14,24 +14,47 @@ import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
-class AuthenticationRepositoryTest {
+class AuthorizationRepositoryTest {
     private val unknownHostException = Exception()
+    private val testAuthCloudDataSource = TestAuthCloudDataSource(true)
+    private val testRegistrationCloudDataSource = TestRegistrationDataSource(true)
+    private val testCloudMapper = AuthorizationListCloudMapper.Base(ToAuthorizationMapper())
+    private val repository = BaseRepositoryAuth(
+        testCloudMapper,
+        ExceptionAuthMapper.Test(),
+        ExceptionAuthMapper.Test(),
+        TokenToSharedPreferences.Test(),
+        testRegistrationCloudDataSource,
+        testAuthCloudDataSource
+    )
 
     @Test
     fun authentication_success_test() = runBlocking {
-        val testAuthCloudDataSource = TestAuthCloudDataSource(true)
-        val testRegistrationCloudDataSource = TestRegistrationDataSource(true)
-        val testCloudMapper = AuthorizationListCloudMapper.Base(ToAuthorizationMapper())
-        val repository = BaseRepositoryAuth(
-            testCloudMapper,
-            ExceptionAuthMapper.Test(),
-            ExceptionAuthMapper.Test(),
-            TokenToSharedPreferences.Test(),
-            testRegistrationCloudDataSource,
-            testAuthCloudDataSource
-        )
         val actual = repository.auth(1, "Ivan", "Ivanov", "pas", "auth")
-        val expected = AuthorizationListData.Success(listOf(AuthorizationData.Base("accessToken","refreshToken",true)))
+        val expected = AuthorizationListData.Success(
+            listOf(
+                AuthorizationData.Base(
+                    "accessToken",
+                    "refreshToken",
+                    true
+                )
+            )
+        )
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun registration_success_test() = runBlocking {
+        val actual = repository.auth(1, "Ivan", "Ivanov", "pas", "register")
+        val expected = AuthorizationListData.Success(
+            listOf(
+                AuthorizationData.Base(
+                    "accessToken",
+                    "refreshToken",
+                    true
+                )
+            )
+        )
         assertEquals(expected, actual)
     }
 
