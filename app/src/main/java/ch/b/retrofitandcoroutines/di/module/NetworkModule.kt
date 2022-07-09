@@ -138,6 +138,4 @@ class NetworkModule {
     fun provideRegistrationDataSource(service: RegistrationService): RegistrationCloudDataSource {
         return RegistrationCloudDataSource.Base(service)
     }
-
-
 }

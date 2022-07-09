@@ -14,7 +14,6 @@ import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 import retrofit2.Response
-import java.net.UnknownHostException
 
 class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
 
@@ -27,7 +26,6 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
         val repository = PhotographerRepository.Base(
             testCloudDataSource,
             testCacheDataSource,
-            PhotographerListCloudMapper.Base(TestToBookMapper()),
             BaseToDataPhotographerMapper(),
             ExceptionPostsMapper.Test()
         )
@@ -43,64 +41,48 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
         val repository = PhotographerRepository.Base(
             testCloudDataSource,
             testCacheDataSource,
-            PhotographerListCloudMapper.Base(TestToBookMapper()),
             BaseToDataPhotographerMapper(),
             ExceptionPostsMapper.Test()
         )
         val actual = repository.getAllPhotographers()
         val expected = PhotographerListData.Success(
             listOf(
-                PhotographerData.Base(1, "name1", "url", 1, "theme1", listOf("one"), listOf("one")),
-                PhotographerData.Base(2, "name2", "url", 2, "theme2", listOf("two"), listOf("two")),
-                PhotographerData.Base(3, "name3", "url", 3, "theme3", listOf("third"), listOf("third"))
+                PhotographerData.Base(
+                    1,
+                    "name1",
+                    "url",
+                    1,
+                    "theme1",
+                    listOf("one"),
+                    listOf("one"),
+                    false
+                ),
+                PhotographerData.Base(
+                    2,
+                    "name2",
+                    "url",
+                    2,
+                    "theme2",
+                    listOf("two"),
+                    listOf("two"),
+                    false
+                ),
+                PhotographerData.Base(
+                    3,
+                    "name3",
+                    "url",
+                    3,
+                    "theme3",
+                    listOf("third"),
+                    listOf("third"),
+                    false
+                )
             )
         )
         assertEquals(expected, actual)
     }
 
-    @Test
-    fun test_no_connection_with_cache() = runBlocking{
-        val testCloudDataSource = TestPhotographerListCloudDataSource(true)
-        val testCacheDataSource = TestPhotographerListCacheDataSource(true)
-        val repository = PhotographerRepository.Base(
-            testCloudDataSource,
-            testCacheDataSource,
-            PhotographerListCloudMapper.Base(TestToBookMapper()),
-            BaseToDataPhotographerMapper(),
-            ExceptionPostsMapper.Test()
-        )
-        val actual = repository.getAllPhotographers()
-        val expected = PhotographerListData.Success(listOf(
-                PhotographerData.Base(
-                    10,
-                    "name10",
-                    "url",
-                    10,
-                    "theme10",
-                    listOf("ten"),
-                    listOf("ten")
-                ),
-            PhotographerData.Base(
-                20,
-                "name20",
-                "url",
-                20,
-                "theme20",
-                listOf("twelve"),
-                listOf("twelve")
-            ),
-            PhotographerData.Base(
-                30,
-                "name30",
-                "url",
-                30,
-                "theme30",
-                listOf("third"),
-                listOf("third")
-            )
-        ))
-        assertEquals(expected,actual)
-    }
+
 
 
     private inner class TestPhotographerListCloudDataSource(private val returnSuccess: Boolean) :
@@ -115,7 +97,8 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
                         1,
                         "theme1",
                         listOf("one"),
-                        listOf("one")
+                        listOf("one"),
+                        false
                     ),
                     PhotographerCloud.Base(
                         2,
@@ -124,7 +107,8 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
                         2,
                         "theme2",
                         listOf("two"),
-                        listOf("two")
+                        listOf("two"),
+                        false
                     ),
                     PhotographerCloud.Base(
                         3,
@@ -133,7 +117,8 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
                         3,
                         "theme3",
                         listOf("third"),
-                        listOf("third")
+                        listOf("third"),
+                        false
                     )
                 )
             } else {
@@ -152,7 +137,6 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
         }
 
 
-
     }
 
 
@@ -160,7 +144,7 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
         private val returnSuccess: Boolean
     ) : PhotographerListCacheDataSource {
         override suspend fun getPhotographers(): List<CachePhotographer> {
-            if (returnSuccess) {
+            if (returnSuccess == true) {
                 return listOf(
                     CachePhotographer.Base(
                         10,
@@ -169,7 +153,8 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
                         10,
                         "theme10",
                         listOf("ten"),
-                        listOf("ten")
+                        listOf("ten"),
+                        true
                     ), CachePhotographer.Base(
                         20,
                         "name20",
@@ -177,7 +162,8 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
                         20,
                         "theme20",
                         listOf("twelve"),
-                        listOf("twelve")
+                        listOf("twelve"),
+                        true
                     ), CachePhotographer.Base(
                         30,
                         "name30",
@@ -185,7 +171,8 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
                         30,
                         "theme30",
                         listOf("third"),
-                        listOf("third")
+                        listOf("third"),
+                        true
                     )
 
                 )
@@ -195,15 +182,11 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
         }
 
         override suspend fun savePhotographers(photographers: List<PhotographerCloud>) {
-            //not used here
-        }
-
-        override suspend fun delete() {
-            TODO("Not yet implemented")
+            TODO("not used here")
         }
 
         override suspend fun searchPhotographers(author: String): List<CachePhotographer> {
-            TODO("Not yet implemented")
+            TODO("not used here")
         }
 
     }

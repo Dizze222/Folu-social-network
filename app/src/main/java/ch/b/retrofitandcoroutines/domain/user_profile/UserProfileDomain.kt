@@ -15,7 +15,4 @@ interface UserProfileDomain {
         override fun <T> map(mapper: UserProfileDomainToUiMapper<T>): T =
             mapper.map(name + secondName, dio, image)
     }
-
-
-
 }

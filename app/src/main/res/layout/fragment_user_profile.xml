@@ -7,8 +7,6 @@
     tools:context=".presentation.user_profile.UserProfileFragment">
 
 
-
-
     <LinearLayout
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"

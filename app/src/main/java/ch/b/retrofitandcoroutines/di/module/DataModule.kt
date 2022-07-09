@@ -36,12 +36,11 @@ class DataModule {
     fun providePhotographerRepository(
         cloudDataSource: PhotographerListCloudDataSource,
         cacheDataSource: PhotographerListCacheDataSource,
-        cloudMapper: PhotographerListCloudMapper,
         toRoomMapper: Abstract.ToPhotographerMapper<PhotographerData>,
         exceptionMapper: ExceptionPostsMapper
     ): PhotographerRepository {
         return PhotographerRepository.Base(
-            cloudDataSource, cacheDataSource, cloudMapper, toRoomMapper, exceptionMapper
+            cloudDataSource, cacheDataSource, toRoomMapper, exceptionMapper
         )
     }
 

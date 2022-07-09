@@ -8,7 +8,7 @@ import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
 interface PhotographerData {
     fun <T> map(mapper: PhotographerDataToDomainMapper<T>): T
 
-    /*data*/class Base(
+    data class Base(
         private val id: Int,
         private val author: String,
         private val URL: String,

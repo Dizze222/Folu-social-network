@@ -28,7 +28,6 @@ interface PhotographerRepository {
     class Base(
         private val cloudDataSource: PhotographerListCloudDataSource,
         private val cacheDataSource: PhotographerListCacheDataSource,
-        private val cloudMapper: PhotographerListCloudMapper,
         private val mapperData: Abstract.ToPhotographerMapper<PhotographerData>,
         private val exceptionMapper: ExceptionPostsMapper
     ) : PhotographerRepository {

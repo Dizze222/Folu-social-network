@@ -50,7 +50,6 @@ class UserProfileFragment :
             }
         }
         viewModel.getUserProfile()
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

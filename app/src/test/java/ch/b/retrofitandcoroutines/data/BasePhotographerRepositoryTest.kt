@@ -5,7 +5,7 @@ import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 
 abstract class BasePhotographerRepositoryTest {
 
-    protected class TestToBookMapper : Abstract.ToPhotographerMapper<PhotographerData> {
+    protected class TestToPhotographerMapper : Abstract.ToPhotographerMapper<PhotographerData> {
         override fun map(
             id: Int,
             author: String,
