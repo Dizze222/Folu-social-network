@@ -5,7 +5,7 @@ import ch.b.retrofitandcoroutines.data.core.authorization.AuthorizationCloud
 import ch.b.retrofitandcoroutines.data.core.authorization.AuthorizationData
 
 interface AuthorizationListCloudMapper : Abstract.Mapper {
-    fun map(cloudList: List<AuthorizationCloud>) : List<AuthorizationData>
+    fun map(cloudList: List<AuthorizationCloud>): List<AuthorizationData>
 
     class Base(private val mapper: Abstract.ToRegisterMapper<AuthorizationData>) :
         AuthorizationListCloudMapper {
@@ -16,4 +16,5 @@ interface AuthorizationListCloudMapper : Abstract.Mapper {
         }
 
     }
+
 }

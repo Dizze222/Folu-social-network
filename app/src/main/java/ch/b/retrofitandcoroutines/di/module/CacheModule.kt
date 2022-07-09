@@ -14,6 +14,7 @@ import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.favourite_post.cache.CacheFavouriteDataSource
 import ch.b.retrofitandcoroutines.data.favourite_post.mappers.BasePhotographerDataToCacheMapper
+import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -76,8 +77,8 @@ class CacheModule {
 
     @Provides
     @Singleton
-    fun provideTokenToSharedPreferences(context: Context): TokenToSharedPreferences {
-        return TokenToSharedPreferences.Base(context, Reader())
+    fun provideTokenToSharedPreferences(resourceProvider: ResourceProvider): TokenToSharedPreferences {
+        return TokenToSharedPreferences.Base(resourceProvider, Reader())
     }
 
 }

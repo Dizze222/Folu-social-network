@@ -4,10 +4,11 @@ import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationDataToDomainMapper
 
-interface AuthorizationData : Abstract.Mapper,Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
+interface AuthorizationData : Abstract.Mapper,
+    Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
     fun <T> map(mapper: AuthorizationDataToDomainMapper<T>): T
-    fun accessToken() : String
-    class Base(
+    fun accessToken(): String
+    data class Base(
         private val accessToken: String,
         private val refreshToken: String,
         private val successRegister: Boolean

@@ -14,6 +14,7 @@ import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.PhotoApp
+import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import kotlinx.coroutines.delay
 import javax.inject.Inject
 
@@ -35,7 +36,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPref = TokenToSharedPreferences.Base(activity!!.applicationContext, Reader())
+        val sharedPref = TokenToSharedPreferences.Base(ResourceProvider.Base(requireContext()), Reader())
         hideNavBar(true)
         lifecycleScope.launchWhenCreated {
             delay(1000)

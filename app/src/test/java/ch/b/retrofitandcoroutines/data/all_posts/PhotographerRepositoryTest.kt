@@ -1,15 +1,11 @@
-package ch.b.retrofitandcoroutines.data
+package ch.b.retrofitandcoroutines.data.all_posts
 
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerListData
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.all_posts.cache.CachePhotographer
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.BaseToDataPhotographerMapper
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.ExceptionPostsMapper
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
@@ -83,8 +79,6 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
     }
 
 
-
-
     private inner class TestPhotographerListCloudDataSource(private val returnSuccess: Boolean) :
         PhotographerListCloudDataSource {
         override suspend fun getPhotographers(): List<PhotographerCloud.Base> {
@@ -144,7 +138,7 @@ class PhotographerRepositoryTest : BasePhotographerRepositoryTest() {
         private val returnSuccess: Boolean
     ) : PhotographerListCacheDataSource {
         override suspend fun getPhotographers(): List<CachePhotographer> {
-            if (returnSuccess == true) {
+            if (returnSuccess) {
                 return listOf(
                     CachePhotographer.Base(
                         10,

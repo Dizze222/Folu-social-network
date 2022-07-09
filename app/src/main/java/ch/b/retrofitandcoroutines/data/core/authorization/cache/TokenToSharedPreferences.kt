@@ -1,8 +1,7 @@
 package ch.b.retrofitandcoroutines.data.core.authorization.cache
 
-import android.content.Context
-import android.util.Log
 import ch.b.retrofitandcoroutines.core.Reader
+import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 
 interface TokenToSharedPreferences {
     suspend fun saveRefreshToken(refreshToken: String)
@@ -13,11 +12,11 @@ interface TokenToSharedPreferences {
 
 
     class Base(
-        context: Context,
+        resourceProvider: ResourceProvider,
         private val reader: Reader
     ) : TokenToSharedPreferences {
         private val sharedPreferences =
-            context.getSharedPreferences(KEY_PREFERENCES, Context.MODE_PRIVATE)
+            resourceProvider.sharedPreferences()
 
         override suspend fun saveRefreshToken(refreshToken: String) {
             sharedPreferences.edit().putString(REFRESH_TOKEN_KEY, refreshToken).apply()
@@ -34,8 +33,22 @@ interface TokenToSharedPreferences {
 
     }
 
+    class Test : TokenToSharedPreferences{
+        override suspend fun saveRefreshToken(refreshToken: String) {
+            TODO("Not yet implemented")
+        }
+
+        override fun readRefreshToken(): String = "refreshToken"
+
+        override suspend fun saveAccessToken(accessToken: String) {
+            TODO("Not yet implemented")
+        }
+
+        override fun readAccessToken(): String = "accessToken"
+
+    }
+
     private companion object {
-        private const val KEY_PREFERENCES = "unique-key-preferences"
         private const val REFRESH_TOKEN_KEY = "key-of-refresh-token"
         private const val ACCESS_TOKEN_KEY = "key-of-access-token"
     }

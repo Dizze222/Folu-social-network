@@ -9,7 +9,7 @@ interface AuthorizationCloud {
     fun map(mapperr: BaseSingleRegistrationStringMapper.SingleStringMapper)
     suspend fun map(mapperr: BaseSingleRegistrationStringMapper.AuthenticatorStringMapper)
 
-    /*data*/class Base(
+    data class Base(
         private val accessToken: String,
         private val refreshToken: String,
         private val successRegister: Boolean

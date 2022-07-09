@@ -7,13 +7,14 @@ import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomain
 sealed class AuthorizationListData :
     Abstract.Object<RegistrationListDomain, AuthorizationListDataToDomainMapper> {
 
-    class Success(private val registrations: List<AuthorizationData>) : AuthorizationListData() {
+    data class Success(private val registrations: List<AuthorizationData>) :
+        AuthorizationListData() {
         override fun map(mapper: AuthorizationListDataToDomainMapper): RegistrationListDomain {
             return mapper.map(registrations)
         }
     }
 
-    class Fail(private val message: String) : AuthorizationListData(){
+    data class Fail(private val message: String) : AuthorizationListData() {
         override fun map(mapper: AuthorizationListDataToDomainMapper): RegistrationListDomain {
             return mapper.map(message)
         }
