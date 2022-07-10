@@ -5,7 +5,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import ch.b.retrofitandcoroutines.ReplaceBottomTab
 import ch.b.retrofitandcoroutines.presentation.containers.*
-import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerScreen
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import java.util.*

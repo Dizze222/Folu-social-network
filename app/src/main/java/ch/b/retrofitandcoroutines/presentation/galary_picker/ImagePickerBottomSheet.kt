@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker
+package ch.b.retrofitandcoroutines.presentation.galary_picker
 
 import android.app.Dialog
 import android.os.Bundle
@@ -13,9 +13,9 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.BottomSheetImagePickerBinding
 import ch.b.retrofitandcoroutines.presentation.user_profile.core.BaseBottomSheet
-import ch.b.retrofitandcoroutines.presentation.user_profile.core.Communicate
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.fragment_registration.view.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -88,17 +88,17 @@ class ImagePickerBottomSheet : BaseBottomSheet<BottomSheetImagePickerBinding>() 
                 override fun onStateChanged(bottomSheet: View, newState: Int) {
                     when (newState) {
                         BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-
+                            binding.bottomSheetLayout.transitionToStart()
                         }
                         BottomSheetBehavior.STATE_EXPANDED -> {
-
+                            binding.bottomSheetLayout.transitionToEnd()
                         }
                     }
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
                     if (slideOffset > 0) {
-                        //binding.bottomSheetLayout.progress = slideOffset
+                        binding.bottomSheetLayout.progress = slideOffset
                     }
                 }
             })
@@ -117,15 +117,15 @@ class ImagePickerBottomSheet : BaseBottomSheet<BottomSheetImagePickerBinding>() 
         }
     }
 
-    companion object{
-        fun newInstance() : ImagePickerBottomSheet{
+    companion object {
+        fun newInstance(): ImagePickerBottomSheet {
             return ImagePickerBottomSheet()
         }
     }
-    fun inject(){
+
+    fun inject() {
         val application = requireActivity().application as PhotoApp
         val appComponent = application.appComponent
         appComponent.inject(this)
     }
-
 }

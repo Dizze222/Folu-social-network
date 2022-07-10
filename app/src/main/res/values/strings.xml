@@ -58,6 +58,7 @@
     <string name="close">Закрыть</string>
     <string name="home">Дом</string>
     <string name="search">Поиск</string>
+    <string name="toolbar_title_gallery">Галерея</string>
 
     <string name="post_image">Пост картинки</string>
     <string name="view_all">View all %d comments</string>

@@ -1,11 +1,10 @@
-package ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker
+package ch.b.retrofitandcoroutines.presentation.galary_picker
 
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
@@ -14,7 +13,6 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.databinding.ScreenPickerImageBinding
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
-import ch.b.retrofitandcoroutines.presentation.user_profile.core.Communicate
 import ch.b.retrofitandcoroutines.presentation.user_profile.core.navigationData
 
 class ImagePickerScreen : BaseFragment<ScreenPickerImageBinding>(ScreenPickerImageBinding::inflate){
@@ -48,11 +46,7 @@ class ImagePickerScreen : BaseFragment<ScreenPickerImageBinding>(ScreenPickerIma
 
     private fun setImage(image: ImageView) {
         val data = navigationData as? MediaStoreImage
-        if (data!!.mapUri() == null){
-            image.setImageResource(R.drawable.ic_user_profile)
-        }else{
-            image.setImageURI(data.mapUri())
-        }
+        image.setImageURI(data!!.mapUri())
     }
 
     private fun clearImage(image: ImageView) {
@@ -79,6 +73,7 @@ class ImagePickerScreen : BaseFragment<ScreenPickerImageBinding>(ScreenPickerIma
             requireContext(), this
         ) == PackageManager.PERMISSION_GRANTED
     }
+
     companion object{
         fun newInstance() : ImagePickerScreen{
             return ImagePickerScreen()

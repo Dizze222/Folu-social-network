@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker
+package ch.b.retrofitandcoroutines.presentation.galary_picker
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -7,7 +7,6 @@ import android.database.ContentObserver
 import android.provider.MediaStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.GalleryAdapter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

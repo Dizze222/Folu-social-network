@@ -1,8 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.user_profile.core
 
-import ch.b.retrofitandcoroutines.databinding.FragmentUserProfileBinding
 import ch.b.retrofitandcoroutines.databinding.ItemImageBinding
-import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.MediaStoreImage
+import ch.b.retrofitandcoroutines.presentation.galary_picker.MediaStoreImage
 
 class ImageViewHolder(
     private val binding: ItemImageBinding,

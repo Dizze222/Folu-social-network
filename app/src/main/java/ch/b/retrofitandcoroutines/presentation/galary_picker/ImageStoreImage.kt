@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker
+package ch.b.retrofitandcoroutines.presentation.galary_picker
 
 import android.net.Uri
 import android.os.Parcel

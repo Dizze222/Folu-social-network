@@ -17,8 +17,7 @@ import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentUserProfileBinding
 import ch.b.retrofitandcoroutines.presentation.core.CameraFragment
 import ch.b.retrofitandcoroutines.presentation.core.*
-import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerBottomSheet
-import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerScreen
+import ch.b.retrofitandcoroutines.presentation.galary_picker.ImagePickerBottomSheet
 import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.inject.Inject
@@ -44,8 +43,9 @@ class UserProfileFragment :
             alertDialog()
         }
         binding.progress.setOnClickListener{
-            val nextScreen = FragmentScreen(ImagePickerScreen.newInstance())
-            (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+
+            val bottomSheetFragment = ImagePickerBottomSheet()
+            bottomSheetFragment.show(requireActivity().supportFragmentManager,"BFT")
         }
         lifecycleScope.launchWhenCreated {
             viewModel.observer(this@UserProfileFragment) {

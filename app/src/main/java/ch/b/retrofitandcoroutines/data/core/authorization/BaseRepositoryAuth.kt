@@ -30,8 +30,8 @@ open class BaseRepositoryAuth @Inject constructor(
             authenticationCloudDataSource.authentication(phoneNumber, password)
         }
         val registerList = cloudMapper.map(listOfCloud)
-       // tokenToSharedPreferences.saveAccessToken(registerList.dataOfAuth()[0])
-        //tokenToSharedPreferences.saveRefreshToken(registerList.dataOfAuth()[1])
+        tokenToSharedPreferences.saveAccessToken(registerList.dataOfAuth()[0])
+        tokenToSharedPreferences.saveRefreshToken(registerList.dataOfAuth()[1])
         AuthorizationListData.Success(registerList)
     } catch (e: Exception) {
         if (state == "register") {

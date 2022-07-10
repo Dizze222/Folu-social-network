@@ -2,7 +2,7 @@ package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
 import ch.b.retrofitandcoroutines.FragmentScreen
-import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerBottomSheet
+import ch.b.retrofitandcoroutines.presentation.galary_picker.ImagePickerBottomSheet
 
 
 class BottomContainer : BaseFragmentContainer() {

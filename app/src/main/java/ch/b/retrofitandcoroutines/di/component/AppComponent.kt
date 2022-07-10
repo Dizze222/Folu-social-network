@@ -10,7 +10,7 @@ import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.favourites.F
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
 import ch.b.retrofitandcoroutines.presentation.splash_screen.SplashFragment
 import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
-import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerBottomSheet
+import ch.b.retrofitandcoroutines.presentation.galary_picker.ImagePickerBottomSheet
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
