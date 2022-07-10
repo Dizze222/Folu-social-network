@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import ch.b.retrofitandcoroutines.ReplaceBottomTab
 import ch.b.retrofitandcoroutines.presentation.containers.*
+import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerScreen
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
 import ru.terrakok.cicerone.commands.Command
 import java.util.*
@@ -77,6 +78,20 @@ class AppNavigator(
             .detach(userProfileContainer)
             .commitNow()
 
+        val picContainer = fragmentManager.findFragmentByTag(PicContainer.TAG) as? PicContainer
+            ?:PicContainer.newInstance()
+        fragmentManager.beginTransaction()
+            .replace(containerId,picContainer,PicContainer.TAG)
+            .detach(picContainer)
+            .commitNow()
+
+        val bottomContainer = fragmentManager.findFragmentByTag(BottomContainer.TAG) as? BottomContainer
+            ?: BottomContainer.newInstance()
+        fragmentManager.beginTransaction()
+            .replace(containerId,bottomContainer,BottomContainer.TAG)
+            .detach(bottomContainer)
+            .commitNow()
+
 
         containers.add(allPostTabContainer)
         containers.add(likedTabContainer)
@@ -85,6 +100,8 @@ class AppNavigator(
         containers.add(authorizationContainer)
         containers.add(searchContainer)
         containers.add(userProfileContainer)
+        containers.add(picContainer)
+        containers.add(bottomContainer)
     }
 
     override fun applyCommand(command: Command) {

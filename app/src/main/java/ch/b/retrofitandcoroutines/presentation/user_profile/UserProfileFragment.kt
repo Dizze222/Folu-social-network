@@ -17,6 +17,8 @@ import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentUserProfileBinding
 import ch.b.retrofitandcoroutines.presentation.core.CameraFragment
 import ch.b.retrofitandcoroutines.presentation.core.*
+import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerBottomSheet
+import ch.b.retrofitandcoroutines.presentation.user_profile.galary_picker.ImagePickerScreen
 import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.inject.Inject
@@ -31,16 +33,26 @@ class UserProfileFragment :
         authenticationViewModelFactory
     }
 
+//    @Inject
+//    lateinit var imagePickerViewModelFactory: ImagePickerViewModelFactory
+//    private val imagePickerViewModel: ImagePickerViewModel by viewModels {
+//        imagePickerViewModelFactory
+//    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.imageProfile.setOnClickListener {
+        binding.image.setOnClickListener {
             alertDialog()
+        }
+        binding.progress.setOnClickListener{
+            val nextScreen = FragmentScreen(ImagePickerScreen.newInstance())
+            (parentFragment as RouterProvider).router.navigateTo(nextScreen)
         }
         lifecycleScope.launchWhenCreated {
             viewModel.observer(this@UserProfileFragment) {
                 it.map { userProfileUi ->
                     userProfileUi.map(
                         binding.name,
-                        binding.imageProfile,
+                        binding.image,
                         binding.bio,
                         binding.progress,
                         binding.mainLayout
@@ -62,7 +74,7 @@ class UserProfileFragment :
         ActivityResultLauncher.Image(registerForActivityResult(ActivityResultContracts.GetContent()) {
             val imageStream = requireActivity().contentResolver.openInputStream(it)
             val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
-            binding.imageProfile.setImageBitmap(selectedImage)
+            binding.image.setImageBitmap(selectedImage)
             val stream = ByteArrayOutputStream()
             selectedImage.compress(Bitmap.CompressFormat.PNG, 80, stream)
             val byteArray = stream.toByteArray()
@@ -96,7 +108,7 @@ class UserProfileFragment :
                 val decodedString = Base64.decode(result, Base64.DEFAULT)
                 val decodedByte =
                     BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                binding.imageProfile.setImageBitmap(decodedByte)
+                binding.image.setImageBitmap(decodedByte)
                 viewModel.sendImage(result!!)
             }
         }

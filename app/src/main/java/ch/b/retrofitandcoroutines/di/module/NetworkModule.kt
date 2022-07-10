@@ -21,7 +21,9 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.lang.annotation.RetentionPolicy
 import java.util.concurrent.TimeUnit
+import javax.inject.Scope
 import javax.inject.Singleton
 
 @Module(includes = [CoroutinesScopeModule::class])
@@ -138,4 +140,5 @@ class NetworkModule {
     fun provideRegistrationDataSource(service: RegistrationService): RegistrationCloudDataSource {
         return RegistrationCloudDataSource.Base(service)
     }
+
 }

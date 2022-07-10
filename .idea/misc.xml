@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/drawable-v24/ic_dashboard_black_24dp.xml" value="0.24305555555555555" />
         <entry key="app/src/main/res/drawable/bg_loading_snackbar.xml" value="0.26216216216216215" />
         <entry key="app/src/main/res/drawable/bg_rounded_search.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable/bg_scheet.xml" value="0.2640625" />
         <entry key="app/src/main/res/drawable/big_like_animation.xml" value="0.265234375" />
         <entry key="app/src/main/res/drawable/bookmark_selector.xml" value="0.2640625" />
         <entry key="app/src/main/res/drawable/capture_button.xml" value="0.2640625" />
@@ -34,10 +35,12 @@
         <entry key="app/src/main/res/drawable/profile_selector.xml" value="0.2922779922779923" />
         <entry key="app/src/main/res/drawable/shape_circular.xml" value="0.261003861003861" />
         <entry key="app/src/main/res/drawable/shape_register.xml" value="0.23472222222222222" />
+        <entry key="app/src/main/res/drawable/sheet_indicator.xml" value="0.295703125" />
         <entry key="app/src/main/res/drawable/shimmerbackround.xml" value="0.3388888888888889" />
         <entry key="app/src/main/res/drawable/test.xml" value="0.25833333333333336" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.253515625" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.28515625" />
+        <entry key="app/src/main/res/layout/bottom_sheet_image_picker.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/comments_adapter.xml" value="0.25234375" />
         <entry key="app/src/main/res/layout/comments_item.xml" value="0.253515625" />
         <entry key="app/src/main/res/layout/each_row.xml" value="0.34270833333333334" />
@@ -62,6 +65,7 @@
         <entry key="app/src/main/res/layout/fragment_user_search.xml" value="0.28515625" />
         <entry key="app/src/main/res/layout/fragment_users.xml" value="0.25703125" />
         <entry key="app/src/main/res/layout/grid_item.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/item_image.xml" value="0.283984375" />
         <entry key="app/src/main/res/layout/item_layout.xml" value="0.34270833333333334" />
         <entry key="app/src/main/res/layout/my_story_item.xml" value="0.25234375" />
         <entry key="app/src/main/res/layout/nav_graph.xml" value="0.3848958333333333" />
@@ -69,6 +73,7 @@
         <entry key="app/src/main/res/layout/photographer_item.xml" value="0.25234375" />
         <entry key="app/src/main/res/layout/progress_fullscreen.xml" value="0.25" />
         <entry key="app/src/main/res/layout/register_layout.xml" value="0.28515625" />
+        <entry key="app/src/main/res/layout/screen_picker_image.xml" value="0.253515625" />
         <entry key="app/src/main/res/layout/shimmer_grid.xml" value="0.33" />
         <entry key="app/src/main/res/layout/shimmer_layout.xml" value="0.33" />
         <entry key="app/src/main/res/layout/stories_container.xml" value="0.25" />
@@ -77,10 +82,12 @@
         <entry key="app/src/main/res/layout/test.xml" value="0.23680555555555555" />
         <entry key="app/src/main/res/menu/bottom_navigation_menu.xml" value="0.256640625" />
         <entry key="app/src/main/res/menu/navigation_icon.xml" value="0.28515625" />
+        <entry key="app/src/main/res/menu/picker.xml" value="0.28515625" />
         <entry key="app/src/main/res/menu/top_app_bar.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.265234375" />
         <entry key="app/src/main/res/xml/fragment_splash_scene.xml" value="0.283984375" />
         <entry key="app/src/main/res/xml/fragment_splash_scenee.xml" value="0.283984375" />
+        <entry key="app/src/main/res/xml/sheet_scence.xml" value="0.28515625" />
         <entry key="testScreen/src/main/res/layout/fragment_test.xml" value="0.240234375" />
         <entry key="testTwo/src/main/res/layout/fragment_two.xml" value="0.28515625" />
       </map>
