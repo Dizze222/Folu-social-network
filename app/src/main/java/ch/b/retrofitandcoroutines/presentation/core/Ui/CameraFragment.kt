@@ -62,7 +62,6 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
         fun newInstance(): CameraFragment {
             return CameraFragment()
         }
-
         private const val TAG = "CameraXGFG"
         private const val FILENAME_FORMAT = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val REQUEST_CODE_PERMISSIONS = 20
@@ -168,7 +167,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                 )
 
             } catch (exc: Exception) {
-                Log.i("RTRR", exc.toString())
+                Log.i("camera", exc.toString())
             }
 
         }, ContextCompat.getMainExecutor(activity!!.applicationContext))

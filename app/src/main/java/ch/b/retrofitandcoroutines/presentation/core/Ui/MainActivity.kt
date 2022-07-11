@@ -13,6 +13,9 @@ import ch.b.retrofitandcoroutines.presentation.navigate.*
 import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
 
 import ru.terrakok.cicerone.Cicerone
+import android.content.Intent
+import ch.b.retrofitandcoroutines.presentation.CustomService
+
 
 class MainActivity : AppCompatActivity(),
     RouterProvider {
@@ -28,6 +31,7 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        startService(Intent(baseContext, CustomService::class.java))
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
         val screen = FragmentScreen(SplashContainer.newInstance())
