@@ -8,7 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.filters.LargeTest
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
-import ch.b.retrofitandcoroutines.presentation.core.MainActivity
+import ch.b.retrofitandcoroutines.presentation.core.Ui.MainActivity
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.Rule

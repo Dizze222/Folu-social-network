@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.core
+package ch.b.retrofitandcoroutines.presentation.core.Ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

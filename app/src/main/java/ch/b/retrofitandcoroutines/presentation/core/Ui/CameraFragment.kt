@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.core
+package ch.b.retrofitandcoroutines.presentation.core.Ui
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -22,6 +22,7 @@ import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.databinding.FragmentCameraBinding
+import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.text.SimpleDateFormat
@@ -71,7 +72,6 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
 
     private fun takePhoto() {
         val imageCapture = imageCapture ?: return
-        Log.i("CAMERA","takePhoto()")
         val photoFile = File(
             outputDirectory,
             SimpleDateFormat(FILENAME_FORMAT, Locale.US).format(System.currentTimeMillis()) + ".jpg"
@@ -96,8 +96,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                     val byteArray = stream.toByteArray()
                     val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
                     setFragmentResult("request_key", Bundle().apply {
-                        putString("bundleKey", base64String)
-                        Log.i("CAMERA","fragment result")
+                        putString("cameraKey", base64String)
                         (parentFragment as RouterProvider).router.exit()
                     })
                 }
@@ -169,7 +168,7 @@ class CameraFragment : BaseFragment<FragmentCameraBinding>(FragmentCameraBinding
                 )
 
             } catch (exc: Exception) {
-                Log.i("RTRR",exc.toString())
+                Log.i("RTRR", exc.toString())
             }
 
         }, ContextCompat.getMainExecutor(activity!!.applicationContext))

@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.user_profile
 
-import android.graphics.Bitmap
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
@@ -8,6 +9,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,15 +17,14 @@ import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentUserProfileBinding
-import ch.b.retrofitandcoroutines.presentation.core.CameraFragment
+import ch.b.retrofitandcoroutines.presentation.core.Ui.CameraFragment
 import ch.b.retrofitandcoroutines.presentation.core.*
 import ch.b.retrofitandcoroutines.presentation.galary_picker.ImagePickerBottomSheet
-import java.io.ByteArrayOutputStream
 import java.util.*
 import javax.inject.Inject
 
 class UserProfileFragment :
-    BaseFragment<FragmentUserProfileBinding>(FragmentUserProfileBinding::inflate) {
+    BaseFragment<FragmentUserProfileBinding>(FragmentUserProfileBinding::inflate), SharedPhoto {
 
 
     @Inject
@@ -32,21 +33,13 @@ class UserProfileFragment :
         authenticationViewModelFactory
     }
 
-//    @Inject
-//    lateinit var imagePickerViewModelFactory: ImagePickerViewModelFactory
-//    private val imagePickerViewModel: ImagePickerViewModel by viewModels {
-//        imagePickerViewModelFactory
-//    }
+    private var callback: SharedPhoto? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.image.setOnClickListener {
             alertDialog()
         }
-        binding.progress.setOnClickListener{
 
-            val bottomSheetFragment = ImagePickerBottomSheet()
-            bottomSheetFragment.show(requireActivity().supportFragmentManager,"BFT")
-        }
         lifecycleScope.launchWhenCreated {
             viewModel.observer(this@UserProfileFragment) {
                 it.map { userProfileUi ->
@@ -62,25 +55,14 @@ class UserProfileFragment :
             }
         }
         viewModel.getUserProfile()
+        callback = this
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
     }
-
-
-    private var resultLauncher =
-        ActivityResultLauncher.Image(registerForActivityResult(ActivityResultContracts.GetContent()) {
-            val imageStream = requireActivity().contentResolver.openInputStream(it)
-            val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
-            binding.image.setImageBitmap(selectedImage)
-            val stream = ByteArrayOutputStream()
-            selectedImage.compress(Bitmap.CompressFormat.PNG, 80, stream)
-            val byteArray = stream.toByteArray()
-            val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
-            viewModel.sendImage(base64String)
-        })
 
 
     companion object {
@@ -100,23 +82,46 @@ class UserProfileFragment :
         dialog.setMessage("Откуда брать фото?")
         dialog.setTitle("Фото профиля")
         dialog.setPositiveButton("Камера") { _, _ ->
-            val nextScreen = FragmentScreen(CameraFragment.newInstance())
-            (parentFragment as RouterProvider).router.navigateTo(nextScreen)
-            setFragmentResultListener("request_key") { _, bundle ->
-                val result = bundle.getString("bundleKey")
-                Toast.makeText(requireContext(), result, Toast.LENGTH_LONG).show()
-                val decodedString = Base64.decode(result, Base64.DEFAULT)
-                val decodedByte =
-                    BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
-                binding.image.setImageBitmap(decodedByte)
-                viewModel.sendImage(result!!)
-            }
+            customCameraFragment()
         }
         dialog.setNegativeButton("Галерея") { _, _ ->
-            resultLauncher.launch()
+            checkedPermission.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
         }
         val alertDialog: AlertDialog = dialog.create()
         alertDialog.show()
     }
 
+    private val checkedPermission =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (!isGranted) {
+                Manifest.permission.READ_EXTERNAL_STORAGE.checkPermission()
+            } else {
+                val bottomSheetFragment = ImagePickerBottomSheet(this)
+                bottomSheetFragment.show(requireActivity().supportFragmentManager, "BFT")
+
+            }
+        }
+
+    private fun String.checkPermission(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            requireContext(), this
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun customCameraFragment() {
+        val nextScreen = FragmentScreen(CameraFragment.newInstance())
+        (parentFragment as RouterProvider).router.navigateTo(nextScreen)
+        setFragmentResultListener("request_key") { _, bundle ->
+            val result = bundle.getString("cameraKey")
+            val decodedString = Base64.decode(result, Base64.DEFAULT)
+            val decodedByte =
+                BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+            binding.image.setImageBitmap(decodedByte)
+            viewModel.sendImage(result!!)
+        }
+    }
+
+    override fun photo(base64: String) {
+        Toast.makeText(requireContext(), base64, Toast.LENGTH_LONG).show()
+    }
 }
