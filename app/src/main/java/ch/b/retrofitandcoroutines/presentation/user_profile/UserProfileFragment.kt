@@ -122,6 +122,10 @@ class UserProfileFragment :
     }
 
     override fun photo(base64: String) {
-        Toast.makeText(requireContext(), base64, Toast.LENGTH_LONG).show()
+        val decodedString = Base64.decode(base64, Base64.DEFAULT)
+        val decodedByte =
+            BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+        binding.image.setImageBitmap(decodedByte)
+        viewModel.sendImage(base64)
     }
 }
