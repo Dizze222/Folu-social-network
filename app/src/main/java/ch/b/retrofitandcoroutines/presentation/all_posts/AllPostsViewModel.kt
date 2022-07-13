@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
 import androidx.lifecycle.*
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
@@ -15,8 +16,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class AllPostsViewModel(
+class AllPostsViewModel @Inject constructor(
     private val interactor: PhotographerInteractor,
     private val mapper: PhotographerListDomainToUIMapper,
     private val favouriteInteractor: FavouritePostInteractor,
@@ -94,5 +96,10 @@ class AllPostsViewModel(
             @Suppress("DEPRECATION")
             return networkInfo.isConnected
         }
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.i("VM","onCleared")
     }
 }

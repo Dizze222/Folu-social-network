@@ -12,12 +12,28 @@ import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import ch.b.retrofitandcoroutines.presentation.core.Ui.MainActivity
 import android.app.PendingIntent
+import android.os.CountDownTimer
+import android.util.Log
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.core.PhotoApp
+import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
+import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModelFactory
+import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
+import javax.inject.Inject
 
 
 class CustomService : Service() {
     private var mNM: NotificationManager? = null
     private val notification: Int = R.string.author
+
+    @Inject
+    lateinit var allPostsViewModelFactory: AllPostsViewModel
+    val COUNTDOWN_BR = "test"
+    private var someIntent = Intent(COUNTDOWN_BR)
+
+
     override fun onBind(intent: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
@@ -30,22 +46,28 @@ class CustomService : Service() {
         super.onDestroy()
         mNM!!.cancel(notification)
 
-        // Tell the user we stopped.
+
         Toast.makeText(this, "сервис destroyed", Toast.LENGTH_SHORT).show()
     }
+
     override fun onCreate() {
         super.onCreate()
-        Toast.makeText(this,"сервис onCreate",Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "сервис onCreate", Toast.LENGTH_LONG).show()
+        (applicationContext as PhotoApp).getMainAppComponent().inject(this)
+
+        allPostsViewModelFactory.getPhotographers()
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             startMyOwnForeground()
         else
             startForeground(1, Notification())
+
     }
 
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun startMyOwnForeground() {
-        val contentIntent= PendingIntent.getActivity(
+        val contentIntent = PendingIntent.getActivity(
             applicationContext,
             0,
             Intent(this, MainActivity::class.java),
@@ -78,5 +100,6 @@ class CustomService : Service() {
     override fun startService(service: Intent?): ComponentName? {
         return super.startService(service)
     }
+
 
 }

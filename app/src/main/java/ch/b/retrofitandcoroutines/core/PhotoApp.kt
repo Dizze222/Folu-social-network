@@ -18,4 +18,8 @@ class PhotoApp : Application() {
             .build()
     }
 
+    fun getMainAppComponent(): AppComponent {
+        return appComponent
+    }
+
 }
