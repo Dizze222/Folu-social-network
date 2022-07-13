@@ -77,16 +77,6 @@ class AppNavigator(
             .detach(userProfileContainer)
             .commitNow()
 
-
-//
-//        val bottomContainer = fragmentManager.findFragmentByTag(BottomContainer.TAG) as? BottomContainer
-//            ?: BottomContainer.newInstance()
-//        fragmentManager.beginTransaction()
-//            .replace(containerId,bottomContainer,BottomContainer.TAG)
-//            .detach(bottomContainer)
-//            .commitNow()
-
-
         containers.add(allPostTabContainer)
         containers.add(likedTabContainer)
         containers.add(registrationContainer)
@@ -95,7 +85,6 @@ class AppNavigator(
         containers.add(searchContainer)
         containers.add(userProfileContainer)
 
-        //containers.add(bottomContainer)
     }
 
     override fun applyCommand(command: Command) {

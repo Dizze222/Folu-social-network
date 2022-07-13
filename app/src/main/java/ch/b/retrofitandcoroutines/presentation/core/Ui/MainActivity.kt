@@ -2,19 +2,15 @@ package ch.b.retrofitandcoroutines.presentation.core.Ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
-import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.containers.*
 import ch.b.retrofitandcoroutines.presentation.navigate.*
-import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
 
 import ru.terrakok.cicerone.Cicerone
 import android.content.Intent
-import ch.b.retrofitandcoroutines.presentation.CustomService
+import ch.b.retrofitandcoroutines.presentation.core.CustomService
 
 
 class MainActivity : AppCompatActivity(),

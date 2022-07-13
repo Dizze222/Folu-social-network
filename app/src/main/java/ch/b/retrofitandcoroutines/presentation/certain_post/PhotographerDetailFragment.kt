@@ -12,6 +12,7 @@ import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerSt
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.core.convertToArrayList
 import ch.b.retrofitandcoroutines.BackButtonListener
+import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import javax.inject.Inject
 
@@ -97,7 +98,7 @@ class PhotographerDetailFragment :
 
 
     override fun onBackPressed(): Boolean {
-        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.exit()
+        (parentFragment as RouterProvider).router.exit()
         return true
     }
 

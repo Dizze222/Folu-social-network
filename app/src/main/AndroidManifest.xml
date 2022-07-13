@@ -22,7 +22,6 @@
         android:supportsRtl="true"
         android:allowBackup="false"
         android:theme="@style/AppTheme">
-        <service android:name=".presentation.CustomService"/>
         <activity
             android:name=".presentation.core.Ui.MainActivity"
             android:exported="true"
@@ -35,5 +34,9 @@
             </intent-filter>
 
         </activity>
+
+        <service android:name=".presentation.core.CustomService">
+
+        </service>
     </application>
 </manifest>

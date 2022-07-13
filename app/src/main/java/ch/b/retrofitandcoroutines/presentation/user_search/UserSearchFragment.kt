@@ -5,10 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.RouterProvider
 
 
-class UserSearchFragment : Fragment() {
+class UserSearchFragment : Fragment(),BackButtonListener {
 
 
     override fun onCreateView(
@@ -21,6 +23,11 @@ class UserSearchFragment : Fragment() {
 
     fun newInstance(): Fragment {
         return UserSearchFragment()
+    }
+
+    override fun onBackPressed(): Boolean {
+        (parentFragment as RouterProvider).router.exit()
+        return true
     }
 
 

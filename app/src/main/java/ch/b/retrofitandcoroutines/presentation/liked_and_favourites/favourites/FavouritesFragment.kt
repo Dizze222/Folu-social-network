@@ -5,6 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import ch.b.retrofitandcoroutines.BackButtonListener
+import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.databinding.FragmentFavouritesBinding
@@ -13,7 +15,9 @@ import ch.b.retrofitandcoroutines.presentation.core.SharedPreferencesFavourite
 import javax.inject.Inject
 
 class FavouritesFragment :
-    BaseFragment<FragmentFavouritesBinding>(FragmentFavouritesBinding::inflate) {
+    BaseFragment<FragmentFavouritesBinding>(FragmentFavouritesBinding::inflate),
+    BackButtonListener {
+
 
     @Inject
     lateinit var favouriteViewModelFactory: FavouriteViewModelFactory
@@ -29,7 +33,7 @@ class FavouritesFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val preferences = SharedPreferencesFavourite.Base(requireContext(), Reader())
-        val itemCollectClickListener = object : FavouriteAdapter.FavouriteItemClickListener{
+        val itemCollectClickListener = object : FavouriteAdapter.FavouriteItemClickListener {
             val localId = preferences.readIdOfFavouritePost()
             override fun deleteClick(id: Int) {
                 val newId = localId.replace(id.toString(), " ")
@@ -42,20 +46,27 @@ class FavouritesFragment :
         binding.listOfFavourites.adapter = adapter
         binding.listOfFavourites.layoutManager = LinearLayoutManager(activity!!.applicationContext)
         lifecycleScope.launchWhenStarted {
-            favouriteViewModel.observe(this@FavouritesFragment,{
+            favouriteViewModel.observe(this@FavouritesFragment, {
                 adapter.update(it)
             })
         }
         favouriteViewModel.getFavouritePost()
     }
-    companion object{
-        fun newInstance() : FavouritesFragment{
+
+    companion object {
+        fun newInstance(): FavouritesFragment {
             return FavouritesFragment()
         }
     }
-    fun inject(){
+
+    fun inject() {
         val application = requireActivity().application as PhotoApp
         val appComponent = application.appComponent
         appComponent.inject(this)
+    }
+
+    override fun onBackPressed(): Boolean {
+        (parentFragment as RouterProvider).router.exit()
+        return true
     }
 }
