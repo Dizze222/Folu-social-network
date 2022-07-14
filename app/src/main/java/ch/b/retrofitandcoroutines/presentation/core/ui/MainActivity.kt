@@ -1,9 +1,10 @@
 package ch.b.retrofitandcoroutines.presentation.core.ui
 
 import android.app.PendingIntent
-import android.content.Intent
+import android.content.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.IBinder
 import android.util.Log
 import android.view.Menu
 import ch.b.retrofitandcoroutines.*
@@ -14,33 +15,40 @@ import ch.b.retrofitandcoroutines.presentation.core.CustomService
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
 import ru.terrakok.cicerone.Cicerone
-import android.content.IntentFilter
 
 
-
-
-
-class MainActivity : AppCompatActivity(),
-    RouterProvider {
+class MainActivity : AppCompatActivity(), RouterProvider {
     private lateinit var binding: ActivityMainBinding
     private val cicerone = Cicerone.create(AppRouter())
     private lateinit var appNavigator: AppNavigator
     override val router: AppRouter
         get() = cicerone.router
-    val BROADCAST_ACTION = "ch.b.retrofitandcoroutines.presentation.core"
+    val BROADCAST_ACTION = "send Data"
     val PARAM_TASK = "task"
+
+
+    private val connection = object : ServiceConnection {
+        override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+            Log.i("Service", "onServiceConnected")
+        }
+
+        override fun onServiceDisconnected(name: ComponentName?) {
+            Log.i("Service", "onServiceDisconnected")
+        }
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        startService(
-            Intent(baseContext, CustomService::class.java).putExtra(
-                "pendingIntent",
-                "someData"
-            )
-        )
-        val intFilt = IntentFilter(BROADCAST_ACTION)
-        registerReceiver(BroadcastReceiver(), intFilt)
+
+        // bindService(Intent(baseContext, CustomService::class.java), connection, Context.BIND_AUTO_CREATE)
+
+//        startService(Intent(baseContext, CustomService::class.java).setAction("test"))
+//
+//        val intFilter = IntentFilter(BROADCAST_ACTION)
+//        registerReceiver(BroadcastReceiver(), intFilter)
 
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()

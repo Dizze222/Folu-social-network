@@ -96,7 +96,6 @@ class UserProfileFragment :
             } else {
                 val bottomSheetFragment = ImagePickerBottomSheet(this)
                 bottomSheetFragment.show(requireActivity().supportFragmentManager, "BFT")
-
             }
         }
 

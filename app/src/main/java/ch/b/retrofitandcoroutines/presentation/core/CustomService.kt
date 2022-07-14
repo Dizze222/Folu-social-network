@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.presentation.core
 
-import android.content.ComponentName
+
 import android.content.Intent
 import android.os.IBinder
 import android.app.*
@@ -11,14 +11,12 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
 import android.app.PendingIntent
+import android.util.Log
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
 import ch.b.retrofitandcoroutines.presentation.core.ui.MainActivity
 import javax.inject.Inject
-
-
-
 
 
 class CustomService : Service() {
@@ -29,37 +27,41 @@ class CustomService : Service() {
     lateinit var allPostsViewModelFactory: AllPostsViewModel
 
     override fun onBind(intent: Intent?): IBinder? {
-        TODO("Not yet implemented")
+        Log.i("Service", "onBind")
+        return null
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-
+        Log.i(
+            "Service",
+            "onStartCommand, flags: $flags, startId: $startId, action: ${intent!!.action}"
+        )
         return START_STICKY
     }
 
     override fun onDestroy() {
         super.onDestroy()
+
+        Log.i("Service", "onDestroy")
         mNM!!.cancel(notification)
-
-
-        Toast.makeText(this, "сервис destroyed", Toast.LENGTH_SHORT).show()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate() {
         super.onCreate()
-        Toast.makeText(this, "сервис onCreate", Toast.LENGTH_LONG).show()
-        (applicationContext as PhotoApp).getMainAppComponent().inject(this)
-        val intent = Intent(MainActivity().BROADCAST_ACTION)
-        intent.putExtra(MainActivity().PARAM_TASK,123)
-        sendBroadcast(intent)
-        //  allPostsViewModelFactory.getPhotographers()
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             startMyOwnForeground()
         else
             startForeground(1, Notification())
+        Log.i("Service", "onCreate")
+
+        (applicationContext as PhotoApp).getMainAppComponent().inject(this)
+        val intent = Intent(MainActivity().BROADCAST_ACTION)
+        intent.putExtra(MainActivity().PARAM_TASK, 123)
+        sendBroadcast(intent)
+        //allPostsViewModelFactory.getPhotographers()
+
 
     }
 
@@ -95,8 +97,4 @@ class CustomService : Service() {
         startForeground(2, notification)
     }
 
-
-    override fun startService(service: Intent?): ComponentName? {
-        return super.startService(service)
-    }
 }
