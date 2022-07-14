@@ -23,7 +23,7 @@
         android:allowBackup="false"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".presentation.core.Ui.MainActivity"
+            android:name=".presentation.core.ui.MainActivity"
             android:exported="true"
             android:configChanges="orientation"
             android:screenOrientation="portrait">
@@ -38,5 +38,9 @@
         <service android:name=".presentation.core.CustomService">
 
         </service>
+        
+        <receiver android:name=".presentation.core.BroadcastReceiver">
+
+        </receiver>
     </application>
 </manifest>

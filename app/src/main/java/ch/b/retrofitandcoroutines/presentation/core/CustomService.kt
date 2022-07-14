@@ -10,18 +10,15 @@ import android.os.Build
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
-import ch.b.retrofitandcoroutines.presentation.core.Ui.MainActivity
 import android.app.PendingIntent
-import android.os.CountDownTimer
-import android.util.Log
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModel
-import ch.b.retrofitandcoroutines.presentation.all_posts.AllPostsViewModelFactory
-import ch.b.retrofitandcoroutines.presentation.all_posts.stories.StoriesContainerAdapter
+import ch.b.retrofitandcoroutines.presentation.core.ui.MainActivity
 import javax.inject.Inject
+
+
+
 
 
 class CustomService : Service() {
@@ -30,16 +27,15 @@ class CustomService : Service() {
 
     @Inject
     lateinit var allPostsViewModelFactory: AllPostsViewModel
-    val COUNTDOWN_BR = "test"
-    private var someIntent = Intent(COUNTDOWN_BR)
-
 
     override fun onBind(intent: Intent?): IBinder? {
         TODO("Not yet implemented")
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        return START_NOT_STICKY
+
+        return START_STICKY
     }
 
     override fun onDestroy() {
@@ -50,12 +46,15 @@ class CustomService : Service() {
         Toast.makeText(this, "сервис destroyed", Toast.LENGTH_SHORT).show()
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate() {
         super.onCreate()
         Toast.makeText(this, "сервис onCreate", Toast.LENGTH_LONG).show()
         (applicationContext as PhotoApp).getMainAppComponent().inject(this)
-
-        allPostsViewModelFactory.getPhotographers()
+        val intent = Intent(MainActivity().BROADCAST_ACTION)
+        intent.putExtra(MainActivity().PARAM_TASK,123)
+        sendBroadcast(intent)
+        //  allPostsViewModelFactory.getPhotographers()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
             startMyOwnForeground()
@@ -100,6 +99,4 @@ class CustomService : Service() {
     override fun startService(service: Intent?): ComponentName? {
         return super.startService(service)
     }
-
-
 }

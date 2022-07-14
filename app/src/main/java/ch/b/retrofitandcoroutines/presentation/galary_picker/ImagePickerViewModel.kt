@@ -25,7 +25,7 @@ class ImagePickerViewModel(private val application: Application) : ViewModel() {
     private val contentObserver: ContentObserver? = null
 
     fun loadImages() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             val imageList = queryImages()
             _images.value = imageList
         }
@@ -33,7 +33,7 @@ class ImagePickerViewModel(private val application: Application) : ViewModel() {
 
     private suspend fun queryImages(): List<MediaStoreImage> {
         val images = mutableListOf<MediaStoreImage>()
-        withContext(Dispatchers.IO) {
+        withContext(Dispatchers.Default) {
             val projection = arrayOf(
                 MediaStore.Images.Media._ID,
                 MediaStore.Images.Media.DISPLAY_NAME,

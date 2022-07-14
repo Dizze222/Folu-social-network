@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -17,7 +16,7 @@ import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentUserProfileBinding
-import ch.b.retrofitandcoroutines.presentation.core.Ui.CameraFragment
+import ch.b.retrofitandcoroutines.presentation.core.ui.CameraFragment
 import ch.b.retrofitandcoroutines.presentation.core.*
 import ch.b.retrofitandcoroutines.presentation.galary_picker.ImagePickerBottomSheet
 import java.util.*

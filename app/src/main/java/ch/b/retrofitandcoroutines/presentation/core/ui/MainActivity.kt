@@ -1,16 +1,23 @@
-package ch.b.retrofitandcoroutines.presentation.core.Ui
+package ch.b.retrofitandcoroutines.presentation.core.ui
 
+import android.app.PendingIntent
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.containers.*
+import ch.b.retrofitandcoroutines.presentation.core.BroadcastReceiver
+import ch.b.retrofitandcoroutines.presentation.core.CustomService
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
 import ru.terrakok.cicerone.Cicerone
-import android.content.Intent
-import ch.b.retrofitandcoroutines.presentation.core.CustomService
+import android.content.IntentFilter
+
+
+
 
 
 class MainActivity : AppCompatActivity(),
@@ -18,16 +25,23 @@ class MainActivity : AppCompatActivity(),
     private lateinit var binding: ActivityMainBinding
     private val cicerone = Cicerone.create(AppRouter())
     private lateinit var appNavigator: AppNavigator
-
     override val router: AppRouter
         get() = cicerone.router
-
-
+    val BROADCAST_ACTION = "ch.b.retrofitandcoroutines.presentation.core"
+    val PARAM_TASK = "task"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        startService(Intent(baseContext, CustomService::class.java))
+        startService(
+            Intent(baseContext, CustomService::class.java).putExtra(
+                "pendingIntent",
+                "someData"
+            )
+        )
+        val intFilt = IntentFilter(BROADCAST_ACTION)
+        registerReceiver(BroadcastReceiver(), intFilt)
+
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
         val screen = FragmentScreen(SplashContainer.newInstance())
@@ -89,6 +103,11 @@ class MainActivity : AppCompatActivity(),
         val inflater = menuInflater
         inflater.inflate(R.menu.navigation_icon, menu)
         return true
+    }
+
+    override fun createPendingResult(requestCode: Int, data: Intent, flags: Int): PendingIntent {
+        Log.i("Pending", requestCode.toString())
+        return super.createPendingResult(requestCode, data, flags)
     }
 
 

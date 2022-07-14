@@ -1,4 +1,4 @@
-package ch.b.retrofitandcoroutines.presentation.core.Ui
+package ch.b.retrofitandcoroutines.presentation.core.ui
 
 import android.Manifest
 import android.content.pm.PackageManager

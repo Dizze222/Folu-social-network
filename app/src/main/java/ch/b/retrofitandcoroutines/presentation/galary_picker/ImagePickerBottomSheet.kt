@@ -38,8 +38,6 @@ class ImagePickerBottomSheet(private val shared: SharedPhoto) : BaseBottomSheet<
         imagePickerViewModelFactory
     }
 
-
-
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<*>
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,9 +66,10 @@ class ImagePickerBottomSheet(private val shared: SharedPhoto) : BaseBottomSheet<
     }
 
     override fun prepareView(savedInstanceState: Bundle?) {
+        binding.recyclerGallery.setHasFixedSize(true)
+        binding.recyclerGallery.setItemViewCacheSize(1)
         viewModel.loadImages()
         initRecyclerView()
-        //toolbarBackPressed()
     }
 
     private fun getScreenHeight(): Int {
