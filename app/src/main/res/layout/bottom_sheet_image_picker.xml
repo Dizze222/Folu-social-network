@@ -40,7 +40,7 @@
         android:layout_height="0dp"
         android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="3"
+        app:spanCount="2"
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="16dp"
         tools:listitem="@layout/item_image" />

@@ -46,7 +46,14 @@ class ImagePickerBottomSheet(private val shared: SharedPhoto) : BaseBottomSheet<
 
     private val galleryAdapter: GalleryAdapter by lazy {
         GalleryAdapter { image ->
-
+            val imageStream = requireActivity().contentResolver.openInputStream(image!!.mapUri())
+            val selectedImage: Bitmap = BitmapFactory.decodeStream(imageStream)
+            val stream = ByteArrayOutputStream()
+            selectedImage.compress(Bitmap.CompressFormat.PNG, 80, stream)
+            val byteArray = stream.toByteArray()
+            val base64String: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+            shared.photo(base64String)
+            dismiss()
         }
     }
 
