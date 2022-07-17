@@ -32,7 +32,7 @@ class FavouriteAdapter(private val favouriteClick: FavouriteItemClickListener) :
         else -> 2
     }
 
-    abstract class FavouriteViewHolder(private val binding: ViewBinding) :
+    abstract class FavouriteViewHolder(binding: ViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
         open fun bind(photographer: PhotographerUI) = Unit
 
@@ -55,7 +55,7 @@ class FavouriteAdapter(private val favouriteClick: FavouriteItemClickListener) :
             }
         }
 
-        class Empty(private val binding: EmptydataFullscreenBinding) : FavouriteViewHolder(binding)
+        class Empty(binding: EmptydataFullscreenBinding) : FavouriteViewHolder(binding)
 
     }
 
