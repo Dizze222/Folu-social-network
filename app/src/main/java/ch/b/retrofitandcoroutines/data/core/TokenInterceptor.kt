@@ -1,12 +1,7 @@
 package ch.b.retrofitandcoroutines.data.core
 
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
-import okhttp3.Request
 import okhttp3.Response
 
 
@@ -40,3 +35,4 @@ interface TokenInterceptor : Interceptor {
         }
     }
 }
+

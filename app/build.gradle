@@ -45,6 +45,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.4.1"
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "android.arch.work:work-runtime:1.0.1"
 
     //test
     testImplementation 'junit:junit:4.13.2'

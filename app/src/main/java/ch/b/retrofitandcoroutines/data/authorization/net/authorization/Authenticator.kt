@@ -11,9 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-class Authenticator(
-    private val tokenFromShared: TokenToSharedPreferences
-) :
+class Authenticator(private val tokenFromShared: TokenToSharedPreferences) :
     Authenticator {
     override fun authenticate(route: Route?, response: Response): Request? = runBlocking {
         val okHttp = OkHttpClient.Builder()
@@ -24,7 +22,7 @@ class Authenticator(
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://photographer-application.herokuapp.com/")
+            .baseUrl("https://ngrok-1g123g1g.com/")
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

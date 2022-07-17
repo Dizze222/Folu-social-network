@@ -5,16 +5,23 @@ import android.content.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
+import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
+import androidx.work.OneTimeWorkRequest
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkManager
+import androidx.work.Worker
 import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
+import ch.b.retrofitandcoroutines.presentation.all_posts.MyWorker
 import ch.b.retrofitandcoroutines.presentation.containers.*
 import ch.b.retrofitandcoroutines.presentation.core.BroadcastReceiver
 import ch.b.retrofitandcoroutines.presentation.core.CustomService
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
 import ru.terrakok.cicerone.Cicerone
+import java.util.concurrent.TimeUnit
 
 
 class MainActivity : AppCompatActivity(), RouterProvider {
@@ -27,7 +34,7 @@ class MainActivity : AppCompatActivity(), RouterProvider {
     val PARAM_TASK = "task"
 
 
-    private val connection = object : ServiceConnection {
+    val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             Log.i("Service", "onServiceConnected")
         }
@@ -45,10 +52,16 @@ class MainActivity : AppCompatActivity(), RouterProvider {
 
         // bindService(Intent(baseContext, CustomService::class.java), connection, Context.BIND_AUTO_CREATE)
 
-//        startService(Intent(baseContext, CustomService::class.java).setAction("test"))
-//
-//        val intFilter = IntentFilter(BROADCAST_ACTION)
-//        registerReceiver(BroadcastReceiver(), intFilter)
+        //startService(Intent(baseContext, CustomService::class.java).setAction("test"))
+
+        //val intFilter = IntentFilter(BROADCAST_ACTION)
+        //registerReceiver(BroadcastReceiver(), intFilter)
+
+        val myWorker = PeriodicWorkRequest.Builder(MyWorker::class.java, 15, TimeUnit.MINUTES)
+            .addTag("WORK-TAG")
+            .build()
+
+
 
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
@@ -117,6 +130,4 @@ class MainActivity : AppCompatActivity(), RouterProvider {
         Log.i("Pending", requestCode.toString())
         return super.createPendingResult(requestCode, data, flags)
     }
-
-
 }

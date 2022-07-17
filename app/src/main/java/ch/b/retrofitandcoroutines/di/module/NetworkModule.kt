@@ -29,7 +29,7 @@ import javax.inject.Singleton
 @Module(includes = [CoroutinesScopeModule::class])
 class NetworkModule {
     private companion object {
-        private const val BASE_URL = "https://photographer-application.herokuapp.com/"
+        private const val BASE_URL = "https://ngrok-1g123g1g.com/"
     }
 
     @Provides
