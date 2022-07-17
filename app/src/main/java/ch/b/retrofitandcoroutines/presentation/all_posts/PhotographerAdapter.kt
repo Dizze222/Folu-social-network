@@ -56,6 +56,7 @@ class PhotographerAdapter(
     abstract class PhotographerViewHolder(view: ViewBinding) : RecyclerView.ViewHolder(view.root) {
         open fun bind(photographer: PhotographerUI) = Unit
         open fun bindFavoriteState(isFavorite: Boolean) = Unit
+
         class Base(
             private val binding: PhotographerItemBinding,
             private val photographerItemClick: PhotographerItemClickListener,
