@@ -22,7 +22,7 @@ class Authenticator(private val tokenFromShared: TokenToSharedPreferences) :
             .build()
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://ngrok-1g123g1g.com/")
+            .baseUrl("https://photographer-application.herokuapp.com/")
             .client(okHttp)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

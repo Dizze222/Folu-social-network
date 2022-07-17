@@ -27,10 +27,17 @@ interface CacheFavouriteDataSource {
             })
         }
 
-        override suspend fun readFavouritePost(): PhotographerListData =
-            PhotographerListData.Success(dao.readFavouritePost().map {
+        override suspend fun readFavouritePost(): PhotographerListData {
+            val data = dao.readFavouritePost().map {
                 it.map(mapperData)
-            })
+            }
+            return if (data.isEmpty()) {
+                PhotographerListData.EmptyData
+            } else {
+                PhotographerListData.Success(data)
+
+            }
+        }
 
         override suspend fun delete(id: Int) {
             dao.delete(id)

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.favourite_post.FavouritePostInteractor
+import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerListUI
 import ch.b.retrofitandcoroutines.presentation.all_posts.core.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ class FavouriteViewModel(
         viewModelScope.launch {
             val resultDomain = interactor.readFavouritePost()
             withContext(Dispatchers.Main) {
-                val resultUi = resultDomain.map(mapper)
+                val resultUi: PhotographerListUI = resultDomain.map(mapper)
                 resultUi.map(communicate)
             }
         }

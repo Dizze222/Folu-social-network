@@ -3,6 +3,7 @@ package ch.b.retrofitandcoroutines.presentation.all_posts
 
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -29,6 +30,7 @@ class PhotographerAdapter(
         is PhotographerUI.Fail -> 1
         is PhotographerUI.EmptyData -> 2
         else -> 3
+
     }
 
 

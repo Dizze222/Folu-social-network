@@ -36,6 +36,7 @@ class AllPostsViewModel @Inject constructor(
                 resultUi.map(communicate)
             }
         }
+
     }
 
     suspend fun observeAllPhotographers(

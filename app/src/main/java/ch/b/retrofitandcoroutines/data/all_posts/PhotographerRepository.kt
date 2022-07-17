@@ -34,7 +34,10 @@ interface PhotographerRepository {
 
         override suspend fun getAllPhotographers() = try {
             val listOfCloud = cloudDataSource.getPhotographers()
-            PhotographerListData.Success(listOfCloud.map { it.map(mapperData) })
+            if (listOfCloud.isEmpty())
+                PhotographerListData.EmptyData
+             else
+                PhotographerListData.Success(listOfCloud.map { it.map(mapperData) })
         } catch (e: Exception) {
             val messageError = exceptionMapper.mapper(e)
             PhotographerListData.Fail(messageError)
