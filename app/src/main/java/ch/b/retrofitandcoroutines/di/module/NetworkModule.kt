@@ -35,7 +35,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideGson(): Gson {
-        return GsonBuilder().setLenient().create()
+        return GsonBuilder().create()
     }
 
 
