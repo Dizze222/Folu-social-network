@@ -8,11 +8,9 @@ import android.os.IBinder
 import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
-import androidx.work.OneTimeWorkRequest
-import androidx.work.PeriodicWorkRequest
-import androidx.work.WorkManager
-import androidx.work.Worker
+import androidx.work.*
 import ch.b.retrofitandcoroutines.*
+import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.MyWorker
 import ch.b.retrofitandcoroutines.presentation.containers.*
@@ -52,17 +50,16 @@ class MainActivity : AppCompatActivity(), RouterProvider {
 
         // bindService(Intent(baseContext, CustomService::class.java), connection, Context.BIND_AUTO_CREATE)
 
-        //startService(Intent(baseContext, CustomService::class.java).setAction("test"))
+        // startService(Intent(baseContext, CustomService::class.java).setAction("test"))
 
         //val intFilter = IntentFilter(BROADCAST_ACTION)
         //registerReceiver(BroadcastReceiver(), intFilter)
 
-        val myWorker = PeriodicWorkRequest.Builder(MyWorker::class.java, 15, TimeUnit.MINUTES)
-            .addTag("WORK-TAG")
+
+
+        PeriodicWorkRequestBuilder<MyWorker>(25,TimeUnit.MINUTES)
+            .setInitialDelay(5,TimeUnit.SECONDS)
             .build()
-
-
-
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
         val screen = FragmentScreen(SplashContainer.newInstance())

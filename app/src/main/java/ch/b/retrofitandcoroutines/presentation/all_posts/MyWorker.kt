@@ -9,7 +9,7 @@ class MyWorker(context: Context, workerParams: WorkerParameters) : Worker(contex
     override fun doWork(): Result {
         try {
             Log.i("Work","work start")
-            Thread.sleep(3000)
+
             var a = 0
             for (i in 0..100){
                 Log.i("Work","doWorking ")

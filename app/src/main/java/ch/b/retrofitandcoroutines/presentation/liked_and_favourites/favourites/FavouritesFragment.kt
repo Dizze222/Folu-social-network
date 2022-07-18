@@ -63,6 +63,7 @@ class FavouritesFragment :
         val application = requireActivity().application as PhotoApp
         val appComponent = application.appComponent
         appComponent.inject(this)
+
     }
 
     override fun onBackPressed(): Boolean {

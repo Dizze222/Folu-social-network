@@ -11,6 +11,7 @@ import ch.b.retrofitandcoroutines.databinding.FragmentRegistrationBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.BackButtonListener
+import ch.b.retrofitandcoroutines.RouterProvider
 import javax.inject.Inject
 
 
@@ -81,7 +82,7 @@ class RegistrationFragment :
     }
 
     override fun onBackPressed(): Boolean {
-        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.exit()
+        (parentFragment as RouterProvider).router.exit()
         return true
     }
 

@@ -36,9 +36,7 @@
 
         </activity>
 
-        <service android:name=".presentation.core.CustomService">
 
-        </service>
         
         <receiver android:name=".presentation.core.BroadcastReceiver">
 
