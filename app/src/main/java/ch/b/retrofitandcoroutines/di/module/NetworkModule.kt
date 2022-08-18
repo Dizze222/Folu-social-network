@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Scope
 import javax.inject.Singleton
 
-@Module(includes = [CoroutinesScopeModule::class])
+@Module
 class NetworkModule {
     private companion object {
         private const val BASE_URL = "https://photographer-application.herokuapp.com/"

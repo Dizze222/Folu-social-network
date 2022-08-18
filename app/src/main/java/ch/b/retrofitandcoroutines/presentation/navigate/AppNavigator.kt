@@ -26,54 +26,61 @@ class AppNavigator(
 
     fun initContainers() {
         val fragmentManager = fragmentManager ?: return
-        val allPostTabContainer = fragmentManager.findFragmentByTag(AllPostTabContainer.TAG) as? AllPostTabContainer
-            ?: AllPostTabContainer.newInstance()
+        val allPostTabContainer =
+            fragmentManager.findFragmentByTag(AllPostTabContainer.TAG) as? AllPostTabContainer
+                ?: AllPostTabContainer.newInstance()
         fragmentManager.beginTransaction()
             .replace(containerId, allPostTabContainer, AllPostTabContainer.TAG)
             .detach(allPostTabContainer)
             .commitNow()
 
-        val likedTabContainer = fragmentManager.findFragmentByTag(LikedTabContainer.TAG) as? LikedTabContainer
-            ?: LikedTabContainer.newInstance()
+        val likedTabContainer =
+            fragmentManager.findFragmentByTag(LikedTabContainer.TAG) as? LikedTabContainer
+                ?: LikedTabContainer.newInstance()
         fragmentManager.beginTransaction()
             .replace(containerId, likedTabContainer, LikedTabContainer.TAG)
             .detach(likedTabContainer)
             .commitNow()
 
-        val registrationContainer = fragmentManager.findFragmentByTag(RegistrationContainer.TAG) as? RegistrationContainer
-            ?: RegistrationContainer.newInstance()
+        val registrationContainer =
+            fragmentManager.findFragmentByTag(RegistrationContainer.TAG) as? RegistrationContainer
+                ?: RegistrationContainer.newInstance()
         fragmentManager.beginTransaction()
-            .replace(containerId,registrationContainer, RegistrationContainer.TAG)
+            .replace(containerId, registrationContainer, RegistrationContainer.TAG)
             .detach(registrationContainer)
             .commitNow()
 
-        val splashContainer = fragmentManager.findFragmentByTag(SplashContainer.TAG) as? SplashContainer
-            ?: SplashContainer.newInstance()
+        val splashContainer =
+            fragmentManager.findFragmentByTag(SplashContainer.TAG) as? SplashContainer
+                ?: SplashContainer.newInstance()
         fragmentManager.beginTransaction()
-            .replace(containerId,splashContainer, SplashContainer.TAG)
+            .replace(containerId, splashContainer, SplashContainer.TAG)
             .detach(splashContainer)
             .commitNow()
 
 
-        val authorizationContainer = fragmentManager.findFragmentByTag(AuthorizationContainer.TAG) as? AuthorizationContainer
-            ?: AuthorizationContainer.newInstance()
+        val authorizationContainer =
+            fragmentManager.findFragmentByTag(AuthorizationContainer.TAG) as? AuthorizationContainer
+                ?: AuthorizationContainer.newInstance()
         fragmentManager.beginTransaction()
-            .replace(containerId,authorizationContainer,AuthorizationContainer.TAG)
+            .replace(containerId, authorizationContainer, AuthorizationContainer.TAG)
             .detach(authorizationContainer)
             .commitNow()
 
 
-        val searchContainer = fragmentManager.findFragmentByTag(SearchTabContainer.TAG) as? SearchTabContainer
-            ?: SearchTabContainer.newInstance()
+        val searchContainer =
+            fragmentManager.findFragmentByTag(SearchTabContainer.TAG) as? SearchTabContainer
+                ?: SearchTabContainer.newInstance()
         fragmentManager.beginTransaction()
-            .replace(containerId,searchContainer,SearchTabContainer.TAG)
+            .replace(containerId, searchContainer, SearchTabContainer.TAG)
             .detach(searchContainer)
             .commitNow()
 
-        val userProfileContainer = fragmentManager.findFragmentByTag(UserProfileContainer.TAG) as? UserProfileContainer
-            ?: UserProfileContainer.newInstance()
+        val userProfileContainer =
+            fragmentManager.findFragmentByTag(UserProfileContainer.TAG) as? UserProfileContainer
+                ?: UserProfileContainer.newInstance()
         fragmentManager.beginTransaction()
-            .replace(containerId,userProfileContainer,UserProfileContainer.TAG)
+            .replace(containerId, userProfileContainer, UserProfileContainer.TAG)
             .detach(userProfileContainer)
             .commitNow()
 

@@ -15,7 +15,7 @@ class SplashContainer : BaseFragmentContainer() {
     }
 
     override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
-        return FragmentScreen(SplashFragment().newInstance())
+        return FragmentScreen(SplashFragment.newInstance())
     }
 
 

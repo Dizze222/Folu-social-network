@@ -35,7 +35,10 @@ class PhotographerDetailFragment :
         super.onViewCreated(view, savedInstanceState)
         val fragmentManager: FragmentManager = activity!!.supportFragmentManager
 
-        fragmentManager.setFragmentResultListener("requestKey", this, { key, bundle ->
+        fragmentManager.setFragmentResultListener(
+            "requestKey", this
+
+        ) { key, bundle ->
             val photographerId = bundle.getInt("id")
             val adapter = CommentsAdapter()
             hideNavBar(true)
@@ -86,14 +89,14 @@ class PhotographerDetailFragment :
 
         }
 
-        )
-
 
     }
 
 
-    fun newInstance(): PhotographerDetailFragment {
-        return PhotographerDetailFragment()
+    companion object {
+        fun newInstance(): PhotographerDetailFragment {
+            return PhotographerDetailFragment()
+        }
     }
 
 

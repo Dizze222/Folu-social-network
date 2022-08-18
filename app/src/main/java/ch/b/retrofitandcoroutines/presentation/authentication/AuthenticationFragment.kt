@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.R
+import ch.b.retrofitandcoroutines.RouterProvider
 import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentAuthorizationBinding
@@ -31,16 +33,16 @@ class AuthenticationFragment :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.registration.setOnClickListener {
-            val fragment = RegistrationFragment()
-            val nextScreen = ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
-            (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
+            val fragment = RegistrationFragment
+            val nextScreen = FragmentScreen(fragment.newInstance())
+            (parentFragment as RouterProvider).router.navigateTo(
                 nextScreen
             )
         }
         binding.authentication.setOnClickListener {
             try {
                 lifecycleScope.launchWhenCreated {
-                    viewModel.observer(this@AuthenticationFragment, { list ->
+                    viewModel.observer(this@AuthenticationFragment) { list ->
                         list.map {
                             it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
                                 override fun map(
@@ -49,10 +51,10 @@ class AuthenticationFragment :
                                     successRegister: Boolean
                                 ) {
                                     if (accessToken.isNotEmpty()) {
-                                        val fragment = PhotographersFragment()
+                                        val fragment = PhotographersFragment
                                         val nextScreen =
-                                            ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
-                                        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
+                                            FragmentScreen(fragment.newInstance())
+                                        (parentFragment as RouterProvider).router.navigateTo(
                                             nextScreen
                                         )
                                     }
@@ -69,7 +71,7 @@ class AuthenticationFragment :
                             })
                         }
 
-                    })
+                    }
                 }
                 val phone = binding.numberOfPhone.text.toString().toLong()
                 val password = binding.password.text.toString()
@@ -81,8 +83,10 @@ class AuthenticationFragment :
 
     }
 
-    fun newInstance(): AuthenticationFragment {
-        return AuthenticationFragment()
+    companion object {
+        fun newInstance(): AuthenticationFragment {
+            return AuthenticationFragment()
+        }
     }
 
     fun inject() {

@@ -15,6 +15,6 @@ class AllPostTabContainer : BaseFragmentContainer() {
 
 
     override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
-        return FragmentScreen(PhotographersFragment().newInstance())
+        return FragmentScreen(PhotographersFragment.newInstance())
     }
 }

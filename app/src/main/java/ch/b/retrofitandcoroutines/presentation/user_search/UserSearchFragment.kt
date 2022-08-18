@@ -10,7 +10,7 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.RouterProvider
 
 
-class UserSearchFragment : Fragment(),BackButtonListener {
+class UserSearchFragment : Fragment(), BackButtonListener {
 
 
     override fun onCreateView(
@@ -21,8 +21,10 @@ class UserSearchFragment : Fragment(),BackButtonListener {
         return inflater.inflate(R.layout.fragment_user_search, container, false)
     }
 
-    fun newInstance(): Fragment {
-        return UserSearchFragment()
+    companion object {
+        fun newInstance(): Fragment {
+            return UserSearchFragment()
+        }
     }
 
     override fun onBackPressed(): Boolean {

@@ -36,7 +36,7 @@ class RegistrationFragment :
         binding.registration.setOnClickListener {
             try {
                 lifecycleScope.launchWhenCreated {
-                    viewModel.observe(this@RegistrationFragment, { list ->
+                    viewModel.observe(this@RegistrationFragment) { list ->
                         list.map {
                             it.map(object : BaseSingleRegistrationStringMapper.SingleStringMapper {
                                 override fun map(
@@ -45,10 +45,10 @@ class RegistrationFragment :
                                     successRegister: Boolean
                                 ) {
                                     if (accessToken.isNotEmpty()) {
-                                        val fragment = PhotographersFragment()
+                                        val fragment = PhotographersFragment
                                         val nextScreen =
                                             ch.b.retrofitandcoroutines.FragmentScreen(fragment.newInstance())
-                                        (parentFragment as ch.b.retrofitandcoroutines.RouterProvider).router.navigateTo(
+                                        (parentFragment as RouterProvider).router.navigateTo(
                                             nextScreen
                                         )
                                     }
@@ -64,7 +64,7 @@ class RegistrationFragment :
                                 }
                             })
                         }
-                    })
+                    }
                 }
                 val name = binding.name.text.toString()
                 val secondName = binding.secondName.text.toString()
@@ -77,8 +77,10 @@ class RegistrationFragment :
         }
     }
 
-    fun newInstance(): RegistrationFragment {
-        return RegistrationFragment()
+    companion object {
+        fun newInstance(): RegistrationFragment {
+            return RegistrationFragment()
+        }
     }
 
     override fun onBackPressed(): Boolean {

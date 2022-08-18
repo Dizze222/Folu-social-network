@@ -5,7 +5,6 @@ import android.content.*
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.IBinder
-import android.os.PersistableBundle
 import android.util.Log
 import android.view.Menu
 import androidx.work.*
@@ -14,8 +13,6 @@ import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
 import ch.b.retrofitandcoroutines.presentation.all_posts.MyWorker
 import ch.b.retrofitandcoroutines.presentation.containers.*
-import ch.b.retrofitandcoroutines.presentation.core.BroadcastReceiver
-import ch.b.retrofitandcoroutines.presentation.core.CustomService
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
 import ru.terrakok.cicerone.Cicerone

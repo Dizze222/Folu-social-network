@@ -25,21 +25,12 @@
         <activity
             android:name=".presentation.core.ui.MainActivity"
             android:exported="true"
-            android:configChanges="orientation"
-
-            >
+            android:configChanges="orientation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-
-        
-        <receiver android:name=".presentation.core.BroadcastReceiver">
-
-        </receiver>
     </application>
 </manifest>

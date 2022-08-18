@@ -5,7 +5,7 @@ import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
 
-@Module(includes = [CacheModule::class, DataModule::class, DomainModule::class, NetworkModule::class, PresentationModule::class,CoroutinesScopeModule::class])
+@Module(includes = [CacheModule::class, DataModule::class, DomainModule::class, NetworkModule::class, PresentationModule::class])
 class AppModule {
 
     @Provides

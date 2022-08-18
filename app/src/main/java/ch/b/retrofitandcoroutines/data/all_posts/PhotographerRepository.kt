@@ -36,7 +36,7 @@ interface PhotographerRepository {
             val listOfCloud = cloudDataSource.getPhotographers()
             if (listOfCloud.isEmpty())
                 PhotographerListData.EmptyData
-             else
+            else
                 PhotographerListData.Success(listOfCloud.map { it.map(mapperData) })
         } catch (e: Exception) {
             val messageError = exceptionMapper.mapper(e)

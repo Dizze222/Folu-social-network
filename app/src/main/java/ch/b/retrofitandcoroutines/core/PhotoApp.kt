@@ -17,9 +17,4 @@ class PhotoApp : Application() {
             .context(this)
             .build()
     }
-
-    fun getMainAppComponent(): AppComponent {
-        return appComponent
-    }
-
 }

@@ -15,7 +15,7 @@ class SearchTabContainer : BaseFragmentContainer() {
 
 
     override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
-        return FragmentScreen(UserSearchFragment().newInstance())
+        return FragmentScreen(UserSearchFragment.newInstance())
     }
 
 }

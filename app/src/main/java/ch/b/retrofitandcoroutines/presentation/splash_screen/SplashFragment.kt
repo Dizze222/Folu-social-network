@@ -36,25 +36,28 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val sharedPref = TokenToSharedPreferences.Base(ResourceProvider.Base(requireContext()), Reader())
+        val sharedPref =
+            TokenToSharedPreferences.Base(ResourceProvider.Base(requireContext()), Reader())
         hideNavBar(true)
         lifecycleScope.launchWhenCreated {
             delay(1000)
             if (sharedPref.readAccessToken().isEmpty()) {
-                val fragment = AuthenticationFragment()
+                val fragment = AuthenticationFragment
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)
             } else {
                 viewModel.checkAccessToken()
-                val fragment = PhotographersFragment()
+                val fragment = PhotographersFragment
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)
             }
         }
     }
 
-    fun newInstance(): SplashFragment {
-        return SplashFragment()
+    companion object {
+        fun newInstance(): SplashFragment {
+            return SplashFragment()
+        }
     }
 
     override fun onBackPressed(): Boolean {

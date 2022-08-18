@@ -12,8 +12,8 @@ class RegistrationContainer : BaseFragmentContainer() {
         }
     }
 
-    override fun getInitialFragmentScreen(params: Bundle?): ch.b.retrofitandcoroutines.FragmentScreen {
-        return ch.b.retrofitandcoroutines.FragmentScreen(RegistrationFragment().newInstance())
+    override fun getInitialFragmentScreen(params: Bundle?): FragmentScreen {
+        return FragmentScreen(RegistrationFragment.newInstance())
     }
 
 

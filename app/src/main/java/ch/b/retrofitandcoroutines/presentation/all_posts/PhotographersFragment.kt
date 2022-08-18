@@ -56,7 +56,7 @@ class PhotographersFragment :
         }
         val itemClickListener = object : PhotographerAdapter.PhotographerItemClickListener {
             override fun onClickPhotographer(photographer: PhotographerUI) {
-                val fragment = PhotographerDetailFragment()
+                val fragment = PhotographerDetailFragment
                 val fragmentManager = activity!!.supportFragmentManager
                 val nextScreen = FragmentScreen(fragment.newInstance())
                 (parentFragment as RouterProvider).router.navigateTo(nextScreen)
@@ -213,8 +213,10 @@ class PhotographersFragment :
         }
     }
 
-    fun newInstance(): PhotographersFragment {
-        return PhotographersFragment()
+    companion object {
+        fun newInstance(): PhotographersFragment {
+            return PhotographersFragment()
+        }
     }
 
     override fun onBackPressed(): Boolean {
