@@ -11,7 +11,6 @@ import androidx.work.*
 import ch.b.retrofitandcoroutines.*
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.ActivityMainBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.MyWorker
 import ch.b.retrofitandcoroutines.presentation.containers.*
 import ch.b.retrofitandcoroutines.presentation.navigate.*
 
@@ -45,18 +44,7 @@ class MainActivity : AppCompatActivity(), RouterProvider {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // bindService(Intent(baseContext, CustomService::class.java), connection, Context.BIND_AUTO_CREATE)
 
-        // startService(Intent(baseContext, CustomService::class.java).setAction("test"))
-
-        //val intFilter = IntentFilter(BROADCAST_ACTION)
-        //registerReceiver(BroadcastReceiver(), intFilter)
-
-
-
-        PeriodicWorkRequestBuilder<MyWorker>(25,TimeUnit.MINUTES)
-            .setInitialDelay(5,TimeUnit.SECONDS)
-            .build()
         appNavigator = AppNavigator(this, R.id.container)
         appNavigator.initContainers()
         val screen = FragmentScreen(SplashContainer.newInstance())
@@ -76,8 +64,6 @@ class MainActivity : AppCompatActivity(), RouterProvider {
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_search -> {
-                    val searchScreen = FragmentScreen(SearchTabContainer.newInstance())
-                    router.replaceTab(searchScreen)
                     return@setOnItemSelectedListener true
                 }
                 R.id.navigation_profile -> {

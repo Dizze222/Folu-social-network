@@ -58,7 +58,6 @@ class AppNavigator(
             .detach(splashContainer)
             .commitNow()
 
-
         val authorizationContainer =
             fragmentManager.findFragmentByTag(AuthorizationContainer.TAG) as? AuthorizationContainer
                 ?: AuthorizationContainer.newInstance()
@@ -67,14 +66,6 @@ class AppNavigator(
             .detach(authorizationContainer)
             .commitNow()
 
-
-        val searchContainer =
-            fragmentManager.findFragmentByTag(SearchTabContainer.TAG) as? SearchTabContainer
-                ?: SearchTabContainer.newInstance()
-        fragmentManager.beginTransaction()
-            .replace(containerId, searchContainer, SearchTabContainer.TAG)
-            .detach(searchContainer)
-            .commitNow()
 
         val userProfileContainer =
             fragmentManager.findFragmentByTag(UserProfileContainer.TAG) as? UserProfileContainer
@@ -89,7 +80,6 @@ class AppNavigator(
         containers.add(registrationContainer)
         containers.add(splashContainer)
         containers.add(authorizationContainer)
-        containers.add(searchContainer)
         containers.add(userProfileContainer)
 
     }

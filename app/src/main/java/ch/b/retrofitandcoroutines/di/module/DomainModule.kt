@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.di.module
 
+import ch.b.retrofitandcoroutines.core.FeatureScope
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.all_posts.mappers.BaseToPhotographerDomainMapper
@@ -35,7 +36,7 @@ import javax.inject.Singleton
 class DomainModule {
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerInteractor(
         repository: PhotographerRepository,
         mapper: PhotographerListDataToDomainMapper
@@ -46,7 +47,7 @@ class DomainModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideAuthenticationInteractor(
         repository: AuthenticationRepository,
         mapper: AuthorizationListDataToDomainMapper
@@ -56,7 +57,7 @@ class DomainModule {
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRegistrationInteractor(
         repository: RegistrationRepository,
         mapper: AuthorizationListDataToDomainMapper
@@ -65,26 +66,26 @@ class DomainModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerListDataToDomainMapper(): PhotographerListDataToDomainMapper {
         return BasePhotographerListDataToDomainMapper(BasePhotographerDataToDomainMapper())
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideUserProfileListDataToDomainMapper() : UserProfileListDataToDomainMapper{
         return BaseUserProfileListDataToDomainMapper(BaseUserProfileDataToDomainMapper())
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRegistrationListDataToDomainMapper(): AuthorizationListDataToDomainMapper {
         return BaseRegistrationListDataToDomainMapper(BaseRegistrationDataToDomainMapper())
     }
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideCertainPostInteractor(
         repository: CertainPostRepository,
         mapper: PhotographerListDataToDomainMapper
@@ -93,19 +94,19 @@ class DomainModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideSplashInteractor(service: SplashService): SplashInteractor {
         return SplashInteractor.Base(service)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerDomainToUiMapper(): PhotographerDomainToUIMapper<PhotographerData> {
         return BaseToPhotographerDomainMapper()
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideFavouritePostInteractor(
         dataSource: CacheFavouriteDataSource,
         mapper: PhotographerListDataToDomainMapper,
@@ -115,7 +116,7 @@ class DomainModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideUserProfileInteractor(
         repository: UserProfileRepository,
         mapper: UserProfileListDataToDomainMapper

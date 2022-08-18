@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.core.FeatureScope
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
@@ -32,7 +33,7 @@ import javax.inject.Singleton
 class DataModule {
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerRepository(
         cloudDataSource: PhotographerListCloudDataSource,
         cacheDataSource: PhotographerListCacheDataSource,
@@ -45,57 +46,57 @@ class DataModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideExceptionPostsMapper(resourcesProvider: ResourceProvider): ExceptionPostsMapper {
         return ExceptionPostsMapper.Base(resourcesProvider)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideCloudMapper(): PhotographerListCloudMapper {
         return PhotographerListCloudMapper.Base(ToPhotographerMapper())
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideExceptionMapper(resourcesProvider: ResourceProvider): ExceptionAuthMapper.Registration {
         return ExceptionAuthMapper.Registration(resourcesProvider)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideExceptionProfileMapper(resourcesProvider: ResourceProvider) : ExceptionProfileMapper.Base{
         return ExceptionProfileMapper.Base(resourcesProvider)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideUserProfileDataSource(service: UserProfileService): UserProfileCloudDataSource {
         return UserProfileCloudDataSource.Base(service)
     }
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideAuthExceptionMapper(resourcesProvider: ResourceProvider): ExceptionAuthMapper.Authorization {
         return ExceptionAuthMapper.Authorization(resourcesProvider)
     }
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRoomMapper(): Abstract.ToPhotographerMapper<PhotographerData> {
         return BaseToDataPhotographerMapper()
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRegistrationCloudMapper(): AuthorizationListCloudMapper {
         return AuthorizationListCloudMapper.Base(ToAuthorizationMapper())
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideCertainPostRepository(
         cloudDataSource: CertainPostDataSource,
         cloudMapper: PhotographerListCloudMapper,
@@ -106,7 +107,7 @@ class DataModule {
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideAuthenticationRepository(
         registerDataSource: RegistrationCloudDataSource,
         dataSource: AuthenticationCloudDataSource,
@@ -127,7 +128,7 @@ class DataModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRegistrationRepository(
         registerDataSource: RegistrationCloudDataSource,
         dataSource: AuthenticationCloudDataSource,
@@ -147,14 +148,14 @@ class DataModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideBaseToProfileMapper() : Abstract.ToProfileMapper<UserProfileData> {
         return BaseToProfileMapper()
     }
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideUserProfileRepository(
         dataSource: UserProfileCloudDataSource,
         mapper: Abstract.ToProfileMapper<UserProfileData>,

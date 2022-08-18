@@ -1,6 +1,7 @@
 package ch.b.retrofitandcoroutines.di.module
 
 import android.content.Context
+import ch.b.retrofitandcoroutines.core.FeatureScope
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
@@ -9,6 +10,7 @@ import dagger.Provides
 class AppModule {
 
     @Provides
+    @FeatureScope
     fun provideResourceProvider(context: Context): ResourceProvider {
         return ResourceProvider.Base(context)
     }

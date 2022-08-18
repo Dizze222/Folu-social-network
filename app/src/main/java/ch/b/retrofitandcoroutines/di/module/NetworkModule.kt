@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.di.module
 
+import ch.b.retrofitandcoroutines.core.FeatureScope
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
@@ -33,14 +34,14 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideGson(): Gson {
         return GsonBuilder().setLenient().create()
     }
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideOkHttpClient(
         accessTokenFromShared: TokenToSharedPreferences,
         authenticator: Authenticator
@@ -55,7 +56,7 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRetrofit(
         gson: Gson,
         client: OkHttpClient
@@ -68,75 +69,75 @@ class NetworkModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideUpdateTokenService(retrofit: Retrofit): UpdateTokenService {
         return retrofit.create(UpdateTokenService::class.java)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideUserProfileService(retrofit: Retrofit) : UserProfileService{
         return retrofit.create(UserProfileService::class.java)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideAuthenticator(accessTokenFromShared: TokenToSharedPreferences): Authenticator {
         return Authenticator(accessTokenFromShared)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerService(retrofit: Retrofit): PhotographerService {
         return retrofit.create(PhotographerService::class.java)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideSplashService(retrofit: Retrofit): SplashService {
         return retrofit.create(SplashService::class.java)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRegistrationService(retrofit: Retrofit): RegistrationService {
         return retrofit.create(RegistrationService::class.java)
     }
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideAuthenticationService(retrofit: Retrofit): AuthenticationService {
         return retrofit.create(AuthenticationService::class.java)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideCertainPostService(retrofit: Retrofit): CertainPhotographerService {
         return retrofit.create(CertainPhotographerService::class.java)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideCloudDataSource(service: PhotographerService): PhotographerListCloudDataSource {
         return PhotographerListCloudDataSource.Base(service)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideAuthenticationCloudDataSource(service: AuthenticationService): AuthenticationCloudDataSource {
         return AuthenticationCloudDataSource.Base(service)
     }
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideCertainPostDataSource(service: CertainPhotographerService): CertainPostDataSource {
         return CertainPostDataSource.Base(service)
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideRegistrationDataSource(service: RegistrationService): RegistrationCloudDataSource {
         return RegistrationCloudDataSource.Base(service)
     }

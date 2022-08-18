@@ -3,6 +3,7 @@ package ch.b.retrofitandcoroutines.di.module
 import android.content.Context
 import androidx.room.Room
 import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.core.FeatureScope
 import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
 import ch.b.retrofitandcoroutines.data.all_posts.cache.CachePhotographer
 import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDao
@@ -28,7 +29,7 @@ class CacheModule {
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerDatabase(context: Context): PhotographerDataBase {
         return Room.databaseBuilder(
             context,
@@ -38,13 +39,13 @@ class CacheModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerDao(photographerDatabase: PhotographerDataBase): PhotographerDao {
         return photographerDatabase.photographerDao()
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideCacheDataSource(
         dao: PhotographerDao,
         mapper: Abstract.ToPhotographerMapper<CachePhotographer.Base>
@@ -53,19 +54,19 @@ class CacheModule {
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideToCachePhotographerMapper(): Abstract.ToPhotographerMapper<CachePhotographer.Base> {
         return BaseToCachePhotographerMapper()
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun providePhotographerDataToDomainMapper() : PhotographerDataToDomainMapper<CachePhotographer.Base>{
         return BasePhotographerDataToCacheMapper()
     }
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideFavouriteCacheDataSource(
         dao: PhotographerDao,
         mapperCache: PhotographerDataToDomainMapper<CachePhotographer.Base>,
@@ -76,7 +77,7 @@ class CacheModule {
 
 
     @Provides
-    @Singleton
+    @FeatureScope
     fun provideTokenToSharedPreferences(resourceProvider: ResourceProvider): TokenToSharedPreferences {
         return TokenToSharedPreferences.Base(resourceProvider, Reader())
     }

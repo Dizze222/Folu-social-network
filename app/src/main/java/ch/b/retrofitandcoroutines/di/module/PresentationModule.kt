@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.di.module
 
+import ch.b.retrofitandcoroutines.core.FeatureScope
 import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.user_profile.UserProfileListDomainToUiMapper
@@ -20,22 +21,26 @@ class PresentationModule {
 
 
     @Provides
+    @FeatureScope
     fun provideCommunication(): PhotographerCommunication {
         return PhotographerCommunication.Base()
     }
 
     @Provides
+    @FeatureScope
     fun provideUserProfileCommunication() : UserProfileCommunication{
         return UserProfileCommunication.Base()
     }
 
 
     @Provides
+    @FeatureScope
     fun provideRegistrationCommunication(): RegistrationCommunication {
         return RegistrationCommunication.Base()
     }
 
     @Provides
+    @FeatureScope
     fun provideRegistrationMapper(): RegistrationListDomainToUIMapper {
         return BaseRegistrationListDomainToUIMapper(
             BaseRegistrationDomainToUIMapper()
@@ -44,11 +49,13 @@ class PresentationModule {
 
 
     @Provides
+    @FeatureScope
     fun providePhotographerListDomainToUiMapper(): PhotographerListDomainToUIMapper {
         return BasePhotographerListDomainToUIMapper(BasePhotographerDomainToUIMapper())
     }
 
     @Provides
+    @FeatureScope
     fun provideUserProfileListDomainToUiMapper() : UserProfileListDomainToUiMapper{
         return BaseUserProfileListDomainToUiMapper(BaseUserProfileDomainToUiMapper())
     }
