@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.databinding.FragmentSplashBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographersFragment
+import ch.b.retrofitandcoroutines.all_posts.presentation.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.BackButtonListener

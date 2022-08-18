@@ -1,12 +1,12 @@
 package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.core.FeatureScope
-import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
+import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.user_profile.UserProfileListDomainToUiMapper
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerDomainToUIMapper
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerListDomainToUIMapper
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.PhotographerCommunication
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.BasePhotographerDomainToUIMapper
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.BasePhotographerListDomainToUIMapper
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.PhotographerCommunication
 import ch.b.retrofitandcoroutines.presentation.registration.BaseRegistrationDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.registration.BaseRegistrationListDomainToUIMapper
 import ch.b.retrofitandcoroutines.presentation.registration.RegistrationCommunication

@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.data.certain_post.net
 
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
+import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerCloud
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 

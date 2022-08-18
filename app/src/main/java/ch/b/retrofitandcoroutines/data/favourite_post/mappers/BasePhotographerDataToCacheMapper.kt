@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.data.favourite_post.mappers
 
-import ch.b.retrofitandcoroutines.data.all_posts.cache.CachePhotographer
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDomainMapper
+import ch.b.retrofitandcoroutines.all_posts.data.cache.CachePhotographer
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.PhotographerDataToDomainMapper
 
 class BasePhotographerDataToCacheMapper : PhotographerDataToDomainMapper<CachePhotographer.Base> {
     override fun map(

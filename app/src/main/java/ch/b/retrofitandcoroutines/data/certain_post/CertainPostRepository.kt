@@ -1,8 +1,8 @@
 package ch.b.retrofitandcoroutines.data.certain_post
 
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerListData
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.ExceptionPostsMapper
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerListData
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.ExceptionPostsMapper
+import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerListCloudMapper
 import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
 
 interface CertainPostRepository {

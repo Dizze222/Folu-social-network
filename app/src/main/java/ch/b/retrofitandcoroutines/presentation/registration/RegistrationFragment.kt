@@ -5,10 +5,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.BaseSingleRegistrationStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.FragmentRegistrationBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographersFragment
+import ch.b.retrofitandcoroutines.all_posts.presentation.PhotographersFragment
 import ch.b.retrofitandcoroutines.presentation.core.BaseFragment
 import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.RouterProvider

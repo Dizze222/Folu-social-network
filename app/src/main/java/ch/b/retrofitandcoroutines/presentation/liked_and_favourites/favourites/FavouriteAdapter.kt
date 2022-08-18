@@ -8,8 +8,8 @@ import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.EmptydataFullscreenBinding
 import ch.b.retrofitandcoroutines.databinding.PhotographerItemBinding
-import ch.b.retrofitandcoroutines.presentation.all_posts.DiffUtilCallback
-import ch.b.retrofitandcoroutines.presentation.all_posts.PhotographerUI
+import ch.b.retrofitandcoroutines.all_posts.presentation.DiffUtilCallback
+import ch.b.retrofitandcoroutines.all_posts.presentation.PhotographerUI
 import java.lang.IllegalStateException
 
 

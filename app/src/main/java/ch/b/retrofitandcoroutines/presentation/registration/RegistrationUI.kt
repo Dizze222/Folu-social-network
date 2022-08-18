@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.registration
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.BaseSingleRegistrationStringMapper
 
 sealed class RegistrationUI : Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper> {
     override fun map(mapper: BaseSingleRegistrationStringMapper.SingleStringMapper) = Unit

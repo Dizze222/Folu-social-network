@@ -1,10 +1,10 @@
 package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.core.FeatureScope
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.BaseToPhotographerDomainMapper
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerListDataToDomainMapper
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerData
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerRepository
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.BaseToPhotographerDomainMapper
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.PhotographerListDataToDomainMapper
 import ch.b.retrofitandcoroutines.data.authorization.AuthenticationRepository
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
 import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
@@ -13,10 +13,10 @@ import ch.b.retrofitandcoroutines.data.favourite_post.cache.CacheFavouriteDataSo
 import ch.b.retrofitandcoroutines.data.splash.SplashService
 import ch.b.retrofitandcoroutines.data.user_profile.UserProfileRepository
 import ch.b.retrofitandcoroutines.data.user_profile.mapper.UserProfileListDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.all_posts.BasePhotographerDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.all_posts.BasePhotographerListDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomainToUIMapper
-import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerInteractor
+import ch.b.retrofitandcoroutines.all_posts.domain.BasePhotographerDataToDomainMapper
+import ch.b.retrofitandcoroutines.all_posts.domain.BasePhotographerListDataToDomainMapper
+import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerDomainToUIMapper
+import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerInteractor
 import ch.b.retrofitandcoroutines.domain.authorization.AuthenticationInteractor
 import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
 import ch.b.retrofitandcoroutines.domain.favourite_post.FavouritePostInteractor
@@ -29,7 +29,6 @@ import ch.b.retrofitandcoroutines.domain.user_profile.BaseUserProfileListDataToD
 import ch.b.retrofitandcoroutines.domain.user_profile.UserProfileInteractor
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 
 @Module

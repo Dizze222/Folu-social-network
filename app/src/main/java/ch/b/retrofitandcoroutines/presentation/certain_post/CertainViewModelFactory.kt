@@ -2,9 +2,9 @@ package ch.b.retrofitandcoroutines.presentation.certain_post
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomainToUIMapper
+import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.PhotographerCommunication
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.PhotographerCommunication
 import javax.inject.Inject
 
 class CertainViewModelFactory @Inject constructor(

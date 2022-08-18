@@ -1,8 +1,8 @@
 package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.core.FeatureScope
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
+import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerService
+import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerListCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationService
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.Authenticator
@@ -22,10 +22,7 @@ import dagger.Provides
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.lang.annotation.RetentionPolicy
 import java.util.concurrent.TimeUnit
-import javax.inject.Scope
-import javax.inject.Singleton
 
 @Module
 class NetworkModule {

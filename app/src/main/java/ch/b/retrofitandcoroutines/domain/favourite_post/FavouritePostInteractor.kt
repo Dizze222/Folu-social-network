@@ -1,11 +1,11 @@
 package ch.b.retrofitandcoroutines.domain.favourite_post
 
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerListDataToDomainMapper
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerData
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.PhotographerListDataToDomainMapper
 import ch.b.retrofitandcoroutines.data.favourite_post.cache.CacheFavouriteDataSource
-import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomain
-import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerDomainToUIMapper
-import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomain
+import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerDomain
+import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerDomainToUIMapper
+import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerListDomain
 
 interface FavouritePostInteractor {
 

@@ -1,12 +1,11 @@
 package ch.b.retrofitandcoroutines.data.favourite_post.cache
 
 import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerListData
-import ch.b.retrofitandcoroutines.data.all_posts.cache.CachePhotographer
-import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDao
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDomainMapper
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerCloud
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerData
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerListData
+import ch.b.retrofitandcoroutines.all_posts.data.cache.CachePhotographer
+import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerDao
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.PhotographerDataToDomainMapper
 
 interface CacheFavouriteDataSource {
 

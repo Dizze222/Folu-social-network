@@ -8,7 +8,7 @@ import ch.b.retrofitandcoroutines.databinding.FragmentPhotographerDetailBinding
 import androidx.lifecycle.lifecycleScope
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.BasePhotographerStringMapper
 import ch.b.retrofitandcoroutines.core.PhotoApp
 import ch.b.retrofitandcoroutines.core.convertToArrayList
 import ch.b.retrofitandcoroutines.BackButtonListener

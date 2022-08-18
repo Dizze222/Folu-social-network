@@ -4,13 +4,13 @@ import android.content.Context
 import androidx.room.Room
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.core.FeatureScope
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.cache.CachePhotographer
-import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDao
-import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerDataBase
-import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.BaseToCachePhotographerMapper
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.PhotographerDataToDomainMapper
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerData
+import ch.b.retrofitandcoroutines.all_posts.data.cache.CachePhotographer
+import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerDao
+import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerDataBase
+import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerListCacheDataSource
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.BaseToCachePhotographerMapper
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.PhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.core.Reader
 import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
 import ch.b.retrofitandcoroutines.data.favourite_post.cache.CacheFavouriteDataSource
@@ -18,7 +18,6 @@ import ch.b.retrofitandcoroutines.data.favourite_post.mappers.BasePhotographerDa
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class CacheModule {
@@ -61,7 +60,7 @@ class CacheModule {
 
     @Provides
     @FeatureScope
-    fun providePhotographerDataToDomainMapper() : PhotographerDataToDomainMapper<CachePhotographer.Base>{
+    fun providePhotographerDataToDomainMapper() : PhotographerDataToDomainMapper<CachePhotographer.Base> {
         return BasePhotographerDataToCacheMapper()
     }
 

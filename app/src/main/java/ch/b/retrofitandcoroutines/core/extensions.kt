@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.core
 
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.BasePhotographerStringMapper
-import ch.b.retrofitandcoroutines.presentation.all_posts.core.BaseSingleRegistrationStringMapper
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.BasePhotographerStringMapper
+import ch.b.retrofitandcoroutines.all_posts.presentation.core.BaseSingleRegistrationStringMapper
 
 
 fun List<Abstract.Object<Unit, BaseSingleRegistrationStringMapper.SingleStringMapper>>.dataOfAuth(): ArrayList<String> {

@@ -2,12 +2,14 @@ package ch.b.retrofitandcoroutines.di.module
 
 import ch.b.retrofitandcoroutines.core.Abstract
 import ch.b.retrofitandcoroutines.core.FeatureScope
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerData
-import ch.b.retrofitandcoroutines.data.all_posts.PhotographerRepository
-import ch.b.retrofitandcoroutines.data.all_posts.cache.PhotographerListCacheDataSource
-import ch.b.retrofitandcoroutines.data.all_posts.mappers.*
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudMapper
-import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerData
+import ch.b.retrofitandcoroutines.all_posts.data.PhotographerRepository
+import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerListCacheDataSource
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.BaseToDataPhotographerMapper
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.ExceptionPostsMapper
+import ch.b.retrofitandcoroutines.all_posts.data.mappers.ToPhotographerMapper
+import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerListCloudMapper
+import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerListCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.AuthenticationRepository
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
 import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
@@ -27,7 +29,6 @@ import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileService
 import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module(includes = [NetworkModule::class])
 class DataModule {
