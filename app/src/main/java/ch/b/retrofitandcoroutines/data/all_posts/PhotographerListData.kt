@@ -6,6 +6,7 @@ import ch.b.retrofitandcoroutines.domain.all_posts.PhotographerListDomain
 
 sealed class PhotographerListData :
     Abstract.Object<PhotographerListDomain, PhotographerListDataToDomainMapper> {
+
     data class Success(private val photographers: List<PhotographerData>) : PhotographerListData() {
         override fun map(mapper: PhotographerListDataToDomainMapper): PhotographerListDomain =
             mapper.map(photographers)
