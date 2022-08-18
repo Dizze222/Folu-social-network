@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import ch.b.retrofitandcoroutines.R
 import ch.b.retrofitandcoroutines.databinding.*
-import ch.b.retrofitandcoroutines.presentation.core.iconAnimation
-import ch.b.retrofitandcoroutines.presentation.core.translateY
+import ch.b.retrofitandcoroutines.utils.core_ui.iconAnimation
+import ch.b.retrofitandcoroutines.utils.core_ui.translateY
 
 class PhotographerAdapter(
     private val retry: Retry,

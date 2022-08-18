@@ -1,10 +1,8 @@
 package ch.b.retrofitandcoroutines.presentation.containers
 
-import android.net.Uri
 import android.os.Bundle
 import ch.b.retrofitandcoroutines.FragmentScreen
-import ch.b.retrofitandcoroutines.presentation.core.ImageResult
-import ch.b.retrofitandcoroutines.presentation.user_profile.UserProfileFragment
+import ch.b.retrofitandcoroutines.user_profile.presentation.UserProfileFragment
 
 class UserProfileContainer : BaseFragmentContainer(){
 

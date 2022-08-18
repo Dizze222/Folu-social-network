@@ -1,8 +1,8 @@
 package ch.b.retrofitandcoroutines.all_posts.data.mappers
 
 import ch.b.retrofitandcoroutines.R
-import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
+import ch.b.retrofitandcoroutines.utils.core.Abstract
+import ch.b.retrofitandcoroutines.utils.core_ui.ResourceProvider
 import java.lang.Exception
 import java.lang.NullPointerException
 import java.net.ConnectException

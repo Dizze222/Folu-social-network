@@ -1,20 +1,20 @@
 package ch.b.retrofitandcoroutines.di.module
 
-import ch.b.retrofitandcoroutines.core.FeatureScope
+import ch.b.retrofitandcoroutines.utils.core.FeatureScope
 import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerService
 import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerListCloudDataSource
-import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
-import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationService
-import ch.b.retrofitandcoroutines.data.authorization.net.authorization.Authenticator
-import ch.b.retrofitandcoroutines.data.authorization.net.update_token.UpdateTokenService
-import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPhotographerService
-import ch.b.retrofitandcoroutines.data.certain_post.net.CertainPostDataSource
-import ch.b.retrofitandcoroutines.data.registration.net.RegistrationCloudDataSource
-import ch.b.retrofitandcoroutines.data.registration.net.RegistrationService
-import ch.b.retrofitandcoroutines.data.core.TokenInterceptor
-import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
-import ch.b.retrofitandcoroutines.data.splash.SplashService
-import ch.b.retrofitandcoroutines.data.user_profile.network.UserProfileService
+import ch.b.retrofitandcoroutines.authorization.data.net.authorization.AuthenticationCloudDataSource
+import ch.b.retrofitandcoroutines.authorization.data.net.authorization.AuthenticationService
+import ch.b.retrofitandcoroutines.authorization.data.net.authorization.Authenticator
+import ch.b.retrofitandcoroutines.authorization.data.net.update_token.UpdateTokenService
+import ch.b.retrofitandcoroutines.certain_post.data.net.CertainPhotographerService
+import ch.b.retrofitandcoroutines.certain_post.data.net.CertainPostDataSource
+import ch.b.retrofitandcoroutines.registration.data.net.RegistrationCloudDataSource
+import ch.b.retrofitandcoroutines.registration.data.net.RegistrationService
+import ch.b.retrofitandcoroutines.utils.core_network.TokenInterceptor
+import ch.b.retrofitandcoroutines.utils.core_network.authorization.cache.TokenToSharedPreferences
+import ch.b.retrofitandcoroutines.splash.data.SplashService
+import ch.b.retrofitandcoroutines.user_profile.data.network.UserProfileService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -73,7 +73,7 @@ class NetworkModule {
 
     @Provides
     @FeatureScope
-    fun provideUserProfileService(retrofit: Retrofit) : UserProfileService{
+    fun provideUserProfileService(retrofit: Retrofit) : UserProfileService {
         return retrofit.create(UserProfileService::class.java)
     }
 

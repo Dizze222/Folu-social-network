@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.all_posts.data.net
 
-import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.utils.core.Abstract
 
 import com.google.gson.annotations.SerializedName
 

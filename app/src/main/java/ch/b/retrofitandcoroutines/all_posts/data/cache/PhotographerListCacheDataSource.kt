@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.all_posts.data.cache
 
-import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.utils.core.Abstract
 import ch.b.retrofitandcoroutines.all_posts.data.net.PhotographerCloud
 
 interface PhotographerListCacheDataSource {

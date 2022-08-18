@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
-import ch.b.retrofitandcoroutines.presentation.authentication.AuthenticationFragment
+import ch.b.retrofitandcoroutines.authorization.presentation.AuthenticationFragment
 import ch.b.retrofitandcoroutines.FragmentScreen
 
 class AuthorizationContainer : BaseFragmentContainer() {

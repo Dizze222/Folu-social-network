@@ -2,7 +2,7 @@ package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
 import ch.b.retrofitandcoroutines.FragmentScreen
-import ch.b.retrofitandcoroutines.presentation.splash_screen.SplashFragment
+import ch.b.retrofitandcoroutines.splash.presentation.SplashFragment
 
 class SplashContainer : BaseFragmentContainer() {
 

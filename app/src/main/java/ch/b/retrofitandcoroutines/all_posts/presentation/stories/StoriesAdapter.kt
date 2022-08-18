@@ -10,7 +10,7 @@ import ch.b.retrofitandcoroutines.all_posts.data.net.Stories
 import ch.b.retrofitandcoroutines.all_posts.data.net.Story
 import ch.b.retrofitandcoroutines.databinding.MyStoryItemBinding
 import ch.b.retrofitandcoroutines.databinding.StoryItemBinding
-import ch.b.retrofitandcoroutines.presentation.core.ImageLoad
+import ch.b.retrofitandcoroutines.utils.core_ui.ImageLoad
 
 class StoriesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

@@ -1,8 +1,8 @@
 package ch.b.retrofitandcoroutines.di.module
 
 import android.content.Context
-import ch.b.retrofitandcoroutines.core.FeatureScope
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
+import ch.b.retrofitandcoroutines.utils.core.FeatureScope
+import ch.b.retrofitandcoroutines.utils.core_ui.ResourceProvider
 import dagger.Module
 import dagger.Provides
 

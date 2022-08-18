@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.data.core
 
+import ch.b.retrofitandcoroutines.utils.core_network.ExceptionAuthMapper
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 import java.lang.Exception

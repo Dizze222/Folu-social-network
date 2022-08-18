@@ -11,15 +11,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import ch.b.retrofitandcoroutines.all_posts.presentation.core.BasePhotographerStringMapper
-import ch.b.retrofitandcoroutines.core.PhotoApp
-import ch.b.retrofitandcoroutines.presentation.certain_post.PhotographerDetailFragment
+import ch.b.retrofitandcoroutines.utils.core.PhotoApp
+import ch.b.retrofitandcoroutines.certain_post.presentation.PhotographerDetailFragment
 import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.FragmentScreen
 import ch.b.retrofitandcoroutines.RouterProvider
-import ch.b.retrofitandcoroutines.core.Reader
+import ch.b.retrofitandcoroutines.utils.core.Reader
 import ch.b.retrofitandcoroutines.all_posts.data.net.Story
 import ch.b.retrofitandcoroutines.all_posts.presentation.stories.StoriesContainerAdapter
-import ch.b.retrofitandcoroutines.presentation.core.*
+import ch.b.retrofitandcoroutines.utils.core_ui.BaseFragment
+import ch.b.retrofitandcoroutines.utils.core_ui.SharedPreferencesFavourite
 import javax.inject.Inject
 
 class PhotographersFragment :

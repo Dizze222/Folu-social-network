@@ -1,18 +1,18 @@
 package ch.b.retrofitandcoroutines.di.module
 
-import ch.b.retrofitandcoroutines.core.FeatureScope
+import ch.b.retrofitandcoroutines.utils.core.FeatureScope
 import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerListDomainToUIMapper
-import ch.b.retrofitandcoroutines.domain.registration.RegistrationListDomainToUIMapper
-import ch.b.retrofitandcoroutines.domain.user_profile.UserProfileListDomainToUiMapper
+import ch.b.retrofitandcoroutines.registration.domain.RegistrationListDomainToUIMapper
+import ch.b.retrofitandcoroutines.user_profile.domain.UserProfileListDomainToUiMapper
 import ch.b.retrofitandcoroutines.all_posts.presentation.core.BasePhotographerDomainToUIMapper
 import ch.b.retrofitandcoroutines.all_posts.presentation.core.BasePhotographerListDomainToUIMapper
 import ch.b.retrofitandcoroutines.all_posts.presentation.core.PhotographerCommunication
-import ch.b.retrofitandcoroutines.presentation.registration.BaseRegistrationDomainToUIMapper
-import ch.b.retrofitandcoroutines.presentation.registration.BaseRegistrationListDomainToUIMapper
-import ch.b.retrofitandcoroutines.presentation.registration.RegistrationCommunication
-import ch.b.retrofitandcoroutines.presentation.user_profile.BaseUserProfileDomainToUiMapper
-import ch.b.retrofitandcoroutines.presentation.user_profile.BaseUserProfileListDomainToUiMapper
-import ch.b.retrofitandcoroutines.presentation.user_profile.core.UserProfileCommunication
+import ch.b.retrofitandcoroutines.registration.presentation.BaseRegistrationDomainToUIMapper
+import ch.b.retrofitandcoroutines.registration.presentation.BaseRegistrationListDomainToUIMapper
+import ch.b.retrofitandcoroutines.registration.presentation.RegistrationCommunication
+import ch.b.retrofitandcoroutines.user_profile.presentation.BaseUserProfileDomainToUiMapper
+import ch.b.retrofitandcoroutines.user_profile.presentation.BaseUserProfileListDomainToUiMapper
+import ch.b.retrofitandcoroutines.user_profile.presentation.core.UserProfileCommunication
 import dagger.Module
 import dagger.Provides
 
@@ -28,7 +28,7 @@ class PresentationModule {
 
     @Provides
     @FeatureScope
-    fun provideUserProfileCommunication() : UserProfileCommunication{
+    fun provideUserProfileCommunication() : UserProfileCommunication {
         return UserProfileCommunication.Base()
     }
 
@@ -56,7 +56,7 @@ class PresentationModule {
 
     @Provides
     @FeatureScope
-    fun provideUserProfileListDomainToUiMapper() : UserProfileListDomainToUiMapper{
+    fun provideUserProfileListDomainToUiMapper() : UserProfileListDomainToUiMapper {
         return BaseUserProfileListDomainToUiMapper(BaseUserProfileDomainToUiMapper())
     }
 

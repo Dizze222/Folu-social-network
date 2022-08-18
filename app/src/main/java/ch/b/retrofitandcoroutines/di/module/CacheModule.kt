@@ -2,8 +2,8 @@ package ch.b.retrofitandcoroutines.di.module
 
 import android.content.Context
 import androidx.room.Room
-import ch.b.retrofitandcoroutines.core.Abstract
-import ch.b.retrofitandcoroutines.core.FeatureScope
+import ch.b.retrofitandcoroutines.utils.core.Abstract
+import ch.b.retrofitandcoroutines.utils.core.FeatureScope
 import ch.b.retrofitandcoroutines.all_posts.data.PhotographerData
 import ch.b.retrofitandcoroutines.all_posts.data.cache.CachePhotographer
 import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerDao
@@ -11,11 +11,11 @@ import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerDataBase
 import ch.b.retrofitandcoroutines.all_posts.data.cache.PhotographerListCacheDataSource
 import ch.b.retrofitandcoroutines.all_posts.data.mappers.BaseToCachePhotographerMapper
 import ch.b.retrofitandcoroutines.all_posts.data.mappers.PhotographerDataToDomainMapper
-import ch.b.retrofitandcoroutines.core.Reader
-import ch.b.retrofitandcoroutines.data.core.authorization.cache.TokenToSharedPreferences
-import ch.b.retrofitandcoroutines.data.favourite_post.cache.CacheFavouriteDataSource
-import ch.b.retrofitandcoroutines.data.favourite_post.mappers.BasePhotographerDataToCacheMapper
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
+import ch.b.retrofitandcoroutines.utils.core.Reader
+import ch.b.retrofitandcoroutines.utils.core_network.authorization.cache.TokenToSharedPreferences
+import ch.b.retrofitandcoroutines.favourite_post.data.cache.CacheFavouriteDataSource
+import ch.b.retrofitandcoroutines.favourite_post.data.mappers.BasePhotographerDataToCacheMapper
+import ch.b.retrofitandcoroutines.utils.core_ui.ResourceProvider
 import dagger.Module
 import dagger.Provides
 

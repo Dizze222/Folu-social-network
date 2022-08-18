@@ -1,32 +1,32 @@
 package ch.b.retrofitandcoroutines.di.module
 
-import ch.b.retrofitandcoroutines.core.FeatureScope
+import ch.b.retrofitandcoroutines.utils.core.FeatureScope
 import ch.b.retrofitandcoroutines.all_posts.data.PhotographerData
 import ch.b.retrofitandcoroutines.all_posts.data.PhotographerRepository
 import ch.b.retrofitandcoroutines.all_posts.data.mappers.BaseToPhotographerDomainMapper
 import ch.b.retrofitandcoroutines.all_posts.data.mappers.PhotographerListDataToDomainMapper
-import ch.b.retrofitandcoroutines.data.authorization.AuthenticationRepository
-import ch.b.retrofitandcoroutines.data.certain_post.CertainPostRepository
-import ch.b.retrofitandcoroutines.data.registration.RegistrationRepository
-import ch.b.retrofitandcoroutines.data.core.authorization.mappers.AuthorizationListDataToDomainMapper
-import ch.b.retrofitandcoroutines.data.favourite_post.cache.CacheFavouriteDataSource
-import ch.b.retrofitandcoroutines.data.splash.SplashService
-import ch.b.retrofitandcoroutines.data.user_profile.UserProfileRepository
-import ch.b.retrofitandcoroutines.data.user_profile.mapper.UserProfileListDataToDomainMapper
+import ch.b.retrofitandcoroutines.authorization.data.AuthenticationRepository
+import ch.b.retrofitandcoroutines.certain_post.data.CertainPostRepository
+import ch.b.retrofitandcoroutines.registration.data.RegistrationRepository
+import ch.b.retrofitandcoroutines.utils.core_network.authorization.mappers.AuthorizationListDataToDomainMapper
+import ch.b.retrofitandcoroutines.favourite_post.data.cache.CacheFavouriteDataSource
+import ch.b.retrofitandcoroutines.splash.data.SplashService
+import ch.b.retrofitandcoroutines.user_profile.data.UserProfileRepository
+import ch.b.retrofitandcoroutines.user_profile.data.mapper.UserProfileListDataToDomainMapper
 import ch.b.retrofitandcoroutines.all_posts.domain.BasePhotographerDataToDomainMapper
 import ch.b.retrofitandcoroutines.all_posts.domain.BasePhotographerListDataToDomainMapper
 import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerDomainToUIMapper
 import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerInteractor
-import ch.b.retrofitandcoroutines.domain.authorization.AuthenticationInteractor
-import ch.b.retrofitandcoroutines.domain.certain_post.CertainPostInteractor
-import ch.b.retrofitandcoroutines.domain.favourite_post.FavouritePostInteractor
-import ch.b.retrofitandcoroutines.domain.registration.BaseRegistrationDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.registration.BaseRegistrationListDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.registration.RegistrationInteractor
-import ch.b.retrofitandcoroutines.domain.splash.SplashInteractor
-import ch.b.retrofitandcoroutines.domain.user_profile.BaseUserProfileDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.user_profile.BaseUserProfileListDataToDomainMapper
-import ch.b.retrofitandcoroutines.domain.user_profile.UserProfileInteractor
+import ch.b.retrofitandcoroutines.authorization.domain.AuthenticationInteractor
+import ch.b.retrofitandcoroutines.certain_post.domain.CertainPostInteractor
+import ch.b.retrofitandcoroutines.favourite_post.domain.FavouritePostInteractor
+import ch.b.retrofitandcoroutines.registration.domain.BaseRegistrationDataToDomainMapper
+import ch.b.retrofitandcoroutines.registration.domain.BaseRegistrationListDataToDomainMapper
+import ch.b.retrofitandcoroutines.registration.domain.RegistrationInteractor
+import ch.b.retrofitandcoroutines.splash.domain.SplashInteractor
+import ch.b.retrofitandcoroutines.user_profile.domain.BaseUserProfileDataToDomainMapper
+import ch.b.retrofitandcoroutines.user_profile.domain.BaseUserProfileListDataToDomainMapper
+import ch.b.retrofitandcoroutines.user_profile.domain.UserProfileInteractor
 import dagger.Module
 import dagger.Provides
 
@@ -72,7 +72,7 @@ class DomainModule {
 
     @Provides
     @FeatureScope
-    fun provideUserProfileListDataToDomainMapper() : UserProfileListDataToDomainMapper{
+    fun provideUserProfileListDataToDomainMapper() : UserProfileListDataToDomainMapper {
         return BaseUserProfileListDataToDomainMapper(BaseUserProfileDataToDomainMapper())
     }
 

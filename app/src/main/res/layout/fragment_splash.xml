@@ -8,7 +8,7 @@
     android:gravity="center"
     android:orientation="horizontal"
     app:layoutDescription="@xml/fragment_splash_scene"
-    tools:context=".presentation.splash_screen.SplashFragment"
+    tools:context=".splash.presentation.SplashFragment"
     tools:ignore="MotionLayoutInvalidSceneFileReference">
 
 

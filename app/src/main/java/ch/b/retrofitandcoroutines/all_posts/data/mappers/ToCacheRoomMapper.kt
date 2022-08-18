@@ -1,6 +1,6 @@
 package ch.b.retrofitandcoroutines.all_posts.data.mappers
 
-import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.utils.core.Abstract
 import ch.b.retrofitandcoroutines.all_posts.data.cache.CachePhotographer
 
 interface ToCacheRoomMapper : Abstract.Mapper {

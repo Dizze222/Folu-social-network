@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import ch.b.retrofitandcoroutines.databinding.ItemImageBinding
-import ch.b.retrofitandcoroutines.presentation.user_profile.core.BaseRecyclerAdapter
-import ch.b.retrofitandcoroutines.presentation.user_profile.core.ImageViewHolder
+import ch.b.retrofitandcoroutines.user_profile.presentation.core.BaseRecyclerAdapter
+import ch.b.retrofitandcoroutines.user_profile.presentation.core.ImageViewHolder
 
 class GalleryAdapter constructor(
     private val onItemClick: ((MediaStoreImage?) -> Unit)? = null,

@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.core
 
+import ch.b.retrofitandcoroutines.utils.core.Abstract
 import junit.framework.Assert.assertEquals
 import org.junit.Assert
 import org.junit.Test

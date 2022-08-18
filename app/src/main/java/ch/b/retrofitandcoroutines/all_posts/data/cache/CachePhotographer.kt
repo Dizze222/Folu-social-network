@@ -4,7 +4,7 @@ package ch.b.retrofitandcoroutines.all_posts.data.cache
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.utils.core.Abstract
 
 
 interface CachePhotographer {

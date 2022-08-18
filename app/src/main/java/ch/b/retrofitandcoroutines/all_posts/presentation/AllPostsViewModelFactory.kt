@@ -4,9 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerInteractor
 import ch.b.retrofitandcoroutines.all_posts.domain.PhotographerListDomainToUIMapper
-import ch.b.retrofitandcoroutines.domain.favourite_post.FavouritePostInteractor
+import ch.b.retrofitandcoroutines.favourite_post.domain.FavouritePostInteractor
 import ch.b.retrofitandcoroutines.all_posts.presentation.core.PhotographerCommunication
-import ch.b.retrofitandcoroutines.presentation.core.ResourceProvider
+import ch.b.retrofitandcoroutines.utils.core_ui.ResourceProvider
 import javax.inject.Inject
 
 class AllPostsViewModelFactory @Inject constructor(

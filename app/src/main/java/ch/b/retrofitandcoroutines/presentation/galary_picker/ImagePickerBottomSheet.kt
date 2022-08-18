@@ -14,10 +14,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import ch.b.retrofitandcoroutines.BackButtonListener
 import ch.b.retrofitandcoroutines.RouterProvider
-import ch.b.retrofitandcoroutines.core.PhotoApp
+import ch.b.retrofitandcoroutines.utils.core.PhotoApp
 import ch.b.retrofitandcoroutines.databinding.BottomSheetImagePickerBinding
-import ch.b.retrofitandcoroutines.presentation.core.SharedPhoto
-import ch.b.retrofitandcoroutines.presentation.user_profile.core.BaseBottomSheet
+import ch.b.retrofitandcoroutines.utils.core_ui.SharedPhoto
+import ch.b.retrofitandcoroutines.user_profile.presentation.core.BaseBottomSheet
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.coroutines.launch

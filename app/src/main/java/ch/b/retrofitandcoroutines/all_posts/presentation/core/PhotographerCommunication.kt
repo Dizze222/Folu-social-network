@@ -1,7 +1,7 @@
 package ch.b.retrofitandcoroutines.all_posts.presentation.core
 
 import androidx.lifecycle.LifecycleOwner
-import ch.b.retrofitandcoroutines.core.Abstract
+import ch.b.retrofitandcoroutines.utils.core.Abstract
 import ch.b.retrofitandcoroutines.all_posts.presentation.PhotographerUI
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.MutableStateFlow

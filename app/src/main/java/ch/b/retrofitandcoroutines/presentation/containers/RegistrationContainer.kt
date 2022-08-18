@@ -2,7 +2,7 @@ package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
 import ch.b.retrofitandcoroutines.FragmentScreen
-import ch.b.retrofitandcoroutines.presentation.registration.RegistrationFragment
+import ch.b.retrofitandcoroutines.registration.presentation.RegistrationFragment
 
 class RegistrationContainer : BaseFragmentContainer() {
     companion object{

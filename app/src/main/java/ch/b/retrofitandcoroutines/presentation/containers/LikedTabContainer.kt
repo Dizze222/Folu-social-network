@@ -2,7 +2,7 @@ package ch.b.retrofitandcoroutines.presentation.containers
 
 import android.os.Bundle
 import ch.b.retrofitandcoroutines.FragmentScreen
-import ch.b.retrofitandcoroutines.presentation.liked_and_favourites.FavouritePostsFragment
+import ch.b.retrofitandcoroutines.favourite_post.presentation.FavouritePostsFragment
 
 class LikedTabContainer : BaseFragmentContainer() {
 
