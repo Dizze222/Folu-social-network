@@ -17,6 +17,7 @@ sealed class PhotographerListData :
         override fun map(mapper: PhotographerListDataToDomainMapper) = mapper.map(e)
     }
 
+
     object EmptyData : PhotographerListData() {
         override fun map(mapper: PhotographerListDataToDomainMapper) = mapper.map()
     }
