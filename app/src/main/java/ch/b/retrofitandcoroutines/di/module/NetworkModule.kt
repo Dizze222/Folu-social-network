@@ -1,5 +1,6 @@
 package ch.b.retrofitandcoroutines.di.module
 
+import android.util.Log
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerService
 import ch.b.retrofitandcoroutines.data.all_posts.net.PhotographerListCloudDataSource
 import ch.b.retrofitandcoroutines.data.authorization.net.authorization.AuthenticationCloudDataSource
@@ -25,6 +26,8 @@ import java.lang.annotation.RetentionPolicy
 import java.util.concurrent.TimeUnit
 import javax.inject.Scope
 import javax.inject.Singleton
+
+
 
 @Module(includes = [CoroutinesScopeModule::class])
 class NetworkModule {
@@ -60,6 +63,7 @@ class NetworkModule {
         gson: Gson,
         client: OkHttpClient
     ): Retrofit {
+        Log.i("DI","new Retrofit")
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(client)
@@ -141,4 +145,6 @@ class NetworkModule {
         return RegistrationCloudDataSource.Base(service)
     }
 
+
 }
+

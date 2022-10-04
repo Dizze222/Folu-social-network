@@ -11,14 +11,11 @@ import ch.b.retrofitandcoroutines.core.PhotoApp
 
 typealias Inflate<T> = (LayoutInflater, ViewGroup?, Boolean) -> T
 
-open class BaseFragment<B : ViewBinding>(private val inflate: Inflate<B>) : Fragment() {
+abstract class BaseFragment<B : ViewBinding>(private val inflate: Inflate<B>) : Fragment() {
 
     private var _viewBinding: B? = null
     val binding get() = checkNotNull(_viewBinding)
     var navBar: View? = null
-    val bundle = this.arguments
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,

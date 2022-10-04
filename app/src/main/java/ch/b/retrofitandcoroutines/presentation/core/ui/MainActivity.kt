@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity(), RouterProvider {
     val PARAM_TASK = "task"
 
 
+    //SOME
     val serviceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
             Log.i("Service", "onServiceConnected")
